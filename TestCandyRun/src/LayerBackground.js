@@ -31,6 +31,7 @@ var LayerBackground = cc.Layer.extend({
         this.testObstacle.sprite.setPosition(cc.p(400, 400));
         this.testObstacle.changeByTexture("m5_trap_0_2_1.png");
 
+
         this._debugNode = new cc.PhysicsDebugNode(this.space);
 
         this.addChild(this._debugNode, 0);
@@ -55,12 +56,12 @@ var LayerBackground = cc.Layer.extend({
         if(this.count%60 === 0 ){
             //console.log("hey");
             frame = cc.spriteFrameCache.getSpriteFrame("m5_trap_0_2_1.png");
-            this.testObstacle.changeByTexture("m5_trap_0_2_1.png");
+           // this.testObstacle.changeByTexture("m5_trap_0_2_1.png");
             this.sprite.setSpriteFrame(frame);
         }else{
             frame = cc.spriteFrameCache.getSpriteFrame("m6_trap_0_1_0.png");
             this.sprite.setSpriteFrame(frame);
-            this.testObstacle.changeByTexture("m6_trap_0_1_0.png");
+            //this.testObstacle.changeByTexture("m6_trap_0_1_0.png");
             //console.log("hey2");
         }
     },
