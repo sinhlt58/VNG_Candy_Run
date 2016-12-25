@@ -2,22 +2,32 @@
   <Name>Candy Run</Name>
   <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
     <Name>Class Diagram</Name>
-    <Language>CSharp</Language>
+    <Language>Java</Language>
     <Entities>
       <Entity type="Class">
-        <Name>ChunkManager</Name>
+        <Name>Item</Name>
         <Access>Public</Access>
-        <Location left="274" top="213" />
-        <Size width="162" height="216" />
+        <Location left="1535" top="1025" />
+        <Size width="162" height="194" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">public Chunk currentRun</Member>
-        <Member type="Field">public Chunk preloadedChunk</Member>
+        <Member type="Field">public int score</Member>
+        <Member type="Field">public PhysicsSprite sprite</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>ObjectManager</Name>
+        <Name>Ground</Name>
         <Access>Public</Access>
-        <Location left="790" top="140" />
+        <Location left="1257" top="1025" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public string currentTexture</Member>
+        <Member type="Field">public PhysicsSprite sprite</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Obstacle</Name>
+        <Access>Public</Access>
+        <Location left="930" top="1025" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
