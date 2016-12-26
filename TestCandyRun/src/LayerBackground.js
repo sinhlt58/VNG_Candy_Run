@@ -26,16 +26,16 @@ var LayerBackground = cc.Layer.extend({
         this.sprite.setPosition(cc.p(contentSize.width/2 + 120, contentSize.height/2 + 200));
         this.space.removeShape(shape);
         var newShape = new cp.BoxShape(body, contentSize.width, contentSize.height);
-        this.space.addShape(newShape);
-        this.testObstacle = new Obstacle(this, this.space, "#m6_trap_0_1_0.png");
-        this.testObstacle.sprite.setPosition(cc.p(400, 400));
-        this.testObstacle.changeByTexture("m5_trap_0_2_1.png");
+        // this.space.addShape(newShape);
+        // this.testObstacle = new Obstacle(this, this.space, "#m6_trap_0_1_0.png");
+        // this.testObstacle.sprite.setPosition(cc.p(400, 400));
+        // this.testObstacle.changeByTexture("m5_trap_0_2_1.png");
 
 
         this._debugNode = new cc.PhysicsDebugNode(this.space);
 
         this.addChild(this._debugNode, 0);
-        this.addChild(this.sprite);
+        // this.addChild(this.sprite);
 
         /*Init events*/
         cc.eventManager.addListener({
@@ -53,17 +53,17 @@ var LayerBackground = cc.Layer.extend({
         this.space.step(dt);
         this.count++;
         var frame;
-        if(this.count%60 === 0 ){
-            //console.log("hey");
-            frame = cc.spriteFrameCache.getSpriteFrame("m5_trap_0_2_1.png");
-           // this.testObstacle.changeByTexture("m5_trap_0_2_1.png");
-            this.sprite.setSpriteFrame(frame);
-        }else{
-            frame = cc.spriteFrameCache.getSpriteFrame("m6_trap_0_1_0.png");
-            this.sprite.setSpriteFrame(frame);
-            //this.testObstacle.changeByTexture("m6_trap_0_1_0.png");
-            //console.log("hey2");
-        }
+        // if(this.count%60 === 0 ){
+        //     //console.log("hey");
+        //     frame = cc.spriteFrameCache.getSpriteFrame("m5_trap_0_2_1.png");
+        //    // this.testObstacle.changeByTexture("m5_trap_0_2_1.png");
+        //     this.sprite.setSpriteFrame(frame);
+        // }else{
+        //     frame = cc.spriteFrameCache.getSpriteFrame("m6_trap_0_1_0.png");
+        //     this.sprite.setSpriteFrame(frame);
+        //     //this.testObstacle.changeByTexture("m6_trap_0_1_0.png");
+        //     //console.log("hey2");
+        // }
     },
     onTouchBegan:function(touch, event){
         console.log(this.testObstacle);

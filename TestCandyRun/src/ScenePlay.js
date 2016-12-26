@@ -6,7 +6,7 @@ var ScenePlay = cc.Scene.extend({
     onEnter:function () {
         this._super();
 
-        this.addChild(new LayerBackground());
+       // this.addChild(new LayerBackground());
         this.addChild(new LayerAnimation());
 
         this.scheduleUpdate();

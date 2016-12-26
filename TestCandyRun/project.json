@@ -9,7 +9,7 @@
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d", "cocostudio", "chipmunk"],
+    "modules" : ["cocos2d", "cocostudio", "chipmunk", "extensions"],
 
     "jsList" : [
         "src/resource.js",
@@ -17,6 +17,7 @@
         "src/ScenePlay.js",
         "src/LayerAnimation.js",
         "src/LayerBackground.js",
-        "src/Obstacle.js"
+        "src/Obstacle.js",
+        "src/Character.js"
     ]
 }
