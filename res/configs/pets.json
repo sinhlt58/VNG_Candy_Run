@@ -1,0 +1,11 @@
+[
+    {
+        "id" : 1,
+        "type" : "heo_beo",
+        "name" : "Heo beo",
+        "gui_info" : {
+            "image" : "heo_beo.png",
+            "skill_description" : "Tang mau 20%"
+        },
+    }
+]
