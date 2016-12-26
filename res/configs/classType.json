@@ -1,0 +1,14 @@
+[
+  {
+    "classId": "0",
+    "name": "Item"
+  },
+  {
+    "classId": "1",
+    "name": "Ground"
+  },
+  {
+    "classId": "2",
+    "name": "Obstacle"
+  }
+]
