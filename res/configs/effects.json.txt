@@ -1,0 +1,46 @@
+[
+	{
+		"effectId" : 0,
+		"name" : "fxScore"
+	},
+	{
+		"effectId" : 1,
+		"name" : "fxMoney"
+	},
+	{
+		"effectId" : 2,
+		"name" : "fx"
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},
+	{
+		"effectId" : ,
+		"name" : ""
+	},	
+]
