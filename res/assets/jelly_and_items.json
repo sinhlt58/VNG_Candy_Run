@@ -144,6 +144,7 @@
 			"item08_energy_1.png",
 			"item08_energy_2.png",
 			"item08_energy_3.png"
+			
 		],
 		"effect":{
 			
@@ -164,7 +165,8 @@
 	"item_alphabet_b":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_b.png"
+			"jelly_alphabet_b.png",
+			
 		],
 		"effect":{
 			
@@ -173,7 +175,8 @@
 	"item_alphabet_o":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_o.png"
+			"jelly_alphabet_o.png",
+			
 		],
 		"effect":{
 			
@@ -182,7 +185,8 @@
 	"item_alphabet_n":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_n.png"
+			"jelly_alphabet_n.png",
+			
 		],
 		"effect":{
 			
@@ -191,7 +195,8 @@
 	"item_alphabet_u":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_u.png"
+			"jelly_alphabet_u.png",
+			
 		],
 		"effect":{
 			
@@ -200,7 +205,8 @@
 	"item_alphabet_s":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_s.png"
+			"jelly_alphabet_s.png",
+			
 		],
 		"effect":{
 			
@@ -209,7 +215,7 @@
 	"item_alphabet_t":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_t.png"
+			"jelly_alphabet_t.png",
 		],
 		"effect":{
 			
@@ -218,7 +224,8 @@
 	"item_alphabet_i":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_i.png"
+			"jelly_alphabet_i.png",
+			
 		],
 		"effect":{
 			
@@ -227,7 +234,8 @@
 	"item_alphabet_m":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_m.png"
+			"jelly_alphabet_m.png",
+			
 		],
 		"effect":{
 			
@@ -236,7 +244,8 @@
 	"item_alphabet_e":{
 		"score": 10,
 		"animations":[
-			"jelly_alphabet_e.png"
+			"jelly_alphabet_e.png",
+			
 		],
 		"effect":{
 			
