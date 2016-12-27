@@ -22,7 +22,7 @@ var Character = cc.Class.extend({
         this.movingAction = new cc.RepeatForever(moveBy);
         this.sprite.runAction(this.movingAction);
 
-        console.log(this.spAnimation);
+       // console.log(this.spAnimation);
     },
     update:function (dt) {
         this.spAnimation.setPosition(this.sprite.getPosition());

@@ -9,7 +9,8 @@ var res = {
     jelly_and_items_png : "res/jelly_and_items.png",
     princess_atlas : "res/princess/princess.atlas",
     princess_json : "res/princess/princess.json",
-    princess_png : "res/princess/char7.png"
+    princess_png : "res/princess/char7.png",
+    new_chunks_json : "res/new_chunks.json"
 };
 
 var g_resources = [];

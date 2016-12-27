@@ -1,0 +1,40 @@
+[
+	{
+		"chunkId" : 0,
+		"level" : 1,
+		"datas" : [
+			{
+				"objectType" : "platform_1_1.png",
+				"positions" : [
+					{
+						"x" : 15,
+						"y" : 25
+					},
+					{
+						"x" : 50,
+						"y" : 25
+					},{
+						"x" : 75,
+						"y" : 25
+					}
+				]
+			},
+			{
+				"objectType" : "items_jelly_1.png",
+				"positions" : [
+					{
+						"x" : 100,
+						"y" : 25
+					},
+					{
+						"x" : 150,
+						"y" : 25
+					},{
+						"x" : 175,
+						"y" : 35
+					}
+				]
+			}
+		]
+	}
+]

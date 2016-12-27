@@ -3,6 +3,7 @@
  */
 var LayerAnimation = cc.Layer.extend({
     character :null,
+    chunks:null,
     ctor:function () {
         this._super();
         this.character = new Character();
@@ -14,9 +15,22 @@ var LayerAnimation = cc.Layer.extend({
         var spawn = new cc.Spawn(moveBy, jumpBy);
        // this.character.sprite.runAction(spawn)
 
+        var chunks = {};
+        var self = this;
+        var testChunks = cc.loader.loadJson(res.new_chunks_json, function (error, data) {
+            if (!error){
+                for (propoty in data[0]["data"]){
+                    console.log(propoty);
+                   for (var i= 0 ; i < data[0]["data"][propoty].length; i++){
+                       data[0]["data"][propoty][i]["status"] = 0;
+                   }
+                }
+                self.chunks = data;
+            }
+
+        });
 
         this.scheduleUpdate();
-
 
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
