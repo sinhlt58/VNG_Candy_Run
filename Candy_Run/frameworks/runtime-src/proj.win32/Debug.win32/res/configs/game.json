@@ -1,0 +1,8 @@
+{
+    "current_money" : 1000,
+    "current_level" : 60,
+    "current_character" : 1,
+    "current_pet" : 1,
+    "characters" : [1,2],
+    "pets" : [1,2]
+}

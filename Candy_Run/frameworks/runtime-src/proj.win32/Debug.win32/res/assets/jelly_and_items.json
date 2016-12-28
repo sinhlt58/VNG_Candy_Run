@@ -1,0 +1,254 @@
+{
+	"coin_silver":{
+		"type":"coin_silver",
+		"score": 10,
+		"money": 100,
+		"animations":[
+			"jelly_coin_1.png",
+			"jelly_coin_2.png",
+			"jelly_coin_3.png",
+			"jelly_coin_4.png"
+		]
+	},
+	"coin_gold":{
+		"type":"coin_gold",
+		"score": 10,
+		"money": 310,
+		"animations":[
+			"jelly_coin2_1.png",
+			"jelly_coin2_2.png",
+			"jelly_coin2_3.png",
+			"jelly_coin2_4.png",
+			"jelly_coin2_5.png",
+			"jelly_coin2_6.png",
+		]
+	},
+	"coin_big_gold":{
+		"type":"coin_big_gold",
+		"score": 100,
+		"money": 100,
+		"animations":[
+			"coin_big_1.png",
+			"coin_big_2.png",
+			"coin_big_3.png",
+			"coin_big_4.png"
+		]
+	},
+	"candy_normal":{
+		"type":"candy_normal",
+		"score": 10,
+		"animations":[
+			"jellybean_01.png"
+		]
+	},
+	"candy_small_bear":{
+		"type":"candy_small_bear",
+		"score":15,
+		"animations":[
+			"jellybean_100.png"
+		]
+	},
+	"candy_pink_bear":{
+		"type":"candy_pink_bear",
+		"score":20,
+		"animations":[
+			"jellybean_101_1.png",
+			"jellybean_101_2.png"
+		]
+	},
+	"candy_big_gold_bear":{
+		"type":"candy_big_gold_bear",
+		"score":30,
+		"animations":[
+			"jellybean_102_1.png",
+			"jellybean_102_2.png"
+		]
+	},
+	"item_giant":{
+		"score": 10,
+		"animations":[
+			"item04_biggest_0.png",
+			"item04_biggest_1.png",
+			"item04_biggest_2.png",
+			"item04_biggest_3.png"
+		],
+		"effect":{
+
+		}
+	},
+	"item_magnetic":{
+		"score": 10,
+		"animations":[
+			"item05_magnet_0.png",
+			"item05_magnet_1.png",
+			"item05_magnet_2.png",
+			"item05_magnet_3.png"
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_change_jelly":{
+		"score": 10,
+		"animations":[
+			"item07_sjelly_0.png",
+			"item07_sjelly_1.png",
+			"item07_sjelly_2.png",
+			"item07_sjelly_3.png"
+		],
+		"effect":{
+			
+		}
+	},
+	"item_invincible":{
+		"score": 10,
+		"animations":[
+			"item03_invincible_0.png",
+			"item03_invincible_1.png",
+			"item03_invincible_2.png",
+			"item03_invincible_3.png"
+		],
+		"effect":{
+			
+		}
+	},
+	"item_instance_bonus":{
+		"score": 10,
+		"animations":[
+			"item02_fever_0.png",
+			"item02_fever_1.png",
+			"item02_fever_2.png",
+			"item02_fever_3.png"
+		],
+		"effect":{
+			
+		}
+	},
+	"item_change_coin":{
+		"score": 10,
+		"animations":[
+			"item06_coin_0.png",
+			"item06_coin_1.png",
+			"item06_coin_2.png",
+			"item06_coin_3.png"
+		],
+		"effect":{
+			
+		}
+	},
+	"item_small_potion":{
+		"score": 10,
+		"animations":[
+			"item08_energy_0.png",
+			"item08_energy_1.png",
+			"item08_energy_2.png",
+			"item08_energy_3.png"
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_big_potion":{
+		"score": 10,
+		"animations":[
+			"item09_bigenergy_0.png",
+			"item09_bigenergy_1.png",
+			"item09_bigenergy_2.png",
+			"item09_bigenergy_3.png"
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_b":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_b.png",
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_o":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_o.png",
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_n":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_n.png",
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_u":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_u.png",
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_s":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_s.png",
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_t":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_t.png",
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_i":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_i.png",
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_m":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_m.png",
+			
+		],
+		"effect":{
+			
+		}
+	},
+	"item_alphabet_e":{
+		"score": 10,
+		"animations":[
+			"jelly_alphabet_e.png",
+			
+		],
+		"effect":{
+			
+		}
+	}
+}

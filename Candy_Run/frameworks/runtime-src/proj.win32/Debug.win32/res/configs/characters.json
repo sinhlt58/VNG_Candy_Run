@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "type": "zombie",
+        "hp": 140,
+        "name_skill": "Hoi sinh",
+        "gui_info":{
+            "image_path": "zombie_gui.png"
+        }
+    }
+]
