@@ -1,0 +1,13 @@
+m1_trap_0_0_1.png 81 
+jelly_point.png 3
+jelly_bear_1_1.png 5
+jelly_bear_1_0.png 4
+jelly_boost.png 9
+m1_platform_0_0_0.png 23
+m1_trap_0_0_0.png 80
+m1_trap_0_2_1.png 86
+m1_trap_0_2_0.png 85
+jelly_health_2.png 13
+jelly_health_1.png 12
+jelly_coin_2.png 1
+jelly_coin_1.png 0
