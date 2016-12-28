@@ -430,3 +430,5 @@ proj.android/libraries/*/local.properties
 # Generated documentation, it can be regenerated using doxygen #
 ######################
 docs/html/*
+
+/Debug.win32/*
