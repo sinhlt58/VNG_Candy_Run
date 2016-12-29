@@ -10,8 +10,12 @@ var res = {
     jelly_and_items_plist: "res/jelly_and_items.plist",
     jelly_and_items_png: "res/jelly_and_items.png",
     obstacles_png: "res/obstacles.png",
-    obstacle_plist: "res/obstacles.plist"
+    obstacle_plist: "res/obstacles.plist",
 
+    chunks_json: "res/data/chunks.json",
+    class_types: "res/data/class_types.json",
+    effect_types: "res/data/effect_types.json",
+    object_types: "res/data/object_types.json"
 };
 
 var g_resources = [];

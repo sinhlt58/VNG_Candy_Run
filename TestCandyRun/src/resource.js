@@ -10,7 +10,8 @@ var res = {
     princess_atlas : "res/princess/princess.atlas",
     princess_json : "res/princess/princess.json",
     princess_png : "res/princess/char7.png",
-    new_chunks_json : "res/new_chunks.json"
+    new_chunks_json : "res/new_chunks.json",
+    chunks_json : "res/chunk.json"
 };
 
 var g_resources = [];
