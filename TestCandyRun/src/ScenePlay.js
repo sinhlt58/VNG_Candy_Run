@@ -7,6 +7,10 @@ var ScenePlay = cc.Scene.extend({
         this._super();
 
        // this.addChild(new LayerBackground());
+
+        //load data ('dhvcdj', fun
+        // )
+
         this.addChild(new LayerAnimation());
 
         this.scheduleUpdate();

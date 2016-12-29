@@ -4,7 +4,10 @@
 var LayerAnimation = cc.Layer.extend({
     character :null,
     chunks:null,
+
     ctor:function () {
+
+
         this._super();
         this.character = new Character();
         this.addChild(this.character.spAnimation);
@@ -17,7 +20,16 @@ var LayerAnimation = cc.Layer.extend({
 
         var chunks = {};
         var self = this;
+
+
+        // test chunk = gg();
+
+
+        // .then (function(data){fjfjn})
         var testChunks = cc.loader.loadJson(res.new_chunks_json, function (error, data) {
+
+
+            // async task
             if (!error){
                 for (propoty in data[0]["data"]){
                     console.log(propoty);
@@ -29,6 +41,8 @@ var LayerAnimation = cc.Layer.extend({
             }
 
         });
+
+        //
 
         this.scheduleUpdate();
 
