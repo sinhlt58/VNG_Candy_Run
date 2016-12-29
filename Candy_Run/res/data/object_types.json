@@ -294,30 +294,37 @@
     
     "80":{
         "classType" : 2,
-        "texture" : "m1_trap_0_0_0.png"
+        "texture" : "m1_trap_0_0_0.png",
+        "damage" : 10
     },
     "81":{
         "classType" : 2,
-        "texture" : "m1_trap_0_0_1.png"
+        "texture" : "m1_trap_0_0_1.png",
+        "damage" : 10
     },
     "82":{
         "classType" : 2,
-        "texture" : "m1_trap_0_0_2.png"
+        "texture" : "m1_trap_0_0_2.png",
+        "damage" : 10
     },
     "83":{
         "classType" : 2,
-        "texture" : "m1_trap_0_1_0.png"
+        "texture" : "m1_trap_0_1_0.png",
+        "damage" : 10
     },
     "84":{
         "classType" : 2,
-        "texture" : "m1_trap_0_1_1.png"
+        "texture" : "m1_trap_0_1_1.png",
+        "damage" : 10
     },
     "85":{
         "classType" : 2,
-        "texture" : "m1_trap_0_2_0.png"
+        "texture" : "m1_trap_0_2_0.png",
+        "damage" : 10
     },
     "86":{
         "classType" : 2,
-        "texture" : "m1_trap_0_2_1.png"
+        "texture" : "m1_trap_0_2_1.png",
+        "damage" : 10
     }
 }
