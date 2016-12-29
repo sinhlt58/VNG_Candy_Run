@@ -6,8 +6,6 @@ var LayerAnimation = cc.Layer.extend({
     chunks:null,
 
     ctor:function () {
-
-
         this._super();
         this.character = new Character();
         this.addChild(this.character.spAnimation);
