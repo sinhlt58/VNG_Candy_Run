@@ -8,5 +8,8 @@ var StateTakingDamage= StateHP.extend({
     onEnter: function () {
 
     },
-    
+    onExit: function(){
+
+    }
+
 });
