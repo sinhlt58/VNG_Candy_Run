@@ -13,7 +13,7 @@
 
     "jsList" : [
         "src/resource.js",
-        "src/ScenePlay.js",
-        "src/LayerPlayAnimation.js"
+        "src/scenes/ScenePlay.js",
+        "src/scenes/LayerPlayAnimation.js"
     ]
 }
