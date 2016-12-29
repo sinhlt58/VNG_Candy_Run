@@ -17,15 +17,23 @@ var Character = cc.Class.extend({
 
     grounded: null,
 
+
+    currentAnimation: '',
+
     /*jumpingAction:null,
     movingAction:null,*/
     ctor: function () {
         this.spAnimation = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas);
         this.sprite = new cc.Sprite();
         this.spAnimation.setPosition(cc.p(200, 200));
-        this.spAnimation.setAnimation(0, "run1", true);
+
+        this.currentAnimation='run1';
+        this.spAnimation.setAnimation(0, this.currentAnimation, true);
         this.spAnimation.anchorX = 0.5;
         this.spAnimation.anchorY = 0.5;
+
+
+        //this.spAnimation.
         //console.log(this.spAnimation.getAnchor());
         //console.log(this.sprite);
         this.sprite.setPosition(cc.p(200, 200));
@@ -61,18 +69,27 @@ var Character = cc.Class.extend({
         var tmpPos= this.spAnimation.getPosition();
 
         //fix logic jump
+        this.currentAnimation= 'jump';
+        this.spAnimation.setAnimation(0,this.currentAnimation , false);
         this.spAnimation.setPosition(cc.p(tmpPos.x, tmpPos.y+1));
 
     },
     update:function (dt) {
 
         var tmpPos= this.spAnimation.getPosition();
-        
+
         //ensure that Character never below ground and update acceleration
         if(tmpPos.y<=200){
+
             this.grounded=true;
             tmpPos.y=200;
             this.acceleration.y=0;
+            if(this.currentAnimation!='run1'){
+                this.currentAnimation='run1';
+                this.spAnimation.setAnimation(0, this.currentAnimation, true);
+            }
+            //this.spAnimation.setAnimation(0, 'run1', true);
+
             //this.velocity.y=0;
         }else{
             this.acceleration.y=-980;
