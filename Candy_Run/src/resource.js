@@ -1,6 +1,4 @@
 var res = {
-    HelloWorld_png: "res/HelloWorld.png",
-    MainScene_json: "res/MainScene.json",
     princess_atlas: "res/assets/characters/princess/princess.atlas",
     princess_json: "res/assets/characters/princess/princess.json",
     zombie_atlas: "res/assets/characters/zombie/zombie.atlas",

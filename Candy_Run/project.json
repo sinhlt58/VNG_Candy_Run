@@ -14,6 +14,14 @@
     "jsList" : [
         "src/resource.js",
         "src/scenes/ScenePlay.js",
-        "src/scenes/LayerPlayAnimation.js"
+        "src/scenes/LayerPlayAnimation.js",
+
+        "src/objects/Object.js",
+        "src/objects/Ground.js",
+        "src/objects/Item.js",
+        "src/objects/Obstacle.js",
+
+        "src/managers/FactoryObject.js",
+        "src/managers/World.js"
     ]
 }
