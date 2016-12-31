@@ -2,17 +2,27 @@
     "project_type": "javascript",
 
     "debugMode" : 1,
-    "showFPS" : true,
+    "showFPS" : false,
     "frameRate" : 60,
     "noCache" : false,
     "id" : "gameCanvas",
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d", "cocostudio"],
+    "modules" : ["cocos2d", "cocostudio", "extensions"],
 
     "jsList" : [
         "src/resource.js",
-        "src/app.js"
+        "src/scenes/ScenePlay.js",
+        "src/scenes/LayerPlayAnimation.js",
+        "src/scenes/LayerPlayBackground.js",
+
+        "src/objects/Object.js",
+        "src/objects/Ground.js",
+        "src/objects/Item.js",
+        "src/objects/Obstacle.js",
+
+        "src/managers/FactoryObject.js",
+        "src/managers/World.js"
     ]
 }

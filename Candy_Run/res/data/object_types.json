@@ -3,7 +3,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 100,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_coin_1.png",
             "jelly_coin_2.png",
@@ -16,7 +16,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 310,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_coin2_1.png",
             "jelly_coin2_2.png",
@@ -31,7 +31,7 @@
         "classType" : 0,
         "score" : 100,
         "money" : 100,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "coin_big_1.png",
             "coin_big_2.png",
@@ -44,7 +44,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jellybean_01.png"
         ],
@@ -54,7 +54,7 @@
         "classType" : 0,
         "score" : 15,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jellybean_100.png"
         ],
@@ -64,7 +64,7 @@
         "classType" : 0,
         "score" : 20,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jellybean_101_1.png",
             "jellybean_101_2.png"
@@ -75,7 +75,7 @@
         "classType" : 0,
         "score" : 30,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jellybean_102_1.png",
             "jellybean_102_2.png"
@@ -86,7 +86,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "item04_biggest_0.png",
             "item04_biggest_1.png",
@@ -99,7 +99,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "item05_magnet_0.png",
             "item05_magnet_1.png",
@@ -112,7 +112,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "item03_invincible_0.png",
             "item03_invincible_1.png",
@@ -125,7 +125,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "item02_fever_0.png",
             "item02_fever_1.png",
@@ -138,7 +138,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "item06_coin_0.png",
             "item06_coin_1.png",
@@ -151,7 +151,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "item08_energy_0.png",
             "item08_energy_1.png",
@@ -165,7 +165,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "item09_bigenergy_0.png",
             "item09_bigenergy_1.png",
@@ -179,7 +179,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_b.png"
         ],
@@ -190,7 +190,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_o.png"
         ],
@@ -201,7 +201,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_n.png"
         ],
@@ -212,7 +212,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_u.png"
         ],
@@ -223,7 +223,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_s.png"
         ],
@@ -234,7 +234,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_t.png"
         ],
@@ -245,7 +245,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_i.png"
         ],
@@ -256,7 +256,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_m.png"
         ],
@@ -267,7 +267,7 @@
         "classType" : 0,
         "score" : 10,
         "money" : 0,
-        "frameRate" : 0.5,
+        "frameRate" : 0.15,
         "frames":[
             "jelly_alphabet_e.png"
         ],
