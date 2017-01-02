@@ -87,8 +87,8 @@ var World = cc.Class.extend({
     getVisibleChunkIds:function (characterPos, characterInitPos, visibleSize) {
         var minVisibleX = characterPos.x - characterInitPos.x;
         var maxVisibleX = characterPos.x + (visibleSize.width - characterInitPos.x);
-        var chunkYId = parseInt(characterPos.y / 650);
-        var chunkWidth = 92 * 4;
+        var chunkYId = parseInt(characterPos.y / this.getChunkHeight());
+        var chunkWidth = this.getChunkWidth();
         var minVisibleChunkId = parseInt(minVisibleX / chunkWidth);
         var maxVisibleChunkId = parseInt(maxVisibleX / chunkWidth);
         var visibleChunkIds = [];
@@ -113,5 +113,21 @@ var World = cc.Class.extend({
         var minVisibleX = characterPos.x - characterInitPos.x;
         var maxVisibleX = characterPos.x + (visibleSize.width - characterInitPos.x);
         return (minVisibleX - width) < posX && posX < maxVisibleX;
+    },
+    getChunkIdsByRange:function (minPos, maxPos) {
+        var minXId = parseInt(minPos.x / this.getChunkWidth());
+        var maxXId = parseInt(maxPos.x / this.getChunkWidth());
+        var chunkYId = parseInt(minPos.y / this.getChunkHeight());
+        var chunkIds = [];
+        for (var i=minXId; i<=maxXId; i++){
+            chunkIds.push(i + '-' + chunkYId);
+        }
+        return chunkIds;
+    },
+    getChunkWidth:function () {
+        return 92 * 4;
+    },
+    getChunkHeight:function () {
+        return 650;
     }
 });

@@ -25,6 +25,8 @@ widthOfOneChunk = widthOfOneGround*groundsPerChunk
 numOfGround = 0
 
 chunkDatasByObjectTypeIds = {}
+chunks = {}
+maxXOnAllMap = 0
 
 #read heaven maps
 chunkHeight = 650
@@ -42,6 +44,8 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
         if x > maxXSoFarInMap:
             maxXSoFarInMap = x
         x = x + preMapWidth
+        if x > maxXOnAllMap:
+            maxXOnAllMap = x 
 
         realObjectTypeId = textureNameToObjectTypeIds[realTextureName]
         if not chunkDatasByObjectTypeIds.has_key(realObjectTypeId):
@@ -49,6 +53,11 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
         chunkDatasByObjectTypeIds[realObjectTypeId].append({"x": x, "y" : y})
 
     preMapWidth = preMapWidth + maxXSoFarInMap
+
+#save endX-1
+print maxXOnAllMap
+chunks['endX-1'] = maxXOnAllMap + 92
+chunks['loopX-1'] = 0
 
 #read normal maps
 preMapWidth = 0
@@ -78,7 +87,7 @@ for i in range(1, 2):
         if x > maxXSoFarInMap:
             maxXSoFarInMap = x
         x = x + preMapWidth
-        if x > maxXOnAllMap:
+        if x > maxXOnAllMap and realTextureName.split("_")[1] == "platform":
             maxXOnAllMap = x
 
         if not chunkDatasByObjectTypeIds.has_key(realObjectTypeId):
@@ -86,12 +95,12 @@ for i in range(1, 2):
         chunkDatasByObjectTypeIds[realObjectTypeId].append({"x": x, "y" : y})
 
     preMapWidth = preMapWidth + maxXSoFarInMap
-    print preMapWidth
 
-print chunkDatasByObjectTypeIds[12]
+#save endX-0
 print maxXOnAllMap
+chunks['endX-0'] = maxXOnAllMap + 92
+chunks['loopX-0'] = 0
 
-chunks = {}
 for objectTypeId in chunkDatasByObjectTypeIds.keys():
     for position in chunkDatasByObjectTypeIds[objectTypeId]:
         chunkIdX = position["x"]/widthOfOneChunk

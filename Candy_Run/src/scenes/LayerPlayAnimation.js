@@ -40,7 +40,7 @@ var LayerPlayAimation = cc.Layer.extend({
         //update tmp character
         //todo: remove later
         var curentChaPos = this.tmpCharacter.getPosition();
-        var nextChaPos = cc.p(curentChaPos.x+100*dt, curentChaPos.y);
+        var nextChaPos = cc.p(curentChaPos.x+300*dt, curentChaPos.y);
         this.tmpCharacter.setPosition(nextChaPos);
 
         // tmp update position relative to the pos of character.
