@@ -51,6 +51,7 @@ var FactoryObject = cc.Class.extend({
                 }
                 var animation = new cc.Animation(animFrames, objectTypeData['frameRate']);
                 var action = new cc.RepeatForever(new cc.Animate(animation));
+                object.sprite.stopAllActions();
                 object.sprite.runAction(action);
             }
             //todo: latter add effects for items.

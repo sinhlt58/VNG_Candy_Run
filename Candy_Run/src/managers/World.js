@@ -5,7 +5,7 @@ var World = cc.Class.extend({
     chunks: null,
     factory:null,
     graphicsParent:null,
-    firstTime:true,
+    triggers:null,
     tempCharacter:null,//todo: remove later
     initPosCharacter:null,//todo: remove later
     ctor:function (chunkData, factory, graphicsParent, tempCharacter, initPosCharacter) {
@@ -26,13 +26,19 @@ var World = cc.Class.extend({
         for (var i=0; i<visibleChunkIds.length; i++){
             this.updateVisibleObjectForChunk(visibleChunkIds[i]);
         }
+
+        //init triggers
+        this.triggers = new WorldTriggers(this);
     },
     update:function (dt) {
-        //check object outside screen every frame.
-        var testOutIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.tempCharacter.getPosition(),
+        //update triggers
+        this.triggers.update(dt);
+
+        //check visible of objects in appropriate chunks
+        var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.tempCharacter.getPosition(),
             this.initPosCharacter, cc.view.getVisibleSize());
-        for (var i=0; i<testOutIds.length; i++){
-            this.updateVisibleObjectForChunk(testOutIds[i]);
+        for (var i=0; i<outChunkIds.length; i++){
+            this.updateVisibleObjectForChunk(outChunkIds[i]);
         }
         console.log(this.factory.objectPool.available);
     },

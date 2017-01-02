@@ -10,6 +10,7 @@ var LayerPlayAimation = cc.Layer.extend({
         this._super();
         this.init();
         this.scheduleUpdate();
+        //this.setPosition(cc.p(0,-650));
     },
     init:function () {
         //add resource to frameCache
@@ -25,6 +26,7 @@ var LayerPlayAimation = cc.Layer.extend({
         //todo: remove later
         this.tmpCharacter = new cc.Sprite("#jelly_coin2_1.png");
         var size = this.tmpCharacter.getContentSize();
+        //this.initCharacterPos = cc.p(300, 90 + size.height/2 + 650);
         this.initCharacterPos = cc.p(300, 90 + size.height/2);
         this.tmpCharacter.setPosition(this.initCharacterPos);
         this.addChild(this.tmpCharacter);
