@@ -1,0 +1,35 @@
+/**
+ * Created by SinhBlack on 1/1/2017.
+ */
+var ObjectPool = cc.Class.extend({
+    available:{},
+    inUse:{}, // maybe not use @@!
+    ctor:function (classTypes) {
+        for (var i=0; i<classTypes.length; i++){
+            this.available[classTypes[i]] = [];
+            this.inUse[classTypes[i]] = [];
+        }
+    },
+    getObjectByClassType:function (classType) {
+        var object;
+        if (this.available[classType].length == 0){
+            if (classType == "Item"){
+                object = new Item();
+            }else if(classType == "Ground"){
+                object = new Ground();
+            }else if (classType == "Obstacle"){
+                object = new Obstacle();
+            }
+            object.sprite = new cc.Sprite();
+        }else{
+            object = this.available[classType].pop();
+        }
+       // this.inUse[classType].push(object);
+        return object;
+    },
+    releaseObject:function (object, classType) {
+        if (object){
+            this.available[classType].push(object);
+        }
+    }
+});

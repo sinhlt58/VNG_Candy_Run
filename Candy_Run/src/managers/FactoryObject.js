@@ -6,10 +6,19 @@ var FactoryObject = cc.Class.extend({
     classTypes:null,
     itemEffectTypes:null,
     objectTypes:null,
+    objectPool:null,
     ctor:function (classTypes, itemEffectTypes, objectTypes) {
         this.classTypes = classTypes;
         this.itemEffectTypes = itemEffectTypes;
         this.objectTypes = objectTypes;
+
+        var classTypesArray = [];
+        for (var k in classTypes){
+            if(classTypes.hasOwnProperty(k)){
+                classTypesArray.push(classTypes[k]);
+            }
+        }
+        this.objectPool = new ObjectPool(classTypesArray);
     },
     getObjectTypeData:function (objectTypeId) {
         return this.objectTypes[objectTypeId];
@@ -20,12 +29,17 @@ var FactoryObject = cc.Class.extend({
     getAObjectByObjectTypeId:function (objectTypeId) {
         var classType = this.getClassTypeByObjecType(objectTypeId);
         var objectTypeData = this.getObjectTypeData(objectTypeId);
-        var object = {};
+        var object = this.objectPool.getObjectByClassType(classType);
+
+        if (object.getObjectTypeId() == objectTypeId){
+            return object;
+        }
+
+        object.setObjectTypeId(objectTypeId);
 
         if (classType == "Item"){
-            object = new Item(objectTypeId);
             var frames = objectTypeData["frames"];
-            object.sprite = new cc.Sprite("#" + frames[0]);
+            this.changeTextureOfSprite(object.sprite, frames[0]);
             object.score = objectTypeData["score"];
             object.money = objectTypeData["money"];
             //todo: animation for item
@@ -36,24 +50,37 @@ var FactoryObject = cc.Class.extend({
                     animFrames.push(frame);
                 }
                 var animation = new cc.Animation(animFrames, objectTypeData['frameRate']);
-
                 var action = new cc.RepeatForever(new cc.Animate(animation));
-
                 object.sprite.runAction(action);
             }
-
             //todo: latter add effects for items.
 
         }else if(classType == "Ground"){
-            object = new Ground(objectTypeId);
-            object.sprite = new cc.Sprite("#" + objectTypeData["texture"]);
-
+            this.changeTextureOfSprite(object.sprite, objectTypeData["texture"]);
         }else if(classType == "Obstacle"){
-            object = new Obstacle(objectTypeId);
-            object.sprite = new cc.Sprite("#" + objectTypeData["texture"]);
+            this.changeTextureOfSprite(object.sprite, objectTypeData["texture"]);
             object.damage = objectTypeData["damage"];
         }
-
         return object;
+    },
+    releaseObject:function (object) {
+        var classType = this.getClassTypeByObjecType(object.getObjectTypeId());
+        this.objectPool.releaseObject(object, classType);
+    },
+    changeTextureOfSprite:function (sprite, frameName) {
+        var frame = cc.spriteFrameCache.getSpriteFrame(frameName);
+        sprite.setSpriteFrame(frame);
+    },
+    getSizeByObjectTypeId:function (objectTypeId) {
+        var classType = this.getClassTypeByObjecType(objectTypeId);
+        var objectTypeData = this.getObjectTypeData(objectTypeId);
+        var frameName;
+        if (classType == "Item"){
+            frameName = objectTypeData["frames"][0];
+        }else{
+            frameName = objectTypeData["texture"];
+        }
+        var frame = cc.spriteFrameCache.getSpriteFrame(frameName);
+        return frame.getOriginalSize();
     }
 });

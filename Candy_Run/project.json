@@ -23,6 +23,7 @@
         "src/objects/Obstacle.js",
 
         "src/managers/FactoryObject.js",
-        "src/managers/World.js"
+        "src/managers/World.js",
+        "src/managers/ObjectPool.js"
     ]
 }
