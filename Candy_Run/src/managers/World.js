@@ -33,6 +33,7 @@ var World = cc.Class.extend({
     update:function (dt) {
         //update triggers
         this.triggers.update(dt);
+        //console.log("After trigger update.");
 
         //check visible of objects in appropriate chunks
         var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.tempCharacter.getPosition(),
@@ -40,7 +41,6 @@ var World = cc.Class.extend({
         for (var i=0; i<outChunkIds.length; i++){
             this.updateVisibleObjectForChunk(outChunkIds[i]);
         }
-        console.log(this.factory.objectPool.available);
     },
     updateVisibleObjectForChunk:function (chunkId) {
         var chunkData = this.getChunkDataById(chunkId);
@@ -53,7 +53,7 @@ var World = cc.Class.extend({
                 var objectData = chunkData[objectTypeId][j];
                 if (this.isObjectInsideScreen(objectData.x, sizeItem.width,
                         this.tempCharacter.getPosition(), this.initPosCharacter, cc.view.getVisibleSize())){
-                    if (!objectData.hasOwnProperty("pObject") || objectData["pObject"] == null){
+                    if (!objectData.hasOwnProperty("pObject") || objectData["pObject"] === null){
                         var object = this.factory.getAObjectByObjectTypeId(objectTypeId);
                         object.sprite.setAnchorPoint(cc.p(0, 0));
                         object.sprite.setPosition(cc.p(objectData.x, objectData.y));
@@ -61,7 +61,7 @@ var World = cc.Class.extend({
                         objectData["pObject"] = object;
                     }
                 }else{
-                    if (objectData.hasOwnProperty("pObject") && objectData["pObject"] != null){
+                    if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
                         var releasedObject = objectData["pObject"];
                         objectData["pObject"] = null;
                         releasedObject.sprite.removeFromParent();
@@ -82,7 +82,8 @@ var World = cc.Class.extend({
         return objectTypeIds;
     },
     getChunkDataById:function (chunkId) {
-        return this.chunks[chunkId]['data'];
+        if (this.chunks.hasOwnProperty(chunkId))
+            return this.chunks[chunkId]['data'];
     },
     getVisibleChunkIds:function (characterPos, characterInitPos, visibleSize) {
         var minVisibleX = characterPos.x - characterInitPos.x;

@@ -4,11 +4,13 @@
 var LayerPlayAimation = cc.Layer.extend({
     world:null,
     factoryObject:null,
+    tmpCharacter:null,//todo: remove later
+    initCharacterPos:null,//todo: remove later
     ctor:function () {
         this._super();
         this.init();
-        this.setPosition(cc.p(-300, 0));
         this.scheduleUpdate();
+        //this.setPosition(cc.p(0,-650));
     },
     init:function () {
         //add resource to frameCache
@@ -20,10 +22,35 @@ var LayerPlayAimation = cc.Layer.extend({
         this.factoryObject = new FactoryObject(cc.loader.getRes(res.class_types),
             cc.loader.getRes(res.item_effect_types), cc.loader.getRes(res.object_types));
 
+        //init for tmp character
+        //todo: remove later
+        this.tmpCharacter = new cc.Sprite("#jelly_coin2_1.png");
+        var size = this.tmpCharacter.getContentSize();
+        //this.initCharacterPos = cc.p(300, 90 + size.height/2 + 650);
+        this.initCharacterPos = cc.p(300, 90 + size.height/2);
+        this.tmpCharacter.setPosition(this.initCharacterPos);
+        this.addChild(this.tmpCharacter);
+
         //create world with chunk data for world object.
-        this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this);
+        this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
+            this.tmpCharacter, this.initCharacterPos);
     },
     update:function (dt) {
 
+        //update tmp character
+        //todo: remove later
+        var curentChaPos = this.tmpCharacter.getPosition();
+        var nextChaPos = cc.p(curentChaPos.x+300*dt, curentChaPos.y);
+        this.tmpCharacter.setPosition(nextChaPos);
+
+        // tmp update position relative to the pos of character.
+        //todo: remove later
+        var currentPos = this.getPosition();
+        var changeX = this.tmpCharacter.getPosition().x - this.initCharacterPos.x;
+        var nextPos = cc.p(-changeX, currentPos.y);
+        this.setPosition(nextPos);
+
+        //update world accordingly to the character's pos.
+        this.world.update(dt);
     }
 });
