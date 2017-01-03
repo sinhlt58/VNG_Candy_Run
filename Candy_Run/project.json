@@ -55,7 +55,8 @@
 
 
     "src/characters/StateRunning.js",
-    "src/characters/StateTakingDamage.js"
+    "src/characters/StateTakingDamage.js",
+    "src/characters/AnimationController.js"
 
   ]
 }

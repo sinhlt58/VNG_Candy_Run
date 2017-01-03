@@ -86,6 +86,16 @@ var LayerPlayAimation = cc.Layer.extend({
         this.lableLayerPos.setAnchorPoint(cc.p(0, 0.5));
         this.lableLayerPos.setPosition(200, 400);
         //this.addChild(this.lableLayerPos);
+
+
+
+
+
+        /*debug handle input*/
+
+
+
+
     },
     update:function (dt) {
         //handle inputs.
