@@ -1,34 +1,63 @@
 {
-    "project_type": "javascript",
+  "project_type": "javascript",
+  "debugMode": 1,
+  "showFPS": true,
+  "frameRate": 60,
+  "noCache": false,
+  "id": "gameCanvas",
+  "renderMode": 0,
+  "engineDir": "frameworks/cocos2d-html5",
+  "modules": [
+    "cocos2d",
+    "cocostudio",
+    "extensions"
+  ],
+  "jsList": [
+    "src/resource.js",
+    "src/scenes/ScenePlay.js",
+    "src/scenes/LayerPlayAnimation.js",
+    "src/scenes/LayerPlayBackground.js",
+    "src/objects/Object.js",
+    "src/objects/Ground.js",
+    "src/objects/Item.js",
+    "src/objects/Obstacle.js",
 
-    "debugMode" : 1,
-    "showFPS" : true,
-    "frameRate" : 60,
-    "noCache" : false,
-    "id" : "gameCanvas",
-    "renderMode" : 0,
-    "engineDir":"frameworks/cocos2d-html5",
+    "src/managers/FactoryObject.js",
+    "src/managers/World.js",
+    "src/managers/ObjectPool.js",
+    "src/managers/Trigger.js",
+    "src/managers/TriggerEndMap.js",
+    "src/managers/TriggerBackToLoop.js",
+    "src/managers/WorldTriggers.js",
+    "src/managers/CollisionDetector.js",
 
-    "modules" : ["cocos2d", "cocostudio", "extensions"],
 
-    "jsList" : [
-        "src/resource.js",
-        "src/scenes/ScenePlay.js",
-        "src/scenes/LayerPlayAnimation.js",
-        "src/scenes/LayerPlayBackground.js",
+    "src/characters/Character.js",
+    "src/characters/State.js",
+    "src/characters/StateVisible.js",
+    "src/characters/StateHP.js",
+    "src/characters/StateMagnetic.js",
 
-        "src/objects/Object.js",
-        "src/objects/Ground.js",
-        "src/objects/Item.js",
-        "src/objects/Obstacle.js",
+    "src/characters/StateMovement.js",
+    "src/characters/StateActiveInvisible.js",
+    "src/characters/StateActiveMagnetic.js",
+    "src/characters/StateDeactiveInvisible.js",
+    "src/characters/StateDeactiveMagnetic.js",
+    "src/characters/StateDecreasingHP.js",
+    "src/characters/StateDoubleJumping.js",
+    "src/characters/StateFlying.js",
+    "src/characters/StateGiant.js",
+    "src/characters/StateGiantActive.js",
+    "src/characters/StateGiantDisactive.js",
 
-        "src/managers/FactoryObject.js",
-        "src/managers/World.js",
-        "src/managers/ObjectPool.js",
+    "src/characters/StateIncreasingHP.js",
+    "src/characters/StateJumping.js",
+    "src/characters/StateMachineCharacter.js",
 
-        "src/managers/Trigger.js",
-        "src/managers/TriggerEndMap.js",
-        "src/managers/TriggerBackToLoop.js",
-        "src/managers/WorldTriggers.js"
-    ]
+
+    "src/characters/StateRunning.js",
+    "src/characters/StateTakingDamage.js",
+    "src/characters/AnimationController.js"
+
+  ]
 }

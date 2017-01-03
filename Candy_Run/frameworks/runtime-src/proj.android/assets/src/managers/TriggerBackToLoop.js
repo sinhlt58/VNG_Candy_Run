@@ -6,8 +6,8 @@ var TriggerBackToLoop = Trigger.extend({
         this._super(world);
     },
     update:function (dt) {
-        var characterPos = this.world.tempCharacter.getPosition();//todo: change later
-        var characterInitPos = this.world.initPosCharacter;//todo: change later
+        var characterPos = this.world.character.getPosition();
+        var characterInitPos = this.world.character.getInitPosition();
         var visibleSize = cc.view.getVisibleSize();
         var chunkIdY = parseInt(characterPos.y / this.world.getChunkHeight());
         var endX = this.world.chunks["endX-"+chunkIdY];
@@ -24,7 +24,7 @@ var TriggerBackToLoop = Trigger.extend({
             }
             //teleport character.
             //todo: change later
-            this.world.tempCharacter.setPosition(cc.p(loopX + characterInitPos.x, characterPos.y));
+            this.world.character.setPosition(cc.p(loopX + characterInitPos.x, characterPos.y));
             //change camera too.
             //todo: change later
             var cameraCurrentPos = this.world.graphicsParent.getPosition();

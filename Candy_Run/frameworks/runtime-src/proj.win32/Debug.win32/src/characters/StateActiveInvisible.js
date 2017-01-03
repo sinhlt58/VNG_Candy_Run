@@ -3,7 +3,7 @@
  */
 var StateActiveInvisible= StateVisible.extend({
     update: function (dt) {
-        
+        //
     },
     onEnter: function () {
         

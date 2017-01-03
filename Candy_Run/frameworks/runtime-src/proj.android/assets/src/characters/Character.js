@@ -12,6 +12,10 @@ var Character = cc.Class.extend({
 
     stateMachine: null,
 
+    animationController: null,
+
+
+    initPosition: null,
 
 
     ctor: function () {
@@ -26,6 +30,8 @@ var Character = cc.Class.extend({
         this.spAnimation.anchorX = 0.5;
         this.spAnimation.anchorY = 0.5;
 
+
+        cc.log(this.spAnimation._contentSize);
         //this.spAnimation.setScale(1);
 
 
@@ -41,16 +47,20 @@ var Character = cc.Class.extend({
 
 
 
+        this.animationController= new AnimationController(this);
         this.stateMachine= new StateMachineCharacter(this);
 
 
+        //fixme: init position should be load from file or somewhere
+        this.initPosition = cc.p(450, 90 + this.spAnimation._contentSize.height/2);
+        this.setPosition(this.initPosition);
 
     },
 
-    // all the update about velocity and acceleration wil be perform in state_machine
+    // all the update about velocity, acceleration and state will be performed in state_machine
     update: function (dt) {
 
-        //update velo and acce
+        //update all
         this.stateMachine.update(dt);
         var currentX = this.spAnimation.getPosition().x;
         var currentY = this.spAnimation.getPosition().y;
@@ -60,5 +70,26 @@ var Character = cc.Class.extend({
 
         this.spAnimation.setPosition(cc.p(x,y));
 
+    },
+    getPosition: function(){
+        return this.spAnimation.getPosition();
+    },
+    setPosition: function (position) {
+        this.spAnimation.setPosition(position);
+    },
+
+
+    getInitPosition: function(){
+        return this.initPosition;
+    },
+
+    getContentSize: function () {
+        return this.spAnimation._contentSize;
     }
+
+
+
+
+
+
 });

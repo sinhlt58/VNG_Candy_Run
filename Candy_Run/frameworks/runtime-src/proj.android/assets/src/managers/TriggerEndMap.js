@@ -7,8 +7,8 @@ var TriggerEndMap = Trigger.extend({
         this._super(world);
     },
     update:function (dt) {
-        var characterPos = this.world.tempCharacter.getPosition();//todo: change later
-        var characterInitPos = this.world.initPosCharacter;//todo: change later
+        var characterPos = this.world.character.getPosition();
+        var characterInitPos = this.world.character.getInitPosition();
         var visibleSize = cc.view.getVisibleSize();
         var chunkIdY = parseInt(characterPos.y / this.world.getChunkHeight());
         var endX = this.world.chunks["endX-"+chunkIdY];

@@ -6,28 +6,23 @@ var World = cc.Class.extend({
     factory:null,
     graphicsParent:null,
     triggers:null,
-    characterAni: null,
-    tempCharacter:null,//todo: remove later
-    initPosCharacter:null,//todo: remove later
+    character: null,
     collisionDetector:null,
-    ctor:function (chunkData, factory, graphicsParent, tempCharacter, initPosCharacter) {
+    ctor:function (chunkData, factory, graphicsParent, character) {
         this.chunks = chunkData;
         this.factory = factory;
         this.graphicsParent = graphicsParent;
 
-        //todo: remove later
-        this.tempCharacter = tempCharacter;
-        this.initPosCharacter = initPosCharacter;
-
-        //this.characterAni=characterAni;
+        //init character
+        this.character = character;
 
         this.init();
     },
     //create object inside the current screen.
     init:function () {
 
-        var visibleChunkIds = this.getVisibleChunkIds(this.tempCharacter.getPosition(),
-            this.initPosCharacter, cc.view.getVisibleSize());
+        var visibleChunkIds = this.getVisibleChunkIds(this.character.getPosition(),
+            this.character.getInitPosition(), cc.view.getVisibleSize());
 
         //
         for (var i=0; i<visibleChunkIds.length; i++){
@@ -48,8 +43,8 @@ var World = cc.Class.extend({
         this.triggers.update(dt);
 
         //check visible of objects in appropriate chunks
-        var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.tempCharacter.getPosition(),
-            this.initPosCharacter, cc.view.getVisibleSize());
+        var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.character.getPosition(),
+            this.character.getInitPosition(), cc.view.getVisibleSize());
         for (var i=0; i<outChunkIds.length; i++){
             this.updateVisibleObjectForChunk(outChunkIds[i]);
         }
@@ -64,7 +59,7 @@ var World = cc.Class.extend({
             for (j=0; j<chunkData[objectTypeId].length; j++){
                 var objectData = chunkData[objectTypeId][j];
                 if (this.isObjectInsideScreen(objectData.x, sizeItem.width,
-                        this.tempCharacter.getPosition(), this.initPosCharacter, cc.view.getVisibleSize())){
+                        this.character.getPosition(), this.character.getInitPosition(), cc.view.getVisibleSize())){
                     if (!objectData.hasOwnProperty("pObject") || objectData["pObject"] === null){
                         var object = this.factory.getAObjectByObjectTypeId(objectTypeId);
                         object.sprite.setAnchorPoint(cc.p(0, 0));

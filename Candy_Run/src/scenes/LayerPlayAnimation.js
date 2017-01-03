@@ -13,10 +13,7 @@ var LayerPlayAimation = cc.Layer.extend({
 
     world: null,
     factoryObject: null,
-    tmpCharacter: null,//todo: remove later
-    initCharacterPos: null,//todo: remove later
 
-    characterAni: null,
     character: null,
 
     ctor: function () {
@@ -55,24 +52,11 @@ var LayerPlayAimation = cc.Layer.extend({
 
         //create Character
         this.character= new Character();
-        this.addChild(this.character.spAnimation);
-
-
-        //init for tmp character
-        //todo: remove later
-
-
-        this.tmpCharacter = new cc.Sprite("#jelly_coin2_1.png");
-        var size = this.tmpCharacter.getContentSize();
-        //this.initCharacterPos = cc.p(300, 90 + size.height/2 + 650);
-        this.initCharacterPos = cc.p(300, 90 + size.height / 2);
-        this.tmpCharacter.setPosition(this.initCharacterPos);
-        this.addChild(this.tmpCharacter);
-
+        //this.addChild(this.character.spAnimation);
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
-            this.tmpCharacter, this.initCharacterPos);
+            this.character);
 
         //debug purposes
         this.labelPos = new cc.LabelTTF("This is Position", "Helvetica");
@@ -86,25 +70,19 @@ var LayerPlayAimation = cc.Layer.extend({
         this.lableLayerPos.setAnchorPoint(cc.p(0, 0.5));
         this.lableLayerPos.setPosition(200, 400);
         //this.addChild(this.lableLayerPos);
+
+
+
+
+
+        /*debug handle input*/
+
+
+
+
     },
     update:function (dt) {
         //handle inputs.
-
-        //update tmp character
-        //todo: remove later
-        var curentCharPos = this.tmpCharacter.getPosition();
-        cc.log();
-        var nextChaPos = cc.p(curentCharPos.x + 300*parseFloat(dt).toPrecision(9), curentCharPos.y);
-
-
-        //update tmp character
-        //todo: remove later
-        var curentChaPos = this.tmpCharacter.getPosition();
-        var nextChaPos = cc.p(curentChaPos.x + 300 * dt, curentChaPos.y);
-        this.tmpCharacter.setPosition(nextChaPos);
-        //this.labelPos.setPosition(nextChaPos.x, 600);
-        //this.labelPos.setString("Character pos:              " + this.tmpCharacter.getPosition().x + " " + this.tmpCharacter.getPosition().y);
-
 
         this.character.update(dt);
 
@@ -112,12 +90,11 @@ var LayerPlayAimation = cc.Layer.extend({
         // tmp update position relative to the pos of character.
         //todo: remove later
         var currentPos = this.getPosition();
-        var changeX = this.tmpCharacter.getPosition().x - this.initCharacterPos.x;
+        var changeX = this.character.getPosition().x - this.character.getInitPosition().x;
         //var nextPos = cc.p(-changeX, -650);
         var nextPos = cc.p(-changeX, currentPos.y);
         this.setPosition(nextPos);
-        //this.lableLayerPos.setPosition(nextChaPos.x, 550);
-        //this.lableLayerPos.setString("Layer pos + initChar.x: " + (this.getPosition().x - this.initCharacterPos.x)+ " " + this.getPosition().y);
+
 
         //update world accordingly to the character's pos.
         this.world.update(dt);
