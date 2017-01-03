@@ -9,6 +9,7 @@ var World = cc.Class.extend({
     characterAni: null,
     tempCharacter:null,//todo: remove later
     initPosCharacter:null,//todo: remove later
+    collisionDetector:null,
     ctor:function (chunkData, factory, graphicsParent, tempCharacter, initPosCharacter) {
         this.chunks = chunkData;
         this.factory = factory;
@@ -35,11 +36,16 @@ var World = cc.Class.extend({
 
         //init triggers
         this.triggers = new WorldTriggers(this);
+
+        //init collision detector.
+        this.collisionDetector = new CollisionDetector(this);
     },
     update:function (dt) {
+        //update collision.
+        this.collisionDetector.update(dt);
+
         //update triggers
         this.triggers.update(dt);
-        //console.log("After trigger update.");
 
         //check visible of objects in appropriate chunks
         var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.tempCharacter.getPosition(),

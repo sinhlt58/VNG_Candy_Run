@@ -1,7 +1,7 @@
 {
   "project_type": "javascript",
   "debugMode": 1,
-  "showFPS": false,
+  "showFPS": true,
   "frameRate": 60,
   "noCache": false,
   "id": "gameCanvas",
@@ -29,6 +29,7 @@
     "src/managers/TriggerEndMap.js",
     "src/managers/TriggerBackToLoop.js",
     "src/managers/WorldTriggers.js",
+    "src/managers/CollisionDetector.js",
 
 
     "src/characters/Character.js",

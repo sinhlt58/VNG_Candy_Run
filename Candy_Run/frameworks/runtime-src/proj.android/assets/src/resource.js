@@ -1,8 +1,16 @@
 var res = {
     princess_atlas: "res/assets/characters/princess/princess.atlas",
     princess_json: "res/assets/characters/princess/princess.json",
+    princess_png: "res/assets/characters/princess/char7.png",
+
+
+
     zombie_atlas: "res/assets/characters/zombie/zombie.atlas",
     zombie_json: "res/assets/characters/zombie/zombie.json",
+    zombie_png: "res/assets/characters/zombie/char12.png",
+
+
+
     ground_png: "res/ground.png",
     ground_plist: "res/ground.plist",
     jelly_and_items_plist: "res/jelly_and_items.plist",

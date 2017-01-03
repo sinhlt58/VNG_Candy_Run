@@ -12,5 +12,17 @@ var LayerPlayBackground = cc.Layer.extend({
 
         this.addChild(testBackground1);
         this.addChild(testBackground2);
+
+        /*var spAnimation= new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
+
+
+        spAnimation.setAnimation(0, 'run1', true);
+
+
+        spAnimation.setPosition(cc.p(200, 200));
+
+        this.addChild(spAnimation);*/
+
+
     }
 });

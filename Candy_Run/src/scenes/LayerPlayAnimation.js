@@ -108,15 +108,6 @@ var LayerPlayAimation = cc.Layer.extend({
 
         this.character.update(dt);
 
-        // simulation update Anipos by coin
-
-        /*var aniPos = {
-            x: this.getPosition().x,
-            y: this.getPosition().y+300
-        }
-        this.characterAni.setPosition(nextChaPos);
-        //console.log(aniPos);*/
-
 
         // tmp update position relative to the pos of character.
         //todo: remove later
