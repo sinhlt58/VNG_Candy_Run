@@ -8,11 +8,29 @@ var StateMachineCharacter= cc.Class.extend({
     stateVisible: null,
     stateMagnetic: null,
     owner: null,
-    ctor: function () {
+    ctor: function (owner) {
+        //owner is the Character
+        this.owner=owner;
+
+
+
+        //todo: create all the state
 
     },
+
+
+    //update acce and velo of the owner
     update: function (dt) {
-        // todo : run update function from  states above
+        //todo : run update function from  states above
+
+
+
+        // fixme: instantiate origin state and run update
+        /*this.stateMovement.update(dt);
+        this.stateGiant.update(dt);
+        this.stateHP.update(dt);
+        this.stateVisible.update(dt);
+        this.stateMagnetic.update(dt);*/
     },
     changeState: function () {
 
