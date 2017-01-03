@@ -103,6 +103,7 @@ var World = cc.Class.extend({
         var resultChunkIds = [];
         resultChunkIds.push(visibleChunkIds[0]);
         resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-1]);
+        resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-2]);
         var splitMinChunkId = visibleChunkIds[0].split('-');
         var minChunkIdX = parseInt(splitMinChunkId[0]);
         if (minChunkIdX > 0){
