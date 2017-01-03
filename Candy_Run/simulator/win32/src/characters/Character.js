@@ -37,7 +37,7 @@ var Character = cc.Class.extend({
 
         //fixme: time scale will be set base on velocity
         this.spAnimation.setTimeScale(0.7);
-        this.spAnimation.setPosition(cc.p(200, 200));
+        //this.spAnimation.setPosition(cc.p(450, 200));
 
 
 
@@ -52,9 +52,9 @@ var Character = cc.Class.extend({
 
 
         //fixme: init position should be load from file or somewhere
-        this.initPosition = cc.p(450, 90 + this.spAnimation._contentSize.height/2);
+        //this.initPosition = cc.p(250, 90 + this.spAnimation._contentSize.height/2); @@ amazing bug @@------
+        this.initPosition = cc.p(250, 100);
         this.setPosition(this.initPosition);
-
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine

@@ -52,7 +52,7 @@ var LayerPlayAimation = cc.Layer.extend({
 
         //create Character
         this.character= new Character();
-        //this.addChild(this.character.spAnimation);
+        this.addChild(this.character.spAnimation);
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
