@@ -19,10 +19,13 @@ var World = cc.Class.extend({
 
         this.init();
     },
+    //create object inside the current screen.
     init:function () {
-        //create object inside the screen.
+
         var visibleChunkIds = this.getVisibleChunkIds(this.tempCharacter.getPosition(),
             this.initPosCharacter, cc.view.getVisibleSize());
+
+        //
         for (var i=0; i<visibleChunkIds.length; i++){
             this.updateVisibleObjectForChunk(visibleChunkIds[i]);
         }
@@ -86,30 +89,24 @@ var World = cc.Class.extend({
             return this.chunks[chunkId]['data'];
     },
     getVisibleChunkIds:function (characterPos, characterInitPos, visibleSize) {
-        var minVisibleX = characterPos.x - characterInitPos.x;
-        var maxVisibleX = characterPos.x + (visibleSize.width - characterInitPos.x);
-        var chunkYId = parseInt(characterPos.y / this.getChunkHeight());
-        var chunkWidth = this.getChunkWidth();
-        var minVisibleChunkId = parseInt(minVisibleX / chunkWidth);
-        var maxVisibleChunkId = parseInt(maxVisibleX / chunkWidth);
-        var visibleChunkIds = [];
-        for (var i=minVisibleChunkId; i<=maxVisibleChunkId; i++){
-            visibleChunkIds.push(i + '-' + chunkYId);
-        }
-        return visibleChunkIds;
+        var minPos = cc.p(characterPos.x - characterInitPos.x, characterPos.y);
+        var maxPos = cc.p(characterPos.x + (visibleSize.width - characterInitPos.x), characterPos.y);
+        return this.getChunkIdsByRange(minPos, maxPos);
     },
     getChunkIdsMayHaveObjectsOutOfScreen:function (characterPos, characterInitPos, visibleSize) {
         var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
         var resultChunkIds = [];
-        resultChunkIds.push(visibleChunkIds[0]);
-        resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-1]);
-        resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-2]);
-        var splitMinChunkId = visibleChunkIds[0].split('-');
-        var minChunkIdX = parseInt(splitMinChunkId[0]);
-        if (minChunkIdX > 0){
-            resultChunkIds.push(minChunkIdX-1 + '-' + splitMinChunkId[1]);
+        if (visibleChunkIds.length > 2){
+            resultChunkIds.push(visibleChunkIds[0]);
+            resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-1]);
+            resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-2]);
+            var splitMinChunkId = visibleChunkIds[0].split('-');
+            var minChunkIdX = parseInt(splitMinChunkId[0]);
+            if (minChunkIdX > 0){
+                resultChunkIds.push(minChunkIdX-1 + '-' + splitMinChunkId[1]);
+            }
+            return resultChunkIds;
         }
-        return resultChunkIds;
     },
     isObjectInsideScreen:function (posX, width, characterPos, characterInitPos, visibleSize) {
         var minVisibleX = characterPos.x - characterInitPos.x;

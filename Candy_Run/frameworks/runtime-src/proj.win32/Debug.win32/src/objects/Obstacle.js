@@ -3,8 +3,8 @@
  */
 var Obstacle = ObjectGame.extend({
     damage:0,
-    ctor:function (objectTypeId) {
-        this._super(objectTypeId);
+    ctor:function () {
+        this._super();
     },
     setDamage:function (damage) {
         this.damage = damage;

@@ -4,10 +4,13 @@
 var ObjectGame = cc.Class.extend({
     objectTypeId:null,
     sprite:null,
-    ctor:function (objectTypeId) {
-        this.objectTypeId = objectTypeId;
+    ctor:function () {
+
     },
     getObjectTypeId:function () {
         return this.objectTypeId;
+    },
+    setObjectTypeId:function (objectTypeId) {
+        this.objectTypeId = objectTypeId;
     }
 });

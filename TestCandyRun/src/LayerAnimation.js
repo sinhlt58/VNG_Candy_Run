@@ -91,7 +91,6 @@ var LayerAnimation = cc.Layer.extend({
         //update Character
         this.character.update(dt);
 
-
         //debug
         this.labelPos.setString("Position "+this.character.spAnimation.getPosition().x+" "+this.character.spAnimation.getPosition().y)
         this.labelVelo.setString("Velo "+ this.character.velocity.x+ " "+ this.character.velocity.y);

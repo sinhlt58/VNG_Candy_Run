@@ -24,11 +24,11 @@ var TriggerBackToLoop = Trigger.extend({
             }
             //teleport character.
             //todo: change later
-            this.world.tempCharacter.setPosition(cc.p(loopX + (characterPos.x-endX), characterPos.y));
+            this.world.tempCharacter.setPosition(cc.p(loopX + characterInitPos.x, characterPos.y));
             //change camera too.
             //todo: change later
             var cameraCurrentPos = this.world.graphicsParent.getPosition();
-            this.world.graphicsParent.setPosition(cc.p(-(loopX + (characterPos.x-endX)), cameraCurrentPos.y));
+            this.world.graphicsParent.setPosition(cc.p(-(loopX), cameraCurrentPos.y));
         }
     },
     teleportChunk:function (minX, maxX, endX, loopX, chunkId) {
