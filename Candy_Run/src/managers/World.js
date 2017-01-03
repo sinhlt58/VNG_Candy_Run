@@ -6,6 +6,7 @@ var World = cc.Class.extend({
     factory:null,
     graphicsParent:null,
     triggers:null,
+    characterAni: null,
     tempCharacter:null,//todo: remove later
     initPosCharacter:null,//todo: remove later
     ctor:function (chunkData, factory, graphicsParent, tempCharacter, initPosCharacter) {
@@ -16,6 +17,8 @@ var World = cc.Class.extend({
         //todo: remove later
         this.tempCharacter = tempCharacter;
         this.initPosCharacter = initPosCharacter;
+
+        //this.characterAni=characterAni;
 
         this.init();
     },
