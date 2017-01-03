@@ -432,4 +432,4 @@ proj.android/libraries/*/local.properties
 docs/html/*
 
 /Debug.win32/*
-/simulator/*
+/Candy_Run/simulator/*
