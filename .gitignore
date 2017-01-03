@@ -431,5 +431,5 @@ proj.android/libraries/*/local.properties
 ######################
 docs/html/*
 
-/Debug.win32/*
+/Candy_Run/frameworks/runtime-src/proj.win32/Debug.win32/*
 /Candy_Run/simulator/*
