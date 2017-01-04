@@ -4,6 +4,7 @@
 var ObjectPool = cc.Class.extend({
     available:{},
     inUse:{}, // maybe not use @@!
+    testCoutCreated:0,
     ctor:function (classTypes) {
         for (var i=0; i<classTypes.length; i++){
             this.available[classTypes[i]] = [];
@@ -21,6 +22,8 @@ var ObjectPool = cc.Class.extend({
                 object = new Obstacle();
             }
             object.sprite = new cc.Sprite();
+            object.sprite.retain();
+            this.testCoutCreated++;
         }else{
             object = this.available[classType].pop();
         }

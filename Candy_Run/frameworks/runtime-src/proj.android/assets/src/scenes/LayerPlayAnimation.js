@@ -6,6 +6,8 @@ var LayerPlayAimation = cc.Layer.extend({
     factoryObject: null,
     character: null,
 
+    labelPool:null,
+    debugNumFrames:0,
     ctor: function () {
         this._super();
         this.init();
@@ -29,6 +31,11 @@ var LayerPlayAimation = cc.Layer.extend({
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
             this.character);
+
+        this.labelPool= new cc.LabelTTF("Object Pool: ", "Helvetica");
+        this.labelPool.setFontSize(20);
+        this.labelPool.setAnchorPoint(cc.p(0, 0));
+        this.addChild(this.labelPool);
     },
     update:function (dt) {
         //handle inputs.
@@ -40,6 +47,16 @@ var LayerPlayAimation = cc.Layer.extend({
 
         //update world accordingly to the character's pos.
         this.world.update(dt);
+
+        //debug
+        this.labelPool.setPosition(this.character.getPosition().x-200, this.character.getPosition().y + 400);
+        this.labelPool.setString(" Items: " + this.world.factory.objectPool.available["Item"].length +
+                                ", Ground: " + this.world.factory.objectPool.available["Ground"].length +
+                                ", Obstacles: " + this.world.factory.objectPool.available["Obstacle"].length +
+                                ", Inuse: " + this.getChildrenCount()+
+                                ", Num created: " + this.world.factory.objectPool.testCoutCreated +
+                                "\n, Num created Animation: " + this.world.factory.testNumCreatedAnimation +
+                                ", Num frames: " + ++this.debugNumFrames);
     },
     updateCamera:function (character) {
         var visibleSize = cc.view.getVisibleSize();
@@ -49,5 +66,8 @@ var LayerPlayAimation = cc.Layer.extend({
         var changeX = characterPos.x - characterInitPos.x;
         var changeY = parseInt(characterPos.y / visibleSize.height)*visibleSize.height;
         this.setPosition(-changeX, -changeY);
+    },
+    onExit:function () {
+        this._super();
     }
 });

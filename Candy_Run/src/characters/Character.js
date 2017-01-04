@@ -52,7 +52,7 @@ var Character = cc.Class.extend({
 
 
         //fixme: init position should be load from file or somewhere
-        //this.initPosition = cc.p(250, 90 + this.spAnimation._contentSize.height/2); @@ amazing bug @@------
+        //this.initPosition = cc.p(250, 90 + this.spAnimation._contentSize.height/2); @@ amazing bug
         this.initPosition = cc.p(250, 90 + this.spAnimation.getContentSize().height/2);
         this.setPosition(this.initPosition);
 
@@ -88,10 +88,5 @@ var Character = cc.Class.extend({
     getContentSize: function () {
         return this.spAnimation.getContentSize();
     }
-
-
-
-
-
 
 });

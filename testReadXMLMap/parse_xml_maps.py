@@ -19,7 +19,7 @@ textureNameToObjectTypeIds = {
     "jelly_magnet.png" : 8
 }
 
-groundsPerChunk = 4
+groundsPerChunk = 2
 widthOfOneGround = 92
 widthOfOneChunk = widthOfOneGround*groundsPerChunk
 numOfGround = 0
@@ -103,8 +103,8 @@ chunks['loopX-0'] = 0
 
 for objectTypeId in chunkDatasByObjectTypeIds.keys():
     for position in chunkDatasByObjectTypeIds[objectTypeId]:
-        chunkIdX = position["x"]/widthOfOneChunk
-        chunkIdY = position["y"]/chunkHeight
+        chunkIdX = int(position["x"]/widthOfOneChunk)
+        chunkIdY = int(position["y"]/chunkHeight)
         chunkId = str(chunkIdX) + '-' + str(chunkIdY)
         if not chunks.has_key(chunkId):
             chunks[chunkId] = {}

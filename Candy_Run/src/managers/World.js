@@ -45,6 +45,7 @@ var World = cc.Class.extend({
         //check visible of objects in appropriate chunks
         var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.character.getPosition(),
             this.character.getInitPosition(), cc.view.getVisibleSize());
+
         for (var i=0; i<outChunkIds.length; i++){
             this.updateVisibleObjectForChunk(outChunkIds[i]);
         }
@@ -65,14 +66,16 @@ var World = cc.Class.extend({
                         object.sprite.setAnchorPoint(cc.p(0, 0));
                         object.sprite.setPosition(cc.p(objectData.x, objectData.y));
                         this.graphicsParent.addChild(object.sprite);
+                        //object.sprite.release();
                         objectData["pObject"] = object;
                     }
                 }else{
                     if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
                         var releasedObject = objectData["pObject"];
-                        objectData["pObject"] = null;
+                        //releasedObject.sprite.retain();
                         releasedObject.sprite.removeFromParent();
                         this.factory.releaseObject(releasedObject);
+                        objectData["pObject"] = null;
                     }
                 }
             }
@@ -115,7 +118,7 @@ var World = cc.Class.extend({
     isObjectInsideScreen:function (posX, width, characterPos, characterInitPos, visibleSize) {
         var minVisibleX = characterPos.x - characterInitPos.x;
         var maxVisibleX = characterPos.x + (visibleSize.width - characterInitPos.x);
-        return (minVisibleX - width) < posX && posX < maxVisibleX;
+        return (minVisibleX - width) <= posX && posX < maxVisibleX;
     },
     getChunkIdsByRange:function (minPos, maxPos) {
         var minXId = parseInt(minPos.x / this.getChunkWidth());
@@ -128,7 +131,7 @@ var World = cc.Class.extend({
         return chunkIds;
     },
     getChunkWidth:function () {
-        return 92 * 4;
+        return 92 * 2;
     },
     getChunkHeight:function () {
         return 650;

@@ -7,6 +7,7 @@ var FactoryObject = cc.Class.extend({
     itemEffectTypes:null,
     objectTypes:null,
     objectPool:null,
+    testNumCreatedAnimation:0,
     ctor:function (classTypes, itemEffectTypes, objectTypes) {
         this.classTypes = classTypes;
         this.itemEffectTypes = itemEffectTypes;
@@ -43,17 +44,18 @@ var FactoryObject = cc.Class.extend({
             object.score = objectTypeData["score"];
             object.money = objectTypeData["money"];
             //todo: animation for item
-            if (frames.length > 1){
-                var animFrames = [];
-                for (var i=0; i<frames.length; i++){
-                    var frame = cc.spriteFrameCache.getSpriteFrame(frames[i]);
-                    animFrames.push(frame);
-                }
-                var animation = new cc.Animation(animFrames, objectTypeData['frameRate']);
-                var action = new cc.RepeatForever(new cc.Animate(animation));
-                object.sprite.stopAllActions();
-                object.sprite.runAction(action);
-            }
+            // if (frames.length > 1){
+            //     var animFrames = [];
+            //     for (var i=0; i<frames.length; i++){
+            //         var frame = cc.spriteFrameCache.getSpriteFrame(frames[i]);
+            //         animFrames.push(frame);
+            //     }
+            //     var animation = new cc.Animation(animFrames, objectTypeData['frameRate']);
+            //     var action = new cc.RepeatForever(new cc.Animate(animation));
+            //     this.testNumCreatedAnimation++;
+            //     object.sprite.stopAllActions();
+            //     object.sprite.runAction(action);
+            // }
             //todo: latter add effects for items.
 
         }else if(classType == "Ground"){
