@@ -2,6 +2,15 @@
  * Created by Fresher on 28/12/2016.
  */
 var Character = cc.Class.extend({
+
+    //fixme: grounded property should not place here (some where else) :))
+    grounded: true,
+
+
+
+
+
+
     spAnimation: null,
     position: null,
 
@@ -21,9 +30,20 @@ var Character = cc.Class.extend({
     ctor: function () {
 
 
+
+
         //todo: Replace with animation controller after
         this.spAnimation = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas);
-        this.spAnimation.setAnimation(0, 'run1', true);
+
+
+
+        //console.log((this.spAnimation instanceof sp.SkeletonAnimation)+ " okkok");
+
+        this.animationController= new AnimationController(this);
+
+        this.animationController.setAnimation('run1', true);
+
+        //console.log(this.spAnimation.getAnimationInfo('run1'));
 
         //this.spAnimation.setPosition(200, 300);
 
@@ -36,7 +56,7 @@ var Character = cc.Class.extend({
 
 
         //fixme: time scale will be set base on velocity
-        this.spAnimation.setTimeScale(0.7);
+        //this.spAnimation.setTimeScale(0.7);
         //this.spAnimation.setPosition(cc.p(450, 200));
 
 
@@ -47,22 +67,21 @@ var Character = cc.Class.extend({
 
 
 
-        this.animationController= new AnimationController(this);
+
         this.stateMachine= new StateMachineCharacter(this);
 
 
         //fixme: init position should be load from file or somewhere
-        //this.initPosition = cc.p(250, 90 + this.spAnimation._contentSize.height/2); @@ amazing bug
         this.initPosition = cc.p(250, 90 + this.spAnimation.getContentSize().height/2);
         this.setPosition(this.initPosition);
 
-        cc.log(this.spAnimation);
+        //cc.log(this.spAnimation);
     },
 
-    // all the update about velocity, acceleration and state will be performed in state_machine
+    // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
     update: function (dt) {
 
-        //update all
+        //update all state machine
         this.stateMachine.update(dt);
         var currentX = this.spAnimation.getPosition().x;
         var currentY = this.spAnimation.getPosition().y;
@@ -87,6 +106,12 @@ var Character = cc.Class.extend({
 
     getContentSize: function () {
         return this.spAnimation.getContentSize();
-    }
+    },
 
+    setAcceleration: function (acc) {
+        this.acceleration= acc;
+    },
+    setVelocity: function (v) {
+        this.velocity= v;
+    }
 });

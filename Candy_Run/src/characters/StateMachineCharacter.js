@@ -2,6 +2,12 @@
  * Created by Fresher on 28/12/2016.
  */
 var StateMachineCharacter = cc.Class.extend({
+
+    // grounded property temporary move to character
+
+
+
+
     stateMovement: null,
     stateGiant: null,
     stateHP: null,
@@ -12,7 +18,7 @@ var StateMachineCharacter = cc.Class.extend({
         //owner is the Character
         this.owner = owner;
         //todo: create all the state
-
+        this.stateMovement= new StateRunning(this.owner);
 
 
     },
@@ -20,7 +26,23 @@ var StateMachineCharacter = cc.Class.extend({
 
     //update acce and velo of the owner
     update: function (dt) {
+        //update velocity by acceleration
+
+        var currentVeloX= this.owner.velocity.x;
+        var currentVeloY=this.owner.velocity.y;
+
+        currentVeloX+= this.owner.acceleration.x*dt;
+        currentVeloY+=this.owner.acceleration.y*dt;
+
+        this.owner.velocity= cc.p(currentVeloX, currentVeloY);
+
+
+
         //todo : run update function from  states above
+
+
+
+
 
 
         // fixme: instantiate origin state and run update
@@ -29,6 +51,23 @@ var StateMachineCharacter = cc.Class.extend({
          this.stateHP.update(dt);
          this.stateVisible.update(dt);
          this.stateMagnetic.update(dt);*/
+        this.stateMovement.update(dt);
+
+
+
+        //fixme: change state should not be handled here, it should be handle at collision detection
+
+        if(this.owner.spAnimation.getPosition().y<90 + this.owner.spAnimation.getContentSize().height/2
+            && this.stateMovement instanceof StateRunning==false ) {
+
+            //console.log(this.owner.spAnimation.getPosition().y+" "+ (90 + this.owner.spAnimation.getContentSize().height/2));
+            this.setStateMovement(new StateRunning(this.owner));
+
+
+            console.log("State turn back to running");
+        }
+
+
     },
     changeState: function () {
 
@@ -51,6 +90,8 @@ var StateMachineCharacter = cc.Class.extend({
     setStateHP: function (stateHP) {
         this.stateHP= stateHP;
     }
+
+
 
 
 

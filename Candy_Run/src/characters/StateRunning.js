@@ -15,18 +15,28 @@ var StateRunning= StateMovement.extend({
         }else{
             // entered update logic
 
+            // fixme: set acceleration to (x, 0)
 
-            var currentVeloX= this.owner.velocity.x;
-            var currentVeloY=this.owner.velocity.y;
 
-            currentVeloX+= this.owner.acceleration.x;
-            currentVeloY+=this.owner.acceleration.y;
 
-            this.owner.velocity= cc.p(currentVeloX, currentVeloY);
+
+
         }
     },
+
+    //  fixme: set position and acceleration to running state
     onEnter: function () {
-        
+        console.log("On Enter Running");
+
+        var currentPosX= this.owner.spAnimation.getPosition().x;
+
+        var y= 90 + this.owner.spAnimation.getContentSize().height/2;
+
+        this.owner.spAnimation.setPosition(cc.p(currentPosX, y));
+
+        this.owner.setAcceleration(cc.p(0,0));
+        this.owner.setVelocity((cc.p(300, 0)));
+
     },
     onExit: function () {
 
