@@ -10,6 +10,14 @@ var LayerPlayAimation = cc.Layer.extend({
         this._super();
         this.init();
         this.scheduleUpdate();
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: this.onTouchBegan,
+            onTouchMoved: this.onTouchMoved,
+            onTouchEnded: this.onTouchEnded
+        }, this);
     },
     init: function () {
         //add resource to frameCache
@@ -49,5 +57,21 @@ var LayerPlayAimation = cc.Layer.extend({
         var changeX = characterPos.x - characterInitPos.x;
         var changeY = parseInt(characterPos.y / visibleSize.height)*visibleSize.height;
         this.setPosition(-changeX, -changeY);
+    },
+    onTouchBegan: function (touch, event) {
+        console.log('mouse down');
+        return true;
+    },
+    onTouchEnded: function (t, e) {
+        console.log("mouse released");
+        //this.
+
+        var thisLayer= e.getCurrentTarget();
+
+        //console.log(thisLayer);
+
+        thisLayer.character.stateMachine.setStateMovement(new StateJumping(thisLayer.character));
+
+        return true;
     }
 });

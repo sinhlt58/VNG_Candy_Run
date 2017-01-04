@@ -5,6 +5,7 @@
 var AnimationController = cc.Class.extend({
     owner: null,
     currentAnimation: null,
+    currentTimeScale: 0.7,
     allAnimation: {
         crouch: 'crouch',
         die: 'die',
@@ -26,13 +27,24 @@ var AnimationController = cc.Class.extend({
     ctor: function (owner) {
         this.owner = owner;
         this.currentAnimation= this.allAnimation['run1'];
+        this.owner.spAnimation.setAnimation(0, this.currentAnimation, true);
+        this.owner.spAnimation.setTimeScale(this.currentTimeScale);
     },
 
 
     // set Animation String
     setAnimation: function (animationName, loop) {
-        this.currentAnimation=animationName;
-        this.owner.spAnimation.setAnimation(0, this.allAnimation[animationName],loop)
+        if(animationName==this.currentAnimation){
+            return
+        }else{
+            this.currentAnimation=animationName;
+            this.owner.spAnimation.setAnimation(0, this.allAnimation[animationName],loop)
+        }
+
+    },
+    
+    updateAnimation: function (aniName, loop) {
+
     }
 
 
