@@ -31,13 +31,13 @@ var Character = cc.Class.extend({
         this.spAnimation.anchorY = 0.5;
 
 
-        cc.log(this.spAnimation._contentSize);
+        //cc.log(this.spAnimation._contentSize);
         //this.spAnimation.setScale(1);
 
 
         //fixme: time scale will be set base on velocity
         this.spAnimation.setTimeScale(0.7);
-        this.spAnimation.setPosition(cc.p(200, 200));
+        //this.spAnimation.setPosition(cc.p(450, 200));
 
 
 
@@ -52,9 +52,11 @@ var Character = cc.Class.extend({
 
 
         //fixme: init position should be load from file or somewhere
-        this.initPosition = cc.p(450, 90 + this.spAnimation._contentSize.height/2);
+        //this.initPosition = cc.p(250, 90 + this.spAnimation._contentSize.height/2); @@ amazing bug @@------
+        this.initPosition = cc.p(250, 90 + this.spAnimation.getContentSize().height/2 + 650);
         this.setPosition(this.initPosition);
 
+        cc.log(this.spAnimation);
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine
@@ -84,7 +86,7 @@ var Character = cc.Class.extend({
     },
 
     getContentSize: function () {
-        return this.spAnimation._contentSize;
+        return this.spAnimation.getContentSize();
     }
 
 

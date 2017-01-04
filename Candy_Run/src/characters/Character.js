@@ -53,8 +53,10 @@ var Character = cc.Class.extend({
 
         //fixme: init position should be load from file or somewhere
         //this.initPosition = cc.p(250, 90 + this.spAnimation._contentSize.height/2); @@ amazing bug @@------
-        this.initPosition = cc.p(250, 100);
+        this.initPosition = cc.p(250, 90 + this.spAnimation.getContentSize().height/2);
         this.setPosition(this.initPosition);
+
+        cc.log(this.spAnimation);
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine
@@ -84,7 +86,7 @@ var Character = cc.Class.extend({
     },
 
     getContentSize: function () {
-        return this.spAnimation._contentSize;
+        return this.spAnimation.getContentSize();
     }
 
 
