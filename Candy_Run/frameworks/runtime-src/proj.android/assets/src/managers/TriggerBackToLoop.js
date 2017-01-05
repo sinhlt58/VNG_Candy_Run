@@ -54,7 +54,7 @@ var TriggerBackToLoop = Trigger.extend({
         //cc.director.pause();
     },
     teleportObject:function (endX, loopX, objectData, objectTypeId) {
-            var xTeleportTo = parseInt(objectData.x) - (parseInt(endX) - parseInt(loopX));
+            var xTeleportTo = objectData.x -( endX - loopX);
             var chunkIdTeleportTo = parseInt(xTeleportTo/this.world.getChunkWidth())
                 + '-' + parseInt(objectData.y/this.world.getChunkHeight());
 
@@ -62,13 +62,16 @@ var TriggerBackToLoop = Trigger.extend({
 
             for (var j=0; j<teleportTochunkData[objectTypeId].length; j++) {
                 var teleportToObjectData = teleportTochunkData[objectTypeId][j];
-                if (parseInt(teleportToObjectData.x) == parseInt(xTeleportTo) &&
-                    parseInt(teleportToObjectData.y) == parseInt(objectData.y)){
-                    var pObject = objectData["pObject"];
-                    pObject.sprite.setPosition(cc.p(xTeleportTo, objectData.y)); //todo: may change to pObject.setPosition() only
-                    teleportToObjectData["pObject"] = pObject;
-                    objectData["pObject"] = null;
-                    return ;
+                if (teleportToObjectData.x == xTeleportTo &&
+                    teleportToObjectData.y == objectData.y){
+                    if (!teleportToObjectData.hasOwnProperty("pObject")
+                        || teleportToObjectData["pObject"] == null){
+                        var pObject = objectData["pObject"];
+                        pObject.sprite.setPosition(cc.p(xTeleportTo, objectData.y)); //todo: may change to pObject.setPosition() only
+                        teleportToObjectData["pObject"] = pObject;
+                        objectData["pObject"] = null;
+                        return ;
+                    }
                 }
             }
     }

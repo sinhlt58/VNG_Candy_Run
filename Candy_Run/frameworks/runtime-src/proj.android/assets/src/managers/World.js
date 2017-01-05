@@ -97,7 +97,7 @@ var World = cc.Class.extend({
     },
     getVisibleChunkIds:function (characterPos, characterInitPos, visibleSize) {
         var minPos = cc.p(characterPos.x - characterInitPos.x, characterPos.y);
-        var maxPos = cc.p(characterPos.x + (visibleSize.width - characterInitPos.x), characterPos.y);
+        var maxPos = cc.p(characterPos.x + (visibleSize.width - characterInitPos.x - 1), characterPos.y);
         return this.getChunkIdsByRange(minPos, maxPos);
     },
     getChunkIdsMayHaveObjectsOutOfScreen:function (characterPos, characterInitPos, visibleSize) {
@@ -118,7 +118,7 @@ var World = cc.Class.extend({
     isObjectInsideScreen:function (posX, width, characterPos, characterInitPos, visibleSize) {
         var minVisibleX = characterPos.x - characterInitPos.x;
         var maxVisibleX = characterPos.x + (visibleSize.width - characterInitPos.x);
-        return (minVisibleX - width) <= posX && posX < maxVisibleX;
+        return (minVisibleX - width) < posX && posX < maxVisibleX;
     },
     getChunkIdsByRange:function (minPos, maxPos) {
         var minXId = parseInt(minPos.x / this.getChunkWidth());

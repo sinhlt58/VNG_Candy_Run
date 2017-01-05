@@ -30,7 +30,7 @@ var StateRunning= StateMovement.extend({
 
         var currentPosX= this.owner.spAnimation.getPosition().x;
 
-        var y= 90 + this.owner.spAnimation.getContentSize().height/2;
+        var y= this.owner.getInitPosition().y;
 
         this.owner.spAnimation.setPosition(cc.p(currentPosX, y));
 
