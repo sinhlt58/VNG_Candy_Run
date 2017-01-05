@@ -2,21 +2,98 @@ import xml.etree.ElementTree as ET
 import re
 import json
 
-textureNameToObjectTypeIds = {
-    "m1_trap_0_0_1.png" : 81, 
+textureNameToObjectTypeIds = { 
     "jelly_point.png" : 3,
     "jelly_bear_1_1.png" : 5,
     "jelly_bear_1_0.png" : 4,
     "jelly_boost.png" : 9,
-    "m1_platform_0_0_0.png" : 23,
-    "m1_trap_0_0_0.png" : 80,
-    "m1_trap_0_2_1.png" : 86,
-    "m1_trap_0_2_0.png" : 85,
     "jelly_health_2.png" : 13,
     "jelly_health_1.png" : 12,
     "jelly_coin_2.png" : 1,
     "jelly_coin_1.png" : 0,
-    "jelly_magnet.png" : 8
+    "jelly_magnet.png" : 8,
+    "jelly_beartrans.png" : 11,
+    "jelly_giganic.png" : 7,
+    "jelly_abc_0.png" : 14,
+    "jelly_abc_1.png" : 15,
+    "jelly_abc_2.png" : 16,
+    "jelly_abc_3.png" : 17,
+    "jelly_abc_4.png" : 18,
+    "jelly_abc_5.png" : 19,
+    "jelly_abc_6.png" : 20,
+    "jelly_abc_7.png" : 21,
+    "jelly_abc_8.png" : 22,
+    "jelly_cointrans.png" : 11,
+    "jelly_fever.png" : 10,
+
+    "m5_platform_0_0_0.png": 36,
+    "m3_platform_0_0_1.png": 32,
+    "m3_platform_0_0_0.png": 31,
+    "m3_platform_0_0_3.png": 34,
+    "m3_platform_0_0_2.png": 33,
+    "m1_platform_0_0_3.png": 26,
+    "m1_platform_0_0_2.png": 25,
+    "m1_platform_0_0_1.png": 24,
+    "m1_platform_0_0_0.png": 23,
+    "m6_platform_0_0_2.png": 42,
+    "m6_platform_0_0_3.png": 43,
+    "m6_platform_0_0_0.png": 40,
+    "m6_platform_0_0_1.png": 41,
+    "m2_platform_0_0_2.png": 29,
+    "m2_platform_0_0_3.png": 30,
+    "m2_platform_0_0_0.png": 27,
+    "m2_platform_0_0_1.png": 28,
+    "m5_platform_0_0_3.png": 39,
+    "m5_platform_0_0_2.png": 38,
+    "m5_platform_0_0_1.png": 37,
+    "m4_platform_0_0_3.png": 35,
+
+    "m1_trap_0_0_2.png": 82,
+    "m1_trap_0_0_0.png": 80,
+    "m5_trap_0_0_1.png": 110,
+    "m4_trap_0_0_0.png": 102,
+    "m4_trap_0_0_1.png": 103,
+    "m3_trap_0_1_0.png": 97,
+    "m6_trap_0_1_1.png": 121,
+    "m1_trap_0_1_1.png": 84,
+    "m3_trap_0_0_1.png": 95,
+    "m3_trap_0_0_0.png": 94,
+    "m5_trap_0_1_0.png": 112,
+    "m3_trap_0_0_2.png": 96,
+    "m2_trap_0_1_0.png": 90,
+    "m5_trap_0_2_1.png": 116,
+    "m5_trap_0_2_0.png": 115,
+    "m3_trap_0_2_0.png": 100,
+    "m6_trap_0_0_0.png": 117,
+    "m6_trap_0_2_1.png": 125,
+    "m1_trap_0_2_1.png": 86,
+    "m4_trap_0_1_0.png": 104,
+    "m4_trap_0_1_2.png": 106,
+    "m6_trap_0_1_3.png": 123,
+    "m1_trap_0_1_0.png": 83,
+    "m2_trap_0_0_1.png": 88,
+    "m6_trap_0_1_2.png": 122,
+    "m1_trap_0_0_1.png": 81,
+    "m3_trap_0_2_1.png": 101,
+    "m6_trap_0_0_2.png": 119,
+    "m6_trap_0_0_1.png": 118,
+    "m6_trap_0_2_0.png": 124,
+    "m3_trap_0_1_1.png": 98,
+    "m2_trap_0_0_0.png": 87,
+    "m4_trap_0_2_1.png": 108,
+    "m2_trap_0_1_1.png": 91,
+    "m5_trap_0_0_2.png": 111,
+    "m5_trap_0_0_0.png": 109,
+    "m2_trap_0_2_0.png": 92,
+    "m2_trap_0_2_1.png": 93,
+    "m4_trap_0_1_1.png": 105,
+    "m1_trap_0_2_0.png": 85,
+    "m3_trap_0_1_2.png": 99,
+    "m6_trap_0_1_0.png": 120,
+    "m2_trap_0_0_2.png": 89,
+    "m4_trap_0_2_0.png": 107,
+    "m5_trap_0_1_2.png": 114,
+    "m5_trap_0_1_1.png": 113
 }
 
 groundsPerChunk = 2
@@ -63,10 +140,10 @@ chunks['loopX-1'] = 0
 preMapWidth = 0
 maxXOnAllMap = 0
 
-for i in range(1, 2):
+for i in range(1, 7):
     tree = ET.parse('MAP0'+ str(i) + '.xml')
     root = tree.getroot()
-    levelName =  "m" + str(int(root.get('Name').split("_")[-1]))
+    levelName =  "m" + str(i)
     maxXSoFarInMap = 0
 
     for item in root.iter('Item'):
