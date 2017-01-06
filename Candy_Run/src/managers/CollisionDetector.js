@@ -3,16 +3,18 @@
  */
 var CollisionDetector = cc.Class.extend({
     world:null,
-    callBack:null,
-    contextCallBack:null,
+    collisionObjectsWithCharacter:[],
     ctor:function (world) {
         this.world = world;
     },
     update:function (dt) {
-       // cc.log("inside collision update");
+        //update array contains items, ground, obstacles collide with character.
+
+        //handle collisions character with item objects.
+
     },
-    registerCallBack:function (callBack, context) {
-        this.callBack = callBack;
-        this.contextCallBack = context;
+    handleCollision:function (character, collisionObjects) {
+       // handle with character
+        // handle with items
     }
 });

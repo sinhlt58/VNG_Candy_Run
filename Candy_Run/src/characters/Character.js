@@ -5,7 +5,7 @@ var Character = cc.Class.extend({
 
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
-
+    body:null,
 
 
 
@@ -33,8 +33,8 @@ var Character = cc.Class.extend({
 
 
         //todo: Replace with animation controller after
-        this.spAnimation = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas);
-
+        this.spAnimation = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
+        this.body = {width: 90, height: 220};
 
 
         //console.log((this.spAnimation instanceof sp.SkeletonAnimation)+ " okkok");
@@ -105,7 +105,7 @@ var Character = cc.Class.extend({
     },
 
     getContentSize: function () {
-        return this.spAnimation.getContentSize();
+        return this.body;
     },
 
     setAcceleration: function (acc) {

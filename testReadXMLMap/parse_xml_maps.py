@@ -161,6 +161,10 @@ for i in range(1, 7):
 
         x = int(item[0][0].text)
         y = -int(item[0][1].text)
+
+        if realTextureName.split("_")[1] == "platform" and y == -1:
+        	y = 0
+
         if x > maxXSoFarInMap:
             maxXSoFarInMap = x
         x = x + preMapWidth
@@ -183,6 +187,8 @@ for objectTypeId in chunkDatasByObjectTypeIds.keys():
         chunkIdX = int(position["x"]/widthOfOneChunk)
         chunkIdY = int(position["y"]/chunkHeight)
         chunkId = str(chunkIdX) + '-' + str(chunkIdY)
+        if chunkIdY < 0:
+        	print "Negative y map."
         if not chunks.has_key(chunkId):
             chunks[chunkId] = {}
             chunks[chunkId]['data'] = {}
