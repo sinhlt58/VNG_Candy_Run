@@ -3,8 +3,19 @@
  */
 var CollisionDetector = cc.Class.extend({
     world: null,
+
+
+    drawNode: null,
+
+    drawDot: null,
+
     ctor: function (world) {
         this.world = world;
+        this.drawNode= new cc.DrawNode();
+
+        //this.drawDot= new cc.Dra
+
+        this.world.graphicsParent.addChild(this.drawNode, 1000);
 
     },
     update: function (dt) {
@@ -30,15 +41,15 @@ var CollisionDetector = cc.Class.extend({
             if (objectInMap.hasOwnProperty("pObject") && objectInMap["pObject"] != null) {
                 var objectPos = objectInMap["pObject"].sprite.getPosition();
                 var objectSize = objectInMap["pObject"].sprite.getContentSize();
-                cc.log("Inside check collison");
+                /*cc.log("Inside check collison");
                 cc.log("Char pos: ", charPos);
                 cc.log("Char bodySize: ", bodySize);
-                cc.log("object pos: ", objectPos);
-                cc.log("object size: ", objectSize);
+                cc.log("object pos: ", objectPos);*/
+                /*cc.log("object size: ", objectSize);*/
 
                 if (this.isCharacterOverlapWithObject(charPos, bodySize, objectPos, objectSize)) {
                     objectInMap["pObject"].sprite.setVisible(false);
-                    cc.log("Log inside if");
+                    //cc.log("Log inside if");
                     //cc.director.pause();
                 }
 
@@ -49,13 +60,37 @@ var CollisionDetector = cc.Class.extend({
     isCharacterOverlapWithObject: function (characterPos, characterBodySize, objectPos, objectSize) {
 
 
-        var characterLeft = characterPos.x - characterBodySize.width / 2 - 100;
-        var characterRight = characterPos.x + characterBodySize.width / 2 - 100;
-        var characterTop = characterPos.y + characterBodySize.height / 2;
-        var characterBottom = characterPos.y - characterBodySize.height / 2;
+        var characterLeft = characterPos.x - characterBodySize.width / 2 - 92;
+        var characterRight = characterPos.x + characterBodySize.width / 2 - 92;
+        var characterTop = characterPos.y + characterBodySize.height / 2-25 ;
+        var characterBottom = characterPos.y - characterBodySize.height / 2-25;
 
 
-        cc.log(this.world.graphicsParent);
+
+
+
+        //cc.log(this.world.graphicsParent);
+
+
+        //debug by drawNode to draw a rectangle to check collision
+        var layer= this.world.graphicsParent;
+        var posRectOrigin= {
+            x: characterLeft,
+            y: characterBottom
+        };
+        var posRectDes= {
+            x: characterRight,
+            y: characterTop
+
+        };
+        var colorRect= cc.color(255,255, 255, 0);
+        var colorLine= cc.color(255, 0,0, 128);
+        this.drawNode.clear();
+        this.drawNode.drawRect(posRectOrigin, posRectDes, colorRect, 2, colorLine);
+        this.drawNode.drawDot(characterPos, 5, cc.color(255, 0, 0, 128));
+
+
+
 
 
         var rect1 = {
@@ -80,7 +115,7 @@ var CollisionDetector = cc.Class.extend({
             height: objectSize.height,
         };
 
-        cc.log(cc.rectIntersectsRect(rect1, rect2));
+        //cc.log(cc.rectIntersectsRect(rect1, rect2));
 
         //return cc.rectIntersectsRect(rect1, rect2);
 

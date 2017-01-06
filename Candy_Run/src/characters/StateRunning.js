@@ -31,7 +31,6 @@ var StateRunning= StateMovement.extend({
         console.log("On Enter Running");
 
         var currentPosX= this.owner.spAnimation.getPosition().x;
-
         var y= this.owner.getInitPosition().y;
 
         this.owner.spAnimation.setPosition(cc.p(currentPosX, y));

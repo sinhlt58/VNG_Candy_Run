@@ -42,7 +42,7 @@ var Character = cc.Class.extend({
 
         //todo: Replace with animation controller after
         this.spAnimation = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas);
-        this.body = {width: 90, height: 220.5};
+        this.body = {width: 90, height: 170};
         cc.log(this.spAnimation.getContentSize());
 
 
@@ -72,7 +72,7 @@ var Character = cc.Class.extend({
 
 
 
-        // fixme: velocity is not set by that
+        // fixme: velocity is not set by that, it should be increasing by time
         this.velocity = cc.p(300, 0);
         this.acceleration = cc.p(0, 0);
 
@@ -83,11 +83,11 @@ var Character = cc.Class.extend({
 
 
         //fixme: init position should be load from file or somewhere
-        this.initPosition = cc.p(250, 90 + this.spAnimation.getContentSize().height/2);
+        this.initPosition = cc.p(250, 90 + this.getContentSize().height/2+ 20);
         this.setPosition(this.initPosition);
 
 
-        console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
+        //console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
         //cc.log(this.spAnimation);
     },
 
