@@ -135,5 +135,8 @@ var World = cc.Class.extend({
     },
     getChunkHeight:function () {
         return 650;
+    },
+    getChunkIdsAroundCharacter:function (characterPos) {
+
     }
 });
