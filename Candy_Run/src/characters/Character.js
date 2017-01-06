@@ -3,9 +3,17 @@
  */
 var Character = cc.Class.extend({
 
+
+
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
 
+
+
+    //this property be used for detecting collision
+    rectangle:{
+
+    },
 
 
 
@@ -37,6 +45,8 @@ var Character = cc.Class.extend({
 
 
 
+
+
         //console.log((this.spAnimation instanceof sp.SkeletonAnimation)+ " okkok");
 
         this.animationController= new AnimationController(this);
@@ -50,6 +60,7 @@ var Character = cc.Class.extend({
         this.spAnimation.anchorX = 0.5;
         this.spAnimation.anchorY = 0.5;
 
+        this.animationController.setScale(1);
 
         //cc.log(this.spAnimation._contentSize);
         //this.spAnimation.setScale(1);
@@ -75,6 +86,8 @@ var Character = cc.Class.extend({
         this.initPosition = cc.p(250, 90 + this.spAnimation.getContentSize().height/2);
         this.setPosition(this.initPosition);
 
+
+        console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
         //cc.log(this.spAnimation);
     },
 
@@ -98,12 +111,10 @@ var Character = cc.Class.extend({
     setPosition: function (position) {
         this.spAnimation.setPosition(position);
     },
-
-
     getInitPosition: function(){
         return this.initPosition;
     },
-
+    //fixme : this function must return a rectangle for collision detecting base on state (ex. Giant state, slide state... )
     getContentSize: function () {
         return this.spAnimation.getContentSize();
     },

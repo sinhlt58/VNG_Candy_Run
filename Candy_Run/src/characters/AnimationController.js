@@ -35,7 +35,7 @@ var AnimationController = cc.Class.extend({
     // set Animation String
     setAnimation: function (animationName, loop) {
         if(animationName==this.currentAnimation){
-            return
+            return;
         }else{
             this.currentAnimation=animationName;
             this.owner.spAnimation.setAnimation(0, this.allAnimation[animationName],loop)
@@ -45,6 +45,9 @@ var AnimationController = cc.Class.extend({
     
     updateAnimation: function (aniName, loop) {
 
+    },
+    setScale: function (scale) {
+        this.owner.spAnimation.setScale(scale);
     }
 
 
