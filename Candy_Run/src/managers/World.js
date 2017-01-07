@@ -174,5 +174,34 @@ var World = cc.Class.extend({
     },
     getObjectsAroundCharacter:function (characterPos, bodySize) {
         return this.getObjectsByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
+    },
+    getAllCurrentRenderedObjects:function (characterPos, characterInitPos, visibleSize) {
+        var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
+        if (visibleChunkIds.length > 0){
+            var splitedChunkId = visibleChunkIds[0].split("-")[0];
+            var minChunkIdX = parseInt(splitedChunkId[0]);
+            var minChunkIdY = parseInt(splitedChunkId[1]);
+            minChunkIdX--;
+            if(minChunkIdX >= 0){
+                visibleChunkIds.push(minChunkIdX + '-' + minChunkIdY);
+            }
+        }
+        return this.getObjectsByChunkIds(visibleChunkIds);
+    },
+    releaseAObjectData:function (objectData) {
+        if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
+            var releasedObject = objectData["pObject"];
+            //releasedObject.sprite.retain();
+            releasedObject.sprite.removeFromParent();
+            this.factory.releaseObject(releasedObject);
+            objectData["pObject"] = null;
+        } 
+    },
+    releaseAllCurrentRenderedObjects:function () {
+        var renderedObjects = this.getAllCurrentRenderedObjects(this.character.getPosition(),
+            this.character.getInitPosition(), cc.view.getVisibleSize());
+        for (var i=0; i<renderedObjects.length; i++){
+            this.releaseAObjectData(renderedObjects[i]);
+        }
     }
 });
