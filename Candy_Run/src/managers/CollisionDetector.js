@@ -33,6 +33,40 @@ var CollisionDetector = cc.Class.extend({
         var charPos = this.world.character.getPosition();
         var bodySize = this.world.character.getContentSize();
 
+
+
+
+
+        //debug collision by drawing a boundary box for character
+        var characterLeft = charPos.x - bodySize.width / 2 -40 ;
+        var characterRight = charPos.x + bodySize.width / 2 -40;
+        var characterTop = charPos.y + bodySize.height / 2 ;
+        var characterBottom = charPos.y - bodySize.height / 2;
+        var posRectOrigin= {
+            x: characterLeft,
+            y: characterBottom
+        };
+        var posRectDes= {
+            x: characterRight,
+            y: characterTop
+
+        };
+        var colorRect= cc.color(255,255, 255, 0);
+        var colorLine= cc.color(255, 0,0, 128);
+        this.drawNode.clear();
+        this.drawNode.drawRect(posRectOrigin, posRectDes, colorRect, 2, colorLine);
+        this.drawNode.drawDot(charPos, 5, cc.color(255, 0, 0, 128));
+
+
+
+
+
+
+
+
+
+
+
         var objectsAroundCharacter = this.world.getObjectsAroundCharacter(charPos, bodySize);
         var objectsCollidingWithCharacter = {};
 
@@ -67,8 +101,8 @@ var CollisionDetector = cc.Class.extend({
         //cc.log(this.world.graphicsParent);
 
         //debug by drawNode to draw a rectangle to check collision
-        var layer= this.world.graphicsParent;
-        var posRectOrigin= {
+        //var layer= this.world.graphicsParent;
+       /* var posRectOrigin= {
             x: characterLeft,
             y: characterBottom
         };
@@ -82,7 +116,7 @@ var CollisionDetector = cc.Class.extend({
         this.drawNode.clear();
         this.drawNode.drawRect(posRectOrigin, posRectDes, colorRect, 2, colorLine);
         this.drawNode.drawDot(characterPos, 5, cc.color(255, 0, 0, 128));
-
+*/
         var rect1 = {
             x: characterLeft,
             y: characterBottom,
