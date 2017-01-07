@@ -30,15 +30,15 @@ var CollisionDetector = cc.Class.extend({
             if (objectInMap.hasOwnProperty("pObject") && objectInMap["pObject"] != null) {
                 var objectPos = objectInMap["pObject"].sprite.getPosition();
                 var objectSize = objectInMap["pObject"].sprite.getContentSize();
-                cc.log("Inside check collison");
-                cc.log("Char pos: ", charPos);
-                cc.log("Char bodySize: ", bodySize);
-                cc.log("object pos: ", objectPos);
-                cc.log("object size: ", objectSize);
+                // cc.log("Inside check collison");
+                // cc.log("Char pos: ", charPos);
+                // cc.log("Char bodySize: ", bodySize);
+                // cc.log("object pos: ", objectPos);
+                // cc.log("object size: ", objectSize);
 
                 if (this.isCharacterOverlapWithObject(charPos, bodySize, objectPos, objectSize)) {
                     objectInMap["pObject"].sprite.setVisible(false);
-                    cc.log("Log inside if");
+                    // cc.log("Log inside if");
                     //cc.director.pause();
                 }
 
@@ -55,7 +55,7 @@ var CollisionDetector = cc.Class.extend({
         var characterBottom = characterPos.y - characterBodySize.height / 2;
 
 
-        cc.log(this.world.graphicsParent);
+        //cc.log(this.world.graphicsParent);
 
 
         var rect1 = {
@@ -80,7 +80,7 @@ var CollisionDetector = cc.Class.extend({
             height: objectSize.height,
         };
 
-        cc.log(cc.rectIntersectsRect(rect1, rect2));
+        //cc.log(cc.rectIntersectsRect(rect1, rect2));
 
         //return cc.rectIntersectsRect(rect1, rect2);
 

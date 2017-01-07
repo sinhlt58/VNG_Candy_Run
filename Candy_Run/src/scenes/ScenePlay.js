@@ -5,7 +5,10 @@ var ScenePlay = cc.Scene.extend({
     onEnter:function () {
         this._super();
         this.addChild(new LayerPlayBackground());
-        this.addChild(new LayerPlayAimation());
+        var animationLayer = new LayerPlayAnimation();
+        this.addChild(animationLayer);
+        var debugLayer = new LayerPlayDebug(animationLayer);
+        this.addChild(debugLayer);
         this.scheduleUpdate();
     },
     init:function () {

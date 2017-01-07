@@ -135,7 +135,7 @@ var World = cc.Class.extend({
         return 92 * 2;
     },
     getChunkHeight:function () {
-        return 650;
+        return 650 + 300;
     },
     getChunkIdsAroundCharacter:function (characterPos, bodySize) {
         var minCollisionX = characterPos.x - bodySize.width/2 - 128;

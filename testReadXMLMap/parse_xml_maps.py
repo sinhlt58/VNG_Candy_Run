@@ -106,7 +106,8 @@ chunks = {}
 maxXOnAllMap = 0
 
 #read heaven maps
-chunkHeight = 650
+characterHeight = 300
+chunkHeight = 650 + characterHeight
 preMapWidth = 0
 for mapFile in ['MAP82.xml', 'MAP83.xml']:
     tree = ET.parse(mapFile)
@@ -117,7 +118,7 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
         realTextureName = re.split('-', textureName)[-1]
 
         x = int(item[0][0].text) - 960
-        y = -int(item[0][1].text) + chunkHeight
+        y = -int(item[0][1].text) + chunkHeight + characterHeight
         if x > maxXSoFarInMap:
             maxXSoFarInMap = x
         x = x + preMapWidth
