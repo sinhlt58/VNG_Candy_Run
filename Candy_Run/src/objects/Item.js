@@ -7,5 +7,13 @@ var Item = ObjectGame.extend({
     effects:null,
     ctor:function () {
         this._super();
+        this.effects = [];
+        this.effects.push(new ItemEffectMoney());
+        this.effects.push(new ItemEffectScore());
+    },
+    doEffects:function () {
+        for (var i=0; i<this.effects.length; i++){
+            this.effects[i].doEffect();
+        }
     }
 });

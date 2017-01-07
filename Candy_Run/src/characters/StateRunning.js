@@ -27,7 +27,7 @@ var StateRunning= StateMovement.extend({
     //  fixme: set position and acceleration to running state
     onEnter: function () {
 
-        this.owner.animationController.setAnimation('run1', true);
+        this.owner.animationController.setAnimation('slide', true);
         console.log("On Enter Running");
 
         var currentPosX= this.owner.spAnimation.getPosition().x;

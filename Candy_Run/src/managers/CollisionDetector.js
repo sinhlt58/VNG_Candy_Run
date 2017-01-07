@@ -33,6 +33,7 @@ var CollisionDetector = cc.Class.extend({
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_GROUND)){
 
         }else{
+
         }
 
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_ITEM)){
@@ -41,7 +42,7 @@ var CollisionDetector = cc.Class.extend({
                 var itemDataObject = itemData[i];
                 var itemObject = itemDataObject["pObject"];
                 //do effects here
-
+                itemObject.doEffects();
                 itemObject.sprite.setVisible(false);
             }
 
@@ -104,13 +105,15 @@ var CollisionDetector = cc.Class.extend({
                 var object = objectDataInMap["pObject"];
                 var objectPos = object.sprite.getPosition();
                 var objectSize = object.sprite.getContentSize();
-                if (this.isCharacterOverlapWithObject(charPos, bodySize, objectPos, objectSize)) {
-                    var objectTypeId = object.getObjectTypeId();
-                    var classType = this.world.factory.getClassTypeByObjecType(objectTypeId);
-                    if (!dataObjectsCollidingWithCharacter.hasOwnProperty(classType)){
-                        dataObjectsCollidingWithCharacter[classType] = [];
+                if (object.sprite.isVisible()){
+                    if (this.isCharacterOverlapWithObject(charPos, bodySize, objectPos, objectSize)) {
+                        var objectTypeId = object.getObjectTypeId();
+                        var classType = this.world.factory.getClassTypeByObjecType(objectTypeId);
+                        if (!dataObjectsCollidingWithCharacter.hasOwnProperty(classType)){
+                            dataObjectsCollidingWithCharacter[classType] = [];
+                        }
+                        dataObjectsCollidingWithCharacter[classType].push(objectDataInMap);
                     }
-                    dataObjectsCollidingWithCharacter[classType].push(objectDataInMap);
                 }
             }
         }

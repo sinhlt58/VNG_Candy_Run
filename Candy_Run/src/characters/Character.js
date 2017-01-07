@@ -35,6 +35,14 @@ var Character = cc.Class.extend({
     initPosition: null,
 
 
+
+    // debug arr static
+
+
+    //arr[]
+
+
+
     ctor: function () {
 
 
