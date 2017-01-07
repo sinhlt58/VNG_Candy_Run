@@ -7,7 +7,7 @@ var CollisionDetector = cc.Class.extend({
 
     drawNode: null,
 
-    drawDot: null,
+    //drawDot: null,
 
     ctor: function (world) {
         this.world = world;
@@ -54,17 +54,17 @@ var CollisionDetector = cc.Class.extend({
     isCharacterOverlapWithObject: function (characterPos, characterBodySize, objectPos, objectSize) {
 
 
-        var characterLeft = characterPos.x - characterBodySize.width / 2 - 92;
-        var characterRight = characterPos.x + characterBodySize.width / 2 - 92;
-        var characterTop = characterPos.y + characterBodySize.height / 2-25 ;
-        var characterBottom = characterPos.y - characterBodySize.height / 2-25;
 
+        //fix position of rectangle for detect collision
+        var characterLeft = characterPos.x - characterBodySize.width / 2 -40 ;
+        var characterRight = characterPos.x + characterBodySize.width / 2 -40;
+        var characterTop = characterPos.y + characterBodySize.height / 2 ;
+        var characterBottom = characterPos.y - characterBodySize.height / 2;
 
 
 
 
         //cc.log(this.world.graphicsParent);
-
 
         //debug by drawNode to draw a rectangle to check collision
         var layer= this.world.graphicsParent;

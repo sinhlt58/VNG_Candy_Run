@@ -5,7 +5,7 @@ var LayerPlayAnimation = cc.Layer.extend({
     world: null,
     factoryObject: null,
     character: null,
-    testSprite:null,
+    //testSprite:null,
     ctor: function () {
         this._super();
         this.init();
@@ -33,9 +33,9 @@ var LayerPlayAnimation = cc.Layer.extend({
         //create Character
         this.character= new Character();
         this.addChild(this.character.spAnimation);
-        this.testSprite = new cc.Sprite("#item08_energy_2.png");
+        /*this.testSprite = new cc.Sprite("#item08_energy_2.png");
         this.testSprite.setPosition(this.character.getInitPosition());
-        this.addChild(this.testSprite);
+        this.addChild(this.testSprite);*/
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
@@ -45,7 +45,7 @@ var LayerPlayAnimation = cc.Layer.extend({
         //handle inputs.
 
         this.character.update(dt);
-        this.testSprite.setPosition(this.character.getPosition());
+        //this.testSprite.setPosition(this.character.getPosition());
         //update layer position relative to the pos of character.
         this.updateCamera(this.character);
 
