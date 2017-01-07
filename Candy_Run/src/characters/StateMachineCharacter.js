@@ -57,7 +57,7 @@ var StateMachineCharacter = cc.Class.extend({
 
         //fixme: change state should not be handled here, it should be handle at collision detection
 
-        if(this.owner.spAnimation.getPosition().y<90 + this.owner.spAnimation.getContentSize().height/2
+        if(this.owner.spAnimation.getPosition().y<90 + this.owner.getContentSize().height/2
             && this.stateMovement instanceof StateRunning==false ) {
 
             //console.log(this.owner.spAnimation.getPosition().y+" "+ (90 + this.owner.spAnimation.getContentSize().height/2));
