@@ -1,13 +1,11 @@
 /**
  * Created by Fresher on 12/29/2016.
  */
-var LayerPlayAimation = cc.Layer.extend({
+var LayerPlayAnimation = cc.Layer.extend({
     world: null,
     factoryObject: null,
     character: null,
-
-    labelPool:null,
-    debugNumFrames:0,
+    //testSprite:null,
     ctor: function () {
         this._super();
         this.init();
@@ -35,45 +33,42 @@ var LayerPlayAimation = cc.Layer.extend({
         //create Character
         this.character= new Character();
         this.addChild(this.character.spAnimation);
+        /*this.testSprite = new cc.Sprite("#item08_energy_2.png");
+        this.testSprite.setPosition(this.character.getInitPosition());
+        this.addChild(this.testSprite);*/
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
             this.character);
-
-        this.labelPool= new cc.LabelTTF("Object Pool: ", "Helvetica");
-        this.labelPool.setFontSize(20);
-        this.labelPool.setAnchorPoint(cc.p(0, 0));
-        this.addChild(this.labelPool);
     },
     update:function (dt) {
         //handle inputs.
 
         this.character.update(dt);
-
+        //this.testSprite.setPosition(this.character.getPosition());
         //update layer position relative to the pos of character.
         this.updateCamera(this.character);
 
         //update world accordingly to the character's pos.
         this.world.update(dt);
-
-        //debug
-        this.labelPool.setPosition(this.character.getPosition().x-200, this.character.getPosition().y + 400);
-        this.labelPool.setString(" Items: " + this.world.factory.objectPool.available["Item"].length +
-                                ", Ground: " + this.world.factory.objectPool.available["Ground"].length +
-                                ", Obstacles: " + this.world.factory.objectPool.available["Obstacle"].length +
-                                ", Inuse: " + this.getChildrenCount()+
-                                ", Num created: " + this.world.factory.objectPool.testCoutCreated +
-                                "\n, Num created Animation: " + this.world.factory.testNumCreatedAnimation +
-                                ", Num frames: " + ++this.debugNumFrames);
     },
-    updateCamera:function (character) {
+    updateCamera:function (character) {//todo: change code later for pretty
         var visibleSize = cc.view.getVisibleSize();
         var characterPos = character.getPosition();
         var characterInitPos = character.getInitPosition();
 
         var changeX = characterPos.x - characterInitPos.x;
-        var changeY = parseInt(characterPos.y / visibleSize.height)*visibleSize.height;
+        var changeY = parseInt((characterPos.y/this.getCameraNeedToChangeY()))*this.getCameraNeedToChangeY();
+
         this.setPosition(-changeX, -changeY);
+    },
+
+    getCurrentCameraY:function () {
+        return Math.abs(this.getPosition().y) + cc.view.getVisibleSize().height/2;
+    },
+
+    getCameraNeedToChangeY:function(){
+        return 2*this.world.getChunkHeight() - cc.view.getVisibleSize().height;
     },
 
     onTouchBegan: function (touch, event) {

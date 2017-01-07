@@ -38,7 +38,7 @@ var FactoryObject = cc.Class.extend({
 
         object.setObjectTypeId(objectTypeId);
 
-        if (classType == "Item"){
+        if (classType == globals.CLASS_TYPE_ITEM){
             var frames = objectTypeData["frames"];
             this.changeTextureOfSprite(object.sprite, frames[0]);
             object.score = objectTypeData["score"];
@@ -58,9 +58,9 @@ var FactoryObject = cc.Class.extend({
             }
             //todo: latter add effects for items.
 
-        }else if(classType == "Ground"){
+        }else if(classType == globals.CLASS_TYPE_GROUND){
             this.changeTextureOfSprite(object.sprite, objectTypeData["texture"]);
-        }else if(classType == "Obstacle"){
+        }else if(classType == globals.CLASS_TYPE_OBSTACLE){
             this.changeTextureOfSprite(object.sprite, objectTypeData["texture"]);
             object.damage = objectTypeData["damage"];
         }

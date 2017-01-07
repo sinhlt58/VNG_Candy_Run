@@ -3,9 +3,17 @@
  */
 var Character = cc.Class.extend({
 
+
+
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
     body:null,
+
+
+    //this property be used for detecting collision
+    rectangle:{
+
+    },
 
 
 
@@ -33,8 +41,10 @@ var Character = cc.Class.extend({
 
 
         //todo: Replace with animation controller after
-        this.spAnimation = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
-        this.body = {width: 90, height: 220};
+        this.spAnimation = new sp.SkeletonAnimation(res.zombie_json , res.zombie_atlas);
+        this.body = {width: 90, height: 170};
+        cc.log(this.spAnimation.getContentSize());
+
 
 
         //console.log((this.spAnimation instanceof sp.SkeletonAnimation)+ " okkok");
@@ -50,6 +60,7 @@ var Character = cc.Class.extend({
         this.spAnimation.anchorX = 0.5;
         this.spAnimation.anchorY = 0.5;
 
+        this.animationController.setScale(1);
 
         //cc.log(this.spAnimation._contentSize);
         //this.spAnimation.setScale(1);
@@ -61,7 +72,7 @@ var Character = cc.Class.extend({
 
 
 
-        // fixme: velocity is not set by that
+        // fixme: velocity is not set by that, it should be increasing by time
         this.velocity = cc.p(300, 0);
         this.acceleration = cc.p(0, 0);
 
@@ -72,9 +83,11 @@ var Character = cc.Class.extend({
 
 
         //fixme: init position should be load from file or somewhere
-        this.initPosition = cc.p(250, 90 + this.spAnimation.getContentSize().height/2);
+        this.initPosition = cc.p(250, 90 + this.getContentSize().height/2);
         this.setPosition(this.initPosition);
 
+
+        //console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
         //cc.log(this.spAnimation);
     },
 
@@ -98,12 +111,10 @@ var Character = cc.Class.extend({
     setPosition: function (position) {
         this.spAnimation.setPosition(position);
     },
-
-
     getInitPosition: function(){
         return this.initPosition;
     },
-
+    //fixme : this function must return a rectangle for collision detecting base on state (ex. Giant state, slide state... )
     getContentSize: function () {
         return this.body;
     },

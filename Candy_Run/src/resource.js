@@ -30,3 +30,8 @@ var g_resources = [];
 for (var i in res) {
     g_resources.push(res[i]);
 }
+
+var globals = {};
+globals.CLASS_TYPE_ITEM = "Item";
+globals.CLASS_TYPE_GROUND = "Ground";
+globals.CLASS_TYPE_OBSTACLE = "Obstacle";

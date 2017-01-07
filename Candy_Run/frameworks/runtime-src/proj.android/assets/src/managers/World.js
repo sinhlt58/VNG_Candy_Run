@@ -8,6 +8,7 @@ var World = cc.Class.extend({
     triggers:null,
     character: null,
     collisionDetector:null,
+    isNeedToInitVisibleChunks:false,
     ctor:function (chunkData, factory, graphicsParent, character) {
         this.chunks = chunkData;
         this.factory = factory;
@@ -43,11 +44,18 @@ var World = cc.Class.extend({
         this.triggers.update(dt);
 
         //check visible of objects in appropriate chunks
-        var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.character.getPosition(),
-            this.character.getInitPosition(), cc.view.getVisibleSize());
+        var chunkIdsNeedToUpdate;
+        if (!this.getIsNeedToInitVisibleChunks()){
+            chunkIdsNeedToUpdate = this.getChunkIdsMayHaveObjectsOutOfScreen(this.character.getPosition(),
+                this.character.getInitPosition(), cc.view.getVisibleSize());
+        }else{
+            chunkIdsNeedToUpdate = this.getVisibleChunkIds(this.character.getPosition(),
+                this.character.getInitPosition(), cc.view.getVisibleSize());
+            this.setIsNeedToInitVisibleChunks(false);
+        }
 
-        for (var i=0; i<outChunkIds.length; i++){
-            this.updateVisibleObjectForChunk(outChunkIds[i]);
+        for (var i=0; i<chunkIdsNeedToUpdate.length; i++){
+            this.updateVisibleObjectForChunk(chunkIdsNeedToUpdate[i]);
         }
     },
     updateVisibleObjectForChunk:function (chunkId) {
@@ -64,6 +72,7 @@ var World = cc.Class.extend({
                     if (!objectData.hasOwnProperty("pObject") || objectData["pObject"] === null){
                         var object = this.factory.getAObjectByObjectTypeId(objectTypeId);
                         object.sprite.setAnchorPoint(cc.p(0, 0));
+                        object.sprite.setVisible(true);
                         object.sprite.setPosition(cc.p(objectData.x, objectData.y));
                         this.graphicsParent.addChild(object.sprite);
                         //object.sprite.release();
@@ -134,9 +143,78 @@ var World = cc.Class.extend({
         return 92 * 2;
     },
     getChunkHeight:function () {
-        return 650;
+        return 650 + 300;
     },
-    getChunkIdsAroundCharacter:function (characterPos) {
-
+    getChunkIdsAroundCharacter:function (characterPos, bodySize) {
+        var minCollisionX = characterPos.x - bodySize.width/2 - 128;
+        if (minCollisionX < 0)
+            minCollisionX = 0;
+        var maxCollisionX = characterPos.x + bodySize.width/2;
+        var minCollisionChunkIdX = parseInt(minCollisionX / (this.getChunkWidth()));
+        var maxCollisionChunkIdX = parseInt(maxCollisionX / (this.getChunkWidth()));
+        var chunkIdY = parseInt(characterPos.y / this.getChunkHeight());
+        var collisionChunkIds = [];
+        for (var idX=minCollisionChunkIdX; idX<=maxCollisionChunkIdX; idX++){
+            collisionChunkIds.push(idX + '-' + chunkIdY);
+        }
+        return collisionChunkIds;
+    },
+    getObjectsByChunkIds:function (chunkIds) {
+        var objectsInChunks = [];
+        for (var index in chunkIds){
+            if (chunkIds.hasOwnProperty(index)){
+                var chunkId = chunkIds[index];
+                var chunkData = this.getChunkDataById(chunkId);
+                var objectTypeIds = this.getObjectTypeIdsInChunk(chunkId);
+                var i, j;
+                for (i=0; i<objectTypeIds.length; i++){
+                    var objectTypeId = objectTypeIds[i];
+                    for (j=0; j<chunkData[objectTypeId].length; j++){
+                        var objectData = chunkData[objectTypeId][j];
+                        if (objectData.hasOwnProperty("pObject") && objectData["pObject"] != null){
+                            objectsInChunks.push(objectData);
+                        }
+                    }
+                }
+            }
+        }
+        return objectsInChunks;
+    },
+    getObjectsAroundCharacter:function (characterPos, bodySize) {
+        return this.getObjectsByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
+    },
+    getAllCurrentRenderedObjects:function (characterPos, characterInitPos, visibleSize) {
+        var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
+        if (visibleChunkIds.length > 0){
+            var splitedChunkId = visibleChunkIds[0].split("-")[0];
+            var minChunkIdX = parseInt(splitedChunkId[0]);
+            var minChunkIdY = parseInt(splitedChunkId[1]);
+            minChunkIdX--;
+            if(minChunkIdX >= 0){
+                visibleChunkIds.push(minChunkIdX + '-' + minChunkIdY);
+            }
+        }
+        return this.getObjectsByChunkIds(visibleChunkIds);
+    },
+    releaseAObjectData:function (objectData) {
+        if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
+            var releasedObject = objectData["pObject"];
+            releasedObject.sprite.removeFromParent();
+            this.factory.releaseObject(releasedObject);
+            objectData["pObject"] = null;
+        } 
+    },
+    releaseAllCurrentRenderedObjects:function () {
+        var renderedObjects = this.getAllCurrentRenderedObjects(this.character.getPosition(),
+            this.character.getInitPosition(), cc.view.getVisibleSize());
+        for (var i=0; i<renderedObjects.length; i++){
+            this.releaseAObjectData(renderedObjects[i]);
+        }
+    },
+    setIsNeedToInitVisibleChunks:function (val) {
+        this.isNeedToInitVisibleChunks = val;
+    },
+    getIsNeedToInitVisibleChunks:function () {
+        return this.isNeedToInitVisibleChunks;
     }
 });
