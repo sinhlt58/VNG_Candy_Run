@@ -8,6 +8,7 @@ var World = cc.Class.extend({
     triggers:null,
     character: null,
     collisionDetector:null,
+    isNeedToInitVisibleChunks:false,
     ctor:function (chunkData, factory, graphicsParent, character) {
         this.chunks = chunkData;
         this.factory = factory;
@@ -43,11 +44,18 @@ var World = cc.Class.extend({
         this.triggers.update(dt);
 
         //check visible of objects in appropriate chunks
-        var outChunkIds = this.getChunkIdsMayHaveObjectsOutOfScreen(this.character.getPosition(),
-            this.character.getInitPosition(), cc.view.getVisibleSize());
+        var chunkIdsNeedToUpdate;
+        if (!this.getIsNeedToInitVisibleChunks()){
+            chunkIdsNeedToUpdate = this.getChunkIdsMayHaveObjectsOutOfScreen(this.character.getPosition(),
+                this.character.getInitPosition(), cc.view.getVisibleSize());
+        }else{
+            chunkIdsNeedToUpdate = this.getVisibleChunkIds(this.character.getPosition(),
+                this.character.getInitPosition(), cc.view.getVisibleSize());
+            this.setIsNeedToInitVisibleChunks(false);
+        }
 
-        for (var i=0; i<outChunkIds.length; i++){
-            this.updateVisibleObjectForChunk(outChunkIds[i]);
+        for (var i=0; i<chunkIdsNeedToUpdate.length; i++){
+            this.updateVisibleObjectForChunk(chunkIdsNeedToUpdate[i]);
         }
     },
     updateVisibleObjectForChunk:function (chunkId) {
@@ -191,7 +199,6 @@ var World = cc.Class.extend({
     releaseAObjectData:function (objectData) {
         if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
             var releasedObject = objectData["pObject"];
-            //releasedObject.sprite.retain();
             releasedObject.sprite.removeFromParent();
             this.factory.releaseObject(releasedObject);
             objectData["pObject"] = null;
@@ -203,5 +210,11 @@ var World = cc.Class.extend({
         for (var i=0; i<renderedObjects.length; i++){
             this.releaseAObjectData(renderedObjects[i]);
         }
+    },
+    setIsNeedToInitVisibleChunks:function (val) {
+        this.isNeedToInitVisibleChunks = val;
+    },
+    getIsNeedToInitVisibleChunks:function () {
+        return this.isNeedToInitVisibleChunks;
     }
 });
