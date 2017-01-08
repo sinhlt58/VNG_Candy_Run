@@ -22,8 +22,9 @@ var res = {
     class_types: "res/data/class_types.json",
     item_effect_types: "res/data/item_effect_types.json",
     object_types: "res/data/object_types.json",
-    test_background2_png: "res/tm02_bg2.png",
-    test_background1_png: "res/tm02_bg1.jpg"
+
+    test_background2_png: "res/assets/gui/scene_play/background/tm02_bg2.png",
+    test_background1_png: "res/assets/gui/scene_play/background/tm02_bg1.jpg"
 };
 
 var g_resources = [];

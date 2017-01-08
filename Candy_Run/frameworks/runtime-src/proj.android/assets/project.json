@@ -58,7 +58,19 @@
 
     "src/characters/StateRunning.js",
     "src/characters/StateTakingDamage.js",
-    "src/characters/AnimationController.js"
+    "src/characters/AnimationController.js",
+
+    "src/objects/ItemEffect.js",
+    "src/objects/ItemEffectFly.js",
+    "src/objects/ItemEffectGiant.js",
+    "src/objects/ItemEffectHeal.js",
+    "src/objects/ItemEffectInstantBonusTime.js",
+    "src/objects/ItemEffectInvisible.js",
+    "src/objects/ItemEffectLetter.js",
+    "src/objects/ItemEffectMagnetic.js",
+    "src/objects/ItemEffectMoney.js",
+    "src/objects/ItemEffectScore.js",
+    "src/objects/ItemEffectTransformCoin.js"
 
   ]
 }

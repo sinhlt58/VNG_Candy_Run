@@ -2,10 +2,11 @@
  * Created by SinhBlack on 1/1/2017.
  */
 var ObjectPool = cc.Class.extend({
-    available:{},
+    available:null,
     inUse:{}, // maybe not use @@!
     testCoutCreated:0,
     ctor:function (classTypes) {
+        this.available = {};
         for (var i=0; i<classTypes.length; i++){
             this.available[classTypes[i]] = [];
             this.inUse[classTypes[i]] = [];

@@ -4,7 +4,7 @@
 var CollisionDetector = cc.Class.extend({
     world: null,
 
-
+    frames:0,
     drawNode: null,
 
     //drawDot: null,
@@ -19,17 +19,46 @@ var CollisionDetector = cc.Class.extend({
 
     },
     update: function (dt) {
+        this.frames++;
         //update array contains items, ground, obstacles collide with character.
-        var objectsColldingWithCharacter = this.getObjectsCollidingWithCharacter(dt);
+        var objectsColldingWithCharacter = this.getDataObjectsCollidingWithCharacter(dt);
 
         //handle collisions character with item objects.
-
+        this.handleCollision(this.world.character, objectsColldingWithCharacter);
     },
     handleCollision: function (character, collisionObjects) {
         // handle with character
+        var i;
+
+        if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_GROUND)){
+
+        }else{
+
+        }
+
+        if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_ITEM)){
+            var itemData = collisionObjects[globals.CLASS_TYPE_ITEM];
+            for (i=0; i<itemData.length; i++){
+                var itemDataObject = itemData[i];
+                var itemObject = itemDataObject["pObject"];
+                //do effects here
+                itemObject.doEffects();
+                itemObject.sprite.setVisible(false);
+            }
+
+        }else{
+
+        }
+
+        if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_OBSTACLE)){
+
+        }else{
+
+        }
+
         // handle with items
     },
-    getObjectsCollidingWithCharacter: function (dt) {
+    getDataObjectsCollidingWithCharacter: function (dt) {
         var charPos = this.world.character.getPosition();
         var bodySize = this.world.character.getContentSize();
 
@@ -68,22 +97,27 @@ var CollisionDetector = cc.Class.extend({
 
 
         var objectsAroundCharacter = this.world.getObjectsAroundCharacter(charPos, bodySize);
-        var objectsCollidingWithCharacter = {};
+        var dataObjectsCollidingWithCharacter = {};
 
         for (var i = 0; i < objectsAroundCharacter.length; i++) {
-            var objectInMap = objectsAroundCharacter[i];
-            if (objectInMap.hasOwnProperty("pObject") && objectInMap["pObject"] != null) {
-                var objectPos = objectInMap["pObject"].sprite.getPosition();
-                var objectSize = objectInMap["pObject"].sprite.getContentSize();
-
-                if (this.isCharacterOverlapWithObject(charPos, bodySize, objectPos, objectSize)) {
-                    objectInMap["pObject"].sprite.setVisible(false);
-                    //cc.log("Log inside if");
+            var objectDataInMap = objectsAroundCharacter[i];
+            if (objectDataInMap.hasOwnProperty("pObject") && objectDataInMap["pObject"] != null) {
+                var object = objectDataInMap["pObject"];
+                var objectPos = object.sprite.getPosition();
+                var objectSize = object.sprite.getContentSize();
+                if (object.sprite.isVisible()){
+                    if (this.isCharacterOverlapWithObject(charPos, bodySize, objectPos, objectSize)) {
+                        var objectTypeId = object.getObjectTypeId();
+                        var classType = this.world.factory.getClassTypeByObjecType(objectTypeId);
+                        if (!dataObjectsCollidingWithCharacter.hasOwnProperty(classType)){
+                            dataObjectsCollidingWithCharacter[classType] = [];
+                        }
+                        dataObjectsCollidingWithCharacter[classType].push(objectDataInMap);
+                    }
                 }
-
             }
         }
-
+        return dataObjectsCollidingWithCharacter;
     },
     isCharacterOverlapWithObject: function (characterPos, characterBodySize, objectPos, objectSize) {
 

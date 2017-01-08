@@ -35,6 +35,14 @@ var Character = cc.Class.extend({
     initPosition: null,
 
 
+
+    // debug arr static
+
+
+    //arr[]
+
+
+
     ctor: function () {
 
 
@@ -93,6 +101,8 @@ var Character = cc.Class.extend({
 
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
     update: function (dt) {
+
+
 
         //update all state machine
         this.stateMachine.update(dt);

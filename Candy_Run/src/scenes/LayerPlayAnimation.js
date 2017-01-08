@@ -9,7 +9,6 @@ var LayerPlayAnimation = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-        this.scheduleUpdate();
 
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -18,6 +17,8 @@ var LayerPlayAnimation = cc.Layer.extend({
             onTouchMoved: this.onTouchMoved,
             onTouchEnded: this.onTouchEnded
         }, this);
+
+        this.scheduleUpdate();
     },
     init: function () {
         //add resource to frameCache
@@ -29,13 +30,9 @@ var LayerPlayAnimation = cc.Layer.extend({
         this.factoryObject = new FactoryObject(cc.loader.getRes(res.class_types),
             cc.loader.getRes(res.item_effect_types), cc.loader.getRes(res.object_types));
 
-
         //create Character
         this.character= new Character();
         this.addChild(this.character.spAnimation);
-        /*this.testSprite = new cc.Sprite("#item08_energy_2.png");
-        this.testSprite.setPosition(this.character.getInitPosition());
-        this.addChild(this.testSprite);*/
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,

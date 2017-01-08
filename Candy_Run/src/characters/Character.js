@@ -102,6 +102,8 @@ var Character = cc.Class.extend({
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
     update: function (dt) {
 
+
+
         //update all state machine
         this.stateMachine.update(dt);
         var currentX = this.spAnimation.getPosition().x;

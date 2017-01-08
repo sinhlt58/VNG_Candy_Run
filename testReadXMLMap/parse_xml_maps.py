@@ -107,7 +107,7 @@ maxXOnAllMap = 0
 
 #read heaven maps
 characterHeight = 300
-chunkHeight = 650 + characterHeight
+chunkHeight = 480 + characterHeight
 preMapWidth = 0
 for mapFile in ['MAP82.xml', 'MAP83.xml']:
     tree = ET.parse(mapFile)

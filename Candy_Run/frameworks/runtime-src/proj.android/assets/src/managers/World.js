@@ -9,6 +9,7 @@ var World = cc.Class.extend({
     character: null,
     collisionDetector:null,
     isNeedToInitVisibleChunks:false,
+    debugDrawNode:null,
     ctor:function (chunkData, factory, graphicsParent, character) {
         this.chunks = chunkData;
         this.factory = factory;
@@ -21,6 +22,10 @@ var World = cc.Class.extend({
     },
     //create object inside the current screen.
     init:function () {
+
+        //debug
+        this.debugDrawNode = new cc.DrawNode();
+        this.graphicsParent.addChild(this.debugDrawNode);
 
         var visibleChunkIds = this.getVisibleChunkIds(this.character.getPosition(),
             this.character.getInitPosition(), cc.view.getVisibleSize());
@@ -53,7 +58,7 @@ var World = cc.Class.extend({
                 this.character.getInitPosition(), cc.view.getVisibleSize());
             this.setIsNeedToInitVisibleChunks(false);
         }
-
+        this.debugDrawChunks();
         for (var i=0; i<chunkIdsNeedToUpdate.length; i++){
             this.updateVisibleObjectForChunk(chunkIdsNeedToUpdate[i]);
         }
@@ -75,13 +80,11 @@ var World = cc.Class.extend({
                         object.sprite.setVisible(true);
                         object.sprite.setPosition(cc.p(objectData.x, objectData.y));
                         this.graphicsParent.addChild(object.sprite);
-                        //object.sprite.release();
                         objectData["pObject"] = object;
                     }
                 }else{
                     if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
                         var releasedObject = objectData["pObject"];
-                        //releasedObject.sprite.retain();
                         releasedObject.sprite.removeFromParent();
                         this.factory.releaseObject(releasedObject);
                         objectData["pObject"] = null;
@@ -118,7 +121,7 @@ var World = cc.Class.extend({
             resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-2]);
             var splitMinChunkId = visibleChunkIds[0].split('-');
             var minChunkIdX = parseInt(splitMinChunkId[0]);
-            if (minChunkIdX > 0){
+            if (minChunkIdX > 1){
                 resultChunkIds.push(minChunkIdX-1 + '-' + splitMinChunkId[1]);
             }
             return resultChunkIds;
@@ -143,7 +146,7 @@ var World = cc.Class.extend({
         return 92 * 2;
     },
     getChunkHeight:function () {
-        return 650 + 300;
+        return 480 + 300;
     },
     getChunkIdsAroundCharacter:function (characterPos, bodySize) {
         var minCollisionX = characterPos.x - bodySize.width/2 - 128;
@@ -216,5 +219,23 @@ var World = cc.Class.extend({
     },
     getIsNeedToInitVisibleChunks:function () {
         return this.isNeedToInitVisibleChunks;
+    },
+    getPlusChunkId:function (chunkId, n) {
+        var splitChunkId = chunkId.split("-");
+        var newChunkIdX = parseInt(splitChunkId[0]) + n;
+        return newChunkIdX + "-" + splitChunkId[1];
+    },
+    debugDrawChunks:function () {
+        var visibleChunks = this.getVisibleChunkIds(this.character.getPosition(),
+            this.character.getInitPosition(), cc.view.getVisibleSize());
+        this.debugDrawNode.clear();
+        var colorRect= cc.color(255, 0, 0, 128);
+        for (var i=0; i<visibleChunks.length; i++){
+            var chunkId = visibleChunks[i];
+            var splitChunkId = chunkId.split("-");
+            var chunkIdX = parseInt(splitChunkId[0]) * this.getChunkWidth();
+            var chunkIdY = parseInt(splitChunkId[1]) * this.getChunkHeight() + this.getChunkHeight();
+            this.debugDrawNode.drawSegment(cc.p(chunkIdX, 0), cc.p(chunkIdX, chunkIdY), 2, colorRect);
+        }
     }
 });
