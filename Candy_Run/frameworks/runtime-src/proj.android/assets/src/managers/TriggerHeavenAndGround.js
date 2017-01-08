@@ -19,7 +19,7 @@ var TriggerHeavenAndGround = Trigger.extend({
         var characterPos = this.world.character.getPosition();
 
         if(!this.isInHeaven){
-            this.rememberedPosInGround = cc.p(characterPos.x, this.initCharacterPosInGround.y);
+            this.rememberedPosInGround = cc.p(characterPos.x - 500, cc.view.getVisibleSize().height - 5);
         }
 
         var distanceY = Math.abs(characterPos.y - currentCameraY);
