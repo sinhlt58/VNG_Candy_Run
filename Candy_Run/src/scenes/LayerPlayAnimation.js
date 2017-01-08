@@ -107,5 +107,6 @@ var LayerPlayAnimation = cc.Layer.extend({
     },
     onExit:function () {
         this._super();
+        this.world.releaseAllCurrentRenderedObjects();
     }
 });

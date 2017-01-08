@@ -9,6 +9,8 @@ var ScenePlay = cc.Scene.extend({
         this.addChild(animationLayer);
         var debugLayer = new LayerPlayDebug(animationLayer);
         this.addChild(debugLayer);
+        this.addChild(new LayerPlayStatus());
+
         this.scheduleUpdate();
     },
     init:function () {

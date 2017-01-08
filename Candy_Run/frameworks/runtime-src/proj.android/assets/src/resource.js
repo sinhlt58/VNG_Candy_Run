@@ -23,8 +23,13 @@ var res = {
     item_effect_types: "res/data/item_effect_types.json",
     object_types: "res/data/object_types.json",
 
+
+
     test_background2_png: "res/assets/gui/scene_play/background/tm02_bg2.png",
-    test_background1_png: "res/assets/gui/scene_play/background/tm02_bg1.jpg"
+    test_background1_png: "res/assets/gui/scene_play/background/tm02_bg1.jpg",
+    test_button: "res/assets/gui/scene_lobby/gui_main/play.png",
+    pause_button: "res/assets/gui/scene_play/in_game/pauseBtn.png",
+    die_button: "res/assets/gui/scene_play/end_game/click_to_die.png"
 };
 
 var g_resources = [];
@@ -36,3 +41,6 @@ var globals = {};
 globals.CLASS_TYPE_ITEM = "Item";
 globals.CLASS_TYPE_GROUND = "Ground";
 globals.CLASS_TYPE_OBSTACLE = "Obstacle";
+
+globals.GUI_TYPE_STATIC = 0;
+globals.GUI_TYPE_BUTTON = 1;

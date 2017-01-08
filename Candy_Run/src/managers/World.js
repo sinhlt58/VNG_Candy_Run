@@ -17,6 +17,7 @@ var World = cc.Class.extend({
 
         //init character
         this.character = character;
+        this.character.setPosition(this.character.getInitPosition());
 
         this.init();
     },

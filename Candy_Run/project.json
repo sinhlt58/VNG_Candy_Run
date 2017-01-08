@@ -17,21 +17,14 @@
     "src/scenes/ScenePlay.js",
     "src/scenes/LayerPlayAnimation.js",
     "src/scenes/LayerPlayBackground.js",
+    "src/scenes/LayerPlayStatus.js",
     "src/scenes/LayerPlayDebug.js",
-    "src/objects/Object.js",
-    "src/objects/Ground.js",
-    "src/objects/Item.js",
-    "src/objects/Obstacle.js",
 
-    "src/managers/FactoryObject.js",
-    "src/managers/World.js",
-    "src/managers/ObjectPool.js",
-    "src/managers/Trigger.js",
-    "src/managers/TriggerEndMap.js",
-    "src/managers/TriggerBackToLoop.js",
-    "src/managers/TriggerHeavenAndGround.js",
-    "src/managers/WorldTriggers.js",
-    "src/managers/CollisionDetector.js",
+    "src/scenes/SceneLobby.js",
+    "src/scenes/LayerLobbyBackground.js",
+    "src/scenes/LayerLobbyCharacters.js",
+    "src/scenes/LayerLobbyPets.js",
+    "src/scenes/LayerLobbyStatus.js",
 
     "src/characters/Character.js",
     "src/characters/State.js",
@@ -61,6 +54,21 @@
     "src/characters/StateTakingDamage.js",
     "src/characters/AnimationController.js",
 
+
+    "src/managers/FactoryObject.js",
+    "src/managers/World.js",
+    "src/managers/ObjectPool.js",
+    "src/managers/Trigger.js",
+    "src/managers/TriggerEndMap.js",
+    "src/managers/TriggerBackToLoop.js",
+    "src/managers/TriggerHeavenAndGround.js",
+    "src/managers/WorldTriggers.js",
+    "src/managers/CollisionDetector.js",
+
+    "src/objects/Object.js",
+    "src/objects/Ground.js",
+    "src/objects/Item.js",
+    "src/objects/Obstacle.js",
     "src/objects/ItemEffect.js",
     "src/objects/ItemEffectFly.js",
     "src/objects/ItemEffectGiant.js",
@@ -72,6 +80,5 @@
     "src/objects/ItemEffectMoney.js",
     "src/objects/ItemEffectScore.js",
     "src/objects/ItemEffectTransformCoin.js"
-
   ]
 }
