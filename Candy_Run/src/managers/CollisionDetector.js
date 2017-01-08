@@ -2,10 +2,20 @@
  * Created by Fresher on 1/3/2017.
  */
 var CollisionDetector = cc.Class.extend({
+
+
+    offsetX:0,
+
+    offsetY: 0,
+
+
     world: null,
 
     frames:0,
     drawNode: null,
+
+
+
 
     //drawDot: null,
 
@@ -17,8 +27,17 @@ var CollisionDetector = cc.Class.extend({
 
         this.world.graphicsParent.addChild(this.drawNode, 1000);
 
+
+        this.offsetX= - 40* this.world.character.scaleSize;
+        this.offsetY=0;
+
     },
     update: function (dt) {
+
+        this.offsetX=-40*this.world.character.scaleSize;
+
+        this.offsetY=0;
+
         this.frames++;
         //update array contains items, ground, obstacles collide with character.
         var objectsColldingWithCharacter = this.getDataObjectsCollidingWithCharacter(dt);
@@ -30,11 +49,28 @@ var CollisionDetector = cc.Class.extend({
         // handle with character
         var i;
 
+
+        //handle collide with ground
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_GROUND)){
+            //change state to running or ... somethings not thought yet
+
+            var isRunning= character.stateMachine.stateMovement instanceof StateRunning;
+
+            if(isRunning==false){
+                character.stateMachine.setStateMovement(new StateRunning(character));
+            }
+
+
 
         }else{
+            //run here when jump or go to hole
+
+            cc.log("No ground collided");
+
 
         }
+
+
 
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_ITEM)){
             var itemData = collisionObjects[globals.CLASS_TYPE_ITEM];
@@ -47,18 +83,26 @@ var CollisionDetector = cc.Class.extend({
             }
 
         }else{
-
+            // nothing here
         }
 
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_OBSTACLE)){
+            // apply damage or die...
+
+
 
         }else{
+
+            // nothing here
 
         }
 
         // handle with items
     },
     getDataObjectsCollidingWithCharacter: function (dt) {
+
+
+        // get character position and body size
         var charPos = this.world.character.getPosition();
         var bodySize = this.world.character.getContentSize();
 
@@ -67,8 +111,8 @@ var CollisionDetector = cc.Class.extend({
 
 
         //debug collision by drawing a boundary box for character
-        var characterLeft = charPos.x - bodySize.width / 2 -40 ;
-        var characterRight = charPos.x + bodySize.width / 2 -40;
+        var characterLeft = charPos.x - bodySize.width / 2 + this.offsetX ;
+        var characterRight = charPos.x + bodySize.width / 2 + this.offsetX;
         var characterTop = charPos.y + bodySize.height / 2 ;
         var characterBottom = charPos.y - bodySize.height / 2;
         var posRectOrigin= {
@@ -124,8 +168,8 @@ var CollisionDetector = cc.Class.extend({
 
 
         //fix position of rectangle for detect collision
-        var characterLeft = characterPos.x - characterBodySize.width / 2 -40 ;
-        var characterRight = characterPos.x + characterBodySize.width / 2 -40;
+        var characterLeft = characterPos.x - characterBodySize.width / 2 +this.offsetX;
+        var characterRight = characterPos.x + characterBodySize.width / 2 +this.offsetX;
         var characterTop = characterPos.y + characterBodySize.height / 2 ;
         var characterBottom = characterPos.y - characterBodySize.height / 2;
 

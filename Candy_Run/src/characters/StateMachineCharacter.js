@@ -24,7 +24,7 @@ var StateMachineCharacter = cc.Class.extend({
     },
 
 
-    //update acce and velo of the owner
+    //update acceleration and velocity of the owner
     update: function (dt) {
         //update velocity by acceleration
 
@@ -40,11 +40,6 @@ var StateMachineCharacter = cc.Class.extend({
 
         //todo : run update function from  states above
 
-
-
-
-
-
         // fixme: instantiate origin state and run update
         /*this.stateMovement.update(dt);
          this.stateGiant.update(dt);
@@ -55,9 +50,9 @@ var StateMachineCharacter = cc.Class.extend({
 
 
 
-        //fixme: change state should not be handled here, it should be handle at collision detection
+        //fixme: change state should not be handled here, it should be handle at collision detection or some other places
 
-        if(this.owner.spAnimation.getPosition().y<90 + this.owner.getContentSize().height/2
+        /*if(this.owner.spAnimation.getPosition().y<90 + this.owner.getContentSize().height/2
             && this.stateMovement instanceof StateRunning==false ) {
 
             //console.log(this.owner.spAnimation.getPosition().y+" "+ (90 + this.owner.spAnimation.getContentSize().height/2));
@@ -65,7 +60,7 @@ var StateMachineCharacter = cc.Class.extend({
 
 
             console.log("State turn back to running");
-        }
+        }*/
 
 
     },

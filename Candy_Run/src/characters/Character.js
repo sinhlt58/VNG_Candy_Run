@@ -36,6 +36,9 @@ var Character = cc.Class.extend({
 
 
 
+    scaleSize: null,
+
+
     // debug arr static
 
 
@@ -68,7 +71,12 @@ var Character = cc.Class.extend({
         this.spAnimation.anchorX = 0.5;
         this.spAnimation.anchorY = 0.5;
 
-        this.animationController.setScale(1);
+
+
+        this.scaleSize=0.8;
+
+        // 1 is too big
+        this.animationController.setScale(this.scaleSize);
 
         //cc.log(this.spAnimation._contentSize);
         //this.spAnimation.setScale(1);
@@ -126,7 +134,10 @@ var Character = cc.Class.extend({
     },
     //fixme : this function must return a rectangle for collision detecting base on state (ex. Giant state, slide state... )
     getContentSize: function () {
-        return this.body;
+        return {
+            width: this.body.width*this.scaleSize,
+            height: this.body.height*this.scaleSize
+        }
     },
 
     setAcceleration: function (acc) {

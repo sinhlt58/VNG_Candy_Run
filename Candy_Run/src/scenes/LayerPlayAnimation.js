@@ -18,6 +18,14 @@ var LayerPlayAnimation = cc.Layer.extend({
             onTouchEnded: this.onTouchEnded
         }, this);
 
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: function () {
+                
+            }
+        }, this);
+        
+        
         this.scheduleUpdate();
     },
     init: function () {
@@ -80,7 +88,20 @@ var LayerPlayAnimation = cc.Layer.extend({
 
         //console.log(thisLayer);
 
-        thisLayer.character.stateMachine.setStateMovement(new StateJumping(thisLayer.character));
+        // simulate jumping by clicking mouse
+        //var isRunning=
+
+        if(thisLayer.character.stateMachine.stateMovement instanceof StateRunning){
+            thisLayer.character.stateMachine.setStateMovement(new StateJumping(thisLayer.character));
+
+        }else if(thisLayer.character.stateMachine.stateMovement instanceof StateJumping){
+            thisLayer.character.stateMachine.setStateMovement(new StateDoubleJumping(thisLayer.character));
+        }else{
+            cc.log('Maybe doubleJumping');
+        }
+
+
+
 
         return true;
     },
