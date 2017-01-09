@@ -4,10 +4,19 @@
 var Character = cc.Class.extend({
 
 
-    // fix spAnimation position bu adding offsetX and Y
-
+    // fix spAnimation position by adding offsetX and Y
     offsetXSp: null,
     offsetYSp: null,
+
+
+
+
+
+    //fix collision offset by adding offset collide offset
+
+    offsetCollX: null,
+    offsetCollY: null,
+
 
 
     //fixme: grounded property should not place here (some where else) :))
@@ -140,6 +149,8 @@ var Character = cc.Class.extend({
 
 
         this.setPosition(spPosition);
+
+        this.animationController.setScale(this.scaleSize);
 
     },
     getPosition: function () {

@@ -18,10 +18,43 @@ var LayerPlayAnimation = cc.Layer.extend({
             onTouchEnded: this.onTouchEnded
         }, this);
 
+
+
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (key, e) {
-                if (key == 32) {
+
+                if(key==cc.KEY.g){
+
+                    cc.log("G");
+                    var character= e.getCurrentTarget().character;
+
+                    if(character.stateMachine.stateGiant instanceof StateGiantActive){
+                        character.stateMachine.setStateGiant(new StateGiantDisactive(character));
+                    }else{
+                        character.stateMachine.setStateGiant(new StateGiantActive(character));
+                    }
+
+
+
+                }
+
+                if(key==cc.KEY.f){
+
+                    //cc.log("F");
+                    var character= e.getCurrentTarget().character;
+
+                    if(character.stateMachine.stateMovement instanceof StateRunning){
+                        character.stateMachine.setStateMovement(new StateFlying(character));
+                    }else if(character.stateMachine.stateMovement instanceof StateFlying){
+                        character.stateMachine.setStateMovement(new StateRunning(character));
+                    }
+
+
+
+                }
+
+                if (key == cc.KEY.space) {
                     //cc.log("Space is pressed");
                     var thisLayer = e.getCurrentTarget();
                     var character = thisLayer.character;
@@ -43,20 +76,10 @@ var LayerPlayAnimation = cc.Layer.extend({
             onKeyReleased: function (key, e) {
 
                 if (key == 32) {
-
-
-                    //var thisLayer = e.getCurrentTarget();
-
-
-
                     var character = e.getCurrentTarget().character;
-
-
                     if(character.stateMachine.stateMovement instanceof StateSliding){
                         character.stateMachine.setStateMovement(new StateRunning(character));
                     }
-
-
                     cc.log("Space is released");
                     cc.log("Exit sliding");
                 }

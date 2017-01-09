@@ -2,6 +2,8 @@
  * Created by SinhBlack on 12/30/2016.
  */
 var Item = ObjectGame.extend({
+
+    stateMachineItem: null,
     score:0,
     money:0,
     effects:null,
