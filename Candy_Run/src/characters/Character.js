@@ -4,19 +4,19 @@
 var Character = cc.Class.extend({
 
 
+    // fix spAnimation position bu adding offsetX and Y
+
+    offsetXSp: null,
+    offsetYSp: null,
+
 
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
-    body:null,
+    body: null,
 
 
     //this property be used for detecting collision
-    rectangle:{
-
-    },
-
-
-
+    rectangle: {},
 
 
     spAnimation: null,
@@ -35,7 +35,6 @@ var Character = cc.Class.extend({
     initPosition: null,
 
 
-
     scaleSize: null,
 
 
@@ -45,22 +44,33 @@ var Character = cc.Class.extend({
     //arr[]
 
 
-
     ctor: function () {
 
 
 
+        //cc.log(cc.sys.platform==cc.sys.DESKTOP_BROWSER);
+
 
         //todo: Replace with animation controller after
-        this.spAnimation = new sp.SkeletonAnimation(res.zombie_json , res.zombie_atlas);
+        this.spAnimation = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
         this.body = {width: 90, height: 170};
         cc.log(this.spAnimation.getContentSize());
 
 
+        if (cc.sys.platform != cc.sys.DESKTOP_BROWSER) {
+
+            this.offsetXSp = - this.body.width / 2;
+            this.offsetYSp = - this.body.height / 2+20;
+
+        } else {
+            this.offsetXSp = 0;
+            this.offsetYSp = 0;
+        }
+
 
         //console.log((this.spAnimation instanceof sp.SkeletonAnimation)+ " okkok");
 
-        this.animationController= new AnimationController(this);
+        this.animationController = new AnimationController(this);
 
         this.animationController.setAnimation('run1', true);
 
@@ -68,12 +78,12 @@ var Character = cc.Class.extend({
 
         //this.spAnimation.setPosition(200, 300);
 
+
         this.spAnimation.anchorX = 0.5;
         this.spAnimation.anchorY = 0.5;
 
 
-
-        this.scaleSize=0.8;
+        this.scaleSize = 0.8;
 
         // 1 is too big
         this.animationController.setScale(this.scaleSize);
@@ -87,21 +97,20 @@ var Character = cc.Class.extend({
         //this.spAnimation.setPosition(cc.p(450, 200));
 
 
-
         // fixme: velocity is not set by that, it should be increasing by time
         this.velocity = cc.p(300, 0);
         this.acceleration = cc.p(0, 0);
 
 
-
-
-        this.stateMachine= new StateMachineCharacter(this);
+        this.stateMachine = new StateMachineCharacter(this);
 
 
         //fixme: init position should be load from file or somewhere
-        this.initPosition = cc.p(250, 90 + this.getContentSize().height/2);
+        this.initPosition = cc.p(250, 90 + this.getContentSize().height / 2);
         this.setPosition(this.initPosition);
 
+
+        this.position = this.initPosition;
 
         //console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
         //cc.log(this.spAnimation);
@@ -114,36 +123,50 @@ var Character = cc.Class.extend({
 
         //update all state machine
         this.stateMachine.update(dt);
-        var currentX = this.spAnimation.getPosition().x;
-        var currentY = this.spAnimation.getPosition().y;
+        var currentX = this.position.x;
+        var currentY = this.position.y;
 
-        var x = currentX + this.velocity.x * dt;
-        var y = currentY + this.velocity.y * dt;
+        /*currentX+=this.offsetXSp;
+         currentY+=this.offsetYSp;*/
 
-        this.spAnimation.setPosition(cc.p(x,y));
+
+        var x = currentX + this.velocity.x * dt;  // + this.offsetXSp*dt;
+        var y = currentY + this.velocity.y * dt;  // +this.offsetYSp*dt;
+
+        this.position = cc.p(x, y);
+
+
+        var spPosition = cc.p(x + this.offsetXSp, y + this.offsetYSp);
+
+
+        this.setPosition(spPosition);
 
     },
-    getPosition: function(){
-        return this.spAnimation.getPosition();
+    getPosition: function () {
+        return this.position;
     },
     setPosition: function (position) {
         this.spAnimation.setPosition(position);
     },
-    getInitPosition: function(){
+    getInitPosition: function () {
         return this.initPosition;
     },
     //fixme : this function must return a rectangle for collision detecting base on state (ex. Giant state, slide state... )
     getContentSize: function () {
         return {
-            width: this.body.width*this.scaleSize,
-            height: this.body.height*this.scaleSize
+            width: this.body.width * this.scaleSize,
+            height: this.body.height * this.scaleSize
         }
     },
 
     setAcceleration: function (acc) {
-        this.acceleration= acc;
+        this.acceleration = acc;
     },
     setVelocity: function (v) {
-        this.velocity= v;
+        this.velocity = v;
+    },
+
+    setScaleSize: function (size) {
+        this.scaleSize=size;
     }
 });

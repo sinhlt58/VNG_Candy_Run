@@ -20,12 +20,51 @@ var LayerPlayAnimation = cc.Layer.extend({
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function () {
-                
+            onKeyPressed: function (key, e) {
+                if (key == 32) {
+                    //cc.log("Space is pressed");
+                    var thisLayer = e.getCurrentTarget();
+                    var character = thisLayer.character;
+
+                    //only can slide when running
+                    if (character.stateMachine.stateMovement instanceof StateSliding == false && character.stateMachine.stateMovement instanceof StateRunning == true) {
+                        character.stateMachine.setStateMovement(new StateSliding(character));
+                        cc.log("Enter sliding");
+                    } else {
+                        cc.log('Sliding');
+                    }
+                }
+
+                //character.stateMachine.setStateMovement(new Sta)
+
+
+                return true;
+            },
+            onKeyReleased: function (key, e) {
+
+                if (key == 32) {
+
+
+                    //var thisLayer = e.getCurrentTarget();
+
+
+
+                    var character = e.getCurrentTarget().character;
+
+
+                    if(character.stateMachine.stateMovement instanceof StateSliding){
+                        character.stateMachine.setStateMovement(new StateRunning(character));
+                    }
+
+
+                    cc.log("Space is released");
+                    cc.log("Exit sliding");
+                }
+                //cc.log()
             }
         }, this);
-        
-        
+
+
         this.scheduleUpdate();
     },
     init: function () {
@@ -39,14 +78,14 @@ var LayerPlayAnimation = cc.Layer.extend({
             cc.loader.getRes(res.item_effect_types), cc.loader.getRes(res.object_types));
 
         //create Character
-        this.character= new Character();
+        this.character = new Character();
         this.addChild(this.character.spAnimation);
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
             this.character);
     },
-    update:function (dt) {
+    update: function (dt) {
         //handle inputs.
 
         this.character.update(dt);
@@ -57,23 +96,23 @@ var LayerPlayAnimation = cc.Layer.extend({
         //update world accordingly to the character's pos.
         this.world.update(dt);
     },
-    updateCamera:function (character) {//todo: change code later for pretty
+    updateCamera: function (character) {//todo: change code later for pretty
         var visibleSize = cc.view.getVisibleSize();
         var characterPos = character.getPosition();
         var characterInitPos = character.getInitPosition();
 
         var changeX = characterPos.x - characterInitPos.x;
-        var changeY = parseInt((characterPos.y/this.getCameraNeedToChangeY()))*this.getCameraNeedToChangeY();
+        var changeY = parseInt((characterPos.y / this.getCameraNeedToChangeY())) * this.getCameraNeedToChangeY();
 
         this.setPosition(-changeX, -changeY);
     },
 
-    getCurrentCameraY:function () {
-        return Math.abs(this.getPosition().y) + cc.view.getVisibleSize().height/2;
+    getCurrentCameraY: function () {
+        return Math.abs(this.getPosition().y) + cc.view.getVisibleSize().height / 2;
     },
 
-    getCameraNeedToChangeY:function(){
-        return 2*this.world.getChunkHeight() - cc.view.getVisibleSize().height;
+    getCameraNeedToChangeY: function () {
+        return 2 * this.world.getChunkHeight() - cc.view.getVisibleSize().height;
     },
 
     onTouchBegan: function (touch, event) {
@@ -84,28 +123,30 @@ var LayerPlayAnimation = cc.Layer.extend({
         console.log("mouse released");
         //this.
 
-        var thisLayer= e.getCurrentTarget();
+        var thisLayer = e.getCurrentTarget();
 
         //console.log(thisLayer);
 
         // simulate jumping by clicking mouse
         //var isRunning=
 
-        if(thisLayer.character.stateMachine.stateMovement instanceof StateRunning){
+
+        // is running
+        if (thisLayer.character.stateMachine.stateMovement instanceof StateRunning) {
             thisLayer.character.stateMachine.setStateMovement(new StateJumping(thisLayer.character));
 
-        }else if(thisLayer.character.stateMachine.stateMovement instanceof StateJumping){
-            thisLayer.character.stateMachine.setStateMovement(new StateDoubleJumping(thisLayer.character));
-        }else{
-            cc.log('Maybe doubleJumping');
         }
-
-
+        // is jumping v1
+        else if (thisLayer.character.stateMachine.stateMovement instanceof StateJumping) {
+            thisLayer.character.stateMachine.setStateMovement(new StateDoubleJumping(thisLayer.character));
+        } else {
+            cc.log('Maybe doubleJumping or Sliding , can not jump right now');
+        }
 
 
         return true;
     },
-    onExit:function () {
+    onExit: function () {
         this._super();
         this.world.releaseAllCurrentRenderedObjects();
     }

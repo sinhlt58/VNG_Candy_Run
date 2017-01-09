@@ -18,10 +18,6 @@ var StateRunning= StateMovement.extend({
 
             // fixme: set acceleration to (x, 0)
 
-
-
-
-
         }
     },
 
@@ -37,6 +33,8 @@ var StateRunning= StateMovement.extend({
         this.owner.animationController.setAnimation('run1', true);
         console.log("On Enter Running");
 
+
+        this.owner.body = {width: 90, height: 170};
         var currentPosX= this.owner.getPosition().x;
         var y= this.owner.getInitPosition().y;
 

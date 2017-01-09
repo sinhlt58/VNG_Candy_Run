@@ -6,8 +6,6 @@ var StateMachineCharacter = cc.Class.extend({
     // grounded property temporary move to character
 
 
-
-
     stateMovement: null,
     stateGiant: null,
     stateHP: null,
@@ -46,6 +44,9 @@ var StateMachineCharacter = cc.Class.extend({
          this.stateHP.update(dt);
          this.stateVisible.update(dt);
          this.stateMagnetic.update(dt);*/
+
+
+
         this.stateMovement.update(dt);
 
 
@@ -64,25 +65,37 @@ var StateMachineCharacter = cc.Class.extend({
 
 
     },
+
+    // fix me
     changeState: function () {
+
 
     },
 
 
     setStateMovement: function (stateMovement) {
+        this.stateMovement.onExit();
+
         this.stateMovement = stateMovement
     },
 
     setStateGiant: function (stateGiant) {
+
+        this.stateGiant.onExit();
         this.stateGiant = stateGiant;
     },
     setStateVisible: function (stateVisible) {
+        this.stateVisible.onExit();
+
         this.stateVisible = stateVisible;
     },
     setStateMagnetic: function (stateMag) {
+        this.stateMagnetic.onExit();
         this.stateMagnetic = stateMag
     },
     setStateHP: function (stateHP) {
+
+        this.stateHP.onExit();
         this.stateHP= stateHP;
     }
 
