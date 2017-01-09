@@ -5,7 +5,7 @@ var ItemEffectMagnetic = ItemEffect.extend({
     ctor:function () {
         this._super();
     },
-    doEffect:function (game, character, item) {
+    doEffect:function (game, world, item) {
 
     }
 });

@@ -5,7 +5,7 @@ var ItemEffectScore = ItemEffect.extend({
     ctor:function () {
         this._super();
     },
-    doEffect:function (game, character, item) {
-        //cc.log("Inside ItemEffectScore");
+    doEffect:function (game, world, item) {
+        cc.log("item score: ", item.score);
     }
 });

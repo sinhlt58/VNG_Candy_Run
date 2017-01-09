@@ -6,6 +6,6 @@ var ItemEffectScore = ItemEffect.extend({
         this._super();
     },
     doEffect:function (game, character, item) {
-        cc.log("Inside ItemEffectScore");
+        //cc.log("Inside ItemEffectScore");
     }
 });

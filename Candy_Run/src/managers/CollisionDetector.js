@@ -87,8 +87,6 @@ var CollisionDetector = cc.Class.extend({
         } else {
             //run here when jump or go to hole
 
-            cc.log("No ground collided");
-
             var character= this.world.character;
 
             if(character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding){
@@ -107,7 +105,7 @@ var CollisionDetector = cc.Class.extend({
                 var itemDataObject = itemData[i];
                 var itemObject = itemDataObject["pObject"];
                 //do effects here
-                itemObject.doEffects();
+                itemObject.doEffects(cr.game, this.world);
                 itemObject.sprite.setVisible(false);
             }
 

@@ -32,9 +32,9 @@ var FactoryObject = cc.Class.extend({
         var objectTypeData = this.getObjectTypeData(objectTypeId);
         var object = this.objectPool.getObjectByClassType(classType);
 
-        // if (object.getObjectTypeId() == objectTypeId){
-        //     return object;
-        // }
+        if (object.getObjectTypeId() == objectTypeId){
+            return object;
+        }
 
         object.setObjectTypeId(objectTypeId);
 
@@ -57,6 +57,14 @@ var FactoryObject = cc.Class.extend({
                 object.sprite.runAction(action);
             }
             //todo: latter add effects for items.
+
+            for (i=0; i<objectTypeData["effects"].length; i++){
+                var effectType = objectTypeData["effects"][i];
+                if (effectType == globals.ITEM_EFFECT_LETTER){
+                    object.letter = objectTypeData["letter"];
+                }
+                object.addAEffect(cr.item_effect_manager.getItemEffectByType(effectType));
+            }
 
         }else if(classType == globals.CLASS_TYPE_GROUND){
             this.changeTextureOfSprite(object.sprite, objectTypeData["texture"]);

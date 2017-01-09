@@ -6,8 +6,6 @@ var StateMachineCharacter = cc.Class.extend({
     // grounded property temporary move to character
 
 
-
-
     stateMovement: null,
     stateGiant: null,
     stateHP: null,
@@ -24,7 +22,7 @@ var StateMachineCharacter = cc.Class.extend({
     },
 
 
-    //update acce and velo of the owner
+    //update acceleration and velocity of the owner
     update: function (dt) {
         //update velocity by acceleration
 
@@ -40,24 +38,22 @@ var StateMachineCharacter = cc.Class.extend({
 
         //todo : run update function from  states above
 
-
-
-
-
-
         // fixme: instantiate origin state and run update
         /*this.stateMovement.update(dt);
          this.stateGiant.update(dt);
          this.stateHP.update(dt);
          this.stateVisible.update(dt);
          this.stateMagnetic.update(dt);*/
+
+
+
         this.stateMovement.update(dt);
 
 
 
-        //fixme: change state should not be handled here, it should be handle at collision detection
+        //fixme: change state should not be handled here, it should be handle at collision detection or some other places
 
-        if(this.owner.spAnimation.getPosition().y<90 + this.owner.getContentSize().height/2
+        /*if(this.owner.spAnimation.getPosition().y<90 + this.owner.getContentSize().height/2
             && this.stateMovement instanceof StateRunning==false ) {
 
             //console.log(this.owner.spAnimation.getPosition().y+" "+ (90 + this.owner.spAnimation.getContentSize().height/2));
@@ -65,29 +61,41 @@ var StateMachineCharacter = cc.Class.extend({
 
 
             console.log("State turn back to running");
-        }
+        }*/
 
 
     },
+
+    // fix me
     changeState: function () {
+
 
     },
 
 
     setStateMovement: function (stateMovement) {
+        this.stateMovement.onExit();
+
         this.stateMovement = stateMovement
     },
 
     setStateGiant: function (stateGiant) {
+
+        this.stateGiant.onExit();
         this.stateGiant = stateGiant;
     },
     setStateVisible: function (stateVisible) {
+        this.stateVisible.onExit();
+
         this.stateVisible = stateVisible;
     },
     setStateMagnetic: function (stateMag) {
+        this.stateMagnetic.onExit();
         this.stateMagnetic = stateMag
     },
     setStateHP: function (stateHP) {
+
+        this.stateHP.onExit();
         this.stateHP= stateHP;
     }
 

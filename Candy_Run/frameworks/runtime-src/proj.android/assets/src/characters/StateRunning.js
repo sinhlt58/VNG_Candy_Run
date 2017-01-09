@@ -3,10 +3,11 @@
  */
 var StateRunning= StateMovement.extend({
     owner: null,
-    onEnterCall: false,
+    onEnterCall: null,
 
     ctor: function (owner) {
         this.owner=owner;
+        this.onEnterCall=false;
     },
     update: function (dt) {
         if(this.onEnterCall==false){
@@ -17,23 +18,27 @@ var StateRunning= StateMovement.extend({
 
             // fixme: set acceleration to (x, 0)
 
-
-
-
-
         }
     },
 
     //  fixme: set position and acceleration to running state
     onEnter: function () {
 
-        this.owner.animationController.setAnimation('slide', true);
+
+
+
+
+
+
+        this.owner.animationController.setAnimation('run1', true);
         console.log("On Enter Running");
 
-        var currentPosX= this.owner.spAnimation.getPosition().x;
+
+        this.owner.body = {width: 90, height: 170};
+        var currentPosX= this.owner.getPosition().x;
         var y= this.owner.getInitPosition().y;
 
-        this.owner.spAnimation.setPosition(cc.p(currentPosX, y));
+        this.owner.setPosition(cc.p(currentPosX, y));
 
         this.owner.setAcceleration(cc.p(0,0));
         this.owner.setVelocity((cc.p(300, 0)));

@@ -5,7 +5,7 @@ var ItemEffectMoney = ItemEffect.extend({
     ctor:function () {
         this._super();
     },
-    doEffect:function (game, character, item) {
-        //cc.log("Inside ItemEffectMoney");
+    doEffect:function (game, world, item) {
+        cc.log("item money: ", item.money);
     }
 });
