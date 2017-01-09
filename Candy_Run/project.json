@@ -80,9 +80,20 @@
     "src/objects/ItemEffectMoney.js",
     "src/objects/ItemEffectScore.js",
     "src/objects/ItemEffectTransformCoin.js",
+
+
+
+
     "src/objects/StateMachineItem.js",
     "src/objects/StateMachineObstacle.js"
 
+
+
+
+    "src/Globals.js",
+    "src/Game.js",
+    "src/Player.js",
+    "src/objects/ItemEffectManager.js"
 
   ]
 }

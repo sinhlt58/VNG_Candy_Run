@@ -20,12 +20,16 @@ cc.game.onStart = function(){
 
     //load resources
     cc.LoaderScene.preload(g_resources, function () {
+        //init player and player info.
+        cr.game = new Game();
+        cr.game.init();
+
         cc.director.runScene(new SceneLobby());
     }, this);
 };
 
 cc.game.onExit = function () {
-    console.log("Exit the game!")
+    cr.game.save();
 };
 
 cc.game.run();

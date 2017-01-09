@@ -139,11 +139,11 @@ var LayerPlayAnimation = cc.Layer.extend({
     },
 
     onTouchBegan: function (touch, event) {
-        console.log('mouse down');
+        //console.log('mouse down');
         return true;
     },
     onTouchEnded: function (t, e) {
-        console.log("mouse released");
+        //console.log("mouse released");
         //this.
 
         var thisLayer = e.getCurrentTarget();
@@ -163,7 +163,7 @@ var LayerPlayAnimation = cc.Layer.extend({
         else if (thisLayer.character.stateMachine.stateMovement instanceof StateJumping) {
             thisLayer.character.stateMachine.setStateMovement(new StateDoubleJumping(thisLayer.character));
         } else {
-            cc.log('Maybe doubleJumping or Sliding , can not jump right now');
+            //cc.log('Maybe doubleJumping or Sliding , can not jump right now');
         }
 
 

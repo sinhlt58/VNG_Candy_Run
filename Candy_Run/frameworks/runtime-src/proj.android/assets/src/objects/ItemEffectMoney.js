@@ -6,6 +6,6 @@ var ItemEffectMoney = ItemEffect.extend({
         this._super();
     },
     doEffect:function (game, character, item) {
-        cc.log("Inside ItemEffectMoney");
+        //cc.log("Inside ItemEffectMoney");
     }
 });

@@ -10,12 +10,13 @@ var Item = ObjectGame.extend({
     ctor:function () {
         this._super();
         this.effects = [];
-        this.effects.push(new ItemEffectMoney());
-        this.effects.push(new ItemEffectScore());
     },
-    doEffects:function () {
+    doEffects:function (game, world) {
         for (var i=0; i<this.effects.length; i++){
-            this.effects[i].doEffect();
+            this.effects[i].doEffect(game, world, this);
         }
+    },
+    addAEffect:function (effect) {
+        this.effects.push(effect);
     }
 });

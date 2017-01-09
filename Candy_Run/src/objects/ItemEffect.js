@@ -5,7 +5,7 @@ var ItemEffect = cc.Class.extend({
     ctor:function () {
 
     },
-    doEffect:function (game, character, item) {
+    doEffect:function (game, world, item) {
 
     }
 });
