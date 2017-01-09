@@ -5,10 +5,16 @@ var LayerPlayStatus= cc.Layer.extend({
     TEST_BUTTON_PAUSE:null,
     TEST_BUTTON_DIE:null,
     isGamePause:false,
-    ctor:function () {
+    animationLayer:null,
+    labelScore:0,
+    labelMoney:0,
+
+    ctor:function (animationLayer) {
         this._super();
-        
+        this.animationLayer = animationLayer;
         this.init();
+
+        this.scheduleUpdate();
     },
     init:function () {
         //todo: remove later
@@ -27,6 +33,28 @@ var LayerPlayStatus= cc.Layer.extend({
             visibleSize.height - size.height/2 - 5));
         this.addChild(this.TEST_BUTTON_DIE);
         this.TEST_BUTTON_DIE.addTouchEventListener(this.handleButtonEvents, this);
+
+        //init score label
+        this.labelScore = new cc.LabelTTF("", "Helvetica");
+        size = this.labelScore.getContentSize();
+        this.labelScore.setFontSize(35);
+        this.labelScore.setPosition(visibleSize.width/2, visibleSize.height - size.height/2 - 20);
+        this.labelScore.setColor(cc.color(255,255,255));
+        this.addChild(this.labelScore);
+
+        this.labelMoney = new cc.LabelTTF("", "Helvetica");
+        size = this.labelMoney.getContentSize();
+        this.labelMoney.setFontSize(35);
+        this.labelMoney.setColor(cc.color(255,255,255));
+        this.labelMoney.setPosition(visibleSize.width/2 + size.width + 100, visibleSize.height - size.height/2 - 20);
+        this.addChild(this.labelMoney);
+
+        //init money label
+
+    },
+    update:function (dt) {
+       this.labelScore.setString(cr.game.getPlayer().currentScore);
+       this.labelMoney.setString(cr.game.getPlayer().currentMoney);
     },
     handleButtonEvents:function (sender, type) {
         if (type == ccui.Widget.TOUCH_ENDED){

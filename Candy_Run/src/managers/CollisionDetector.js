@@ -116,7 +116,6 @@ var CollisionDetector = cc.Class.extend({
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_OBSTACLE)) {
             // apply damage or die...
 
-
         } else {
 
             // nothing here

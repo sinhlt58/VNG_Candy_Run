@@ -7,5 +7,6 @@ var ItemEffectScore = ItemEffect.extend({
     },
     doEffect:function (game, world, item) {
         cc.log("item score: ", item.score);
+        game.getPlayer().increaseScore(item.score);
     }
 });
