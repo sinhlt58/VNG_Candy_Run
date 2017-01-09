@@ -16,7 +16,12 @@ var StateRunning= StateMovement.extend({
         }else{
             // entered update logic
 
-            // fixme: set acceleration to (x, 0)
+
+            var currentPosX= this.owner.getPosition().x;
+            var y= 90+ this.owner.getContentSize().height/2;
+            this.owner.position= cc.p(currentPosX, y);
+            //cc.log(y);
+
 
         }
     },
@@ -25,6 +30,11 @@ var StateRunning= StateMovement.extend({
     onEnter: function () {
 
 
+        /*this.offsetX = -40 * this.world.character.scaleSize;
+        this.offsetY = 0; */
+
+        this.owner.offsetCollX= -40 *this.owner.scaleSize;
+        this.owner.offsetCollY=0;
 
 
 
@@ -36,7 +46,9 @@ var StateRunning= StateMovement.extend({
 
         this.owner.body = {width: 90, height: 170};
         var currentPosX= this.owner.getPosition().x;
-        var y= this.owner.getInitPosition().y;
+        var y= 90+ this.owner.getContentSize().height/2;
+
+        //cc.log(y);
 
         this.owner.setPosition(cc.p(currentPosX, y));
 

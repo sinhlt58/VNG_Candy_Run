@@ -4,9 +4,6 @@
 var StateGiantActive = StateGiant.extend({
 
     onEnterCall: null,
-
-
-
     owner: null,
     ctor: function (owner) {
         this.owner=owner;

@@ -23,23 +23,26 @@ var CollisionDetector = cc.Class.extend({
 
         //this.drawDot= new cc.Dra
 
-        this.world.graphicsParent.addChild(this.drawNode, 1000);
+        this.world.graphicsParent.addChild(this.drawNode, 100);
 
-        this.offsetX = -40 * this.world.character.scaleSize;
-        this.offsetY = 0;
+        /*this.offsetX = -40 * this.world.character.scaleSize;
+        this.offsetY = 0;*/
 
     },
     update: function (dt) {
 
 
+        this.offsetX= this.world.character.offsetCollX;
+        this.offsetY=this.world.character.offsetCollY;
+
 
         //fix me offset X and Y must change by stateMovement
-        if (this.world.character.stateMachine.stateMovement instanceof StateSliding) {
+        /*if (this.world.character.stateMachine.stateMovement instanceof StateSliding) {
             this.offsetY = -39;
         } else {
             this.offsetX = -40 * this.world.character.scaleSize;
             this.offsetY = 0;
-        }
+        }*/
 
 
 

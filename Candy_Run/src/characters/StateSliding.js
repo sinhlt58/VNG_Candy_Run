@@ -20,6 +20,8 @@ var StateSliding = StateMovement.extend({
         var velocityX=this.owner.velocity.x;
         this.owner.setVelocity(cc.p(velocityX, 0));
 
+
+        this.owner.offsetCollY=-40;
     },
 
     onExit: function () {
