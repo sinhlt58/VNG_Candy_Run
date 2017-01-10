@@ -4,9 +4,9 @@
 var CollisionDetector = cc.Class.extend({
 
 
-    offsetX: 0,
+    offsetX: null,
 
-    offsetY: 0,
+    offsetY: null,
 
 
     world: null,
@@ -18,6 +18,11 @@ var CollisionDetector = cc.Class.extend({
     //drawDot: null,
 
     ctor: function (world) {
+
+        this.offsetX=0;
+
+        this.offsetY=0;
+
         this.world = world;
         this.drawNode = new cc.DrawNode();
 
@@ -32,8 +37,8 @@ var CollisionDetector = cc.Class.extend({
     update: function (dt) {
 
 
-        this.offsetX= this.world.character.offsetCollX;
-        this.offsetY=this.world.character.offsetCollY;
+        this.offsetX = this.world.character.offsetCollX;
+        this.offsetY = this.world.character.offsetCollY;
 
 
         //fix me offset X and Y must change by stateMovement
@@ -52,10 +57,10 @@ var CollisionDetector = cc.Class.extend({
 
         this.frames++;
         //update array contains items, ground, obstacles collide with character.
-        var objectsColldingWithCharacter = this.getDataObjectsCollidingWithCharacter(dt);
+        var objectsCollidingWithCharacter = this.getDataObjectsCollidingWithCharacter(dt);
 
         //handle collisions character with item objects.
-        this.handleCollision(this.world.character, objectsColldingWithCharacter);
+        this.handleCollision(this.world.character, objectsCollidingWithCharacter);
     },
     handleCollision: function (character, collisionObjects) {
         // handle with character
@@ -70,12 +75,11 @@ var CollisionDetector = cc.Class.extend({
 
             if (isRunning == false) {
                 // maybe jumping or sliding
-                //if not sliding turn back to running else
+                //if sliding do nothing
                 if (character.stateMachine.stateMovement instanceof StateSliding ) {
                     //character.stateMachine.setStateMovement(new StateRunning(character));
                 }else if (character.stateMachine.stateMovement instanceof StateJumping ){
-
-                    //is jumping and going down
+                    //if is jumping and going down (velocityY <0)
                     if(character.velocity.y<=0){
                         character.stateMachine.setStateMovement(new StateRunning(character));
                     }
@@ -83,16 +87,20 @@ var CollisionDetector = cc.Class.extend({
                     character.stateMachine.setStateMovement(new StateRunning(character));
                 }
             } else {
-                // is running
+                // is running, do nothing
             }
 
 
         } else {
+
+            //no ground collide
             //run here when jump or go to hole
 
             var character= this.world.character;
 
             if(character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding){
+
+                // falling
 
 
                 cc.log("Die");
@@ -135,11 +143,15 @@ var CollisionDetector = cc.Class.extend({
         var bodySize = this.world.character.getContentSize();
 
 
+        //cc.log(charPos.x);
+
         //debug collision by drawing a boundary box for character
-        var characterLeft = charPos.x - bodySize.width / 2 + this.offsetX;
-        var characterRight = charPos.x + bodySize.width / 2 + this.offsetX;
-        var characterTop = charPos.y + bodySize.height / 2 + this.offsetY;
-        var characterBottom = charPos.y - bodySize.height / 2 + this.offsetY;
+        var characterLeft = charPos.x  + this.offsetX;
+        var characterRight = charPos.x + bodySize.width + this.offsetX;
+        var characterTop = charPos.y  + this.offsetY+ bodySize.height+ this.offsetY;
+        var characterBottom = charPos.y  + this.offsetY;
+
+        //cc.log(charPos.y);
         var posRectOrigin = {
             x: characterLeft,
             y: characterBottom
@@ -179,41 +191,23 @@ var CollisionDetector = cc.Class.extend({
         }
         return dataObjectsCollidingWithCharacter;
     },
-    isCharacterOverlapWithObject: function (characterPos, characterBodySize, objectPos, objectSize) {
+    isCharacterOverlapWithObject: function (charPos, bodySize, objectPos, objectSize) {
 
 
 
         //fix position of rectangle for detect collision
-        var characterLeft = characterPos.x - characterBodySize.width / 2 + this.offsetX;
-        var characterRight = characterPos.x + characterBodySize.width / 2 + this.offsetX;
-        var characterTop = characterPos.y + characterBodySize.height / 2 + this.offsetY;
-        var characterBottom = characterPos.y - characterBodySize.height / 2 + this.offsetY;
+        var characterLeft = charPos.x  + this.offsetX;
+        var characterRight = charPos.x + bodySize.width + this.offsetX;
+        var characterTop = charPos.y  + this.offsetY+ bodySize.height+ this.offsetY;
+        var characterBottom = charPos.y  + this.offsetY;
 
 
-        //cc.log(this.world.graphicsParent);
 
-        //debug by drawNode to draw a rectangle to check collision
-        //var layer= this.world.graphicsParent;
-        /* var posRectOrigin= {
-         x: characterLeft,
-         y: characterBottom
-         };
-         var posRectDes= {
-         x: characterRight,
-         y: characterTop
-
-         };
-         var colorRect= cc.color(255,255, 255, 0);
-         var colorLine= cc.color(255, 0,0, 128);
-         this.drawNode.clear();
-         this.drawNode.drawRect(posRectOrigin, posRectDes, colorRect, 2, colorLine);
-         this.drawNode.drawDot(characterPos, 5, cc.color(255, 0, 0, 128));
-         */
         var rect1 = {
             x: characterLeft,
             y: characterBottom,
-            width: characterBodySize.width,
-            height: characterBodySize.height
+            width: bodySize.width,
+            height: bodySize.height
 
         };
 

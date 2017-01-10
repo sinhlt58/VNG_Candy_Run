@@ -18,6 +18,9 @@ var Character = cc.Class.extend({
     offsetCollY: null,
 
 
+    hp: null,
+
+
 
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
@@ -60,24 +63,12 @@ var Character = cc.Class.extend({
         //cc.log(cc.sys.platform==cc.sys.DESKTOP_BROWSER);
 
 
+        this.hp=1000;
+
         //todo: Replace with animation controller after
         this.spAnimation = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
         this.body = {width: 90, height: 170};
-        cc.log(this.spAnimation.getContentSize());
 
-
-        if (cc.sys.platform != cc.sys.DESKTOP_BROWSER) {
-
-            this.offsetXSp = - this.body.width / 2;
-            this.offsetYSp = - this.body.height / 2+20;
-
-        } else {
-            this.offsetXSp = 0;
-            this.offsetYSp = 0;
-        }
-
-
-        //console.log((this.spAnimation instanceof sp.SkeletonAnimation)+ " okkok");
 
         this.animationController = new AnimationController(this);
 
@@ -88,13 +79,13 @@ var Character = cc.Class.extend({
         //this.spAnimation.setPosition(200, 300);
 
 
-        this.spAnimation.anchorX = 0.5;
-        this.spAnimation.anchorY = 0.5;
-
-
-        this.scaleSize = 0.8;
+        this.spAnimation.anchorX = 0;
+        this.spAnimation.anchorY = 0;
 
         // 1 is too big
+        this.scaleSize = 0.8;
+
+
         this.animationController.setScale(this.scaleSize);
 
         //cc.log(this.spAnimation._contentSize);
@@ -115,7 +106,10 @@ var Character = cc.Class.extend({
 
 
         //fixme: init position should be load from file or somewhere
-        this.initPosition = cc.p(250, 90 + this.getContentSize().height / 2);
+
+        // 90 is height of the ground, and
+
+        this.initPosition = cc.p(250, 90 );
         this.setPosition(this.initPosition);
 
 
@@ -128,6 +122,9 @@ var Character = cc.Class.extend({
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
     update: function (dt) {
 
+
+        /*this.offsetXSp = - this.body.width*this.scaleSize;
+        this.offsetYSp = - this.body.height*this.scaleSize;*/
 
 
         //update all state machine
@@ -179,5 +176,20 @@ var Character = cc.Class.extend({
 
     setScaleSize: function (size) {
         this.scaleSize=size;
+    },
+
+    getHP: function () {
+        return this.hp;
+    },
+    setHP: function (hp) {
+        this.hp=hp;
+    },
+    getVelocity: function () {
+        return this.velocity;
+    },
+    getAcceleration: function () {
+        return this.acceleration;
     }
+
+
 });

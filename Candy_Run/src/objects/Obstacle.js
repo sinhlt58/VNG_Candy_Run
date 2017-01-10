@@ -3,10 +3,10 @@
  */
 var Obstacle = ObjectGame.extend({
 
+    stateMachineObstacle: null,
 
 
-
-    damage:0,
+    damage:null,
     ctor:function () {
         this._super();
     },
