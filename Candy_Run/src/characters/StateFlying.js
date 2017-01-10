@@ -26,7 +26,7 @@ var StateFlying = StateMovement.extend({
 
     update: function (dt) {
 
-        cc.log(this.owner.getPosition().y);
+        //cc.log(this.owner.getPosition().y);
         if(this.onEnterCall==false){
             this.onEnter();
             this.onEnterCall=true;
@@ -37,7 +37,7 @@ var StateFlying = StateMovement.extend({
             }
 
             if(this.isGoingUp==false){
-                this.owner.setVelocity(cc.p(300, 300));
+                this.owner.setVelocity(cc.p(300, 0));
             }
 
 
