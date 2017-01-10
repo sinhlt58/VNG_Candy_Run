@@ -68,7 +68,6 @@ var LayerPlayStatus= cc.Layer.extend({
         size = this.buttonSlide.getContentSize();
         this.buttonSlide.setPosition(visibleSize.width - size.width/2 - this.globalPadding, size.height/2 + this.globalPadding);
         this.buttonSlide.addTouchEventListener(this.handleButtonEvents, this);
-        this.buttonSlide.setVisible(false);
         this.addChild(this.buttonSlide);
 
         //BONUSTIME GUI
