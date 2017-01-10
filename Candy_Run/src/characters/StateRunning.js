@@ -35,6 +35,8 @@ var StateRunning= StateMovement.extend({
         /*this.offsetX = -40 * this.world.character.scaleSize;
         this.offsetY = 0; */
 
+
+
         this.owner.offsetCollX= - this.owner.getContentSize().width/2;
         this.owner.offsetCollY=0;
 

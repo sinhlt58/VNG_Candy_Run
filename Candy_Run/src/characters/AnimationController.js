@@ -32,7 +32,7 @@ var AnimationController = cc.Class.extend({
     },
 
 
-    // set Animation String
+    // set Animation String, can be call frame bt frame
     setAnimation: function (animationName, loop) {
         if(animationName==this.currentAnimation){
             return;
@@ -40,7 +40,6 @@ var AnimationController = cc.Class.extend({
             this.currentAnimation=animationName;
             this.owner.spAnimation.setAnimation(0, this.allAnimation[animationName],loop)
         }
-
     },
     
     updateAnimation: function (aniName, loop) {

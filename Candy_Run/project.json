@@ -41,6 +41,7 @@
     "src/characters/StateDoubleJumping.js",
     "src/characters/StateFlying.js",
     "src/characters/StateFalling.js",
+    "src/characters/StateInHeaven.js",
 
     "src/characters/StateGiant.js",
     "src/characters/StateGiantActive.js",

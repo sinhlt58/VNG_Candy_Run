@@ -123,6 +123,9 @@ var Character = cc.Class.extend({
     update: function (dt) {
 
 
+
+        //cc.log(this.stateMachine.stateMovement);
+
         /*this.offsetXSp = - this.body.width*this.scaleSize;
         this.offsetYSp = - this.body.height*this.scaleSize;*/
 

@@ -22,8 +22,8 @@ var TriggerHeavenAndGround = Trigger.extend({
             this.rememberedPosInGround = cc.p(characterPos.x - 500, cc.view.getVisibleSize().height - 5);
         }
 
-        var distanceY = Math.abs(characterPos.y - currentCameraY);
-        if (distanceY >= cc.view.getVisibleSize().height/2 + this.world.character.getContentSize().height/2){
+        var distanceY = Math.abs(characterPos.y - currentCameraY) + this.world.character.getContentSize().height/2;
+        if (distanceY >= cc.view.getVisibleSize().height/2){
             this.world.releaseAllCurrentRenderedObjects();
             this.world.setIsNeedToInitVisibleChunks(true);
             //release ojects and teleport player here.
