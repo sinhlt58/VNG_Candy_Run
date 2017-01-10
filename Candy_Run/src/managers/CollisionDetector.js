@@ -96,7 +96,6 @@ var CollisionDetector = cc.Class.extend({
             //no ground collide
             //run here when jump or go to hole
 
-            var character= this.world.character;
 
             if(character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding){
 
@@ -126,6 +125,7 @@ var CollisionDetector = cc.Class.extend({
 
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_OBSTACLE)) {
             // apply damage or die...
+            character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
 
         } else {
 

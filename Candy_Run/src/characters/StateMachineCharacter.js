@@ -19,7 +19,8 @@ var StateMachineCharacter = cc.Class.extend({
         this.stateMovement= new StateRunning(this.owner);
         this.stateGiant= new StateGiantDisactive(this.owner);
 
-
+        //example state
+        this.stateVisible = new StateDeactiveInvisible();
 
     },
 
@@ -52,7 +53,8 @@ var StateMachineCharacter = cc.Class.extend({
         this.stateMovement.update(dt);
         this.stateGiant.update(dt);
 
-
+        //example
+        this.stateVisible.update(dt, this.owner);
 
 
         //fixme: change state should not be handled here, it should be handle at collision detection or some other places
@@ -71,9 +73,11 @@ var StateMachineCharacter = cc.Class.extend({
     },
 
     // fix me
-    changeState: function () {
-
-
+    //example
+    changeState: function (groupStateName, nextState) {
+        this[groupStateName].onExit(this.owner);
+        this[groupStateName] = nextState;
+        this[groupStateName].onEnter(this.owner);
     },
 
 
