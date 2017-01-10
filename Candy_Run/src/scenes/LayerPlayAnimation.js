@@ -24,6 +24,15 @@ var LayerPlayAnimation = cc.Layer.extend({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (key, e) {
 
+
+                if(key==cc.KEY.h){
+
+                    var character= e.getCurrentTarget().character;
+
+                    character.stateMachine.setStateMovement(new StateInHeaven(character));
+
+                }
+
                 if(key==cc.KEY.g){
 
                     cc.log("G");
@@ -125,7 +134,7 @@ var LayerPlayAnimation = cc.Layer.extend({
         var characterInitPos = character.getInitPosition();
 
         var changeX = characterPos.x - characterInitPos.x;
-        var changeY = parseInt((characterPos.y / this.getCameraNeedToChangeY())) * this.getCameraNeedToChangeY();
+        var changeY = parseInt(((characterPos.y + character.getContentSize().height/2) / this.getCameraNeedToChangeY())) * this.getCameraNeedToChangeY();
 
         this.setPosition(-changeX, -changeY);
     },

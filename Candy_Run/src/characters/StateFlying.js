@@ -3,11 +3,13 @@
  */
 var StateFlying = StateMovement.extend({
 
+
+
     time: null,
     timePass: null,
 
 
-
+    isGoingUp:null,
 
 
 
@@ -18,33 +20,34 @@ var StateFlying = StateMovement.extend({
     ctor: function (owner) {
         this.owner=owner;
         this.onEnterCall=false;
+        this.isGoingUp= true;
+
     },
 
     update: function (dt) {
+
+        cc.log(this.owner.getPosition().y);
         if(this.onEnterCall==false){
             this.onEnter();
             this.onEnterCall=true;
         }else{
 
+            if(this.owner.getPosition().y>=200){
+                this.isGoingUp=false
+            }
+
+            if(this.isGoingUp==false){
+                this.owner.setVelocity(cc.p(300, 300));
+            }
+
+
         }
     }, 
     onEnter: function () {
-        var currentPosCharacterX= this.owner.getPosition().x;
 
-
-        // fixme y should be fix
-
-        var y= this.owner.initPosition.y;
-
-        y+=100;
-
-        this.owner.position= cc.p(currentPosCharacterX, y);
-        //this.owner.setPosition(cc.p(currentPosCharacterX, y));
-
+        this.owner.setVelocity(cc.p(300, 400))
         this.owner.animationController.setAnimation('fly', true);
 
-
-        //fixme set body
 
     },
     onExit: function () {

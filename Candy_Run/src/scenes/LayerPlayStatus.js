@@ -76,6 +76,16 @@ var LayerPlayStatus= cc.Layer.extend({
             }
             if (sender == this.buttonSlide){
                 //character slide
+
+                var character = this.animationLayer.character;
+
+                //only can slide when running
+                if (character.stateMachine.stateMovement instanceof StateSliding == false && character.stateMachine.stateMovement instanceof StateRunning == true) {
+                    character.stateMachine.setStateMovement(new StateSliding(character));
+                    cc.log("Enter sliding");
+                } else {
+                    cc.log('Sliding');
+                }
             }
         }
 
@@ -93,9 +103,34 @@ var LayerPlayStatus= cc.Layer.extend({
 
             if (sender == this.buttonJump){
                 //character jump
+
+                //this.animationLayer
+
+
+                var character= this.animationLayer.character;
+
+                if (character.stateMachine.stateMovement instanceof StateRunning) {
+                    character.stateMachine.setStateMovement(new StateJumping(character));
+
+                }
+                // is jumping v1
+                else if (character.stateMachine.stateMovement instanceof StateJumping) {
+                    character.stateMachine.setStateMovement(new StateDoubleJumping(character));
+                } else {
+                    //cc.log('Maybe doubleJumping or Sliding , can not jump right now');
+                }
+
+
             }
             if (sender == this.buttonSlide){
-                //character slide
+                //character end slide
+
+                var character = this.animationLayer.character;
+                if(character.stateMachine.stateMovement instanceof StateSliding){
+                    character.stateMachine.setStateMovement(new StateRunning(character));
+                }
+                cc.log("Space is released");
+                cc.log("Exit sliding");
             }
         }
 
