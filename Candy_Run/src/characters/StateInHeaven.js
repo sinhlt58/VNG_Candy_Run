@@ -28,7 +28,9 @@ var StateInHeaven= StateMovement.extend({
 
     update: function (dt) {
 
-        cc.log(this.owner.position.y);
+        cc.log(this.owner.position.y, this.owner.position.x);
+
+
 
         if(this.onEnterCall==false){
             this.onEnter();
