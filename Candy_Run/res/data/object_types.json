@@ -184,7 +184,7 @@
             "jelly_alphabet_b.png"
         ],
         "effects" : [0, 9],
-        "letter" : "b"
+        "letter" : "B"
     },
     "15":{
         "classType" : 0,
@@ -195,7 +195,7 @@
             "jelly_alphabet_o.png"
         ],
         "effects" : [0, 9],
-        "letter" : "o"
+        "letter" : "O"
     },
     "16":{
         "classType" : 0,
@@ -206,7 +206,7 @@
             "jelly_alphabet_n.png"
         ],
         "effects" : [0, 9],
-        "letter" : "n"
+        "letter" : "N"
     },
     "17":{
         "classType" : 0,
@@ -217,7 +217,7 @@
             "jelly_alphabet_u.png"
         ],
         "effects" : [0, 9],
-        "letter" : "u"
+        "letter" : "U"
     },
     "18":{
         "classType" : 0,
@@ -228,7 +228,7 @@
             "jelly_alphabet_s.png"
         ],
         "effects" : [0, 9],
-        "letter" : "s"
+        "letter" : "S"
     },
     "19":{
         "classType" : 0,
@@ -239,7 +239,7 @@
             "jelly_alphabet_t.png"
         ],
         "effects" : [0, 9],
-        "letter" : "t"
+        "letter" : "T"
     },
     "20":{
         "classType" : 0,
@@ -250,7 +250,7 @@
             "jelly_alphabet_i.png"
         ],
         "effects" : [0, 9],
-        "letter" : "i"
+        "letter" : "I"
     },
     "21":{
         "classType" : 0,
@@ -261,7 +261,7 @@
             "jelly_alphabet_m.png"
         ],
         "effects" : [0, 9],
-        "letter" : "m"
+        "letter" : "M"
     },
     "22":{
         "classType" : 0,
@@ -272,7 +272,7 @@
             "jelly_alphabet_e.png"
         ],
         "effects" : [0, 9],
-        "letter" : "e"
+        "letter" : "E"
     },
 
 	  "23": {
