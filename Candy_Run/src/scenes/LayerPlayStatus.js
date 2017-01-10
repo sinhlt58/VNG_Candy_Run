@@ -9,6 +9,8 @@ var LayerPlayStatus= cc.Layer.extend({
     labelScore:0,
     labelMoney:0,
 
+    buttonJump:null,
+    buttonSlide:null,
     ctor:function (animationLayer) {
         this._super();
         this.animationLayer = animationLayer;
@@ -49,7 +51,18 @@ var LayerPlayStatus= cc.Layer.extend({
         this.labelMoney.setPosition(visibleSize.width/2 + size.width + 100, visibleSize.height - size.height/2 - 20);
         this.addChild(this.labelMoney);
 
-        //init money label
+        //init play buttons
+        this.buttonJump = new ccui.Button(res.button_jump_normal, res.button_jump_selected);
+        size = this.buttonJump.getContentSize();
+        this.buttonJump.setPosition(size.width/2 + 10, size.height/2 + 10);
+        this.buttonJump.addTouchEventListener(this.handleButtonEvents, this);
+        this.addChild(this.buttonJump);
+
+        this.buttonSlide = new ccui.Button(res.button_slide_normal, res.button_slide_selected);
+        size = this.buttonSlide.getContentSize();
+        this.buttonSlide.setPosition(visibleSize.width - size.width/2 - 10, size.height/2 + 10);
+        this.buttonSlide.addTouchEventListener(this.handleButtonEvents, this);
+        this.addChild(this.buttonSlide);
 
     },
     update:function (dt) {
@@ -57,6 +70,15 @@ var LayerPlayStatus= cc.Layer.extend({
        this.labelMoney.setString(cr.game.getPlayer().currentMoney);
     },
     handleButtonEvents:function (sender, type) {
+        if (type == ccui.Widget.TOUCH_BEGAN){
+            if (sender == this.buttonJump){
+                //character jump
+            }
+            if (sender == this.buttonSlide){
+                //character slide
+            }
+        }
+
         if (type == ccui.Widget.TOUCH_ENDED){
             if (sender == this.TEST_BUTTON_PAUSE){
                 this.isGamePause = !this.isGamePause;
@@ -68,6 +90,15 @@ var LayerPlayStatus= cc.Layer.extend({
             }else if(sender == this.TEST_BUTTON_DIE){
                 cc.director.popScene();
             }
+
+            if (sender == this.buttonJump){
+                //character jump
+            }
+            if (sender == this.buttonSlide){
+                //character slide
+            }
         }
+
+
     }
 });
