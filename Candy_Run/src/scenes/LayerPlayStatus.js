@@ -19,8 +19,11 @@ var LayerPlayStatus= cc.Layer.extend({
         this.scheduleUpdate();
     },
     init:function () {
+        cc.spriteFrameCache.addSpriteFrames(res.layer_status_play_plist, res.layer_status_play_png);
+
+
         //todo: remove later
-        this.TEST_BUTTON_PAUSE = new ccui.Button(res.pause_button);
+        this.TEST_BUTTON_PAUSE = new ccui.Button("pauseBtn.png", "", "",  ccui.Widget.PLIST_TEXTURE);
         var visibleSize = cc.view.getVisibleSize();
         var size = this.TEST_BUTTON_PAUSE.getContentSize();
         this.TEST_BUTTON_PAUSE.setPosition(cc.p(visibleSize.width - size.width/2 - 10, visibleSize.height - size.height/2 - 5));
@@ -28,7 +31,7 @@ var LayerPlayStatus= cc.Layer.extend({
         this.TEST_BUTTON_PAUSE.addTouchEventListener(this.handleButtonEvents, this);
 
         //todo: remove later
-        this.TEST_BUTTON_DIE = new ccui.Button(res.pause_button);
+        this.TEST_BUTTON_DIE = new ccui.Button("pauseBtn.png", "", "", ccui.Widget.PLIST_TEXTURE);
         visibleSize = cc.view.getVisibleSize();
         size = this.TEST_BUTTON_DIE.getContentSize();
         this.TEST_BUTTON_DIE.setPosition(cc.p(visibleSize.width - size.width*1.5 - 20,
@@ -52,13 +55,13 @@ var LayerPlayStatus= cc.Layer.extend({
         this.addChild(this.labelMoney);
 
         //init play buttons
-        this.buttonJump = new ccui.Button(res.button_jump_normal, res.button_jump_selected);
+        this.buttonJump = new ccui.Button("jumpBtn_Normal.png", "jumpBtn_Selected.png", "", ccui.Widget.PLIST_TEXTURE);
         size = this.buttonJump.getContentSize();
         this.buttonJump.setPosition(size.width/2 + 10, size.height/2 + 10);
         this.buttonJump.addTouchEventListener(this.handleButtonEvents, this);
         this.addChild(this.buttonJump);
 
-        this.buttonSlide = new ccui.Button(res.button_slide_normal, res.button_slide_selected);
+        this.buttonSlide = new ccui.Button("slideBtn_Normal.png", "slideBtn_Selected.png", "", ccui.Widget.PLIST_TEXTURE);
         size = this.buttonSlide.getContentSize();
         this.buttonSlide.setPosition(visibleSize.width - size.width/2 - 10, size.height/2 + 10);
         this.buttonSlide.addTouchEventListener(this.handleButtonEvents, this);

@@ -24,16 +24,13 @@ var res = {
     object_types: "res/data/object_types.json",
 
 
+    layer_status_play_png: "res/assets/gui/scene_play/in_game/layer_status_play.png",
+    layer_status_play_plist: "res/assets/gui/scene_play/in_game/layer_status_play.plist",
+
 
     test_background2_png: "res/assets/gui/scene_play/background/tm02_bg2.png",
     test_background1_png: "res/assets/gui/scene_play/background/tm02_bg1.jpg",
-    test_button: "res/assets/gui/scene_lobby/gui_main/play.png",
-    pause_button: "res/assets/gui/scene_play/in_game/pauseBtn.png",
-    die_button: "res/assets/gui/scene_play/end_game/click_to_die.png",
-    button_jump_normal: "res/assets/gui/scene_play/in_game/jumpBtn_Normal.png",
-    button_jump_selected: "res/assets/gui/scene_play/in_game/jumpBtn_Selected.png",
-    button_slide_normal: "res/assets/gui/scene_play/in_game/slideBtn_Normal.png",
-    button_slide_selected: "res/assets/gui/scene_play/in_game/slideBtn_Selected.png"
+    test_button: "res/assets/gui/scene_lobby/gui_main/play.png"
 };
 
 var g_resources = [];
