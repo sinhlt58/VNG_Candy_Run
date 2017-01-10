@@ -18,6 +18,9 @@ var Character = cc.Class.extend({
     offsetCollY: null,
 
 
+    hp: null,
+
+
 
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
@@ -59,6 +62,8 @@ var Character = cc.Class.extend({
 
         //cc.log(cc.sys.platform==cc.sys.DESKTOP_BROWSER);
 
+
+        this.hp=1000;
 
         //todo: Replace with animation controller after
         this.spAnimation = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
@@ -171,5 +176,20 @@ var Character = cc.Class.extend({
 
     setScaleSize: function (size) {
         this.scaleSize=size;
+    },
+
+    getHP: function () {
+        return this.hp;
+    },
+    setHP: function (hp) {
+        this.hp=hp;
+    },
+    getVelocity: function () {
+        return this.velocity;
+    },
+    getAcceleration: function () {
+        return this.acceleration;
     }
+
+
 });
