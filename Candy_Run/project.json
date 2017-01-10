@@ -40,6 +40,8 @@
     "src/characters/StateDecreasingHP.js",
     "src/characters/StateDoubleJumping.js",
     "src/characters/StateFlying.js",
+    "src/characters/StateFalling.js",
+
     "src/characters/StateGiant.js",
     "src/characters/StateGiantActive.js",
     "src/characters/StateGiantDisactive.js",

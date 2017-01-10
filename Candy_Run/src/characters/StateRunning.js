@@ -17,8 +17,10 @@ var StateRunning= StateMovement.extend({
             // entered update logic
 
 
+            this.owner.offsetCollX= - this.owner.getContentSize().width/2;
+
             var currentPosX= this.owner.getPosition().x;
-            var y= 90+ this.owner.getContentSize().height/2;
+            var y= 90;
             this.owner.position= cc.p(currentPosX, y);
             //cc.log(y);
 
@@ -33,7 +35,7 @@ var StateRunning= StateMovement.extend({
         /*this.offsetX = -40 * this.world.character.scaleSize;
         this.offsetY = 0; */
 
-        this.owner.offsetCollX= -40 *this.owner.scaleSize;
+        this.owner.offsetCollX= - this.owner.getContentSize().width/2;
         this.owner.offsetCollY=0;
 
 
@@ -45,8 +47,9 @@ var StateRunning= StateMovement.extend({
 
 
         this.owner.body = {width: 90, height: 170};
+
         var currentPosX= this.owner.getPosition().x;
-        var y= 90+ this.owner.getContentSize().height/2;
+        var y= 90 ; //+ this.owner.getContentSize().height/2;
 
         //cc.log(y);
 

@@ -17,7 +17,7 @@ var StateMachineItem= cc.Class.extend({
 
 
     update: function (dt) {
-        //todo: move item to character or somethings
+        //todo: move item to character or somethings...
 
 
 
