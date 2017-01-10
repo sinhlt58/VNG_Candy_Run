@@ -96,7 +96,10 @@
     "src/Globals.js",
     "src/Game.js",
     "src/Player.js",
-    "src/objects/ItemEffectManager.js"
+    "src/objects/ItemEffectManager.js",
+
+
+    "src/scenes/BonusTimeGui.js"
 
   ]
 }

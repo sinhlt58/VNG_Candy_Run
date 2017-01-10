@@ -6,6 +6,6 @@ var ItemEffectFly = ItemEffect.extend({
         this._super();
     },
     doEffect:function (game, world, item) {
-
+        world.character.stateMachine.setStateMovement(new StateFlying( world.character));
     }
 });

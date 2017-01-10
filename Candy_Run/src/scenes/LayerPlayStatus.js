@@ -8,9 +8,12 @@ var LayerPlayStatus= cc.Layer.extend({
     animationLayer:null,
     labelScore:0,
     labelMoney:0,
+    globalPadding: 10,
 
     buttonJump:null,
     buttonSlide:null,
+
+    bonusTimeGui:null,
     ctor:function (animationLayer) {
         this._super();
         this.animationLayer = animationLayer;
@@ -19,20 +22,23 @@ var LayerPlayStatus= cc.Layer.extend({
         this.scheduleUpdate();
     },
     init:function () {
+        cc.spriteFrameCache.addSpriteFrames(res.layer_status_play_plist, res.layer_status_play_png);
+
+
         //todo: remove later
-        this.TEST_BUTTON_PAUSE = new ccui.Button(res.pause_button);
+        this.TEST_BUTTON_PAUSE = new ccui.Button("pauseBtn.png", "", "",  ccui.Widget.PLIST_TEXTURE);
         var visibleSize = cc.view.getVisibleSize();
         var size = this.TEST_BUTTON_PAUSE.getContentSize();
-        this.TEST_BUTTON_PAUSE.setPosition(cc.p(visibleSize.width - size.width/2 - 10, visibleSize.height - size.height/2 - 5));
+        this.TEST_BUTTON_PAUSE.setPosition(cc.p(visibleSize.width - size.width/2 - this.globalPadding, visibleSize.height - size.height/2 - this.globalPadding));
         this.addChild(this.TEST_BUTTON_PAUSE);
         this.TEST_BUTTON_PAUSE.addTouchEventListener(this.handleButtonEvents, this);
 
         //todo: remove later
-        this.TEST_BUTTON_DIE = new ccui.Button(res.pause_button);
+        this.TEST_BUTTON_DIE = new ccui.Button("pauseBtn.png", "", "", ccui.Widget.PLIST_TEXTURE);
         visibleSize = cc.view.getVisibleSize();
         size = this.TEST_BUTTON_DIE.getContentSize();
         this.TEST_BUTTON_DIE.setPosition(cc.p(visibleSize.width - size.width*1.5 - 20,
-            visibleSize.height - size.height/2 - 5));
+            visibleSize.height - size.height/2 - this.globalPadding));
         this.addChild(this.TEST_BUTTON_DIE);
         this.TEST_BUTTON_DIE.addTouchEventListener(this.handleButtonEvents, this);
 
@@ -40,7 +46,7 @@ var LayerPlayStatus= cc.Layer.extend({
         this.labelScore = new cc.LabelTTF("", "Helvetica");
         size = this.labelScore.getContentSize();
         this.labelScore.setFontSize(35);
-        this.labelScore.setPosition(visibleSize.width/2, visibleSize.height - size.height/2 - 20);
+        this.labelScore.setPosition(visibleSize.width/2, visibleSize.height - size.height/2 - this.globalPadding);
         this.labelScore.setColor(cc.color(255,255,255));
         this.addChild(this.labelScore);
 
@@ -48,24 +54,27 @@ var LayerPlayStatus= cc.Layer.extend({
         size = this.labelMoney.getContentSize();
         this.labelMoney.setFontSize(35);
         this.labelMoney.setColor(cc.color(255,255,255));
-        this.labelMoney.setPosition(visibleSize.width/2 + size.width + 100, visibleSize.height - size.height/2 - 20);
+        this.labelMoney.setPosition(visibleSize.width/2 + size.width + 100, visibleSize.height - size.height/2 - this.globalPadding);
         this.addChild(this.labelMoney);
 
         //init play buttons
-        this.buttonJump = new ccui.Button(res.button_jump_normal, res.button_jump_selected);
+        this.buttonJump = new ccui.Button("jumpBtn_Normal.png", "jumpBtn_Selected.png", "", ccui.Widget.PLIST_TEXTURE);
         size = this.buttonJump.getContentSize();
-        this.buttonJump.setPosition(size.width/2 + 10, size.height/2 + 10);
+        this.buttonJump.setPosition(size.width/2 + 10, size.height/2 + this.globalPadding);
         this.buttonJump.addTouchEventListener(this.handleButtonEvents, this);
         this.addChild(this.buttonJump);
 
-        this.buttonSlide = new ccui.Button(res.button_slide_normal, res.button_slide_selected);
+        this.buttonSlide = new ccui.Button("slideBtn_Normal.png", "slideBtn_Selected.png", "", ccui.Widget.PLIST_TEXTURE);
         size = this.buttonSlide.getContentSize();
-        this.buttonSlide.setPosition(visibleSize.width - size.width/2 - 10, size.height/2 + 10);
+        this.buttonSlide.setPosition(visibleSize.width - size.width/2 - this.globalPadding, size.height/2 + this.globalPadding);
         this.buttonSlide.addTouchEventListener(this.handleButtonEvents, this);
         this.addChild(this.buttonSlide);
 
+        //BONUSTIME GUI
+        this.bonusTimeGui = new BonusTimeGui(this.globalPadding, 100, this);
     },
     update:function (dt) {
+        this.bonusTimeGui.update();
        this.labelScore.setString(cr.game.getPlayer().currentScore);
        this.labelMoney.setString(cr.game.getPlayer().currentMoney);
     },
