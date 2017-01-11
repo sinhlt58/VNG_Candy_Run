@@ -22,8 +22,6 @@ var LayerPlayStatus= cc.Layer.extend({
         this.scheduleUpdate();
     },
     init:function () {
-        cc.spriteFrameCache.addSpriteFrames(res.layer_status_play_plist, res.layer_status_play_png);
-
 
         //todo: remove later
         this.TEST_BUTTON_PAUSE = new ccui.Button("pauseBtn.png", "", "",  ccui.Widget.PLIST_TEXTURE);

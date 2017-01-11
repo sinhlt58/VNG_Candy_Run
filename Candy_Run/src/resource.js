@@ -10,22 +10,13 @@ var res = {
     zombie_png: "res/assets/characters/zombie/char12.png",
 
 
-
-    ground_png: "res/ground.png",
-    ground_plist: "res/ground.plist",
-    jelly_and_items_plist: "res/jelly_and_items.plist",
-    jelly_and_items_png: "res/jelly_and_items.png",
-    obstacles_png: "res/obstacles.png",
-    obstacles_plist: "res/obstacles.plist",
-
     chunks_json: "res/data/chunks.json",
     class_types: "res/data/class_types.json",
     item_effect_types: "res/data/item_effect_types.json",
     object_types: "res/data/object_types.json",
+    characters_json: "res/data/characters.json",
+    pets_json: "res/data/pets.json",
 
-
-    layer_status_play_png: "res/assets/gui/scene_play/in_game/layer_status_play.png",
-    layer_status_play_plist: "res/assets/gui/scene_play/in_game/layer_status_play.plist",
 
 
     test_background2_png: "res/assets/gui/scene_play/background/tm02_bg2.png",
@@ -33,7 +24,33 @@ var res = {
     test_button: "res/assets/gui/scene_lobby/gui_main/play.png"
 };
 
+var sprite_sheets_play =  [
+    "res/ground.plist",
+    "res/ground.png",
+    "res/jelly_and_items.plist",
+    "res/jelly_and_items.png",
+    "res/obstacles.plist",
+    "res/obstacles.png",
+
+    "res/assets/gui/scene_play/in_game/layer_status_play.plist",
+    "res/assets/gui/scene_play/in_game/layer_status_play.png",
+
+    "res/assets/gui/characters/gui_characters.plist",
+    "res/assets/gui/characters/gui_characters.png",
+    "res/assets/gui/pets/gui_pets.plist",
+    "res/assets/gui/pets/gui_pets.png",
+
+    "res/assets/pets/pet_zombie.plist",
+    "res/assets/pets/pet_zombie.png",
+    "res/assets/pets/pet_cookie.plist",
+    "res/assets/pets/pet_cookie.png"
+];
+
 var g_resources = [];
 for (var i in res) {
     g_resources.push(res[i]);
+}
+
+for (i=0; i<sprite_sheets_play.length; i++){
+    g_resources.push(sprite_sheets_play[i]);
 }
