@@ -79,7 +79,19 @@ var LayerPlayStatus= cc.Layer.extend({
     handleButtonEvents:function (sender, type) {
         if (type == ccui.Widget.TOUCH_BEGAN){
             if (sender == this.buttonJump){
-                //character jump
+
+                var character= this.animationLayer.character;
+                if(this.animationLayer.character.stateMachine.stateMovement instanceof StateFlying){
+                    //todo set velocityY>0 and accelerationY =0
+                    character.setVelocityY(200);
+                    cc.log('jump hold');
+
+
+                }
+
+
+
+
             }
             if (sender == this.buttonSlide){
                 //character slide
@@ -87,8 +99,8 @@ var LayerPlayStatus= cc.Layer.extend({
                 var character = this.animationLayer.character;
 
                 //only can slide when running
-                if (character.stateMachine.stateMovement instanceof StateSliding == false && character.stateMachine.stateMovement instanceof StateRunning == true) {
-                    character.stateMachine.setStateMovement(new StateSliding(character));
+                if ( character.stateMachine.stateMovement instanceof StateRunning == true) {
+                    character.stateMachine.changeState('stateMovement',new StateSliding(character));
                     cc.log("Enter sliding");
                 } else {
                     cc.log('Sliding');
@@ -104,27 +116,30 @@ var LayerPlayStatus= cc.Layer.extend({
                 }else{
                     cc.director.resume();
                 }
-            }else if(sender == this.TEST_BUTTON_DIE){
+            }
+            if(sender == this.TEST_BUTTON_DIE){
                 cc.director.popScene();
             }
 
             if (sender == this.buttonJump){
-                //character jump
-
-                //this.animationLayer
 
 
                 var character= this.animationLayer.character;
 
+
+
+
                 if (character.stateMachine.stateMovement instanceof StateRunning) {
-                    character.stateMachine.setStateMovement(new StateJumping(character));
+                    character.stateMachine.changeState("stateMovement",new StateJumping(character));
 
                 }
                 // is jumping v1
                 else if (character.stateMachine.stateMovement instanceof StateJumping) {
-                    character.stateMachine.setStateMovement(new StateDoubleJumping(character));
-                } else {
-                    //cc.log('Maybe doubleJumping or Sliding , can not jump right now');
+                    character.stateMachine.changeState('stateMovement',new StateDoubleJumping(character));
+                }
+                // is Flying
+                else if(character.stateMachine.stateMovement instanceof StateFlying) {
+                    character.setVelocityY(-200);
                 }
 
 
@@ -134,10 +149,10 @@ var LayerPlayStatus= cc.Layer.extend({
 
                 var character = this.animationLayer.character;
                 if(character.stateMachine.stateMovement instanceof StateSliding){
-                    character.stateMachine.setStateMovement(new StateRunning(character));
+                    character.stateMachine.changeState('stateMovement',new StateRunning(character));
                 }
-                cc.log("Space is released");
-                cc.log("Exit sliding");
+                //cc.log("Space is released");
+                //cc.log("Exit sliding");
             }
         }
 

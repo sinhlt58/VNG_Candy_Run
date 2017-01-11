@@ -192,6 +192,12 @@ var Character = cc.Class.extend({
     },
     getAcceleration: function () {
         return this.acceleration;
+    },
+    setVelocityX: function (vx) {
+        this.velocity.x=vx;
+    },
+    setVelocityY: function (vy) {
+        this.velocity.y=vy;
     }
 
 

@@ -4,78 +4,74 @@
 var StateFlying = StateMovement.extend({
 
 
-
     time: null,
     timePass: null,
 
 
-    isGoingUp:null,
+    isGoingUp: null,
+    isResetVy: null,
 
 
-
-    owner: null,
-    onEnterCall: null,
 
 
     ctor: function (owner) {
-        this.owner=owner;
-        this.onEnterCall=false;
-        this.isGoingUp= true;
 
-        this.time=15;
-        this.timePass=0;
+        this.isGoingUp = true;
+
+        this.time = 5;
+        this.timePass = 0;
+        this.isResetVy=false;
     },
 
-    update: function (dt) {
 
-        //cc.log(this.owner.getPosition().y);
-        if(this.onEnterCall==false){
-            this.onEnter();
-            this.onEnterCall=true;
-        }else{
+    //todo : fix logic here,
+    update: function (dt, character) {
 
+        if (character.getPosition().y >= 250) {
+            this.isGoingUp = false
+        }
+        //went up
+        if (this.isGoingUp == false) {
+            //character.setVelocity(cc.p(300, 0));
 
+            if(this.isResetVy==false){
+                character.setVelocityY(-200);
+                this.isResetVy=true;
+            }else{
 
-
-
-            if(this.owner.getPosition().y>=200){
-                this.isGoingUp=false
-            }
-            // went up
-            if(this.isGoingUp==false){
-                this.owner.setVelocity(cc.p(300, 0));
-                this.timePass=+dt;
-                if(this.timePass>this.time){
-
-                    cc.log("exit flying");
-
-                    this.owner.stateMachine.setStateMovement(new StateRunning(this.owner));
+                //character.setVelocityY(-200);
+                this.timePass = +dt;
+                if (this.timePass > this.time) {
+                    //todo : use new API to set new state
+                    character.stateMachine.changeState('stateMovement', new StateRunning());
                 }
-
-
             }
 
+            //character
+
+
 
         }
-    }, 
-    onEnter: function () {
 
 
+    },
+    onEnter: function (character) {
 
-        if(this.owner.stateMachine.stateMovement instanceof StateFlying==false){
-            this.owner.setVelocity(cc.p(300, 400))
-            this.owner.animationController.setAnimation('fly', true);
-            cc.log('on enter flying');
-        }
 
-        //this.owner.setVelocity(cc.p(300, 400))
-        this.owner.animationController.setAnimation('fly', true);
+        character.setVelocity(cc.p(300, 400));
+        character.animationController.setAnimation('fly', true);
         cc.log('on enter flying');
 
 
 
+
+        //this.owner.setVelocity(cc.p(300, 400))
+        /*character.animationController.setAnimation('fly', true);
+         cc.log('on enter flying');*/
+
+
     },
     onExit: function () {
-        
+
     }
 });
