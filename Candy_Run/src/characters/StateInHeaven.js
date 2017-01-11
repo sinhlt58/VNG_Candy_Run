@@ -11,25 +11,23 @@ var StateInHeaven= StateMovement.extend({
 
     ctor: function () {
         this.flewToHeaven= false;
-        this.time= 10;
+        this.time= 5;
         this.passedTime=0;
     },
 
     update: function (dt, character) {
 
-        if(this.onEnterCall==false){
-            this.onEnter();
-            this.onEnterCall=true;
-        }else{
+
             // logic here
             if(this.flewToHeaven==false){
                 // flying up
                 // set velocity to fly up
 
-                character.setVelocity(cc.p(0, 800));
+                character.setVelocity(cc.p(0, 400));
                 // 500 or some number
                 if (character.getPosition().y> 1150){
                     this.flewToHeaven=true;
+                    character.setVelocityY(0);
                 }
             }else{
                 // flew
@@ -40,18 +38,23 @@ var StateInHeaven= StateMovement.extend({
 
                 character.animationController.setAnimation('fly', true);
                 this.passedTime+=dt;
-                character.setVelocity(cc.p(300, 0));
+                character.setVelocityX(300);
+
+                if(this.passedTime>this.time){
+                    character.setVelocityY(-300);
+                    //cc.log(character.getPosition().y);
+                }
 
 
 
             }
 
-        }
+
 
     },
 
     onEnter: function (character) {
-        this.owner.animationController.setAnimation("enterFever", true);
+        character.animationController.setAnimation("enterFever", true);
 
     },
     onExit: function (character) {

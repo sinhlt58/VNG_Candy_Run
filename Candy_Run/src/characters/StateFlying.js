@@ -27,6 +27,10 @@ var StateFlying = StateMovement.extend({
     //todo : fix logic here,
     update: function (dt, character) {
 
+
+
+        //cc.log(character.getPosition().y);
+
         if (character.getPosition().y >= 250) {
             this.isGoingUp = false
         }
@@ -40,10 +44,11 @@ var StateFlying = StateMovement.extend({
             }else{
 
                 //character.setVelocityY(-200);
-                this.timePass = +dt;
-                if (this.timePass > this.time) {
-                    //todo : use new API to set new state
-                    character.stateMachine.changeState('stateMovement', new StateRunning());
+                this.timePass += dt;
+                if (this.timePass >= this.time) {
+                    //character.stateMachine.changeState('stateMovement', new StateRunning());
+
+                    character.setVelocityY(-200);
                 }
             }
 

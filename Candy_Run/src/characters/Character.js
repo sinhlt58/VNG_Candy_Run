@@ -18,7 +18,7 @@ var Character = cc.Class.extend({
     offsetCollY: null,
 
 
-    hp: 1000,
+    hp: null,
     currentHP: 0,
     decreasingHPRate: 2,
 
@@ -63,6 +63,8 @@ var Character = cc.Class.extend({
 
         //cc.log(cc.sys.platform==cc.sys.DESKTOP_BROWSER);
 
+
+        this.hp=1000;
 
         this.currentHP=this.hp;
 
@@ -203,6 +205,10 @@ var Character = cc.Class.extend({
     },
     setVelocityY: function (vy) {
         this.velocity.y=vy;
+    },
+
+    decreasingHP: function (amount) {
+        this.currentHP-=amount;
     }
 
 

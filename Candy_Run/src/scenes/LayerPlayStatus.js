@@ -87,11 +87,33 @@ var LayerPlayStatus= cc.Layer.extend({
             if (sender == this.buttonJump){
 
                 var character= this.animationLayer.character;
-                if(this.animationLayer.character.stateMachine.stateMovement instanceof StateFlying){
-                    //todo set velocityY>0 and accelerationY =0
-                    character.setVelocityY(200);
-                    cc.log('jump hold');
 
+
+                if(this.animationLayer.character.stateMachine.stateMovement instanceof StateFlying){
+
+
+
+                    //fixme: if time out then do nothing
+                    var crState= this.animationLayer.character.stateMachine.stateMovement;
+
+                    if(crState.timePass>=crState.time==false){
+                        character.setVelocityY(200);
+                        cc.log('flying up hold');
+                    }else{
+                        // do nothing here
+                    }
+
+
+
+
+                }else if(this.animationLayer.character.stateMachine.stateMovement instanceof StateInHeaven){
+                    // handle in heaven
+
+                    cc.log('Jump in heaven');
+                    var stateInHeaven= this.animationLayer.character.stateMachine.stateMovement;
+                    if(stateInHeaven.passedTime<=stateInHeaven.time){
+                        character.setVelocityY(300);
+                    }
 
                 }
 
@@ -146,6 +168,10 @@ var LayerPlayStatus= cc.Layer.extend({
                 // is Flying
                 else if(character.stateMachine.stateMovement instanceof StateFlying) {
                     character.setVelocityY(-200);
+                }
+                // is inHeaven
+                else if(character.stateMachine.stateMovement instanceof StateInHeaven){
+                    character.setVelocityY(-300);
                 }
 
 
