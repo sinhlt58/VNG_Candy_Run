@@ -14,6 +14,8 @@ var LayerPlayStatus= cc.Layer.extend({
     buttonSlide:null,
 
     bonusTimeGui:null,
+
+    hpProcessBar:null,
     ctor:function (animationLayer) {
         this._super();
         this.animationLayer = animationLayer;
@@ -70,6 +72,10 @@ var LayerPlayStatus= cc.Layer.extend({
 
         //BONUSTIME GUI
         this.bonusTimeGui = new BonusTimeGui(this.globalPadding, 100, this);
+
+        //HP process bar
+        this.hpProcessBar = new cc.Sprite("hpProgressBar.png");
+        this.addChild(this.hpProcessBar);
     },
     update:function (dt) {
         this.bonusTimeGui.update();

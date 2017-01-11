@@ -18,8 +18,9 @@ var Character = cc.Class.extend({
     offsetCollY: null,
 
 
-    hp: null,
-
+    hp: 1000,
+    currentHP: 0,
+    decreasingHPRate: 2,
 
 
     //fixme: grounded property should not place here (some where else) :))
@@ -63,7 +64,7 @@ var Character = cc.Class.extend({
         //cc.log(cc.sys.platform==cc.sys.DESKTOP_BROWSER);
 
 
-        this.hp=1000;
+        this.currentHP=this.hp;
 
         //todo: Replace with animation controller after
         this.spAnimation = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
@@ -98,7 +99,7 @@ var Character = cc.Class.extend({
 
 
         // fixme: velocity is not set by that, it should be increasing by time
-        this.velocity = cc.p(300, 0);
+        this.velocity = cc.p(800, 0);
         this.acceleration = cc.p(0, 0);
 
 
@@ -157,6 +158,7 @@ var Character = cc.Class.extend({
         return this.position;
     },
     setPosition: function (position) {
+        this.position = position;
         this.spAnimation.setPosition(position);
     },
     getInitPosition: function () {
@@ -185,10 +187,10 @@ var Character = cc.Class.extend({
     },
 
     getHP: function () {
-        return this.hp;
+        return this.currentHP;
     },
-    setHP: function (hp) {
-        this.hp=hp;
+    increaseHP: function (amount) {
+        this.currentHP += amount;
     },
     getVelocity: function () {
         return this.velocity;

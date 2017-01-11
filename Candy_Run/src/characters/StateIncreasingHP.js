@@ -5,10 +5,10 @@ var StateIncreasingHP= StateHP.extend({
     update: function (dt) {
         
     },
-    onEnter: function () {
+    onEnter: function (character) {
         
     },
-    onExit: function () {
+    onExit: function (character) {
         
     }
 }); 

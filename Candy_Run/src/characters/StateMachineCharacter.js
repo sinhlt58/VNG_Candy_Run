@@ -17,10 +17,11 @@ var StateMachineCharacter = cc.Class.extend({
         this.owner = owner;
         //todo: create all the state
         this.stateMovement= new StateRunning();
-        // this.stateGiant= new StateGiantDisactive();
+        this.stateGiant= new StateGiantDisactive();
 
         //example state
         this.stateVisible = new StateDeactiveInvisible();
+        this.stateHP = new StateDecreasingHP();
 
     },
 
@@ -55,7 +56,7 @@ var StateMachineCharacter = cc.Class.extend({
 
         //example
         this.stateVisible.update(dt, this.owner);
-
+        this.stateHP.update(dt, this.owner);
 
 
 

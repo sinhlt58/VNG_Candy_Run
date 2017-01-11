@@ -123,7 +123,7 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
             maxXSoFarInMap = x
         x = x + preMapWidth
         if x > maxXOnAllMap:
-            maxXOnAllMap = x 
+            maxXOnAllMap = x
 
         realObjectTypeId = textureNameToObjectTypeIds[realTextureName]
         if not chunkDatasByObjectTypeIds.has_key(realObjectTypeId):
@@ -131,6 +131,7 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
         chunkDatasByObjectTypeIds[realObjectTypeId].append({"x": x, "y" : y})
 
     preMapWidth = preMapWidth + maxXSoFarInMap
+    print preMapWidth
 
 #save endX-1
 print maxXOnAllMap

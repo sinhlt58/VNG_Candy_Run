@@ -99,7 +99,14 @@
     "src/objects/ItemEffectManager.js",
     "src/pets/Pet.js",
 
+    "src/skills/SkillCharacterMagnetic.js",
+    "src/skills/SkillCharacterRespawn.js",
+    "src/skills/SkillPetHPRate.js",
+    "src/skills/SkillPetRespawn.js",
+
     "src/scenes/BonusTimeGui.js"
+
+
 
   ]
 }
