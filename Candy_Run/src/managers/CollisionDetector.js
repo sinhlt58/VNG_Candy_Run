@@ -81,10 +81,12 @@ var CollisionDetector = cc.Class.extend({
                 }else if (character.stateMachine.stateMovement instanceof StateJumping ){
                     //if is jumping and going down (velocityY <0)
                     if(character.velocity.y<=0){
-                        character.stateMachine.setStateMovement(new StateRunning(character));
+                        character.stateMachine.changeState('stateMovement',new StateRunning());
                     }
                 }else if(character.stateMachine.stateMovement instanceof StateDoubleJumping ){
-                    character.stateMachine.setStateMovement(new StateRunning(character));
+                    character.stateMachine.changeState('stateMovement',new StateRunning(character));
+                }else if(character.stateMachine.stateMovement instanceof StateFlying){
+                    character.stateMachine.changeState('stateMovement',new StateRunning());
                 }
             } else {
                 // is running, do nothing

@@ -29,7 +29,7 @@ var LayerPlayAnimation = cc.Layer.extend({
 
                     var character= e.getCurrentTarget().character;
 
-                    character.stateMachine.setStateMovement(new StateInHeaven(character));
+                    character.stateMachine.changeState('stateMovement', new StateInHeaven());
 
                 }
 
@@ -39,9 +39,9 @@ var LayerPlayAnimation = cc.Layer.extend({
                     var character= e.getCurrentTarget().character;
 
                     if(character.stateMachine.stateGiant instanceof StateGiantActive){
-                        character.stateMachine.setStateGiant(new StateGiantDisactive(character));
+                        character.stateMachine.changeState('stateGiant', new StateGiantDisactive());
                     }else{
-                        character.stateMachine.setStateGiant(new StateGiantActive(character));
+                        character.stateMachine.changeState('changeState', new StateGiantActive());
                     }
 
 
@@ -51,12 +51,14 @@ var LayerPlayAnimation = cc.Layer.extend({
                 if(key==cc.KEY.f){
 
                     //cc.log("F");
+
+                    //fixme fix logic here, it is debug mode, remove later
                     var character= e.getCurrentTarget().character;
 
                     if(character.stateMachine.stateMovement instanceof StateRunning){
-                        character.stateMachine.setStateMovement(new StateFlying(character));
+                        character.stateMachine.changeState('stateMovement', new StateFlying());
                     }else if(character.stateMachine.stateMovement instanceof StateFlying){
-                        character.stateMachine.setStateMovement(new StateRunning(character));
+                        character.stateMachine.changeState("stateMovement",new StateRunning());
                     }
 
 
@@ -69,11 +71,11 @@ var LayerPlayAnimation = cc.Layer.extend({
                     var character = thisLayer.character;
 
                     //only can slide when running
-                    if (character.stateMachine.stateMovement instanceof StateSliding == false && character.stateMachine.stateMovement instanceof StateRunning == true) {
-                        character.stateMachine.setStateMovement(new StateSliding(character));
-                        cc.log("Enter sliding");
+                    if (character.stateMachine.stateMovement instanceof StateRunning == true) {
+                        character.stateMachine.changeState("stateMovement",new StateSliding());
+                        //cc.log("Enter sliding");
                     } else {
-                        cc.log('Sliding');
+                        //cc.log('Sliding');
                     }
                 }
 
@@ -84,13 +86,13 @@ var LayerPlayAnimation = cc.Layer.extend({
             },
             onKeyReleased: function (key, e) {
 
-                if (key == 32) {
+                if (key == cc.KEY.space) {
                     var character = e.getCurrentTarget().character;
                     if(character.stateMachine.stateMovement instanceof StateSliding){
-                        character.stateMachine.setStateMovement(new StateRunning(character));
+                        character.stateMachine.changeState("stateMovement",new StateRunning());
                     }
                     cc.log("Space is released");
-                    cc.log("Exit sliding");
+                    //cc.log("Exit sliding");
                 }
                 //cc.log()
             }
@@ -152,29 +154,19 @@ var LayerPlayAnimation = cc.Layer.extend({
         return true;
     },
     onTouchEnded: function (t, e) {
-        //console.log("mouse released");
-        //this.
 
         var thisLayer = e.getCurrentTarget();
 
-        //console.log(thisLayer);
-
-        // simulate jumping by clicking mouse
-        //var isRunning=
-
-
-        // is running
         if (thisLayer.character.stateMachine.stateMovement instanceof StateRunning) {
-            thisLayer.character.stateMachine.setStateMovement(new StateJumping(thisLayer.character));
+            thisLayer.character.stateMachine.changeState("stateMovement",new StateJumping());
 
         }
         // is jumping v1
         else if (thisLayer.character.stateMachine.stateMovement instanceof StateJumping) {
-            thisLayer.character.stateMachine.setStateMovement(new StateDoubleJumping(thisLayer.character));
+            thisLayer.character.stateMachine.changeState('stateMovement',new StateDoubleJumping());
         } else {
             //cc.log('Maybe doubleJumping or Sliding , can not jump right now');
         }
-
 
         return true;
     },

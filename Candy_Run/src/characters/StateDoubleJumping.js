@@ -2,34 +2,24 @@
  * Created by Fresher on 28/12/2016.
  */
 var StateDoubleJumping = StateMovement.extend({
-    owner: null,
-    onEnterCall: null,
 
-    ctor: function (owner) {
-        this.owner=owner;
-        this.onEnterCall=false;
-    },
-    update: function (dt) {
-        if(this.onEnterCall==false){
-            this.onEnter();
-            this.onEnterCall=true;
-        }else{
-            //logic here
 
-        }
-
+    ctor: function () {
 
     },
-    onEnter: function () {
+    update: function (dt, character) {
+
+    },
+    onEnter: function (character) {
         cc.log('enter double jumping');
 
-        this.owner.animationController.setAnimation('doubleJump', false);
-        var currentVelo= this.owner.velocity;
-        this.owner.setVelocity(cc.p(currentVelo.x, 500));
+        character.animationController.setAnimation('doubleJump', false);
+        var currentVelo= character.velocity;
+        character.setVelocity(cc.p(currentVelo.x, 500));
 
 
     },
-    onExit: function () {
-
+    onExit: function (character) {
+        cc.log("exit double jumping");
     }
 });
