@@ -57,7 +57,7 @@ var FactoryObject = cc.Class.extend({
                 object.sprite.runAction(action);
             }
             //todo: latter add effects for items.
-
+            object.clearEffects();
             for (i=0; i<objectTypeData["effects"].length; i++){
                 var effectType = objectTypeData["effects"][i];
                 if (effectType == globals.ITEM_EFFECT_LETTER){

@@ -23,5 +23,10 @@ var Item = ObjectGame.extend({
 
     addAEffect:function (effect) {
         this.effects.push(effect);
+    },
+
+
+    clearEffects:function () {
+        this.effects = [];
     }
 });
