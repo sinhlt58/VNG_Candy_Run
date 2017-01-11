@@ -8,10 +8,15 @@ var FactoryObject = cc.Class.extend({
     objectTypes:null,
     objectPool:null,
     testNumCreatedAnimation:0,
-    ctor:function (classTypes, itemEffectTypes, objectTypes) {
+
+    characters:null,
+    pets:null,
+    ctor:function (classTypes, itemEffectTypes, objectTypes, characters, pets) {
         this.classTypes = classTypes;
         this.itemEffectTypes = itemEffectTypes;
         this.objectTypes = objectTypes;
+        this.character = characters;
+        this.pets = pets;
 
         var classTypesArray = [];
         for (var k in classTypes){
@@ -93,5 +98,36 @@ var FactoryObject = cc.Class.extend({
         }
         var frame = cc.spriteFrameCache.getSpriteFrame(frameName);
         return frame.getOriginalSize();
+    },
+    getCharacterById:function (characterId) {
+        
+    },
+    getPetById:function (petId, graphicsParent, characterOwner) {
+        var pet = new Pet();
+        if(this.pets.hasOwnProperty(petId)){
+            pet.character = characterOwner;
+
+            var petData = this.pets[petId];
+            var keyFrameName = petData["animation"]["key_frame_name"];
+            var startKeyFrame = petData["animation"]["start_key_frame"];
+            var endKeyFrame = petData["animation"]["end_key_frame"];
+
+            pet.sprite = new cc.Sprite("#" + keyFrameName + startKeyFrame + ".png");
+            var characterPos = characterOwner.getPosition();
+            pet.sprite.setPosition(cc.p(characterPos.x - 50, characterPos.y + 200));
+
+            //init animation
+            var animFrames = [];
+            for (var i=startKeyFrame; i<=endKeyFrame; i++){
+                var frame = cc.spriteFrameCache.getSpriteFrame(keyFrameName+i+".png");
+                animFrames.push(frame);
+            }
+            var animation = new cc.Animation(animFrames, 0.1);
+            var animationAction = new cc.RepeatForever(new cc.Animate(animation));
+            pet.sprite.runAction(animationAction);
+
+            graphicsParent.addChild(pet.sprite);
+        }
+        return pet;
     }
 });

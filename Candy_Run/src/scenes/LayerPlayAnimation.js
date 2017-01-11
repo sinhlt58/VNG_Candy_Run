@@ -5,6 +5,7 @@ var LayerPlayAnimation = cc.Layer.extend({
     world: null,
     factoryObject: null,
     character: null,
+    pet:null,
     //testSprite:null,
     ctor: function () {
         this._super();
@@ -103,17 +104,24 @@ var LayerPlayAnimation = cc.Layer.extend({
     },
     init: function () {
         //add resource to frameCache
-        cc.spriteFrameCache.addSpriteFrames(res.ground_plist, res.ground_png);
-        cc.spriteFrameCache.addSpriteFrames(res.obstacles_plist, res.obstacles_png);
-        cc.spriteFrameCache.addSpriteFrames(res.jelly_and_items_plist, res.jelly_and_items_png);
+        // cc.spriteFrameCache.addSpriteFrames(res.ground_plist, res.ground_png);
+        // cc.spriteFrameCache.addSpriteFrames(res.obstacles_plist, res.obstacles_png);
+        // cc.spriteFrameCache.addSpriteFrames(res.jelly_and_items_plist, res.jelly_and_items_png);
+        for (var i=0; i<sprite_sheets_play.length-1; i+=2){
+            cc.spriteFrameCache.addSpriteFrames(sprite_sheets_play[i], sprite_sheets_play[i+1]);
+        }
 
         //create object factory with data.
         this.factoryObject = new FactoryObject(cc.loader.getRes(res.class_types),
-            cc.loader.getRes(res.item_effect_types), cc.loader.getRes(res.object_types));
+            cc.loader.getRes(res.item_effect_types), cc.loader.getRes(res.object_types),
+            cc.loader.getRes(res.characters_json), cc.loader.getRes(res.pets_json));
 
         //create Character
         this.character = new Character();
         this.addChild(this.character.spAnimation);
+
+        //create Pet
+        this.pet = this.factoryObject.getPetById(cr.game.getPlayer().currentPetId, this, this.character);
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
@@ -123,7 +131,9 @@ var LayerPlayAnimation = cc.Layer.extend({
         //handle inputs.
 
         this.character.update(dt);
-        //this.testSprite.setPosition(this.character.getPosition());
+
+        this.pet.update(dt);
+
         //update layer position relative to the pos of character.
         this.updateCamera(this.character);
 

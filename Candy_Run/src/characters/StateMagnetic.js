@@ -9,6 +9,6 @@ var StateMagnetic = State.extend({
         
     },
     onExit: function () {
-        
+
     }
 });
