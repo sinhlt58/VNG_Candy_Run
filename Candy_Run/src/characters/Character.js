@@ -83,7 +83,7 @@ var Character = cc.Class.extend({
         this.spAnimation.anchorY = 0;
 
         // 1 is too big
-        this.scaleSize = 0.8;
+        this.setScaleSize(0.7);
 
 
         this.animationController.setScale(this.scaleSize);
@@ -150,7 +150,7 @@ var Character = cc.Class.extend({
 
         this.setPosition(spPosition);
 
-        this.animationController.setScale(this.scaleSize);
+
 
     },
     getPosition: function () {
@@ -178,7 +178,10 @@ var Character = cc.Class.extend({
     },
 
     setScaleSize: function (size) {
+
+        cc.log('set Scale size');
         this.scaleSize=size;
+        this.animationController.setScale(size);
     },
 
     getHP: function () {

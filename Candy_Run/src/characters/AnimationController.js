@@ -38,7 +38,7 @@ var AnimationController = cc.Class.extend({
             return;
         }else{
             this.currentAnimation=animationName;
-            this.owner.spAnimation.setAnimation(0, this.allAnimation[animationName],loop)
+            this.owner.spAnimation.setAnimation(0, animationName,loop)
         }
     },
     

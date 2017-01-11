@@ -19,9 +19,9 @@ var CollisionDetector = cc.Class.extend({
 
     ctor: function (world) {
 
-        this.offsetX=0;
+        this.offsetX = 0;
 
-        this.offsetY=0;
+        this.offsetY = 0;
 
         this.world = world;
         this.drawNode = new cc.DrawNode();
@@ -31,7 +31,7 @@ var CollisionDetector = cc.Class.extend({
         this.world.graphicsParent.addChild(this.drawNode, 100);
 
         /*this.offsetX = -40 * this.world.character.scaleSize;
-        this.offsetY = 0;*/
+         this.offsetY = 0;*/
 
     },
     update: function (dt) {
@@ -43,16 +43,11 @@ var CollisionDetector = cc.Class.extend({
 
         //fix me offset X and Y must change by stateMovement
         /*if (this.world.character.stateMachine.stateMovement instanceof StateSliding) {
-            this.offsetY = -39;
-        } else {
-            this.offsetX = -40 * this.world.character.scaleSize;
-            this.offsetY = 0;
-        }*/
-
-
-
-
-
+         this.offsetY = -39;
+         } else {
+         this.offsetX = -40 * this.world.character.scaleSize;
+         this.offsetY = 0;
+         }*/
 
 
         this.frames++;
@@ -71,25 +66,19 @@ var CollisionDetector = cc.Class.extend({
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_GROUND)) {
             //change state to running or ... somethings not thought yet
 
-            var isRunning = character.stateMachine.stateMovement instanceof StateRunning;
-
-            if (isRunning == false) {
-                // maybe jumping or sliding
-                //if sliding do nothing
-                if (character.stateMachine.stateMovement instanceof StateSliding ) {
-                    //character.stateMachine.setStateMovement(new StateRunning(character));
-                }else if (character.stateMachine.stateMovement instanceof StateJumping ){
-                    //if is jumping and going down (velocityY <0)
-                    if(character.velocity.y<=0){
-                        character.stateMachine.changeState('stateMovement',new StateRunning());
-                    }
-                }else if(character.stateMachine.stateMovement instanceof StateDoubleJumping ){
-                    character.stateMachine.changeState('stateMovement',new StateRunning(character));
-                }else if(character.stateMachine.stateMovement instanceof StateFlying){
-                    character.stateMachine.changeState('stateMovement',new StateRunning());
+            // maybe jumping or sliding
+            //if sliding do nothing
+            if (character.stateMachine.stateMovement instanceof StateSliding) {
+                //character.stateMachine.setStateMovement(new StateRunning(character));
+            } else if (character.stateMachine.stateMovement instanceof StateJumping) {
+                //if is jumping and going down (velocityY <0)
+                if (character.velocity.y <= 0) {
+                    character.stateMachine.changeState('stateMovement', new StateRunning());
                 }
-            } else {
-                // is running, do nothing
+            } else if (character.stateMachine.stateMovement instanceof StateDoubleJumping) {
+                character.stateMachine.changeState('stateMovement', new StateRunning(character));
+            } else if (character.stateMachine.stateMovement instanceof StateFlying) {
+                character.stateMachine.changeState('stateMovement', new StateRunning());
             }
 
 
@@ -97,12 +86,7 @@ var CollisionDetector = cc.Class.extend({
 
             //no ground collide
             //run here when jump or go to hole
-
-
-            if(character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding){
-
-                // falling
-
+            if (character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding) {
 
                 cc.log("Die");
             }
@@ -117,7 +101,7 @@ var CollisionDetector = cc.Class.extend({
                 var itemDataObject = itemData[i];
                 var itemObject = itemDataObject["pObject"];
                 //do effects here
-                itemObject.doEffects(cr.game, this.world);
+                //itemObject.doEffects(cr.game, this.world);
                 itemObject.sprite.setVisible(false);
             }
 
@@ -127,7 +111,7 @@ var CollisionDetector = cc.Class.extend({
 
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_OBSTACLE)) {
             // apply damage or die...
-            character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
+            //character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
 
         } else {
 
@@ -148,10 +132,10 @@ var CollisionDetector = cc.Class.extend({
         //cc.log(charPos.x);
 
         //debug collision by drawing a boundary box for character
-        var characterLeft = charPos.x  + this.offsetX;
+        var characterLeft = charPos.x + this.offsetX;
         var characterRight = charPos.x + bodySize.width + this.offsetX;
-        var characterTop = charPos.y  + this.offsetY+ bodySize.height+ this.offsetY;
-        var characterBottom = charPos.y  + this.offsetY;
+        var characterTop = charPos.y + this.offsetY + bodySize.height + this.offsetY;
+        var characterBottom = charPos.y + this.offsetY;
 
         //cc.log(charPos.y);
         var posRectOrigin = {
@@ -181,6 +165,8 @@ var CollisionDetector = cc.Class.extend({
                 var objectSize = object.sprite.getContentSize();
                 if (object.sprite.isVisible()) {
                     if (this.isCharacterOverlapWithObject(charPos, bodySize, objectPos, objectSize)) {
+
+                        //cc.log('Va cham');
                         var objectTypeId = object.getObjectTypeId();
                         var classType = this.world.factory.getClassTypeByObjecType(objectTypeId);
                         if (!dataObjectsCollidingWithCharacter.hasOwnProperty(classType)) {
@@ -198,11 +184,10 @@ var CollisionDetector = cc.Class.extend({
 
 
         //fix position of rectangle for detect collision
-        var characterLeft = charPos.x  + this.offsetX;
+        var characterLeft = charPos.x + this.offsetX;
         var characterRight = charPos.x + bodySize.width + this.offsetX;
-        var characterTop = charPos.y  + this.offsetY+ bodySize.height+ this.offsetY;
-        var characterBottom = charPos.y  + this.offsetY;
-
+        var characterTop = charPos.y + this.offsetY + bodySize.height + this.offsetY;
+        var characterBottom = charPos.y + this.offsetY;
 
 
         var rect1 = {
@@ -227,11 +212,6 @@ var CollisionDetector = cc.Class.extend({
             height: objectSize.height,
         };
 
-        //cc.log(cc.rectIntersectsRect(rect1, rect2));
-
-        //return cc.rectIntersectsRect(rect1, rect2);
-
-        //cc.log("objectTop: ", objectTop);
 
         return (characterLeft <= objectRight && characterRight >= objectLeft &&
         characterTop >= objectBottom && characterBottom <= objectTop);

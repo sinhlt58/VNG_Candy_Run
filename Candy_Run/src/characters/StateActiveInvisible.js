@@ -16,7 +16,7 @@ var StateActiveInvisible= StateVisible.extend({
         this.currentVisibleCount = 0;
         var blinkAction = new cc.Blink(this.maxVisibleTime, 10);
         blinkAction.setTag(this.actionTag);
-        character.spAnimation.runAction(blinkAction);
+       // character.spAnimation.runAction(blinkAction);
     },
     onExit: function (character) {
         character.spAnimation.stopActionByTag(this.actionTag);

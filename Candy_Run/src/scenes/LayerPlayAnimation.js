@@ -41,7 +41,7 @@ var LayerPlayAnimation = cc.Layer.extend({
                     if(character.stateMachine.stateGiant instanceof StateGiantActive){
                         character.stateMachine.changeState('stateGiant', new StateGiantDisactive());
                     }else{
-                        character.stateMachine.changeState('changeState', new StateGiantActive());
+                        character.stateMachine.changeState('stateGiant', new StateGiantActive());
                     }
 
 

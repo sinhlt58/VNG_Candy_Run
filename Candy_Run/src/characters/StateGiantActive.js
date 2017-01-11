@@ -3,23 +3,17 @@
  */
 var StateGiantActive = StateGiant.extend({
 
-    onEnterCall: null,
-    owner: null,
-    ctor: function (owner) {
-        this.owner=owner;
-        this.onEnterCall=false;
+
+    ctor: function () {
+
     },
 
 
-    update: function (dt) {
-        if(this.onEnterCall==false){
-            this.onEnter();
-        }else{
+    update: function (dt, character) {
 
-        }
     },
-    onEnter: function () {
-        this.owner.setScaleSize(1.5);
+    onEnter: function (character) {
+        character.setScaleSize(1.5);
     },
     onExit: function () {
 

@@ -16,8 +16,8 @@ var StateMachineCharacter = cc.Class.extend({
         //owner is the Character
         this.owner = owner;
         //todo: create all the state
-        this.stateMovement= new StateRunning(this.owner);
-        this.stateGiant= new StateGiantDisactive(this.owner);
+        this.stateMovement= new StateRunning();
+        // this.stateGiant= new StateGiantDisactive();
 
         //example state
         this.stateVisible = new StateDeactiveInvisible();
@@ -51,7 +51,7 @@ var StateMachineCharacter = cc.Class.extend({
 
 
         this.stateMovement.update(dt, this.owner);
-        this.stateGiant.update(dt, this.owner);
+        //this.stateGiant.update(dt, this.owner);
 
         //example
         this.stateVisible.update(dt, this.owner);
@@ -78,34 +78,12 @@ var StateMachineCharacter = cc.Class.extend({
         this[groupStateName].onExit(this.owner);
         this[groupStateName] = nextState;
         this[groupStateName].onEnter(this.owner);
-    },
-
-
-    setStateMovement: function (stateMovement) {
-        this.stateMovement.onExit();
-
-        this.stateMovement = stateMovement
-    },
-
-    setStateGiant: function (stateGiant) {
-
-        this.stateGiant.onExit();
-        this.stateGiant = stateGiant;
-    },
-    setStateVisible: function (stateVisible) {
-        this.stateVisible.onExit();
-
-        this.stateVisible = stateVisible;
-    },
-    setStateMagnetic: function (stateMag) {
-        this.stateMagnetic.onExit();
-        this.stateMagnetic = stateMag
-    },
-    setStateHP: function (stateHP) {
-
-        this.stateHP.onExit();
-        this.stateHP= stateHP;
     }
+
+
+
+
+
 
 
 

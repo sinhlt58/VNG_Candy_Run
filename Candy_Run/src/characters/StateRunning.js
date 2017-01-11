@@ -10,8 +10,6 @@ var StateRunning = StateMovement.extend({
     update: function (dt, character) {
 
         // entered update logic
-
-
         character.offsetCollX = -character.getContentSize().width / 2;
 
         var currentPosX = character.getPosition().x;
@@ -29,8 +27,6 @@ var StateRunning = StateMovement.extend({
 
         character.offsetCollX = - character.getContentSize().width / 2;
         character.offsetCollY = 0;
-
-
         character.animationController.setAnimation('run1', true);
         console.log("On Enter Running");
 
