@@ -76,13 +76,17 @@ var CollisionDetector = cc.Class.extend({
                     character.stateMachine.changeState('stateMovement', new StateRunning());
                 }
             } else if (character.stateMachine.stateMovement instanceof StateDoubleJumping) {
-                character.stateMachine.changeState('stateMovement', new StateRunning(character));
+                character.stateMachine.changeState('stateMovement', new StateRunning());
             } else if (character.stateMachine.stateMovement instanceof StateFlying) {
                 character.stateMachine.changeState('stateMovement', new StateRunning());
             }else if(character.stateMachine.stateMovement instanceof StateFalling ){
                 var currentState= character.stateMachine.stateMovement;
                 currentState.fell= true;
                 character.setVelocityX(0);
+            }else if (character.stateMachine.stateMovement instanceof StateInHeaven ){
+                character.stateMachine.changeState('stateMovement', new StateRunning());
+
+
             }
 
 
