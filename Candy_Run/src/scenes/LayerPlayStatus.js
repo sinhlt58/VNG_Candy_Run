@@ -201,7 +201,7 @@ var LayerPlayStatus = cc.Layer.extend({
                 }
                 // is inHeaven
                 else if (character.stateMachine.stateMovement instanceof StateInHeaven) {
-                    character.setVelocityY(-300);
+                    //character.setVelocityY(-300);
                 }
 
 
