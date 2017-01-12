@@ -76,10 +76,20 @@ var CollisionDetector = cc.Class.extend({
                     character.stateMachine.changeState('stateMovement', new StateRunning());
                 }
             } else if (character.stateMachine.stateMovement instanceof StateDoubleJumping) {
-                character.stateMachine.changeState('stateMovement', new StateRunning(character));
+                character.stateMachine.changeState('stateMovement', new StateRunning());
             } else if (character.stateMachine.stateMovement instanceof StateFlying) {
                 character.stateMachine.changeState('stateMovement', new StateRunning());
+            }else if(character.stateMachine.stateMovement instanceof StateFalling ){
+                var currentState= character.stateMachine.stateMovement;
+                currentState.fell= true;
+                character.setVelocityX(0);
+            }else if (character.stateMachine.stateMovement instanceof StateInHeaven ){
+                character.stateMachine.changeState('stateMovement', new StateRunning());
+
+
             }
+
+
 
 
         } else {
@@ -89,6 +99,8 @@ var CollisionDetector = cc.Class.extend({
             if (character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding) {
 
                 cc.log("Die");
+
+                character.stateMachine.changeState("stateMovement", new StateFalling());
             }
 
 
@@ -101,7 +113,7 @@ var CollisionDetector = cc.Class.extend({
                 var itemDataObject = itemData[i];
                 var itemObject = itemDataObject["pObject"];
                 //do effects here
-                //itemObject.doEffects(cr.game, this.world);
+                itemObject.doEffects(cr.game, this.world);
                 itemObject.sprite.setVisible(false);
             }
 
@@ -111,7 +123,11 @@ var CollisionDetector = cc.Class.extend({
 
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_OBSTACLE)) {
             // apply damage or die...
-            //character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
+            var currentVisibleState = character.stateMachine.stateVisible;
+            if (!(currentVisibleState instanceof StateActiveInvisible)){
+                character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
+                character.stateMachine.changeState("stateHP", new StateTakingDamage());
+            }
 
         } else {
 

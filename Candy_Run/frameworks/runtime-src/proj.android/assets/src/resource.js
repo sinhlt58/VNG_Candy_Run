@@ -16,7 +16,7 @@ var res = {
     object_types: "res/data/object_types.json",
     characters_json: "res/data/characters.json",
     pets_json: "res/data/pets.json",
-
+    gui_end_game_json : "res/assets/gui/scene_play/end_game/gui_end_game.json",
 
 
     test_background2_png: "res/assets/gui/scene_play/background/tm02_bg2.png",
@@ -39,6 +39,8 @@ var sprite_sheets_play =  [
     "res/assets/gui/characters/gui_characters.png",
     "res/assets/gui/pets/gui_pets.plist",
     "res/assets/gui/pets/gui_pets.png",
+    "res/assets/gui/scene_play/end_game/gui_end_game.plist",
+    "res/assets/gui/scene_play/end_game/gui_end_game.png",
 
     "res/assets/pets/pet_zombie.plist",
     "res/assets/pets/pet_zombie.png",

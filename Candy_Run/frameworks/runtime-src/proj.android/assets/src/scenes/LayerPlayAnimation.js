@@ -6,7 +6,6 @@ var LayerPlayAnimation = cc.Layer.extend({
     factoryObject: null,
     character: null,
     pet:null,
-    //testSprite:null,
     ctor: function () {
         this._super();
         this.init();
@@ -18,8 +17,6 @@ var LayerPlayAnimation = cc.Layer.extend({
             onTouchMoved: this.onTouchMoved,
             onTouchEnded: this.onTouchEnded
         }, this);
-
-
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -129,6 +126,11 @@ var LayerPlayAnimation = cc.Layer.extend({
     },
     update: function (dt) {
         //handle inputs.
+
+
+
+
+
 
         this.character.update(dt);
 

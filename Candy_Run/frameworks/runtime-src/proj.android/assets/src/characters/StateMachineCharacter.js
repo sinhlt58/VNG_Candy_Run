@@ -52,13 +52,16 @@ var StateMachineCharacter = cc.Class.extend({
 
 
         this.stateMovement.update(dt, this.owner);
-        //this.stateGiant.update(dt, this.owner);
+        this.stateGiant.update(dt, this.owner);
 
         //example
         this.stateVisible.update(dt, this.owner);
         this.stateHP.update(dt, this.owner);
 
-
+        this.owner.currentHP = this.owner.currentHP > this.owner.hp ? this.owner.hp: this.owner.currentHP;
+        if (this.owner.currentHP <= 0){
+            this.owner.currentHP = 0;
+        }
 
         /*if(this.owner.spAnimation.getPosition().y<90 + this.owner.getContentSize().height/2
             && this.stateMovement instanceof StateRunning==false ) {

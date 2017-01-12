@@ -5,10 +5,10 @@ var StateDeactiveInvisible= StateVisible.extend({
     update: function (dt, character) {
         
     },
-    onEnter: function () {
+    onEnter: function (character) {
 
     }, 
-    onExit: function () {
+    onExit: function (character) {
         
     }
 });

@@ -20,13 +20,12 @@ var Character = cc.Class.extend({
 
     hp: null,
     currentHP: 0,
-    decreasingHPRate: 2,
+    decreasingHPRate: 0.2,
 
 
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
     body: null,
-
 
     //this property be used for detecting collision
     rectangle: {},
@@ -101,7 +100,7 @@ var Character = cc.Class.extend({
 
 
         // fixme: velocity is not set by that, it should be increasing by time
-        this.velocity = cc.p(800, 0);
+        this.velocity = cc.p(500, 0);
         this.acceleration = cc.p(0, 0);
 
 
@@ -120,11 +119,19 @@ var Character = cc.Class.extend({
 
         //console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
         //cc.log(this.spAnimation);
+
+        //cc.log(cc.view.getVisibleSize());
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
     update: function (dt) {
 
+
+        if(this.getPosition().y+this.getContentSize().height>=cc.view.getVisibleSize().height){
+            cc.log("Higher Screen");
+        }
+
+        //if(this.getPosition().y>=cc.view.getVisibleSize());
 
 
         //cc.log(this.stateMachine.stateMovement);
@@ -163,6 +170,16 @@ var Character = cc.Class.extend({
         this.position = position;
         this.spAnimation.setPosition(position);
     },
+
+
+    setPositionX: function (px) {
+      this.position.x=px;
+    },
+
+
+    setPositionY: function (py) {
+        this.position.y=py;
+    },
     getInitPosition: function () {
         return this.initPosition;
     },
@@ -177,13 +194,23 @@ var Character = cc.Class.extend({
     setAcceleration: function (acc) {
         this.acceleration = acc;
     },
+
+
+
     setVelocity: function (v) {
         this.velocity = v;
     },
 
+    setAccelerationX: function (ax) {
+      this.acceleration.x=ax;
+    },
+
+    setAccelerationY: function(ay){
+        this.acceleration.y=ay;
+    },
     setScaleSize: function (size) {
 
-        cc.log('set Scale size');
+        //cc.log('set Scale size');
         this.scaleSize=size;
         this.animationController.setScale(size);
     },
@@ -207,9 +234,15 @@ var Character = cc.Class.extend({
         this.velocity.y=vy;
     },
 
-    decreasingHP: function (amount) {
+    decreaseHP: function (amount) {
         this.currentHP-=amount;
-    }
+    },
 
+    getMaxHP:function () {
+        return this.hp;
+    },
+    isDead:function () {
+        return (this.position.y <= -this.body.height || this.currentHP <= 0);
+    }
 
 });

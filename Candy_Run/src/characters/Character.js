@@ -100,7 +100,7 @@ var Character = cc.Class.extend({
 
 
         // fixme: velocity is not set by that, it should be increasing by time
-        this.velocity = cc.p(800, 0);
+        this.velocity = cc.p(500, 0);
         this.acceleration = cc.p(0, 0);
 
 

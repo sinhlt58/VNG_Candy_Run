@@ -2,19 +2,17 @@
  * Created by Fresher on 29/12/2016.
  */
 var StateIncreasingHP= StateHP.extend({
-
-    increasingRate:null,
-
-    ctor: function (increasingRate) {
-        this.increasingRate=increasingRate;
+    ctor: function () {
     },
-
 
     update: function (dt, character) {
-        character.increaseHP(this.increasingRate*dt);
+        var currentStateHP = character.stateMachine.stateHP;
+        if (!(currentStateHP instanceof StateDecreasingHP)){
+            character.stateMachine.changeState("stateHP", new StateDecreasingHP());
+        }
     },
     onEnter: function (character) {
-        
+        character.increaseHP(50);
     },
     onExit: function (character) {
         

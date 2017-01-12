@@ -62,7 +62,7 @@ var LayerPlayStatus = cc.Layer.extend({
         size = this.labelMoney.getContentSize();
         this.labelMoney.setFontSize(35);
         this.labelMoney.setColor(cc.color(255, 255, 255));
-        this.labelMoney.setPosition(visibleSize.width / 2 + size.width + 100, visibleSize.height - size.height / 2 - this.globalPadding);
+        this.labelMoney.setPosition(visibleSize.width / 2 + size.width + 150, visibleSize.height - size.height / 2 - this.globalPadding);
         this.addChild(this.labelMoney);
 
         //init play buttons
@@ -84,7 +84,7 @@ var LayerPlayStatus = cc.Layer.extend({
         //HP process bar
         this.hpProcessBar = new cc.Sprite("#hpProgressBar.png");
         size = this.hpProcessBar.getContentSize();
-        this.hpProcessBar.setPosition(100, visibleSize.height - 65);
+        this.hpProcessBar.setPosition(100, visibleSize.height - 80);
         this.hpProcessBar.setAnchorPoint(cc.p(0,0));
         this.addChild(this.hpProcessBar);
 

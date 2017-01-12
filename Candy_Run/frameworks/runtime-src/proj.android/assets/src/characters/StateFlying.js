@@ -1,6 +1,11 @@
 /**
  * Created by Fresher on 29/12/2016.
  */
+
+
+//fixme: use gravity here to simulation falling
+
+
 var StateFlying = StateMovement.extend({
 
 
@@ -31,30 +36,33 @@ var StateFlying = StateMovement.extend({
 
         //cc.log(character.getPosition().y);
 
+
+        // went up
         if (character.getPosition().y >= 250) {
-            this.isGoingUp = false
+            this.isGoingUp = false;
+            character.setAccelerationY(-500);
+
+
         }
-        //went up
+        //went up and going down
         if (this.isGoingUp == false) {
-            //character.setVelocity(cc.p(300, 0));
 
-            if(this.isResetVy==false){
-                character.setVelocityY(-200);
+
+            this.timePass+=dt;
+            // not reset vy
                 this.isResetVy=true;
-            }else{
+                if(this.isResetVy==false){
+                    character.setVelocityY(0);
+            }
+            // vy reset
+            else{
 
-                //character.setVelocityY(-200);
-                this.timePass += dt;
-                if (this.timePass >= this.time) {
-                    //character.stateMachine.changeState('stateMovement', new StateRunning());
-
-                    character.setVelocityY(-200);
-                }
             }
 
-            //character
 
-
+        }
+        // going up
+        else {
 
         }
 
@@ -63,9 +71,11 @@ var StateFlying = StateMovement.extend({
     onEnter: function (character) {
 
 
-        character.setVelocity(cc.p(300, 400));
+        //character.setVelocity(cc.p(300, 400));
         character.animationController.setAnimation('fly', true);
         cc.log('on enter flying');
+
+        character.setAccelerationY(500);
 
 
 
