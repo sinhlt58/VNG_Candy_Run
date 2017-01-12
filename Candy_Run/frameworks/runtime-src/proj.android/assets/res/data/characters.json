@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "hp": 140,
+        "skill": 1,
+        "animation":{
+        	"animation_json" : "res/assets/characters/zombie/zombie.json",
+        	"animation_atlas" : "res/assets/characters/zombie/zombie.atlas"
+        },
+        "gui_image":"zombie_gui.png"   
+    },
+    {
+    	"id": 1,
+    	"hp": 100,
+    	"skill": 0,
+    	"animation":{
+        	"animation_json" : "res/assets/characters/zombie/princess.json",
+        	"animation_atlas" : "res/assets/characters/zombie/princess.atlas"
+        },
+        "gui_image":"princess_gui.png"
+    }
+]

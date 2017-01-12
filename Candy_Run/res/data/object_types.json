@@ -119,7 +119,7 @@
             "item03_invincible_2.png",
             "item03_invincible_3.png"
         ],
-        "effects" : [0, 4, 5]
+        "effects" : [0, 3, 4, 5]
     },
     "10":{
         "classType" : 0,

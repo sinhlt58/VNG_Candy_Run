@@ -15,12 +15,12 @@ var LayerPlayStatus = cc.Layer.extend({
 
     bonusTimeGui: null,
 
-    hpProcessBar: null,
+    hpProcessBar:null,
+
+    layerPlayEnd:null,
 
 
     playerSliding: null,
-
-
 
     ctor: function (animationLayer) {
         this._super();
@@ -82,16 +82,32 @@ var LayerPlayStatus = cc.Layer.extend({
         this.bonusTimeGui = new BonusTimeGui(this.globalPadding, 100, this);
 
         //HP process bar
-        this.hpProcessBar = new cc.Sprite("hpProgressBar.png");
+        this.hpProcessBar = new cc.Sprite("#hpProgressBar.png");
+        size = this.hpProcessBar.getContentSize();
+        this.hpProcessBar.setPosition(100, visibleSize.height - 65);
+        this.hpProcessBar.setAnchorPoint(cc.p(0,0));
         this.addChild(this.hpProcessBar);
+
+        //crete layer end game
+        this.layerPlayEnd = new LayerPlayEnd(cc.loader.getRes(res.gui_end_game_json));
+        this.addChild(this.layerPlayEnd);
+        this.layerPlayEnd.setVisible(false);
     },
-    update: function (dt) {
+
+    update:function (dt) {
+        if(this.animationLayer.character.isDead()){
+            this.animationLayer.pause();
+            this.layerPlayEnd.setVisible(true);
+        }
+
         this.bonusTimeGui.update();
         this.labelScore.setString(cr.game.getPlayer().currentScore);
         this.labelMoney.setString(cr.game.getPlayer().currentMoney);
-
-
-        //handle character sliding with ccui widget, without touch hold event
+        //update hp process bar.
+        var ratioHP = parseFloat(this.animationLayer.character.getHP()/ this.animationLayer.character.getMaxHP());
+        if (ratioHP <= 0)
+            ratioHP = 0;
+        this.hpProcessBar.setScaleX(ratioHP);
 
 
         if(this.animationLayer.character.stateMachine.stateMovement instanceof StateSliding){
@@ -100,7 +116,6 @@ var LayerPlayStatus = cc.Layer.extend({
         else if(this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning && this.playerSliding){
             this.animationLayer.character.stateMachine.changeState('stateMovement', new StateSliding());
         }
-
     },
     handleButtonEvents: function (sender, type) {
 
@@ -117,7 +132,6 @@ var LayerPlayStatus = cc.Layer.extend({
 
                     if (crState.timePass >= crState.time == false&&( character.getPosition().y+ character.getContentSize().height<= cc.view.getVisibleSize().height)) {
                         character.setVelocityY(200);
-                        cc.log('flying up hold');
                     } else {
                         // do nothing here
                     }
@@ -127,7 +141,6 @@ var LayerPlayStatus = cc.Layer.extend({
                 // in heaven
                 else if (this.animationLayer.character.stateMachine.stateMovement instanceof StateInHeaven) {
                     // handle in heaven
-                    cc.log('click jump in heaven');
                     var stateInHeaven = this.animationLayer.character.stateMachine.stateMovement;
                     if (stateInHeaven.passedTime <= stateInHeaven.time) {
                         character.setVelocityY(300);

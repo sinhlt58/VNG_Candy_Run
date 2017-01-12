@@ -1,0 +1,12 @@
+{
+	"0" : "EffectScore",
+	"1" : "EffectMoney",
+	"2"	: "EffectGiant",
+	"3"	: "EffectInvisible",
+	"4"	: "EffectMagnetic",
+	"5"	: "EffectFly",
+	"6"	: "EffectInstanceBonusTime",
+	"7"	: "EffectTransformCoin",
+	"8"	: "EffectHeal",
+	"9" : "EffectLetter"
+}

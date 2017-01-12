@@ -6,6 +6,6 @@ var ItemEffectGiant = ItemEffect.extend({
         this._super();
     },
     doEffect:function (game, world, item) {
-
+        world.character.stateMachine.changeState("stateGiant", new StateGiantActive());
     }
 });

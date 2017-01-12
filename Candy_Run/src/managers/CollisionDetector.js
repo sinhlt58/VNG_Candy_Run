@@ -113,7 +113,7 @@ var CollisionDetector = cc.Class.extend({
                 var itemDataObject = itemData[i];
                 var itemObject = itemDataObject["pObject"];
                 //do effects here
-                //itemObject.doEffects(cr.game, this.world);
+                itemObject.doEffects(cr.game, this.world);
                 itemObject.sprite.setVisible(false);
             }
 
@@ -123,7 +123,11 @@ var CollisionDetector = cc.Class.extend({
 
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_OBSTACLE)) {
             // apply damage or die...
-            //character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
+            var currentVisibleState = character.stateMachine.stateVisible;
+            if (!(currentVisibleState instanceof StateActiveInvisible)){
+                character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
+                character.stateMachine.changeState("stateHP", new StateTakingDamage());
+            }
 
         } else {
 

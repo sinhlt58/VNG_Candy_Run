@@ -6,6 +6,6 @@ var ItemEffectHeal = ItemEffect.extend({
         this._super();
     },
     doEffect:function (game, world, item) {
-
+        world.character.stateMachine.changeState("stateHP", new StateIncreasingHP());
     }
 });
