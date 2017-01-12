@@ -6,6 +6,9 @@ var ItemEffectInstantBonusTime = ItemEffect.extend({
         this._super();
     },
     doEffect:function (game, world, item) {
-
+        var currentStateMovement = world.character.stateMachine.stateMovement;
+        if (!(currentStateMovement instanceof StateInHeaven)){
+            world.character.stateMachine.changeState("stateMovement", new StateInHeaven());
+        }
     }
 });

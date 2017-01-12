@@ -101,6 +101,13 @@ var LayerPlayStatus = cc.Layer.extend({
         }
 
         this.bonusTimeGui.update();
+        var itemEffectLetter = cr.item_effect_manager.getItemEffectByType(globals.ITEM_EFFECT_LETTER);
+        if (itemEffectLetter.isFullString()){
+            this.animationLayer.world.setTriggerHeaven(true);
+            itemEffectLetter.resetLetters();
+            this.animationLayer.world.character.stateMachine.changeState("stateMovement", new StateInHeaven());
+        }
+
         this.labelScore.setString(cr.game.getPlayer().currentScore);
         this.labelMoney.setString(cr.game.getPlayer().currentMoney);
         //update hp process bar.

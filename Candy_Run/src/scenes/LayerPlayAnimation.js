@@ -177,7 +177,6 @@ var LayerPlayAnimation = cc.Layer.extend({
         else if (thisLayer.character.stateMachine.stateMovement instanceof StateJumping) {
             thisLayer.character.stateMachine.changeState('stateMovement',new StateDoubleJumping());
         } else {
-            //cc.log('Maybe doubleJumping or Sliding , can not jump right now');
         }
 
         return true;
@@ -185,5 +184,6 @@ var LayerPlayAnimation = cc.Layer.extend({
     onExit: function () {
         this._super();
         this.world.releaseAllCurrentRenderedObjects();
+        cr.item_effect_manager.getItemEffectByType(globals.ITEM_EFFECT_LETTER).resetLetters();
     }
 });

@@ -28,7 +28,7 @@ var CollisionDetector = cc.Class.extend({
 
         //this.drawDot= new cc.Dra
 
-        this.world.graphicsParent.addChild(this.drawNode, 100);
+       // this.world.graphicsParent.addChild(this.drawNode, 100);
 
         /*this.offsetX = -40 * this.world.character.scaleSize;
          this.offsetY = 0;*/

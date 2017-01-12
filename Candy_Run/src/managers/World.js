@@ -17,7 +17,6 @@ var World = cc.Class.extend({
 
         //init character
         this.character = character;
-        this.character.setPosition(this.character.getInitPosition());
 
         this.init();
     },
@@ -59,7 +58,7 @@ var World = cc.Class.extend({
                 this.character.getInitPosition(), cc.view.getVisibleSize());
             this.setIsNeedToInitVisibleChunks(false);
         }
-        this.debugDrawChunks();
+        //this.debugDrawChunks();
         for (var i=0; i<chunkIdsNeedToUpdate.length; i++){
             this.updateVisibleObjectForChunk(chunkIdsNeedToUpdate[i]);
         }
@@ -238,5 +237,8 @@ var World = cc.Class.extend({
             var chunkIdY = parseInt(splitChunkId[1]) * this.getChunkHeight() + this.getChunkHeight();
             this.debugDrawNode.drawSegment(cc.p(chunkIdX, 0), cc.p(chunkIdX, chunkIdY), 2, colorRect);
         }
+    },
+    setTriggerHeaven:function (value) {
+        this.triggers.triggerHeavenAndGround.isTriggerHeaven = value;
     }
 });
