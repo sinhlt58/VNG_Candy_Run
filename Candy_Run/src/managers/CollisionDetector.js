@@ -89,6 +89,8 @@ var CollisionDetector = cc.Class.extend({
             if (character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding) {
 
                 cc.log("Die");
+
+                character.stateMachine.changeState("stateMovement", new StateFalling());
             }
 
 
