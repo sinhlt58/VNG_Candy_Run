@@ -19,6 +19,7 @@
     "src/scenes/LayerPlayBackground.js",
     "src/scenes/LayerPlayStatus.js",
     "src/scenes/LayerPlayDebug.js",
+    "src/scenes/LayerPlayEnd.js",
 
     "src/scenes/SceneLobby.js",
     "src/scenes/LayerLobbyBackground.js",
@@ -104,9 +105,7 @@
     "src/skills/SkillPetHPRate.js",
     "src/skills/SkillPetRespawn.js",
 
-    "src/scenes/BonusTimeGui.js"
-
-
-
+    "src/scenes/BonusTimeGui.js",
+    "src/scenes/GuiRegister.js"
   ]
 }

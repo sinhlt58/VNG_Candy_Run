@@ -16,6 +16,8 @@ var LayerPlayStatus= cc.Layer.extend({
     bonusTimeGui:null,
 
     hpProcessBar:null,
+
+    layerPlayEnd:null,
     ctor:function (animationLayer) {
         this._super();
         this.animationLayer = animationLayer;
@@ -74,13 +76,31 @@ var LayerPlayStatus= cc.Layer.extend({
         this.bonusTimeGui = new BonusTimeGui(this.globalPadding, 100, this);
 
         //HP process bar
-        this.hpProcessBar = new cc.Sprite("hpProgressBar.png");
+        this.hpProcessBar = new cc.Sprite("#hpProgressBar.png");
+        size = this.hpProcessBar.getContentSize();
+        this.hpProcessBar.setPosition(100, visibleSize.height - 65);
+        this.hpProcessBar.setAnchorPoint(cc.p(0,0));
         this.addChild(this.hpProcessBar);
+
+        //crete layer end game
+        this.layerPlayEnd = new LayerPlayEnd(cc.loader.getRes(res.gui_end_game_json));
+        this.addChild(this.layerPlayEnd);
+        this.layerPlayEnd.setVisible(false);
     },
     update:function (dt) {
+        if(this.animationLayer.character.isDead()){
+            this.animationLayer.pause();
+            this.layerPlayEnd.setVisible(true);
+        }
+
         this.bonusTimeGui.update();
-       this.labelScore.setString(cr.game.getPlayer().currentScore);
-       this.labelMoney.setString(cr.game.getPlayer().currentMoney);
+        this.labelScore.setString(cr.game.getPlayer().currentScore);
+        this.labelMoney.setString(cr.game.getPlayer().currentMoney);
+        //update hp process bar.
+        var ratioHP = parseFloat(this.animationLayer.character.getHP()/ this.animationLayer.character.getMaxHP());
+        if (ratioHP <= 0)
+            ratioHP = 0;
+        this.hpProcessBar.setScaleX(ratioHP);
     },
     handleButtonEvents:function (sender, type) {
         if (type == ccui.Widget.TOUCH_BEGAN){

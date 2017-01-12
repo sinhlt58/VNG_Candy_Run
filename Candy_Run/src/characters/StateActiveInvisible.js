@@ -17,8 +17,14 @@ var StateActiveInvisible= StateVisible.extend({
         var blinkAction = new cc.Blink(this.maxVisibleTime, 10);
         blinkAction.setTag(this.actionTag);
         character.spAnimation.runAction(blinkAction);
+        character.decreasingHPRate = 0;
     },
     onExit: function (character) {
         character.spAnimation.stopActionByTag(this.actionTag);
+        var currentStateHP = character.stateMachine.stateHP;
+        character.decreasingHPRate = 0.2;
+        if (!(currentStateHP instanceof StateDecreasingHP)){
+            character.stateMachine.changeState("stateHP", new StateDecreasingHP());
+        }
     }
 });

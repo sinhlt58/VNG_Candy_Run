@@ -20,13 +20,12 @@ var Character = cc.Class.extend({
 
     hp: null,
     currentHP: 0,
-    decreasingHPRate: 2,
+    decreasingHPRate: 0.2,
 
 
     //fixme: grounded property should not place here (some where else) :))
     grounded: true,
     body: null,
-
 
     //this property be used for detecting collision
     rectangle: {},
@@ -207,9 +206,15 @@ var Character = cc.Class.extend({
         this.velocity.y=vy;
     },
 
-    decreasingHP: function (amount) {
+    decreaseHP: function (amount) {
         this.currentHP-=amount;
-    }
+    },
 
+    getMaxHP:function () {
+        return this.hp;
+    },
+    isDead:function () {
+        return this.currentHP <= 0;
+    }
 
 });
