@@ -50,9 +50,9 @@ var StateFlying = StateMovement.extend({
 
             this.timePass+=dt;
             // not reset vy
-            if(this.isResetVy==false){
-                character.setVelocityY(0);
                 this.isResetVy=true;
+                if(this.isResetVy==false){
+                    character.setVelocityY(0);
             }
             // vy reset
             else{

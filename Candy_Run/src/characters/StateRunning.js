@@ -41,7 +41,7 @@ var StateRunning = StateMovement.extend({
         character.setPosition(cc.p(currentPosX, y));
 
         character.setAcceleration(cc.p(0, 0));
-        character.setVelocity((cc.p(300, 0)));
+        character.setVelocity((cc.p(800, 0)));
 
     },
     onExit: function (character) {
