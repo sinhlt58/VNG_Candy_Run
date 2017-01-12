@@ -7,8 +7,12 @@ var StateFalling = StateMovement.extend({
     fell: null,
 
     //vx: null,
+
+    fixedPos: null,
     ctor: function (vx) {
         this.fell=false;
+
+        this.fixedPos=false;
     },
 
 
@@ -17,6 +21,26 @@ var StateFalling = StateMovement.extend({
 
         }else{
             character.setVelocityY(-300);
+
+            if(this.fixedPos==false){
+
+
+                var cx= character.getPosition().x;
+
+
+                cc.log(cx);
+
+
+                cx=cx - (800*dt);
+
+                cc.log(cx);
+
+                character.setPositionX(cx);
+
+
+
+                this.fixedPos=true;
+            }
 
         }
 

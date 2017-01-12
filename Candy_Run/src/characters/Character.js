@@ -170,6 +170,16 @@ var Character = cc.Class.extend({
         this.position = position;
         this.spAnimation.setPosition(position);
     },
+
+
+    setPositionX: function (px) {
+      this.position.x=px;
+    },
+
+
+    setPositionY: function (py) {
+        this.position.y=py;
+    },
     getInitPosition: function () {
         return this.initPosition;
     },
