@@ -5,6 +5,7 @@ var StateActiveInvisible= StateVisible.extend({
     currentVisibleCount:0,
     maxVisibleTime:1,//seconds
     actionTag: 1,
+    defaultVisibleTime: 1,
 
     update: function (dt, character) {
         this.currentVisibleCount += dt;
@@ -26,5 +27,6 @@ var StateActiveInvisible= StateVisible.extend({
         if (!(currentStateHP instanceof StateDecreasingHP)){
             character.stateMachine.changeState("stateHP", new StateDecreasingHP());
         }
+        this.maxVisibleTime = this.defaultVisibleTime;
     }
 });

@@ -52,7 +52,7 @@ var StateMachineCharacter = cc.Class.extend({
 
 
         this.stateMovement.update(dt, this.owner);
-        //this.stateGiant.update(dt, this.owner);
+        this.stateGiant.update(dt, this.owner);
 
         //example
         this.stateVisible.update(dt, this.owner);

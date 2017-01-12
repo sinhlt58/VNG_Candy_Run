@@ -97,7 +97,6 @@ var LayerPlayStatus = cc.Layer.extend({
     update:function (dt) {
         if(this.animationLayer.character.isDead()){
             this.animationLayer.pause();
-            cc.log(this.animationLayer.character.getPosition().y);
             this.layerPlayEnd.setVisible(true);
         }
 
@@ -133,7 +132,6 @@ var LayerPlayStatus = cc.Layer.extend({
 
                     if (crState.timePass >= crState.time == false&&( character.getPosition().y+ character.getContentSize().height<= cc.view.getVisibleSize().height)) {
                         character.setVelocityY(200);
-                        cc.log('flying up hold');
                     } else {
                         // do nothing here
                     }
@@ -143,7 +141,6 @@ var LayerPlayStatus = cc.Layer.extend({
                 // in heaven
                 else if (this.animationLayer.character.stateMachine.stateMovement instanceof StateInHeaven) {
                     // handle in heaven
-                    cc.log('click jump in heaven');
                     var stateInHeaven = this.animationLayer.character.stateMachine.stateMovement;
                     if (stateInHeaven.passedTime <= stateInHeaven.time) {
                         character.setVelocityY(300);
