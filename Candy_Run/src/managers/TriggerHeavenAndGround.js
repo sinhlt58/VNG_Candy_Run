@@ -19,12 +19,12 @@ var TriggerHeavenAndGround = Trigger.extend({
         var characterPos = this.world.character.getPosition();
 
         if(!this.isInHeaven){
-            this.rememberedPosInGround = cc.p(characterPos.x - 500, cc.view.getVisibleSize().height - 5);
+            this.rememberedPosInGround = cc.p(characterPos.x - 500, cc.view.getVisibleSize().height - 100);
         }
 
         var characterSizeHeiht =  this.world.character.getContentSize().height/2;
         var distanceY = Math.abs(characterPos.y + characterSizeHeiht - currentCameraY);
-        if (distanceY >= cc.view.getVisibleSize().height/2){
+        if (distanceY >= cc.view.getVisibleSize().height/2 && characterPos.y >= globals.GROUND_HEIGHT){
             cc.log("INSIDE IF TAM LINH");
             this.world.releaseAllCurrentRenderedObjects();
             this.world.setIsNeedToInitVisibleChunks(true);

@@ -119,11 +119,19 @@ var Character = cc.Class.extend({
 
         //console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
         //cc.log(this.spAnimation);
+
+        //cc.log(cc.view.getVisibleSize());
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
     update: function (dt) {
 
+
+        if(this.getPosition().y+this.getContentSize().height>=cc.view.getVisibleSize().height){
+            cc.log("Higher Screen");
+        }
+
+        //if(this.getPosition().y>=cc.view.getVisibleSize());
 
 
         //cc.log(this.stateMachine.stateMovement);
@@ -176,13 +184,23 @@ var Character = cc.Class.extend({
     setAcceleration: function (acc) {
         this.acceleration = acc;
     },
+
+
+
     setVelocity: function (v) {
         this.velocity = v;
     },
 
+    setAccelerationX: function (ax) {
+      this.acceleration.x=ax;
+    },
+
+    setAccelerationY: function(ay){
+        this.acceleration.y=ay;
+    },
     setScaleSize: function (size) {
 
-        cc.log('set Scale size');
+        //cc.log('set Scale size');
         this.scaleSize=size;
         this.animationController.setScale(size);
     },
@@ -214,7 +232,7 @@ var Character = cc.Class.extend({
         return this.hp;
     },
     isDead:function () {
-        return this.currentHP <= 0;
+        return (this.position.y <= -this.body.height || this.currentHP <= 0);
     }
 
 });

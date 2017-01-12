@@ -127,6 +127,11 @@ var LayerPlayAnimation = cc.Layer.extend({
     update: function (dt) {
         //handle inputs.
 
+
+
+
+
+
         this.character.update(dt);
 
         this.pet.update(dt);

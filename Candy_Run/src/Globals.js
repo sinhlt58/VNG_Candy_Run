@@ -25,4 +25,6 @@ globals.SKILL_TYPE_CHARACTER_RESPAWN = 1;
 globals.SKILL_TYPE_PET_HP_RATE = 2;
 globals.SKILL_TYPE_PET_RESPAWN = 3;
 
+globals.GROUND_HEIGHT = 90;
+
 var cr = {};

@@ -11,7 +11,9 @@ var StateFalling = StateMovement.extend({
     update: function (dt, character) {
 
     },
-    onEnter: function (ch) {
+    onEnter: function(ch) {
+
+        ch.setAccelerationY(-500);
 
     },
     onExit: function (ch) {
