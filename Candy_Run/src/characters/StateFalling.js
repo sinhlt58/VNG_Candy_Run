@@ -3,17 +3,30 @@
  */
 var StateFalling = StateMovement.extend({
 
-    ctor: function () {
 
+    fell: null,
+
+    //vx: null,
+    ctor: function (vx) {
+        this.fell=false;
     },
 
 
     update: function (dt, character) {
+        if(this.fell==false){
+
+        }else{
+            character.setVelocityY(-300);
+
+        }
+
 
     },
     onEnter: function(ch) {
 
         ch.setAccelerationY(-500);
+
+        //ch.setVelocityX(0);
 
     },
     onExit: function (ch) {
