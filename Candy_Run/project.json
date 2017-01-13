@@ -98,7 +98,7 @@
     "src/Game.js",
     "src/Player.js",
     "src/objects/ItemEffectManager.js",
-    "src/Pets/Pet.js",
+    "src/pets/Pet.js",
 
     "src/skills/SkillCharacterMagnetic.js",
     "src/skills/SkillCharacterRespawn.js",

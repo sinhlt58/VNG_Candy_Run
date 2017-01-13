@@ -12,7 +12,6 @@ var Obstacle = ObjectGame.extend({
     },
     update:function (dt, world) {
         this._super(dt, world);
-        cc.log("Inside udpate obstacle");
     },
     setDamage:function (damage) {
         this.damage = damage;

@@ -11,4 +11,4 @@ var StateActiveMagnetic= StateMagnetic.extend({
     onExit: function () {
         
     }
-})
+});

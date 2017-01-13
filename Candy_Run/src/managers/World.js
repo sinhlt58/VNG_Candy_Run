@@ -168,7 +168,7 @@ var World = cc.Class.extend({
         }
         return collisionChunkIds;
     },
-    getObjectsByChunkIds:function (chunkIds) {
+    getObjectsDataByChunkIds:function (chunkIds) {
         var objectsInChunks = [];
         for (var index in chunkIds){
             if (chunkIds.hasOwnProperty(index)){
@@ -190,7 +190,7 @@ var World = cc.Class.extend({
         return objectsInChunks;
     },
     getObjectsAroundCharacter:function (characterPos, bodySize) {
-        return this.getObjectsByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
+        return this.getObjectsDataByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
     },
     getAllCurrentRenderedObjectsData:function (characterPos, characterInitPos, visibleSize) {
         var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
@@ -203,7 +203,7 @@ var World = cc.Class.extend({
                 visibleChunkIds.push(minChunkIdX + '-' + minChunkIdY);
             }
         }
-        return this.getObjectsByChunkIds(visibleChunkIds);
+        return this.getObjectsDataByChunkIds(visibleChunkIds);
     },
     releaseAObjectData:function (objectData) {
         if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
@@ -273,5 +273,24 @@ var World = cc.Class.extend({
 
         return minX < pos.x && pos.x < maxX &&
             minY < pos.y && pos.y < maxY;
+    },
+    
+    getObjectItemsInRadius:function (characterPos, radius) {
+        var minXPos = characterPos.x - radius;
+        if (minXPos < 0) minXPos = 0;
+        var maxXPos = characterPos.x + radius;
+        var chunkIdsInRadius = this.getChunkIdsByRange(cc.p(minXPos, characterPos.y), cc.p(maxXPos, characterPos.y));
+        var objectsDataInRadius = this.getObjectsDataByChunkIds(chunkIdsInRadius);
+        var itemObjects = [];
+        for (var i=0; i<objectsDataInRadius.length; i++){
+            var object = objectsDataInRadius[i]["pObject"];
+            var objectPos = object.sprite.getPosition();
+            var distanceToCharacter = Math.sqrt(( (objectPos.x - characterPos.x)*(objectPos.x - characterPos.x)
+            + (objectPos.y - characterPos.y)*(objectPos.y - characterPos.y) ));
+            if (object instanceof Item && distanceToCharacter <= radius){
+                itemObjects.push(object);
+            }
+        }
+        return itemObjects;
     }
 });

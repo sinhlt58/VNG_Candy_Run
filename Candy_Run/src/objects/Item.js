@@ -13,7 +13,6 @@ var Item = ObjectGame.extend({
 
     update:function (dt, world) {
         this._super(dt, world);
-        cc.log("Inside udpate item");
     },
 
     doEffects:function (game, world) {

@@ -162,7 +162,7 @@ var World = cc.Class.extend({
         }
         return collisionChunkIds;
     },
-    getObjectsByChunkIds:function (chunkIds) {
+    getObjectsDataByChunkIds:function (chunkIds) {
         var objectsInChunks = [];
         for (var index in chunkIds){
             if (chunkIds.hasOwnProperty(index)){
@@ -184,7 +184,7 @@ var World = cc.Class.extend({
         return objectsInChunks;
     },
     getObjectsAroundCharacter:function (characterPos, bodySize) {
-        return this.getObjectsByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
+        return this.getObjectsDataByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
     },
     getAllCurrentRenderedObjectsData:function (characterPos, characterInitPos, visibleSize) {
         var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
@@ -197,7 +197,7 @@ var World = cc.Class.extend({
                 visibleChunkIds.push(minChunkIdX + '-' + minChunkIdY);
             }
         }
-        return this.getObjectsByChunkIds(visibleChunkIds);
+        return this.getObjectsDataByChunkIds(visibleChunkIds);
     },
     releaseAObjectData:function (objectData) {
         if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
