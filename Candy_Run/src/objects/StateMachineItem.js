@@ -7,11 +7,17 @@ var StateMachineItem = cc.Class.extend({
 
     owner: null,
 
+    character: null,
+
 
     ctor: function (item) {
         this.owner = item;
         this.stateItem= new StateItemNormal();
-        this.stateItem.onEnter();
+        this.stateItem.onEnter(this.owner);
+
+
+        //cc.log(cr);
+        //cc.log(this.owner instanceof Item);
     },
 
 

@@ -4,10 +4,10 @@
 var StateItemNormal = cc.Class.extend({
     
     onEnter: function (item) {
-        cc.log("onEnter state Normal item");
+        //cc.log()
     },
     update: function (dt, item) {
-        
+        //cc.log(item.sprite);
     },
     onExit: function () {
 

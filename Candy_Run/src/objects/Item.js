@@ -9,7 +9,7 @@ var Item = ObjectGame.extend({
     ctor:function () {
         this._super();
         this.effects = [];
-        this.stateMachineItem= new StateMachineItem();
+        this.stateMachineItem= new StateMachineItem(this);
 
     },
 
