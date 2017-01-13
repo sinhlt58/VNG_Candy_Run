@@ -31,7 +31,7 @@ var StateMachineCharacter = cc.Class.extend({
         this.stateHP = new StateDecreasingHP();
         this.stateHP.onEnter(this.owner);
 
-        this.stateMagnetic = new StateDeactiveMagnetic();
+        this.stateMagnetic = new StateActiveMagnetic();
         this.stateMagnetic.onEnter(this.owner);
 
     },
@@ -55,6 +55,7 @@ var StateMachineCharacter = cc.Class.extend({
         this.stateGiant.update(dt, this.owner);
         this.stateVisible.update(dt, this.owner);
         this.stateHP.update(dt, this.owner);
+        this.stateMagnetic.update(dt, this.owner);
 
         this.owner.currentHP = this.owner.currentHP > this.owner.hp ? this.owner.hp : this.owner.currentHP;
         if (this.owner.currentHP <= 0) {

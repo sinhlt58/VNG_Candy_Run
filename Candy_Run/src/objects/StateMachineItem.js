@@ -21,8 +21,8 @@ var StateMachineItem = cc.Class.extend({
     },
 
 
-    update: function (dt) {
-        this.stateItem.update(dt, this.owner);
+    update: function (dt, character) {
+        this.stateItem.update(dt, this.owner, character);
     },
 
     changeState: function (newState) {

@@ -56,8 +56,9 @@ var Character = cc.Class.extend({
     skills:null,
     numOfLife: 0,
 
-    ctor: function (jsonFile, atlasFile) {
+    world:null,
 
+    ctor: function (jsonFile, atlasFile) {
 
         cc.log(Math.sqrt(189));
         this.hp = 1000;

@@ -12,7 +12,7 @@ var StateItemBeAttracted = cc.Class.extend({
 
     ctor: function (character) {
         this.character = character;
-        this.velocity = 300;
+        this.velocity = 500;
     },
 
     onEnter: function (item) {
@@ -36,8 +36,8 @@ var StateItemBeAttracted = cc.Class.extend({
             y: distance.y / distanceLength
         };
         var destinationPosItem = {
-            x: currentItemPos.x + dt * velocity * distanceNormalized.x,
-            y: currentItemPos.y + dt * velocity * distanceNormalized.y
+            x: currentItemPos.x + dt * this.velocity * distanceNormalized.x,
+            y: currentItemPos.y + dt * this.velocity * distanceNormalized.y
         };
         item.sprite.setPosition(destinationPosItem);
 
