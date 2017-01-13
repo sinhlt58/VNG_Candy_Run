@@ -112,11 +112,9 @@ var Character = cc.Class.extend({
         // 90 is height of the ground, and
 
         this.initPosition = cc.p(250, 90 );
-        this.setPosition(this.initPosition);
 
-
-        this.position = this.initPosition;
-
+        this.position = cc.p(250, 90);
+        //
         //console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
         //cc.log(this.spAnimation);
 

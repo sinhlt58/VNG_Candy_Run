@@ -12,5 +12,10 @@ var ObjectGame = cc.Class.extend({
     },
     setObjectTypeId:function (objectTypeId) {
         this.objectTypeId = objectTypeId;
+    },
+    update:function (dt, world) {
+        if (!world.isObjectInsideTheScreen(this.sprite.getPosition(), this.sprite.getContentSize())){
+            world.releaseAObjectData(this.sprite.getUserData());
+        }
     }
 });

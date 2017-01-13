@@ -17,7 +17,6 @@ var World = cc.Class.extend({
 
         //init character
         this.character = character;
-        this.character.setPosition(this.character.getInitPosition());
 
         this.init();
     },
@@ -59,7 +58,7 @@ var World = cc.Class.extend({
                 this.character.getInitPosition(), cc.view.getVisibleSize());
             this.setIsNeedToInitVisibleChunks(false);
         }
-        this.debugDrawChunks();
+        //this.debugDrawChunks();
         for (var i=0; i<chunkIdsNeedToUpdate.length; i++){
             this.updateVisibleObjectForChunk(chunkIdsNeedToUpdate[i]);
         }
@@ -187,7 +186,7 @@ var World = cc.Class.extend({
     getObjectsAroundCharacter:function (characterPos, bodySize) {
         return this.getObjectsByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
     },
-    getAllCurrentRenderedObjects:function (characterPos, characterInitPos, visibleSize) {
+    getAllCurrentRenderedObjectsData:function (characterPos, characterInitPos, visibleSize) {
         var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
         if (visibleChunkIds.length > 0){
             var splitedChunkId = visibleChunkIds[0].split("-")[0];
@@ -209,7 +208,7 @@ var World = cc.Class.extend({
         } 
     },
     releaseAllCurrentRenderedObjects:function () {
-        var renderedObjects = this.getAllCurrentRenderedObjects(this.character.getPosition(),
+        var renderedObjects = this.getAllCurrentRenderedObjectsData(this.character.getPosition(),
             this.character.getInitPosition(), cc.view.getVisibleSize());
         for (var i=0; i<renderedObjects.length; i++){
             this.releaseAObjectData(renderedObjects[i]);
@@ -238,5 +237,8 @@ var World = cc.Class.extend({
             var chunkIdY = parseInt(splitChunkId[1]) * this.getChunkHeight() + this.getChunkHeight();
             this.debugDrawNode.drawSegment(cc.p(chunkIdX, 0), cc.p(chunkIdX, chunkIdY), 2, colorRect);
         }
+    },
+    setTriggerHeaven:function (value) {
+        this.triggers.triggerHeavenAndGround.isTriggerHeaven = value;
     }
 });

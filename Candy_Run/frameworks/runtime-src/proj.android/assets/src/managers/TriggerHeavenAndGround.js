@@ -6,12 +6,13 @@ var TriggerHeavenAndGround = Trigger.extend({
     initCharacterPosInHeaven:null,
     rememberedPosInGround:null,
     initCharacterPosInGround:null,
+    isTriggerHeaven:false,
     ctor:function (world) {
         this._super(world);
 
         this.initCharacterPosInGround = this.world.character.getInitPosition();
         this.initCharacterPosInHeaven = cc.p(this.initCharacterPosInGround.x,
-                    2*this.world.getChunkHeight() - cc.view.getVisibleSize().height + this.initCharacterPosInGround.y);
+                    2*this.world.getChunkHeight() - cc.view.getVisibleSize().height/2);
     },
     update:function(dt){
         //check if the character's pos go to heaven.
@@ -24,6 +25,7 @@ var TriggerHeavenAndGround = Trigger.extend({
 
         var distanceY = Math.abs(characterPos.y - currentCameraY);
         if (distanceY >= cc.view.getVisibleSize().height/2 && characterPos.y >= globals.GROUND_HEIGHT){
+            this.isTriggerHeaven = false;
             cc.log("INSIDE IF TAM LINH");
             this.world.releaseAllCurrentRenderedObjects();
             this.world.setIsNeedToInitVisibleChunks(true);
