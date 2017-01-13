@@ -12,18 +12,20 @@ var StateMachineItem = cc.Class.extend({
 
     ctor: function (item) {
         this.owner = item;
-        this.stateItem= new StateItemNormal();
+        this.stateItem= StateItemNormal;
         this.stateItem.onEnter(this.owner);
 
 
         //cc.log(cr);
         //cc.log(this.owner instanceof Item);
     },
-
-
     update: function (dt, character) {
         this.stateItem.update(dt, this.owner, character);
     },
+
+
+
+
 
     changeState: function (newState) {
         this.stateItem.onExit(this.owner);

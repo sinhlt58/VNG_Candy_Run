@@ -3,27 +3,20 @@
  */
 
 //this state make item follow character
-var StateItemBeAttracted = cc.Class.extend({
+var StateItemBeAttracted = {
 
 
-    character: null,
 
-    velocity: null,
-
-    ctor: function (character) {
-        this.character = character;
-        this.velocity = 500;
-    },
-
+    velocity: 500,
     onEnter: function (item) {
 
     },
-    update: function (dt, item) {
+    update: function (dt, item, character) {
         var currentItemPos = item.sprite.getPosition();
 
-        var charPos = this.character.getPosition();
-        var centerChaPos = cc.p(charPos.x + this.character.getContentSize().width / 2,
-            charPos.y + this.character.getContentSize().height / 2);
+        var charPos = character.getPosition();
+        var centerChaPos = cc.p(charPos.x + character.getContentSize().width / 2,
+            charPos.y + character.getContentSize().height / 2);
 
 
         var distance = {
@@ -46,4 +39,4 @@ var StateItemBeAttracted = cc.Class.extend({
     onExit: function (item) {
 
     }
-});
+}

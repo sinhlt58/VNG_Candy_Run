@@ -18,8 +18,8 @@ var StateActiveMagnetic= StateMagnetic.extend({
 
         var inRadiusItems = character.world.getObjectItemsInRadius(character.getPosition(), 380);
         for (var i=0; i<inRadiusItems.length; i++){
-            if (!(inRadiusItems[i].stateMachineItem instanceof StateItemBeAttracted)){
-                inRadiusItems[i].stateMachineItem.changeState(new StateItemBeAttracted(character));
+            if (!(inRadiusItems[i].stateMachineItem == StateItemBeAttracted)){
+                inRadiusItems[i].stateMachineItem.changeState( StateItemBeAttracted );
             }
         }
 

@@ -15,7 +15,10 @@ var Item = ObjectGame.extend({
 
     update:function (dt, world) {
         this._super(dt, world);
-        //cc.log("Inside udpate item");
+
+
+
+        //pass character to update function of stateMachine
         this.stateMachineItem.update(dt, world.character);
     },
 
@@ -27,8 +30,6 @@ var Item = ObjectGame.extend({
     addAEffect:function (effect) {
         this.effects.push(effect);
     },
-
-
     clearEffects:function () {
         this.effects = [];
     }
