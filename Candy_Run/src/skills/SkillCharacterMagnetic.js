@@ -5,7 +5,10 @@ var SkillCharacterMagnetic = cc.Class.extend({
     ctor:function () {
         
     },
-    update:function (character) {
+    init:function (character) {
 
+    },
+    update:function (character) {
+        cc.log("insidide SkillCharacterMagnetic");
     }
 });

@@ -10,13 +10,15 @@ var World = cc.Class.extend({
     collisionDetector:null,
     isNeedToInitVisibleChunks:false,
     debugDrawNode:null,
-    ctor:function (chunkData, factory, graphicsParent, character) {
+    pet:null,
+    ctor:function (chunkData, factory, graphicsParent, character, pet) {
         this.chunks = chunkData;
         this.factory = factory;
         this.graphicsParent = graphicsParent;
 
         //init character
         this.character = character;
+        this.pet = pet;
 
         this.init();
     },
@@ -44,6 +46,13 @@ var World = cc.Class.extend({
     update:function (dt) {
         //update collision.
         this.collisionDetector.update(dt);
+
+        this.character.update(dt);
+
+        this.pet.update(dt);
+
+        //update layer position relative to the pos of character.
+        this.graphicsParent.updateCamera(this.character);
 
         //update triggers
         this.triggers.update(dt);

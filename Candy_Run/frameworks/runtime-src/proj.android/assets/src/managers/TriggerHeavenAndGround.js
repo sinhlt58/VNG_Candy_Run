@@ -35,7 +35,7 @@ var TriggerHeavenAndGround = Trigger.extend({
             }else{
                 this.world.character.setPosition(this.initCharacterPosInHeaven);
             }
-
+            this.world.graphicsParent.updateCamera(this.world.character);
             this.isInHeaven = !this.isInHeaven;
             return true;
         }

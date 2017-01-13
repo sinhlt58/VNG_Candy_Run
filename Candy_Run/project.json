@@ -104,6 +104,7 @@
     "src/skills/SkillCharacterRespawn.js",
     "src/skills/SkillPetHPRate.js",
     "src/skills/SkillPetRespawn.js",
+    "src/skills/SkillManager.js",
 
     "src/scenes/BonusTimeGui.js",
     "src/scenes/GuiRegister.js"

@@ -62,6 +62,10 @@ var World = cc.Class.extend({
         for (var i=0; i<chunkIdsNeedToUpdate.length; i++){
             this.updateVisibleObjectForChunk(chunkIdsNeedToUpdate[i]);
         }
+        //update visible for chunks (just create objects inside the screen that are not rendered yet)
+
+        //update objects inside the screen.
+        this.updateObjectInsideTheScreen(dt);
     },
     updateVisibleObjectForChunk:function (chunkId) {
         var chunkData = this.getChunkDataById(chunkId);
@@ -80,11 +84,13 @@ var World = cc.Class.extend({
                         object.sprite.setVisible(true);
                         object.sprite.setPosition(cc.p(objectData.x, objectData.y));
                         this.graphicsParent.addChild(object.sprite);
+                        object.sprite.setUserData(objectData);
                         objectData["pObject"] = object;
                     }
                 }else{
                     if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
                         var releasedObject = objectData["pObject"];
+                        releasedObject.sprite.setUserData(null);
                         releasedObject.sprite.removeFromParent();
                         this.factory.releaseObject(releasedObject);
                         objectData["pObject"] = null;
@@ -240,5 +246,51 @@ var World = cc.Class.extend({
     },
     setTriggerHeaven:function (value) {
         this.triggers.triggerHeavenAndGround.isTriggerHeaven = value;
+    },
+    //update invisible objects.
+    updateObjectInsideTheScreen:function (dt) {
+        var renderedObjectsData = this.getAllCurrentRenderedObjectsData(this.character.getPosition(),
+            this.character.getInitPosition(), cc.view.getVisibleSize());
+        //cc.log("renderedObjectsLength: ", renderedObjectsData.length);
+        //cc.log("child of parents", this.graphicsParent.getChildrenCount());
+        for (var i=0; i<renderedObjectsData.length; i++){
+            var objectNeedToUpdate = renderedObjectsData[i]["pObject"];
+            // if (!(objectNeedToUpdate instanceof Ground)){
+            objectNeedToUpdate.update(dt, this);
+            // }
+        }
+    },
+
+    isObjectInsideTheScreen:function (pos, size) {
+        var charPos = this.character.getPosition();
+        var charInitPos = this.character.getInitPosition();
+        var visibleSize = cc.view.getVisibleSize();
+        var currentCameraY = this.graphicsParent.getCurrentCameraY();
+        var minX = charPos.x - (charInitPos.x + size.width);
+        var maxX = charPos.x + (visibleSize.width - charInitPos.x);
+        var minY = currentCameraY - (visibleSize.height/2 + size.height);
+        var maxY = currentCameraY + visibleSize.height/2;
+
+        return minX < pos.x && pos.x < maxX &&
+            minY < pos.y && pos.y < maxY;
+    },
+    
+    getObjectItemsInRadius:function (characterPos, radius) {
+        var minXPos = characterPos.x - radius;
+        if (minXPos < 0) minXPos = 0;
+        var maxXPos = characterPos.x + radius;
+        var chunkIdsInRadius = this.getChunkIdsByRange(cc.p(minXPos, characterPos.y), cc.p(maxXPos, characterPos.y));
+        var objectsDataInRadius = this.getObjectsDataByChunkIds(chunkIdsInRadius);
+        var itemObjects = [];
+        for (var i=0; i<objectsDataInRadius.length; i++){
+            var object = objectsDataInRadius[i]["pObject"];
+            var objectPos = object.sprite.getPosition();
+            var distanceToCharacter = Math.sqrt(( (objectPos.x - characterPos.x)*(objectPos.x - characterPos.x)
+            + (objectPos.y - characterPos.y)*(objectPos.y - characterPos.y) ));
+            if (object instanceof Item && distanceToCharacter <= radius){
+                itemObjects.push(object);
+            }
+        }
+        return itemObjects;
     }
 });

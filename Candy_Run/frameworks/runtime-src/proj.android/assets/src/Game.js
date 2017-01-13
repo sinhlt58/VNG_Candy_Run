@@ -16,7 +16,7 @@ var Game = cc.Class.extend({
         //read file here
         this.player = new Player();
         this.player.currentCharacterId = 0;
-        this.player.currentPetId = 1;
+        this.player.currentPetId = 0;
         this.player.characters = [0 , 1];
         this.player.pets = [0, 1];
     }

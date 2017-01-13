@@ -15,7 +15,7 @@ var FactoryObject = cc.Class.extend({
         this.classTypes = classTypes;
         this.itemEffectTypes = itemEffectTypes;
         this.objectTypes = objectTypes;
-        this.character = characters;
+        this.characters = characters;
         this.pets = pets;
 
         var classTypesArray = [];
@@ -99,8 +99,20 @@ var FactoryObject = cc.Class.extend({
         var frame = cc.spriteFrameCache.getSpriteFrame(frameName);
         return frame.getOriginalSize();
     },
-    getCharacterById:function (characterId) {
-        
+    getCharacterById:function (characterId, graphicsParent) {
+        var character;
+        if (this.characters.hasOwnProperty(characterId)){
+            var characterData = this.characters[characterId];
+            character = new Character(characterData["animation"]["animation_json"],
+                characterData["animation"]["animation_atlas"]);
+            var skillIds = characterData["skills"];
+            for (var i=0; i<skillIds.length; i++){
+                var skill = cr.skill_manager.getSkillByType(skillIds[i]);
+                character.pushSkill(skill);
+            }
+        }
+        graphicsParent.addChild(character.spAnimation);
+        return character;
     },
     getPetById:function (petId, graphicsParent, characterOwner) {
         var pet = new Pet();
@@ -125,6 +137,10 @@ var FactoryObject = cc.Class.extend({
             var animation = new cc.Animation(animFrames, 0.1);
             var animationAction = new cc.RepeatForever(new cc.Animate(animation));
             pet.sprite.runAction(animationAction);
+
+            //add skill for character
+            var skill = cr.skill_manager.getSkillByType(petData["skill"]);
+            characterOwner.pushSkill(skill);
 
             graphicsParent.addChild(pet.sprite);
         }

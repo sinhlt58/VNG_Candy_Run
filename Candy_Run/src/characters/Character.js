@@ -55,8 +55,11 @@ var Character = cc.Class.extend({
 
     //arr[]
 
+    //skills
+    skills:null,
+    numOfLife: 0,
 
-    ctor: function () {
+    ctor: function (jsonFile, atlasFile) {
 
 
 
@@ -68,7 +71,7 @@ var Character = cc.Class.extend({
         this.currentHP=this.hp;
 
         //todo: Replace with animation controller after
-        this.spAnimation = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
+        this.spAnimation = new sp.SkeletonAnimation(jsonFile, atlasFile);
         this.body = {width: 90, height: 170};
 
 
@@ -114,11 +117,8 @@ var Character = cc.Class.extend({
         this.initPosition = cc.p(250, 90 );
 
         this.position = cc.p(250, 90);
-        //
-        //console.log(this.spAnimation.getContentSize(), this.spAnimation.getBoundingBox());
-        //cc.log(this.spAnimation);
 
-        //cc.log(cc.view.getVisibleSize());
+        this.skills = [];
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
@@ -159,7 +159,10 @@ var Character = cc.Class.extend({
         this.setPosition(spPosition);
 
 
-
+        //update skills
+        for (var i=0; i<this.skills.length; i++){
+            this.skills[i].update(this);
+        }
     },
     getPosition: function () {
         return this.position;
@@ -241,6 +244,20 @@ var Character = cc.Class.extend({
     },
     isDead:function () {
         return (this.position.y <= -this.body.height || this.currentHP <= 0);
-    }
+    },
 
+    runSkillsInit:function () {
+        //call init functions of skills
+        for (var i=0; i<this.skills.length; i++){
+            this.skills[i].init(this);
+        }
+    },
+    pushSkill:function (skill) {
+        this.skills.push(skill);
+    },
+    respawnToPosition:function () {
+        var currentPos = this.getPosition();
+        this.setPosition(cc.p(currentPos.x - 200, currentPos.y + globals.GROUND_HEIGHT + this.getContentSize().height + 300));
+        this.stateMachine.changeState("stateMovement", new StateRunning());
+    }
 });

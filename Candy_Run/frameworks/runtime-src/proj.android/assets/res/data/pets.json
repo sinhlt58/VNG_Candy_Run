@@ -1,6 +1,5 @@
-[
-    {
-        "id" : 0,
+{
+    "0" :{
         "skill" : 3,
         "gui_image" : "pet_zombie.png",
         "animation" : {
@@ -11,8 +10,7 @@
         	"end_key_frame" : 5
         }
     },
-    {
-        "id" : 1,
+    "1" :{
         "skill" : 2,
         "gui_image" : "pet_cookie.png",
         "animation" : {
@@ -23,4 +21,4 @@
         	"end_key_frame" : 64
         }
     }
-]
+}
