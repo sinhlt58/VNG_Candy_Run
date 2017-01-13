@@ -126,23 +126,12 @@ var LayerPlayAnimation = cc.Layer.extend({
 
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
-            this.character);
+            this.character, this.pet);
+
+        this.character.world = this.world;
     },
     update: function (dt) {
         //handle inputs.
-
-
-
-
-
-
-        this.character.update(dt);
-
-        this.pet.update(dt);
-
-        //update layer position relative to the pos of character.
-        this.updateCamera(this.character);
-
         //update world accordingly to the character's pos.
         this.world.update(dt);
     },

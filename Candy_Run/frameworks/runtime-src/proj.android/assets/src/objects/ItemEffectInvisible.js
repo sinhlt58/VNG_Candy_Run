@@ -7,7 +7,7 @@ var ItemEffectInvisible = ItemEffect.extend({
     },
     doEffect:function (game, world, item) {
         var stateInvisible = new StateActiveInvisible();
-        stateInvisible.maxVisibleTime = 3;
+        stateInvisible.maxVisibleTime = 4;
         world.character.stateMachine.changeState("stateVisible", stateInvisible)
     }
 });

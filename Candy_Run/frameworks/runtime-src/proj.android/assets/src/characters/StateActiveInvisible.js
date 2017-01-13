@@ -15,7 +15,7 @@ var StateActiveInvisible= StateVisible.extend({
     },
     onEnter: function (character) {
         this.currentVisibleCount = 0;
-        var blinkAction = new cc.Blink(this.maxVisibleTime, 10);
+        var blinkAction = new cc.Blink(this.maxVisibleTime, 10*this.maxVisibleTime);
         blinkAction.setTag(this.actionTag);
         character.spAnimation.runAction(blinkAction);
         character.decreasingHPRate = 0;

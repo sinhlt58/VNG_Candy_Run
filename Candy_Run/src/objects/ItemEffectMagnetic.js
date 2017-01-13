@@ -6,6 +6,6 @@ var ItemEffectMagnetic = ItemEffect.extend({
         this._super();
     },
     doEffect:function (game, world, item) {
-
+        world.character.stateMachine.changeState("stateMagnetic", new StateActiveMagnetic());
     }
 });
