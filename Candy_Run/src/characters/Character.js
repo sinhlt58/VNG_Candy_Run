@@ -9,9 +9,6 @@ var Character = cc.Class.extend({
     offsetYSp: null,
 
 
-
-
-
     //fix collision offset by adding offset collide offset
 
     offsetCollX: null,
@@ -62,13 +59,10 @@ var Character = cc.Class.extend({
     ctor: function (jsonFile, atlasFile) {
 
 
+        cc.log(Math.sqrt(189));
+        this.hp = 1000;
 
-        //cc.log(cc.sys.platform==cc.sys.DESKTOP_BROWSER);
-
-
-        this.hp=1000;
-
-        this.currentHP=this.hp;
+        this.currentHP = this.hp;
 
         //todo: Replace with animation controller after
         this.spAnimation = new sp.SkeletonAnimation(jsonFile, atlasFile);
@@ -107,16 +101,14 @@ var Character = cc.Class.extend({
         this.acceleration = cc.p(0, 0);
 
 
+        this.initPosition = cc.p(250, 90);
+
+        this.position = cc.p(250, 90);
+
         this.stateMachine = new StateMachineCharacter(this);
 
 
-        //fixme: init position should be load from file or somewhere
 
-        // 90 is height of the ground, and
-
-        this.initPosition = cc.p(250, 90 );
-
-        this.position = cc.p(250, 90);
 
         this.skills = [];
     },
@@ -125,7 +117,7 @@ var Character = cc.Class.extend({
     update: function (dt) {
 
 
-        if(this.getPosition().y+this.getContentSize().height>=cc.view.getVisibleSize().height){
+        if (this.getPosition().y + this.getContentSize().height >= cc.view.getVisibleSize().height) {
             cc.log("Higher Screen");
         }
 
@@ -135,7 +127,7 @@ var Character = cc.Class.extend({
         //cc.log(this.stateMachine.stateMovement);
 
         /*this.offsetXSp = - this.body.width*this.scaleSize;
-        this.offsetYSp = - this.body.height*this.scaleSize;*/
+         this.offsetYSp = - this.body.height*this.scaleSize;*/
 
 
         //update all state machine
@@ -158,7 +150,6 @@ var Character = cc.Class.extend({
 
         this.setPosition(spPosition);
 
-
         //update skills
         for (var i=0; i<this.skills.length; i++){
             this.skills[i].update(this);
@@ -174,12 +165,12 @@ var Character = cc.Class.extend({
 
 
     setPositionX: function (px) {
-      this.position.x=px;
+        this.position.x = px;
     },
 
 
     setPositionY: function (py) {
-        this.position.y=py;
+        this.position.y = py;
     },
     getInitPosition: function () {
         return this.initPosition;
@@ -197,22 +188,21 @@ var Character = cc.Class.extend({
     },
 
 
-
     setVelocity: function (v) {
         this.velocity = v;
     },
 
     setAccelerationX: function (ax) {
-      this.acceleration.x=ax;
+        this.acceleration.x = ax;
     },
 
-    setAccelerationY: function(ay){
-        this.acceleration.y=ay;
+    setAccelerationY: function (ay) {
+        this.acceleration.y = ay;
     },
     setScaleSize: function (size) {
 
         //cc.log('set Scale size');
-        this.scaleSize=size;
+        this.scaleSize = size;
         this.animationController.setScale(size);
     },
 
@@ -229,20 +219,20 @@ var Character = cc.Class.extend({
         return this.acceleration;
     },
     setVelocityX: function (vx) {
-        this.velocity.x=vx;
+        this.velocity.x = vx;
     },
     setVelocityY: function (vy) {
-        this.velocity.y=vy;
+        this.velocity.y = vy;
     },
 
     decreaseHP: function (amount) {
-        this.currentHP-=amount;
+        this.currentHP -= amount;
     },
 
-    getMaxHP:function () {
+    getMaxHP: function () {
         return this.hp;
     },
-    isDead:function () {
+    isDead: function () {
         return (this.position.y <= -this.body.height || this.currentHP <= 0);
     },
 

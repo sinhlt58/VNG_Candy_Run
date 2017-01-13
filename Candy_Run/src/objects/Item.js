@@ -9,10 +9,14 @@ var Item = ObjectGame.extend({
     ctor:function () {
         this._super();
         this.effects = [];
+        this.stateMachineItem= new StateMachineItem(this);
+
     },
 
     update:function (dt, world) {
         this._super(dt, world);
+        //cc.log("Inside udpate item");
+        this.stateMachineItem.update(dt);
     },
 
     doEffects:function (game, world) {
@@ -20,9 +24,6 @@ var Item = ObjectGame.extend({
             this.effects[i].doEffect(game, world, this);
         }
     },
-
-
-
     addAEffect:function (effect) {
         this.effects.push(effect);
     },
