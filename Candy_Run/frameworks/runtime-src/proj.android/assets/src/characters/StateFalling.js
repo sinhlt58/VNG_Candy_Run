@@ -10,6 +10,7 @@ var StateFalling = StateMovement.extend({
 
     fixedPos: null,
     ctor: function (vx) {
+
         this.fell=false;
 
         this.fixedPos=false;

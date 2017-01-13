@@ -75,6 +75,8 @@ var StateFlying = StateMovement.extend({
         character.animationController.setAnimation('fly', true);
         cc.log('on enter flying');
 
+
+        character.setVelocityY(0);
         character.setAccelerationY(500);
 
 

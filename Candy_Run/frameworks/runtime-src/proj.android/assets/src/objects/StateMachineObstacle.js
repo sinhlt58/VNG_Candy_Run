@@ -1,17 +1,20 @@
 var StateMachineObstacle= cc.Class.extend({
-    isCollided: null,
+    owner: null,
 
-    isKicking: null,
+    stateObstacle: null,
 
-    ownerObstacle: null,
 
     ctor: function (owner) {
-        this.ownerObstacle=owner;
-        this.isCollided=false;
-        this.isKicking= false;
+        this.owner=owner;
     },
 
     update: function (dt) {
+        this.stateObstacle.update(dt, this.owner);
+
+
+
+    },
+    changeState: function (newState) {
 
     }
 

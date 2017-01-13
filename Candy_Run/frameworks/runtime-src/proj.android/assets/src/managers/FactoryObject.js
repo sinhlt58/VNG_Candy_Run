@@ -37,13 +37,14 @@ var FactoryObject = cc.Class.extend({
         var objectTypeData = this.getObjectTypeData(objectTypeId);
         var object = this.objectPool.getObjectByClassType(classType);
 
-        if (object.getObjectTypeId() == objectTypeId){
-            return object;
-        }
+        // if (object.getObjectTypeId() == objectTypeId){
+        //     return object;
+        // }
 
         object.setObjectTypeId(objectTypeId);
 
         if (classType == globals.CLASS_TYPE_ITEM){
+            object.stateMachineItem.changeState(StateItemNormal);
             var frames = objectTypeData["frames"];
             this.changeTextureOfSprite(object.sprite, frames[0]);
             object.score = objectTypeData["score"];

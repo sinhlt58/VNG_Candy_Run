@@ -2,9 +2,9 @@
  * Created by Fresher on 29/12/2016.
  */
 var StateActiveMagnetic= StateMagnetic.extend({
-    maxTimeCount:100,
+    maxTimeCount:4,
     currentTimeCount:0,
-
+    radius: 380,
 
     update: function (dt, character) {
 
@@ -16,7 +16,7 @@ var StateActiveMagnetic= StateMagnetic.extend({
             character.stateMachine.changeState("stateMagnetic", new StateDeactiveMagnetic(character));
         }
 
-        var inRadiusItems = character.world.getObjectItemsInRadius(character.getPosition(), 380);
+        var inRadiusItems = character.world.getObjectItemsInRadius(character.getPosition(), this.radius);
         for (var i=0; i<inRadiusItems.length; i++){
             if (!(inRadiusItems[i].stateMachineItem == StateItemBeAttracted)){
                 inRadiusItems[i].stateMachineItem.changeState( StateItemBeAttracted );
