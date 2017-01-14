@@ -14,6 +14,8 @@ var ObjectGame = cc.Class.extend({
         this.objectTypeId = objectTypeId;
     },
     update:function (dt, world) {
+        var objectData = this.sprite.getUserData();
+        var size = this.sprite.getContentSize();
         if (!world.isObjectInsideTheScreen(this.sprite.getPosition(), this.sprite.getContentSize())){
             world.releaseAObjectData(this.sprite.getUserData());
         }

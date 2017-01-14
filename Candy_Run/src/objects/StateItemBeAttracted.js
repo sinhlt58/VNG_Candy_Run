@@ -7,7 +7,7 @@ var StateItemBeAttracted = {
 
 
 
-    velocity: 500,
+    velocity: 1000,
     onEnter: function (item) {
 
     },

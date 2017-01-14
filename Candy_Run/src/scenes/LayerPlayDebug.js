@@ -14,7 +14,7 @@ var LayerPlayDebug = cc.Layer.extend({
         this.labelPool.setFontSize(20);
         this.labelPool.setAnchorPoint(cc.p(0, 0));
         this.labelPool.setPosition(cc.p(30, cc.view.getVisibleSize().height - 50));
-        this.addChild(this.labelPool);
+       this.addChild(this.labelPool);
 
         this.scheduleUpdate();
     },

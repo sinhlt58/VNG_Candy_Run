@@ -16,8 +16,6 @@ var Item = ObjectGame.extend({
     update:function (dt, world) {
         this._super(dt, world);
 
-
-
         //pass character to update function of stateMachine
         this.stateMachineItem.update(dt, world.character);
     },

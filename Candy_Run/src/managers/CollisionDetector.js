@@ -114,7 +114,7 @@ var CollisionDetector = cc.Class.extend({
                 var itemObject = itemDataObject["pObject"];
                 //do effects here
                 itemObject.doEffects(cr.game, this.world);
-                itemObject.sprite.setVisible(false);
+                this.world.releaseAObjectData(itemDataObject);
             }
 
         } else {

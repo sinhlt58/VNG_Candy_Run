@@ -27,7 +27,7 @@ var World = cc.Class.extend({
 
         //debug
         this.debugDrawNode = new cc.DrawNode();
-        this.graphicsParent.addChild(this.debugDrawNode);
+        //this.graphicsParent.addChild(this.debugDrawNode);
 
         var visibleChunkIds = this.getVisibleChunkIds(this.character.getPosition(),
             this.character.getInitPosition(), cc.view.getVisibleSize());
@@ -72,7 +72,6 @@ var World = cc.Class.extend({
             this.updateVisibleObjectForChunk(chunkIdsNeedToUpdate[i]);
         }
         //update visible for chunks (just create objects inside the screen that are not rendered yet)
-
         //update objects inside the screen.
         this.updateObjectInsideTheScreen(dt);
     },
@@ -85,8 +84,9 @@ var World = cc.Class.extend({
             var sizeItem = this.factory.getSizeByObjectTypeId(objectTypeId);
             for (j=0; j<chunkData[objectTypeId].length; j++){
                 var objectData = chunkData[objectTypeId][j];
-                if (this.isObjectInsideScreen(objectData.x, sizeItem.width,
-                        this.character.getPosition(), this.character.getInitPosition(), cc.view.getVisibleSize())){
+                // if (this.isObjectInsideScreen(objectData.x, sizeItem.width,
+                //         this.character.getPosition(), this.character.getInitPosition(), cc.view.getVisibleSize())){
+                if (this.isObjectInsideTheScreen(cc.p(objectData.x, objectData.y), sizeItem)){
                     if (!objectData.hasOwnProperty("pObject") || objectData["pObject"] === null){
                         var object = this.factory.getAObjectByObjectTypeId(objectTypeId);
                         object.sprite.setAnchorPoint(cc.p(0, 0));
@@ -97,13 +97,7 @@ var World = cc.Class.extend({
                         objectData["pObject"] = object;
                     }
                 }else{
-                    if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
-                        var releasedObject = objectData["pObject"];
-                        releasedObject.sprite.setUserData(null);
-                        releasedObject.sprite.removeFromParent();
-                        this.factory.releaseObject(releasedObject);
-                        objectData["pObject"] = null;
-                    }
+                   // this.releaseAObjectData(objectData);
                 }
             }
         }
@@ -131,14 +125,14 @@ var World = cc.Class.extend({
         var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
         var resultChunkIds = [];
         if (visibleChunkIds.length > 2){
-            resultChunkIds.push(visibleChunkIds[0]);
+            //resultChunkIds.push(visibleChunkIds[0]);
             resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-1]);
             resultChunkIds.push(visibleChunkIds[visibleChunkIds.length-2]);
-            var splitMinChunkId = visibleChunkIds[0].split('-');
-            var minChunkIdX = parseInt(splitMinChunkId[0]);
-            if (minChunkIdX > 1){
-                resultChunkIds.push(minChunkIdX-1 + '-' + splitMinChunkId[1]);
-            }
+            // var splitMinChunkId = visibleChunkIds[0].split('-');
+            // var minChunkIdX = parseInt(splitMinChunkId[0]);
+            // if (minChunkIdX > 1){
+            //     resultChunkIds.push(minChunkIdX-1 + '-' + splitMinChunkId[1]);
+            // }
             return resultChunkIds;
         }
     },
@@ -149,6 +143,7 @@ var World = cc.Class.extend({
     },
     getChunkIdsByRange:function (minPos, maxPos) {
         var minXId = parseInt(minPos.x / this.getChunkWidth());
+        if (minXId < 0) minXId = 0;
         var maxXId = parseInt(maxPos.x / this.getChunkWidth());
         var chunkYId = parseInt(minPos.y / this.getChunkHeight());
         var chunkIds = [];
@@ -164,18 +159,6 @@ var World = cc.Class.extend({
         return 480 + 300;
     },
     getChunkIdsAroundCharacter:function (characterPos, bodySize) {
-        // var minCollisionX = characterPos.x - bodySize.width/2 - 128;
-        // if (minCollisionX < 0)
-        //     minCollisionX = 0;
-        // var maxCollisionX = characterPos.x + bodySize.width/2;
-        // var minCollisionChunkIdX = parseInt(minCollisionX / (this.getChunkWidth()));
-        // var maxCollisionChunkIdX = parseInt(maxCollisionX / (this.getChunkWidth()));
-        // var chunkIdY = parseInt(characterPos.y / this.getChunkHeight());
-        // var collisionChunkIds = [];
-        // for (var idX=minCollisionChunkIdX; idX<=maxCollisionChunkIdX; idX++){
-        //     collisionChunkIds.push(idX + '-' + chunkIdY);
-        // }
-        // return collisionChunkIds;
         return this.getVisibleChunkIds(characterPos, this.character.getInitPosition(), cc.view.getVisibleSize());
     },
     getObjectsDataByChunkIds:function (chunkIds) {
@@ -203,21 +186,32 @@ var World = cc.Class.extend({
         return this.getObjectsDataByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
     },
     getAllCurrentRenderedObjectsData:function (characterPos, characterInitPos, visibleSize) {
-        var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
-        if (visibleChunkIds.length > 0){
-            var splitedChunkId = visibleChunkIds[0].split("-")[0];
-            var minChunkIdX = parseInt(splitedChunkId[0]);
-            var minChunkIdY = parseInt(splitedChunkId[1]);
-            minChunkIdX--;
-            if(minChunkIdX >= 0){
-                visibleChunkIds.push(minChunkIdX + '-' + minChunkIdY);
+        // var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);
+        // if (visibleChunkIds.length > 0){
+        //     var splitedChunkId = visibleChunkIds[0].split("-")[0];
+        //     var minChunkIdX = parseInt(splitedChunkId[0]);
+        //     var minChunkIdY = parseInt(splitedChunkId[1]);
+        //     minChunkIdX--;
+        //     if(minChunkIdX >= 0){
+        //         visibleChunkIds.push(minChunkIdX + '-' + minChunkIdY);
+        //     }
+        // }
+        var renderedBbjectsData = [];
+        var children = this.graphicsParent.getChildren();
+        for(var i=0; i<children.length; i++){
+            var child = children[i];
+            var userData = child.getUserData();
+            if (child != this.character && child != this.pet && userData != null){
+                renderedBbjectsData.push(userData);
             }
         }
-        return this.getObjectsDataByChunkIds(visibleChunkIds);
+        return renderedBbjectsData;
     },
     releaseAObjectData:function (objectData) {
         if (objectData.hasOwnProperty("pObject") && objectData["pObject"] !== null){
             var releasedObject = objectData["pObject"];
+            releasedObject.sprite.setVisible(false);
+            releasedObject.sprite.setUserData(null);
             releasedObject.sprite.removeFromParent();
             this.factory.releaseObject(releasedObject);
             objectData["pObject"] = null;
@@ -235,11 +229,6 @@ var World = cc.Class.extend({
     },
     getIsNeedToInitVisibleChunks:function () {
         return this.isNeedToInitVisibleChunks;
-    },
-    getPlusChunkId:function (chunkId, n) {
-        var splitChunkId = chunkId.split("-");
-        var newChunkIdX = parseInt(splitChunkId[0]) + n;
-        return newChunkIdX + "-" + splitChunkId[1];
     },
     debugDrawChunks:function () {
         var visibleChunks = this.getVisibleChunkIds(this.character.getPosition(),
@@ -261,14 +250,12 @@ var World = cc.Class.extend({
     updateObjectInsideTheScreen:function (dt) {
         var renderedObjectsData = this.getAllCurrentRenderedObjectsData(this.character.getPosition(),
             this.character.getInitPosition(), cc.view.getVisibleSize());
-        //cc.log("renderedObjectsLength: ", renderedObjectsData.length);
-        //cc.log("child of parents", this.graphicsParent.getChildrenCount());
         for (var i=0; i<renderedObjectsData.length; i++){
             var objectNeedToUpdate = renderedObjectsData[i]["pObject"];
-            // if (!(objectNeedToUpdate instanceof Ground)){
-            objectNeedToUpdate.update(dt, this);
-            // }
+            if (objectNeedToUpdate != null)
+                objectNeedToUpdate.update(dt, this);
         }
+
     },
 
     isObjectInsideTheScreen:function (pos, size) {

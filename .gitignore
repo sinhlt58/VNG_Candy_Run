@@ -402,28 +402,29 @@ proj.ios_mac/.idea/*
 #.LSOverride#
 
 # Generated files in the Android project #
-proj.android/libs/armeabi/*
-proj.android/libs/armeabi-v7a/*
-proj.android/libs/x86/*
-proj.android/obj/*
+Candy_Run/frameworks/runtime-src/proj.android/libs/armeabi/*
+Candy_Run/frameworks/runtime-src/proj.android/libs/armeabi-v7a/*
+Candy_Run/frameworks/runtime-src/proj.android/libs/x86/*
+Candy_Run/frameworks/runtime-src/proj.android/obj/*
 
-proj.android/build/
-proj.android/gen/*
-proj.android/bin/*
-proj.android/assets/*
+Candy_Run/frameworks/runtime-src/proj.android/build/
+Candy_Run/frameworks/runtime-src/proj.android/gen/*
+Candy_Run/frameworks/runtime-src/proj.android/bin/*
+Candy_Run/frameworks/runtime-src/proj.android/assets/*
 
-proj.android/.gradle/*
-proj.android/.idea/*
-proj.android/*.iml
-proj.android/local.properties
+Candy_Run/frameworks/runtime-src/proj.android/.gradle/*
+Candy_Run/frameworks/runtime-src/proj.android/.idea/*
+Candy_Run/frameworks/runtime-src/proj.android/*.iml
+Candy_Run/frameworks/runtime-src/proj.android/local.properties
+Candy_Run/frameworks/runtime-src/proj.android/.d/
 
-proj.android/libraries/*/build/
-proj.android/libraries/*/gen/*
-proj.android/libraries/*/bin/*
-proj.android/libraries/*/.idea/*
-proj.android/libraries/*/*.iml
-proj.android/libraries/*/local.properties
-
+Candy_Run/frameworks/runtime-src/proj.android/libraries/*/build/
+Candy_Run/frameworks/runtime-src/proj.android/libraries/*/gen/*
+Candy_Run/frameworks/runtime-src/proj.android/libraries/*/bin/*
+Candy_Run/frameworks/runtime-src/proj.android/libraries/*/.idea/*
+Candy_Run/frameworks/runtime-src/proj.android/libraries/*/*.iml
+Candy_Run/frameworks/runtime-src/proj.android/libraries/*/local.properties
+/Candy_Run/frameworks/runtime-src/proj.android/assets/*
 
 *.apk
 
