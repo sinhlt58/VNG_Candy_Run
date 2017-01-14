@@ -6,8 +6,8 @@ var Item = ObjectGame.extend({
     score:0,
     money:0,
     effects:null,
-    ctor:function () {
-        this._super();
+    ctor:function (sprite) {
+        this._super(sprite);
         this.effects = [];
         this.stateMachineItem= new StateMachineItem(this);
 

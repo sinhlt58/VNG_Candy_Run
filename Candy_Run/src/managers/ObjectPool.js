@@ -15,14 +15,16 @@ var ObjectPool = cc.Class.extend({
     getObjectByClassType:function (classType) {
         var object;
         if (this.available[classType].length == 0){
+            var sprite = new cc.Sprite();
             if (classType == "Item"){
-                object = new Item();
+                object = new Item(sprite);
             }else if(classType == "Ground"){
-                object = new Ground();
+                object = new Ground(sprite);
             }else if (classType == "Obstacle"){
-                object = new Obstacle();
+                sprite.setZOrder(-1);
+                object = new Obstacle(sprite);
             }
-            object.sprite = new cc.Sprite();
+            // object.sprite = new cc.Sprite();
             object.sprite.retain();
             this.testCoutCreated++;
         }else{

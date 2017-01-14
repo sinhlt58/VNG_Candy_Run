@@ -7,11 +7,14 @@ var Obstacle = ObjectGame.extend({
 
 
     damage:null,
-    ctor:function () {
-        this._super();
+    ctor:function (sprite) {
+        this._super(sprite);
+
+        this.stateMachineObstacle = new StateMachineObstacle(this);
     },
     update:function (dt, world) {
         this._super(dt, world);
+        this.stateMachineObstacle.update(dt);
     },
     setDamage:function (damage) {
         this.damage = damage;

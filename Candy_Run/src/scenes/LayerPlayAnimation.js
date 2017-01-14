@@ -129,6 +129,8 @@ var LayerPlayAnimation = cc.Layer.extend({
             this.character, this.pet);
 
         this.character.world = this.world;
+
+        Camera.init(this);
     },
     update: function (dt) {
         //handle inputs.

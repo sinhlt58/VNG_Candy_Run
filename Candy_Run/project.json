@@ -68,6 +68,7 @@
     "src/managers/TriggerHeavenAndGround.js",
     "src/managers/WorldTriggers.js",
     "src/managers/CollisionDetector.js",
+    "src/managers/Camera.js",
 
     "src/objects/Object.js",
     "src/objects/Ground.js",

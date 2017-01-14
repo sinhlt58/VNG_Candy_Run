@@ -92,6 +92,12 @@ var World = cc.Class.extend({
                         object.sprite.setAnchorPoint(cc.p(0, 0));
                         object.sprite.setVisible(true);
                         object.sprite.setPosition(cc.p(objectData.x, objectData.y));
+
+                        //trivial here @@. call enter after have the default position
+                        var classType = this.factory.getClassTypeByObjecType(objectTypeId);
+                        if (classType == globals.CLASS_TYPE_OBSTACLE)
+                            object.stateMachineObstacle.stateObstacle.onEnter(object);
+
                         this.graphicsParent.addChild(object.sprite);
                         object.sprite.setUserData(objectData);
                         objectData["pObject"] = object;

@@ -77,6 +77,7 @@ var FactoryObject = cc.Class.extend({
         }else if(classType == globals.CLASS_TYPE_OBSTACLE){
             this.changeTextureOfSprite(object.sprite, objectTypeData["texture"]);
             object.damage = objectTypeData["damage"];
+            object.stateMachineObstacle.stateObstacle = StateObstacleNormal;
         }
         return object;
     },

@@ -128,7 +128,15 @@ var CollisionDetector = cc.Class.extend({
                 character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
                 character.stateMachine.changeState("stateHP", new StateTakingDamage());
             }
-
+            var currentGiantState = character.stateMachine.stateGiant;
+            if (currentGiantState instanceof StateGiantActive){
+                var obstaclesData = collisionObjects[globals.CLASS_TYPE_OBSTACLE];
+                for (i = 0; i < obstaclesData.length; i++) {
+                    var obstacleDataObject = obstaclesData[i];
+                    var obstacleObject = obstacleDataObject["pObject"];
+                    obstacleObject.stateMachineObstacle.changeState(StateObstacleBeKicked);
+                }
+            }
         } else {
 
             // nothing here
