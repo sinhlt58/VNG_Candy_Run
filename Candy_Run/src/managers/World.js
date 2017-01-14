@@ -52,7 +52,9 @@ var World = cc.Class.extend({
         this.pet.update(dt);
 
         //update layer position relative to the pos of character.
-        this.graphicsParent.updateCamera(this.character);
+        // this.graphicsParent.updateCamera(this.character);
+        Camera.update(this.character.getPosition(),
+            this.character.getInitPosition(), this.character.getContentSize(), dt);
 
         //update triggers
         this.triggers.update(dt);

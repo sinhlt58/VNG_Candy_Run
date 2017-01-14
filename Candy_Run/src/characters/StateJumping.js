@@ -18,6 +18,10 @@ var StateJumping = StateMovement.extend({
         var currentVelo= character.velocity;
         character.setVelocity(cc.p(currentVelo.x, 500));
         character.setAcceleration(cc.p(0, -1000));
+
+        //todo: change later to shake the screen when giant and from jump to running.
+        if(character.stateMachine.stateGiant instanceof StateGiantActive)
+            Camera.shakeTheScreen(0.2);
     },
     onExit: function (character) {
 

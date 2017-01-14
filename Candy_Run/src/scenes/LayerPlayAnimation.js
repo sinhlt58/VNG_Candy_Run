@@ -143,7 +143,7 @@ var LayerPlayAnimation = cc.Layer.extend({
         var characterInitPos = character.getInitPosition();
 
         var changeX = characterPos.x - characterInitPos.x;
-        var changeY = parseInt(((characterPos.y + character.getContentSize().height/2) / this.getCameraNeedToChangeY())) * this.getCameraNeedToChangeY();
+        var changeY = parseInt(((characterPos.y + character.getContentSize().height) / this.getCameraNeedToChangeY())) * this.getCameraNeedToChangeY();
 
         this.setPosition(-changeX, -changeY);
     },

@@ -2,7 +2,7 @@
  * Created by Fresher on 28/12/2016.
  */
 var StateGiantActive = StateGiant.extend({
-    maxGiantTime: 3,
+    maxGiantTime: 6,
     currentCountTime: 0,
 
     ctor: function () {
