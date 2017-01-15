@@ -8,6 +8,7 @@ globals.CLASS_TYPE_OBSTACLE = "Obstacle";
 
 globals.GUI_TYPE_STATIC = 0;
 globals.GUI_TYPE_BUTTON = 1;
+globals.GUI_TYPE_PROCESS = 2;
 
 globals.ITEM_EFFECT_SCORE = 0;
 globals.ITEM_EFFECT_MONEY = 1;

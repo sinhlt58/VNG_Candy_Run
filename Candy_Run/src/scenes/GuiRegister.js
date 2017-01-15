@@ -11,17 +11,28 @@ cr.gui_register = {
             var guiObjectData = data["data"][i];
             var guiType = guiObjectData["gui_type"];
             var guiObject;
+            var xRatio = guiObjectData["x"]/width;
+            var yRatio = guiObjectData["y"]/height;
             if(guiType == globals.GUI_TYPE_STATIC){
                 guiObject = new cc.Sprite("#" + guiObjectData["texture"]);
+                guiObject.setPosition(xRatio*visibleSize.width, yRatio*visibleSize.height);
             }else if(guiType == globals.GUI_TYPE_BUTTON){
                 var textures = guiObjectData["textures"];
                 guiObject = new ccui.Button(textures[0], textures[1], textures[2], ccui.Widget.PLIST_TEXTURE);
                 graphicsParent[guiObjectData["name"]] = guiObject;
+                guiObject.setPosition(xRatio*visibleSize.width, yRatio*visibleSize.height);
                 guiObject.addTouchEventListener(graphicsParent.handleButtonEvents, graphicsParent);
+            }else if (guiType == globals.GUI_TYPE_PROCESS){
+                guiObject = new cc.Sprite("#" + guiObjectData["texture"]);
+                guiObject.setPosition(xRatio*visibleSize.width, yRatio*visibleSize.height);
+                var currentPos = guiObject.getPosition();
+                guiObject.setAnchorPoint(cc.p(0, 0));
+                var size = guiObject.getContentSize();
+                guiObject.setPosition(currentPos.x - size.width/2, currentPos.y - size.height/2);
+                graphicsParent[guiObjectData["name"]] = guiObject;
             }
-            var xRatio = guiObjectData["x"]/width;
-            var yRatio = guiObjectData["y"]/height;
-            guiObject.setPosition(xRatio*visibleSize.width, yRatio*visibleSize.height);
+
+
             graphicsParent.addChild(guiObject);
         }
     }

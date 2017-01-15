@@ -28,7 +28,7 @@
 			"name" : "buttonBackToLobby",
 			"textures" : ["button_to_lobby.png","",""],
 			"x" : 400,
-			"y" : 100
+			"y" : 85
 		}
 	]
 }

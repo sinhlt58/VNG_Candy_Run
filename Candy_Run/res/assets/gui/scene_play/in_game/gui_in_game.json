@@ -4,9 +4,38 @@
 	"data":[
 		{
 			"gui_type" : 0,
+			"name" : "hpProcessBarBg",
 			"texture" : "hpProgressBarBg.png",
-			"x" : 500,
-			"y" : 350
+			"x" : 180,
+			"y" : 400
+		},
+		{
+			"gui_type" : 2,
+			"name" : "hpProcessBar",
+			"texture" : "hpProgressBar.png",
+			"x" : 180,
+			"y" : 400
+		},		
+		{
+			"gui_type" : 1,
+			"name" : "buttonPause",
+			"textures" : ["pauseBtn.png","",""],
+			"x" : 780,
+			"y" : 440
+		},
+		{
+			"gui_type" : 1,
+			"name" : "buttonJump",
+			"textures" : ["jumpBtn_Normal.png","jumpBtn_Selected.png",""],
+			"x" : 50,
+			"y" : 70
+		},
+		{
+			"gui_type" : 1,
+			"name" : "buttonSlide",
+			"textures" : ["slideBtn_Normal.png","slideBtn_Selected.png",""],
+			"x" : 750,
+			"y" : 70
 		}
 	]
 }

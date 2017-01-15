@@ -2,7 +2,7 @@
  * Created by Fresher on 12/29/2016.
  */
 var LayerPlayStatus = cc.Layer.extend({
-    TEST_BUTTON_PAUSE: null,
+    buttonPause: null,
     TEST_BUTTON_DIE: null,
     isGamePause: false,
     animationLayer: null,
@@ -34,12 +34,12 @@ var LayerPlayStatus = cc.Layer.extend({
     init: function () {
 
         //todo: remove later
-        this.TEST_BUTTON_PAUSE = new ccui.Button("pauseBtn.png", "", "", ccui.Widget.PLIST_TEXTURE);
+        this.buttonPause = new ccui.Button("pauseBtn.png", "", "", ccui.Widget.PLIST_TEXTURE);
         var visibleSize = cc.view.getVisibleSize();
-        var size = this.TEST_BUTTON_PAUSE.getContentSize();
-        this.TEST_BUTTON_PAUSE.setPosition(cc.p(visibleSize.width - size.width / 2 - this.globalPadding, visibleSize.height - size.height / 2 - this.globalPadding));
-        this.addChild(this.TEST_BUTTON_PAUSE);
-        this.TEST_BUTTON_PAUSE.addTouchEventListener(this.handleButtonEvents, this);
+        var size = this.buttonPause.getContentSize();
+        this.buttonPause.setPosition(cc.p(visibleSize.width - size.width / 2 - this.globalPadding, visibleSize.height - size.height / 2 - this.globalPadding));
+        this.addChild(this.buttonPause);
+        this.buttonPause.addTouchEventListener(this.handleButtonEvents, this);
 
         //todo: remove later
         this.TEST_BUTTON_DIE = new ccui.Button("pauseBtn.png", "", "", ccui.Widget.PLIST_TEXTURE);
@@ -54,16 +54,26 @@ var LayerPlayStatus = cc.Layer.extend({
         this.labelScore = new cc.LabelTTF("", "Helvetica");
         size = this.labelScore.getContentSize();
         this.labelScore.setFontSize(35);
-        this.labelScore.setPosition(visibleSize.width / 2, visibleSize.height - size.height / 2 - this.globalPadding);
+        this.labelScore.setPosition(visibleSize.width / 2, visibleSize.height - size.height / 2 - 0.04*visibleSize.height);
         this.labelScore.setColor(cc.color(255, 255, 255));
         this.addChild(this.labelScore);
+
+        var scoreIcon = new cc.Sprite("#G.png");
+        size = scoreIcon.getContentSize();
+        scoreIcon.setPosition(this.labelScore.getPosition().x - 70 , this.labelScore.getPosition().y);
+        this.addChild(scoreIcon);
 
         this.labelMoney = new cc.LabelTTF("", "Helvetica");
         size = this.labelMoney.getContentSize();
         this.labelMoney.setFontSize(35);
         this.labelMoney.setColor(cc.color(255, 255, 255));
-        this.labelMoney.setPosition(visibleSize.width / 2 + size.width + 150, visibleSize.height - size.height / 2 - this.globalPadding);
+        this.labelMoney.setPosition(visibleSize.width / 2 + 200, visibleSize.height - size.height / 2 -  0.04*visibleSize.height);
         this.addChild(this.labelMoney);
+
+        var moneyScore = new cc.Sprite("#gold.png");
+        size = moneyScore.getContentSize();
+        moneyScore.setPosition(this.labelMoney.getPosition().x - 90, this.labelMoney.getPosition().y);
+        this.addChild(moneyScore);
 
         //init play buttons
         this.buttonJump = new ccui.Button("jumpBtn_Normal.png", "jumpBtn_Selected.png", "", ccui.Widget.PLIST_TEXTURE);
@@ -78,15 +88,22 @@ var LayerPlayStatus = cc.Layer.extend({
         this.buttonSlide.addTouchEventListener(this.handleButtonEvents, this);
         this.addChild(this.buttonSlide);
 
-        //BONUSTIME GUI
-        this.bonusTimeGui = new BonusTimeGui(this.globalPadding, 100, this);
-
         //HP process bar
+        var hpBackground = new cc.Sprite("#hpProgressBarBg.png");
+        size = hpBackground.getContentSize();
+        hpBackground.setPosition(visibleSize.width*0.01, visibleSize.height - 82);
+        hpBackground.setAnchorPoint(cc.p(0,0));
+        this.addChild(hpBackground);
+
         this.hpProcessBar = new cc.Sprite("#hpProgressBar.png");
         size = this.hpProcessBar.getContentSize();
-        this.hpProcessBar.setPosition(100, visibleSize.height - 80);
+        this.hpProcessBar.setPosition(visibleSize.width*0.01 + 2, visibleSize.height - 82 + 2);
         this.hpProcessBar.setAnchorPoint(cc.p(0,0));
         this.addChild(this.hpProcessBar);
+
+        //BONUSTIME GUI
+        this.bonusTimeGui = new BonusTimeGui(0.02*visibleSize.height, this.hpProcessBar.getPosition().x, this);
+
 
         //crete layer end game
         this.layerPlayEnd = new LayerPlayEnd(cc.loader.getRes(res.gui_end_game_json));
@@ -97,6 +114,8 @@ var LayerPlayStatus = cc.Layer.extend({
     update:function (dt) {
         if(this.animationLayer.character.isDead()){
             this.animationLayer.pause();
+            this.layerPlayEnd.setMoney(cr.game.getPlayer().currentMoney);
+            this.layerPlayEnd.setScore(cr.game.getPlayer().currentScore);
             this.layerPlayEnd.setVisible(true);
         }
 
@@ -176,7 +195,7 @@ var LayerPlayStatus = cc.Layer.extend({
         }
 
         if (type == ccui.Widget.TOUCH_ENDED) {
-            if (sender == this.TEST_BUTTON_PAUSE) {
+            if (sender == this.buttonPause) {
                 this.isGamePause = !this.isGamePause;
                 if (this.isGamePause) {
                     cc.director.pause();
