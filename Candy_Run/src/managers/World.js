@@ -120,6 +120,13 @@ var World = cc.Class.extend({
         }
         return objectTypeIds;
     },
+    getObjectTypeIdsInChunks:function (chunkIds) {
+        var objectTypeIds = [];
+        for(var i=0; i<chunkIds.length;i++){
+            objectTypeIds.push.apply(objectTypeIds ,this.getObjectTypeIdsInChunk(chunkIds[i]));
+        }
+        return objectTypeIds;
+    },
     getChunkDataById:function (chunkId) {
         if (this.chunks.hasOwnProperty(chunkId))
             return this.chunks[chunkId]['data'];
@@ -151,7 +158,7 @@ var World = cc.Class.extend({
     },
     getChunkIdsByRange:function (minPos, maxPos) {
         var minXId = parseInt(minPos.x / this.getChunkWidth());
-        if (minXId < 0) minXId = 0;
+       // if (minXId < 0) minXId = 0;
         var maxXId = parseInt(maxPos.x / this.getChunkWidth());
         var chunkYId = parseInt(minPos.y / this.getChunkHeight());
         var chunkIds = [];

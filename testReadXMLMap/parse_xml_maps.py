@@ -142,7 +142,7 @@ chunks['loopX-1'] = 0
 preMapWidth = 0
 maxXOnAllMap = 0
 
-for i in range(1, 3):
+for i in range(1, 7):
     tree = ET.parse('MAP0'+ str(i) + '.xml')
     root = tree.getroot()
     levelName =  "m" + str(i)

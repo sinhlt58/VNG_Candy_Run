@@ -7,6 +7,12 @@ var TriggerHeavenAndGround = Trigger.extend({
     rememberedPosInGround:null,
     initCharacterPosInGround:null,
     isTriggerHeaven:false,
+
+    tmpChunkIdX: -1000,
+    tmpChunkIdY: 0,
+    tmpChunkPosBackToGround: null,
+    groundChunkPosBackFromTmp:null,
+    isInTmpChunks:false,
     ctor:function (world) {
         this._super(world);
 
@@ -20,7 +26,15 @@ var TriggerHeavenAndGround = Trigger.extend({
         var characterPos = this.world.character.getPosition();
 
         if(!this.isInHeaven){
-            this.rememberedPosInGround = cc.p(characterPos.x - 500, cc.view.getVisibleSize().height - 10);
+            this.rememberedPosInGround = cc.p(characterPos.x, cc.view.getVisibleSize().height - 10);
+        }
+
+        if (this.isInTmpChunks && characterPos.x >= this.tmpChunkPosBackToGround.x){
+            this.world.character.setPosition(this.groundChunkPosBackFromTmp);
+            Camera.update(this.world.character.getPosition(), this.world.character.getInitPosition(), cc.view.getVisibleSize());
+            this.world.releaseAllCurrentRenderedObjects();
+            this.world.setIsNeedToInitVisibleChunks(true);
+            this.isInTmpChunks = false;
         }
 
         var distanceY = Math.abs(characterPos.y - currentCameraY);
@@ -31,14 +45,126 @@ var TriggerHeavenAndGround = Trigger.extend({
             this.world.setIsNeedToInitVisibleChunks(true);
             //release ojects and teleport player here.
             if (this.isInHeaven){
-                this.world.character.setPosition(this.rememberedPosInGround);
+                this.createTmpChunks(this.world.character.getInitPosition());
+                this.world.character.setPosition(cc.p(250 + this.tmpChunkIdX*this.world.getChunkWidth(), 90));
+                this.isInHeaven = !this.isInHeaven;
+                // this.world.character.setPosition(this.rememberedPosInGround);
             }else{
                 this.world.character.setPosition(this.initCharacterPosInHeaven);
+                this.isInHeaven = !this.isInHeaven;
             }
-            this.world.graphicsParent.updateCamera(this.world.character);
-            this.isInHeaven = !this.isInHeaven;
+           // this.world.graphicsParent.updateCamera(this.world.character);
+            Camera.update(this.world.character.getPosition(), this.world.character.getInitPosition(), cc.view.getVisibleSize());
+
             return true;
         }
         return false;
+    },
+    getChunkIdsToGetCopyedGround:function (characterPos) {
+        var currentChunkIdX = parseInt(characterPos.x / this.world.getChunkWidth());
+        var currentChunkIdY = parseInt(characterPos.y / this.world.getChunkHeight());
+        var chunkIdsToGetCopyedGround = [];
+        chunkIdsToGetCopyedGround.push(currentChunkIdX + 1 + '-' + currentChunkIdY);
+        chunkIdsToGetCopyedGround.push(currentChunkIdX + 2 + '-' + currentChunkIdY);
+        chunkIdsToGetCopyedGround.push(currentChunkIdX + 3 + '-' + currentChunkIdY);
+        return chunkIdsToGetCopyedGround;
+    },
+
+    getCopyedGroundObjectTypeId:function (characterPos) {
+        var chunkIdsToGetCopyedGround = this.getChunkIdsToGetCopyedGround(characterPos);
+        var groundObjectTypeId = null;
+        var objectTypeIds = this.world.getObjectTypeIdsInChunks(chunkIdsToGetCopyedGround);
+        for (var i=0; i<objectTypeIds.length; i++){
+            var classType = this.world.factory.getClassTypeByObjecType(objectTypeIds[i]);
+            if (classType == globals.CLASS_TYPE_GROUND){
+                groundObjectTypeId = objectTypeIds[i];
+                return groundObjectTypeId;
+            }
+        }
+        return groundObjectTypeId;
+    },
+
+    createTmpChunks:function (characterInitPos) {
+        var startTmpChunkIdX = this.tmpChunkIdX;
+        var numChunksNeedToCopy = this.calculateNumChunksNeedToCopy();
+        var numOfCopy = 2;
+        var copyedGroundObjectTypeId = this.getCopyedGroundObjectTypeId(this.rememberedPosInGround);
+        if (copyedGroundObjectTypeId == null)
+            copyedGroundObjectTypeId = 23;
+
+        var groundY = this.tmpChunkIdY * this.world.getChunkHeight();
+
+        var sourceChunkIds = [];
+        var desChunkIds = [];
+
+        var startSourceChunkIdX = parseInt(this.rememberedPosInGround.x / this.world.getChunkWidth()) + 1;
+        var startSourceChunkIdY = parseInt(this.rememberedPosInGround.y / this.world.getChunkHeight());
+        var startDesChunkIdX = numChunksNeedToCopy*numOfCopy + this.tmpChunkIdX;
+
+        var deltaX = (startDesChunkIdX - startSourceChunkIdX)*this.world.getChunkWidth();
+        var deltaY = (this.tmpChunkIdY - startSourceChunkIdY)*this.world.getChunkHeight();
+
+        //create ground for tmpchunks
+        for (var i=0; i<numChunksNeedToCopy*numOfCopy; i++){
+            var tmpChunkIdX = startTmpChunkIdX + i;
+
+            var tmpChunkId = tmpChunkIdX + '-' + this.tmpChunkIdY;
+            this.world.chunks[tmpChunkId] = {};
+            this.world.chunks[tmpChunkId]["data"] = {};
+            this.world.chunks[tmpChunkId]["data"][copyedGroundObjectTypeId] = [];
+            for (var j=0; j<globals.NUM_OF_GROUND_PER_CHUNK; j++){
+                var groundX = tmpChunkIdX * this.world.getChunkWidth() + j*globals.GROUND_WIDTH;
+                var objectData = {x: groundX, y: groundY};
+                this.world.chunks[tmpChunkId]["data"][copyedGroundObjectTypeId].push(objectData);
+            }
+            if (i < numChunksNeedToCopy){
+                var sourceChunkIdX= startSourceChunkIdX + i;
+                var desChunkIdx = startDesChunkIdX + i;
+
+                sourceChunkIds.push(sourceChunkIdX + '-' + startSourceChunkIdY);
+                desChunkIds.push(desChunkIdx + '-' + this.tmpChunkIdY);
+            }
+        }
+
+        //copy chunks in the rememberedPos
+        this.createChunksFromOtherChunks(sourceChunkIds, desChunkIds, deltaX, deltaY);
+
+        //setTmpPosBackToGround
+        var tmpPosBackToGroundX = startDesChunkIdX*this.world.getChunkWidth() + characterInitPos.x;
+        var tmpPosBackToGroundY = this.tmpChunkIdY*this.world.getChunkHeight();
+        this.tmpChunkPosBackToGround = cc.p(tmpPosBackToGroundX, tmpPosBackToGroundY);
+        this.isInTmpChunks = true;
+
+        var groundChunkPosBackFromTmpX = startSourceChunkIdX*this.world.getChunkWidth() + characterInitPos.x;
+        var groundChunkPosBackFromTmpY = globals.GROUND_HEIGHT;
+        this.groundChunkPosBackFromTmp = cc.p(groundChunkPosBackFromTmpX, groundChunkPosBackFromTmpY);
+
+    },
+    calculateNumChunksNeedToCopy:function () {
+        var numChunksNeedToCopy;
+        var visibleSize = cc.view.getVisibleSize();
+        if (visibleSize.width % this.world.getChunkWidth() == 0){
+            numChunksNeedToCopy = parseInt(visibleSize.width / this.world.getChunkWidth());
+        }else{
+            numChunksNeedToCopy = parseInt(visibleSize.width / this.world.getChunkWidth()) + 1;
+        }
+        return numChunksNeedToCopy;
+    },
+    createChunksFromOtherChunks:function (sourceChunkIds, desChunkIds, deltaX, deltaY) {
+        for (var i=0; i<desChunkIds.length; i++){
+            this.world.chunks[desChunkIds[i]] = {};
+            this.world.chunks[desChunkIds[i]]["data"] = {};
+            var objectTypeIds = this.world.getObjectTypeIdsInChunk(sourceChunkIds[i]);
+            for (var j=0; j<objectTypeIds.length; j++){
+                this.world.chunks[desChunkIds[i]]["data"][objectTypeIds[j]] = [];
+                var sourceObjectsData = this.world.chunks[sourceChunkIds[i]]["data"][objectTypeIds[j]];
+                for (var t=0; t<sourceObjectsData.length; t++){
+                    var x = sourceObjectsData[t].x + deltaX;
+                    var y = sourceObjectsData[t].y + deltaY;
+                    var newObjectData = {x: x, y: y};
+                    this.world.chunks[desChunkIds[i]]["data"][objectTypeIds[j]].push(newObjectData);
+                }
+            }
+        }
     }
 });
