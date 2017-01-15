@@ -13,6 +13,11 @@ var TriggerHeavenAndGround = Trigger.extend({
     tmpChunkPosBackToGround: null,
     groundChunkPosBackFromTmp:null,
     isInTmpChunks:false,
+
+    sourceChunkIdsFromTmp:null,
+    desChunkIdsFromGroud:null,
+    deltaXFromTmpToGround:null,
+    deltaYFromTmpToGround:null,
     ctor:function (world) {
         this._super(world);
 
@@ -29,16 +34,26 @@ var TriggerHeavenAndGround = Trigger.extend({
             this.rememberedPosInGround = cc.p(characterPos.x, cc.view.getVisibleSize().height - 10);
         }
 
-        if (this.isInTmpChunks && characterPos.x >= this.tmpChunkPosBackToGround.x){
-            this.world.character.setPosition(this.groundChunkPosBackFromTmp);
-            Camera.update(this.world.character.getPosition(), this.world.character.getInitPosition(), cc.view.getVisibleSize());
-            this.world.releaseAllCurrentRenderedObjects();
-            this.world.setIsNeedToInitVisibleChunks(true);
-            this.isInTmpChunks = false;
+        if (this.isInTmpChunks){
+            if (characterPos.x >= this.tmpChunkPosBackToGround.x){
+                //change later for exact
+                var posFromTmpToGround = cc.p(characterPos.x + this.deltaXFromTmpToGround,
+                    characterPos.y + this.deltaYFromTmpToGround);
+                this.world.character.setPosition(posFromTmpToGround);
+                Camera.update(this.world.character.getPosition(), this.world.character.getInitPosition(), cc.view.getVisibleSize());
+                //teleport all the objects in the tmpChunks to the ground.
+
+                //this.world.releaseAllCurrentRenderedObjects();
+                //this.world.setIsNeedToInitVisibleChunks(true);
+                this.copyStateChunksFromOtherChunks(this.sourceChunkIdsFromTmp, this.desChunkIdsFromGroud,
+                    this.deltaXFromTmpToGround, this.deltaYFromTmpToGround);
+                this.isInTmpChunks = false;
+            }
         }
 
         var distanceY = Math.abs(characterPos.y - currentCameraY);
-        if (distanceY >= cc.view.getVisibleSize().height/2 && characterPos.y >= globals.GROUND_HEIGHT){
+        if (distanceY >= cc.view.getVisibleSize().height/2 && characterPos.y >= globals.GROUND_HEIGHT
+            && !this.isInTmpChunks){
             this.isTriggerHeaven = false;
             cc.log("INSIDE IF TAM LINH");
             this.world.releaseAllCurrentRenderedObjects();
@@ -103,6 +118,8 @@ var TriggerHeavenAndGround = Trigger.extend({
 
         var deltaX = (startDesChunkIdX - startSourceChunkIdX)*this.world.getChunkWidth();
         var deltaY = (this.tmpChunkIdY - startSourceChunkIdY)*this.world.getChunkHeight();
+        this.deltaXFromTmpToGround = -deltaX;
+        this.deltaYFromTmpToGround = -deltaY;
 
         //create ground for tmpchunks
         for (var i=0; i<numChunksNeedToCopy*numOfCopy; i++){
@@ -131,7 +148,7 @@ var TriggerHeavenAndGround = Trigger.extend({
 
         //setTmpPosBackToGround
         var tmpPosBackToGroundX = startDesChunkIdX*this.world.getChunkWidth() + characterInitPos.x;
-        var tmpPosBackToGroundY = this.tmpChunkIdY*this.world.getChunkHeight();
+        var tmpPosBackToGroundY = this.world.character.getPosition().y - deltaY;
         this.tmpChunkPosBackToGround = cc.p(tmpPosBackToGroundX, tmpPosBackToGroundY);
         this.isInTmpChunks = true;
 
@@ -139,6 +156,9 @@ var TriggerHeavenAndGround = Trigger.extend({
         var groundChunkPosBackFromTmpY = globals.GROUND_HEIGHT;
         this.groundChunkPosBackFromTmp = cc.p(groundChunkPosBackFromTmpX, groundChunkPosBackFromTmpY);
 
+        //prepare for teleport back to ground
+        this.sourceChunkIdsFromTmp = desChunkIds;
+        this.desChunkIdsFromGroud = sourceChunkIds;
     },
     calculateNumChunksNeedToCopy:function () {
         var numChunksNeedToCopy;
@@ -163,6 +183,42 @@ var TriggerHeavenAndGround = Trigger.extend({
                     var y = sourceObjectsData[t].y + deltaY;
                     var newObjectData = {x: x, y: y};
                     this.world.chunks[desChunkIds[i]]["data"][objectTypeIds[j]].push(newObjectData);
+                }
+            }
+        }
+    },
+    copyStateChunksFromOtherChunks:function (sourceChunkIds, desChunkIds, deltaX, deltaY) {
+        for (var i=0; i<desChunkIds.length; i++){
+            this.world.chunks[desChunkIds[i]] = {};
+            this.world.chunks[desChunkIds[i]]["data"] = {};
+            var objectTypeIds = this.world.getObjectTypeIdsInChunk(sourceChunkIds[i]);
+            for (var j=0; j<objectTypeIds.length; j++){
+                this.world.chunks[desChunkIds[i]]["data"][objectTypeIds[j]] = [];
+                var sourceObjectsData = this.world.chunks[sourceChunkIds[i]]["data"][objectTypeIds[j]];
+                for (var t=0; t<sourceObjectsData.length; t++){
+                    var x = sourceObjectsData[t].x + deltaX;
+                    var y = sourceObjectsData[t].y + deltaY;
+                    var newObjectData = {x: x, y: y};
+                    this.world.chunks[desChunkIds[i]]["data"][objectTypeIds[j]].push(newObjectData);
+                    if (sourceObjectsData[t].hasOwnProperty("pObject") && sourceObjectsData[t]["pObject"] != null){
+                        var pSourceObject = sourceObjectsData[t]["pObject"];
+                        var pObjectSourcePos = pSourceObject.sprite.getPosition();
+                        //teleport current sprite
+                        if(pSourceObject.sprite == null){
+                            var a = 1;
+                        }
+                        pSourceObject.sprite.setPosition(pObjectSourcePos.x + deltaX, pObjectSourcePos.y + deltaY);
+                        //swap that sprite for the desChunks
+                        newObjectData["pObject"] = pSourceObject;
+                        sourceObjectsData[t]["pObject"] = null;
+                        //check if is obstacle then reset state
+                        //not needed because the action moveTo of cc implement from moveBy
+                        //var classType = this.world.factory.getClassTypeByObjecType(objectTypeIds[j]);
+                        // if (classType == globals.CLASS_TYPE_OBSTACLE){
+                        //     newObjectData["pObject"]
+                        //         .stateMachineObstacle.stateObstacle.onEnter(newObjectData["pObject"]);
+                        // }
+                    }
                 }
             }
         }
