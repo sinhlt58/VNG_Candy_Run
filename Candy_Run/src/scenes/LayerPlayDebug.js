@@ -23,13 +23,13 @@ var LayerPlayDebug = cc.Layer.extend({
         // if (this.debugNumFrames > 600 && dt > 0.06)
         //     cc.director.pause();
         //debug
-        this.labelPool.setString(" Items: " + this.animationLayer.world.factory.objectPool.available["Item"].length +
-            ", Ground: " + this.animationLayer.world.factory.objectPool.available["Ground"].length +
-            ", Obstacles: " + this.animationLayer.world.factory.objectPool.available["Obstacle"].length +
-            ", Inuse: " + this.animationLayer.getChildrenCount()+
-            ", Num created: " + this.animationLayer.world.factory.objectPool.testCoutCreated +
-            "\n, Num created Animation: " + this.animationLayer.world.factory.testNumCreatedAnimation +
-            ", Num frames: " + ++this.debugNumFrames +
-            ", DeltaTime: " + dt);
+        // this.labelPool.setString(" Items: " + this.animationLayer.world.factory.objectPool.available["Item"].length +
+        //     ", Ground: " + this.animationLayer.world.factory.objectPool.available["Ground"].length +
+        //     ", Obstacles: " + this.animationLayer.world.factory.objectPool.available["Obstacle"].length +
+        //     ", Inuse: " + this.animationLayer.getChildrenCount()+
+        //     ", Num created: " + this.animationLayer.world.factory.objectPool.testCoutCreated +
+        //     "\n, Num created Animation: " + this.animationLayer.world.factory.testNumCreatedAnimation +
+        //     ", Num frames: " + ++this.debugNumFrames +
+        //     ", DeltaTime: " + dt);
     }
 });

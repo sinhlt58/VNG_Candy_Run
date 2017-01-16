@@ -124,16 +124,13 @@ var LayerPlayAnimation = cc.Layer.extend({
         //run ini skills for character
         this.character.runSkillsInit();
 
+        Camera.init(this);
+
         //create world with chunk data for world object.
         this.world = new World(cc.loader.getRes(res.chunks_json), this.factoryObject, this,
             this.character, this.pet);
 
         this.character.world = this.world;
-
-        Camera.init(this);
-
-        //init levels data
-        cr.level_manager.init(cc.loader.getRes(res.levels_json), this.world);
     },
     update: function (dt) {
         //handle inputs.
