@@ -46,6 +46,10 @@ var World = cc.Class.extend({
         //init collision detector.
         this.collisionDetector = new CollisionDetector(this);
 
+        //init levels data
+        cr.level_manager.init(cc.loader.getRes(res.levels_json), this);
+        this.currentLevelIn = cr.level_manager.getLevelByPosition(this.character.getPosition());
+
     },
     update:function (dt) {
         //update collision.
@@ -56,7 +60,7 @@ var World = cc.Class.extend({
         if (this.isNeedToUpdateLevelIn){
             this.currentLevelIn = cr.level_manager.getLevelByPosition(this.character.getPosition());
         }
-        cc.log("Level in: ", cr.level_manager.getLevelByPosition(this.character.getPosition()));
+        // cc.log("Level in: ", cr.level_manager.getLevelByPosition(this.character.getPosition()));
 
         this.pet.update(dt);
 
@@ -309,6 +313,26 @@ var World = cc.Class.extend({
             var distanceToCharacter = Math.sqrt(( (objectPos.x - characterPos.x)*(objectPos.x - characterPos.x)
             + (objectPos.y - characterPos.y)*(objectPos.y - characterPos.y) ));
             if (object instanceof Item && distanceToCharacter <= radius && object.sprite.isVisible()){
+                itemObjects.push(object);
+            }
+        }
+        return itemObjects;
+    },
+
+    getObjectItemsByTypeInRadius:function (characterPos, radius, objectType) {
+        var minXPos = characterPos.x - radius;
+        if (minXPos < 0) minXPos = 0;
+        var maxXPos = characterPos.x + radius;
+        var chunkIdsInRadius = this.getChunkIdsByRange(cc.p(minXPos, characterPos.y), cc.p(maxXPos, characterPos.y));
+        var objectsDataInRadius = this.getObjectsDataByChunkIds(chunkIdsInRadius);
+        var itemObjects = [];
+        for (var i=0; i<objectsDataInRadius.length; i++){
+            var object = objectsDataInRadius[i]["pObject"];
+            var objectPos = object.sprite.getPosition();
+            var distanceToCharacter = Math.sqrt(( (objectPos.x - characterPos.x)*(objectPos.x - characterPos.x)
+            + (objectPos.y - characterPos.y)*(objectPos.y - characterPos.y) ));
+            if (object instanceof Item && distanceToCharacter <= radius && object.sprite.isVisible()
+              && object.getObjectTypeId() == objectType){
                 itemObjects.push(object);
             }
         }

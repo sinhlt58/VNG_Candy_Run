@@ -74,7 +74,7 @@ var StateDie = StateMovement.extend({
 
         // cc.log('Enter Die');
         character.setVelocityX(0);
-        character.currentHP = character.hp;
+        character.currentHP = 500;
 
 
         // make character fall

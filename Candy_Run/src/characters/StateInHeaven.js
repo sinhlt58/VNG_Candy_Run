@@ -13,7 +13,7 @@ var StateInHeaven = StateMovement.extend({
 
     ctor: function () {
         this.flewToHeaven = false;
-        this.time = 5;
+        this.time = 15;
         this.passedTime = 0;
     },
 
@@ -41,7 +41,7 @@ var StateInHeaven = StateMovement.extend({
 
             character.animationController.setAnimation('fly', true);
             this.passedTime += dt;
-            character.setVelocityX(300);
+            character.setVelocityX(500);
 
             if (this.passedTime >= this.time) {
                 // use acceleration y here

@@ -14,10 +14,10 @@ var LayerLobbyBackground = cc.Layer.extend({
         this.backgroundImg= new cc.Sprite("#lobbyBg.png");
         this.addChild(this.backgroundImg);
         //cc.log("layer bg lobby created");
-        var visibleSize= this.getContentSize();
+        var visibleSize= cc.view.getVisibleSize();
+        var size = this.backgroundImg.getContentSize();
+        this.backgroundImg.setAnchorPoint(cc.p(0, 0));
 
-        this.backgroundImg.setScale(1.2, 1.2);
-
-        this.backgroundImg.setPosition(cc.p(visibleSize.width/2, visibleSize.height/2));
+        this.backgroundImg.setScale(visibleSize.width/size.width, visibleSize.height/size.height);
     }
 });
