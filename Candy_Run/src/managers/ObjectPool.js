@@ -21,7 +21,7 @@ var ObjectPool = cc.Class.extend({
             }else if(classType == "Ground"){
                 object = new Ground(sprite);
             }else if (classType == "Obstacle"){
-                sprite.setZOrder(-1);
+                sprite.setLocalZOrder(-1);
                 object = new Obstacle(sprite);
             }
             // object.sprite = new cc.Sprite();

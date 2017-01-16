@@ -12,7 +12,7 @@ var StateJumping = StateMovement.extend({
     },
     onEnter: function (character){
         //todo: set velocity and acceleration for owner
-        console.log("On Jumping running");
+        //console.log("On Jumping running");
 
         character.animationController.setAnimation('jump', false);
         var currentVelo= character.velocity;

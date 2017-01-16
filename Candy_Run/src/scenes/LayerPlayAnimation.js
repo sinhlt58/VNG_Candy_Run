@@ -108,10 +108,6 @@ var LayerPlayAnimation = cc.Layer.extend({
             cc.spriteFrameCache.addSpriteFrames(sprite_sheets_play[i], sprite_sheets_play[i+1]);
         }
 
-        for (i=0; i<sprite_sheets_background.length-1; i+=2){
-            cc.spriteFrameCache.addSpriteFrames(sprite_sheets_background[i], sprite_sheets_background[i+1]);
-        }
-
         //create object factory with data.
         this.factoryObject = new FactoryObject(cc.loader.getRes(res.class_types),
             cc.loader.getRes(res.item_effect_types), cc.loader.getRes(res.object_types),

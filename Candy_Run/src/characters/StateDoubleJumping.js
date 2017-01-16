@@ -11,7 +11,7 @@ var StateDoubleJumping = StateMovement.extend({
 
     },
     onEnter: function (character) {
-        cc.log('enter double jumping');
+       // cc.log('enter double jumping');
 
         character.animationController.setAnimation('doubleJump', false);
         var currentVelo= character.velocity;
@@ -20,6 +20,6 @@ var StateDoubleJumping = StateMovement.extend({
 
     },
     onExit: function (character) {
-        cc.log("exit double jumping");
+        //cc.log("exit double jumping");
     }
 });

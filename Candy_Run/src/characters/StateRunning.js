@@ -28,7 +28,7 @@ var StateRunning = StateMovement.extend({
         character.offsetCollX = - character.getContentSize().width / 2;
         character.offsetCollY = 0;
         character.animationController.setAnimation('run1', true);
-        console.log("On Enter Running");
+        //console.log("On Enter Running");
 
 
         character.body = {width: 90, height: 170};
