@@ -53,12 +53,18 @@ var sprite_sheets_play = [
 ];
 
 
-/*var GUI_sheet = [
-    "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.plist",
-    "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.png",
 
+var sprite_sheets_background = [
+    "res/assets/gui/backgrounds/background_map_1_2.plist",
+    "res/assets/gui/backgrounds/background_map_1_2.png",
+    "res/assets/gui/backgrounds/background_map_3_4.plist",
+    "res/assets/gui/backgrounds/background_map_3_4.png",
+    "res/assets/gui/backgrounds/background_map_5_6.plist",
+    "res/assets/gui/backgrounds/background_map_5_6.png",
+    "res/assets/gui/backgrounds/background_map_83_84.plist",
+    "res/assets/gui/backgrounds/background_map_83_84.png"
+];
 
-];*/
 
 
 var g_resources = [];
@@ -70,7 +76,13 @@ for (var i = 0; i < sprite_sheets_play.length; i++) {
     g_resources.push(sprite_sheets_play[i]);
 }
 
+<<<<<<< HEAD
 /*
 for(el in GUI_sheet){
     g_resources.push(GUI_sheet[el]);
 }*/
+=======
+for (i=0; i<sprite_sheets_background.length; i++){
+    g_resources.push(sprite_sheets_background[i]);
+}
+>>>>>>> 87f71b45e91df6cdcf3567a38afcfb74e0b68fe2

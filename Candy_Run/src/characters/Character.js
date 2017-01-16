@@ -17,7 +17,7 @@ var Character = cc.Class.extend({
 
     hp: null,
     currentHP: 0,
-    decreasingHPRate: 0.2,
+    decreasingHPRate: 0.1,
 
 
     //fixme: grounded property should not place here (some where else) :))
@@ -60,7 +60,6 @@ var Character = cc.Class.extend({
 
     ctor: function (jsonFile, atlasFile) {
 
-        cc.log(Math.sqrt(189));
         this.hp = 100;
 
         this.currentHP = this.hp;

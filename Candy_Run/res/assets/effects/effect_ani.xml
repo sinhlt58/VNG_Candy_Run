@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<AnimationConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="jelly" numberAnimation="10">
+	<animation name="char_magnet_aura" fps="10" loop="true">
+		<frame>effect08_magnet_0.png</frame>
+		<frame>effect08_magnet_1.png</frame>
+		<frame>effect08_magnet_2.png</frame>
+		<frame>effect08_magnet_3.png</frame>
+		<frame>effect08_magnet_4.png</frame>
+		<frame>effect08_magnet_5.png</frame>
+		<frame>effect08_magnet_6.png</frame>
+		<frame>effect08_magnet_7.png</frame>
+		
+	</animation>
+	<animation name="big_health_star" fps="6" loop="false">
+		<frame>effect15_bigbottle1_0.png</frame>
+		<frame>effect15_bigbottle1_1.png</frame>
+		<frame>effect15_bigbottle1_2.png</frame>
+		<frame>effect15_bigbottle1_3.png</frame>
+		<frame>effect15_bigbottle1_4.png</frame>
+		<frame>effect15_bigbottle1_5.png</frame>
+		<frame>effect15_bigbottle1_6.png</frame>
+		
+	</animation>
+	<animation name="big_health_aura" fps="6" loop="false">
+		<frame>effect16_bigbottle2_0.png</frame>
+		<frame>effect16_bigbottle2_1.png</frame>
+		<frame>effect16_bigbottle2_2.png</frame>
+		<frame>effect16_bigbottle2_3.png</frame>
+		<frame>effect16_bigbottle2_4.png</frame>
+		<frame>effect16_bigbottle2_5.png</frame>
+		<frame>effect16_bigbottle2_6.png</frame>
+		<frame>effect16_bigbottle2_7.png</frame>
+	</animation>
+	
+	<animation name="yellow_star" fps="3" loop="false">
+		<frame>ov_game_eff_ye_0.png</frame>
+		<frame>ov_game_eff_ye_1.png</frame>
+	</animation>
+	<animation name="white_star" fps="3" loop="false">
+		<frame>ov_game_eff_wh_0.png</frame>
+		<frame>ov_game_eff_wh_1.png</frame>
+	</animation>
+	<animation name="pet_magnet_aura" fps="20" loop="true">
+		<frame>effect05_magnet_0.png</frame>
+		<frame>effect05_magnet_1.png</frame>
+		<frame>effect05_magnet_2.png</frame>
+		<frame>effect05_magnet_3.png</frame>
+		<frame>effect05_magnet_4.png</frame>
+		<frame>effect05_magnet_5.png</frame>
+	</animation>
+	<animation name="trap_crash_ani" fps="10" loop="false">
+		<frame>effect11_obstacle_0.png</frame>
+		<frame>effect11_obstacle_1.png</frame>
+		<frame>effect11_obstacle_2.png</frame>
+	</animation>
+	<animation name="trap_burn_ani" fps="10" loop="false">
+		<frame>effect09_bomb_0.png</frame>
+		<frame>effect09_bomb_1.png</frame>
+		<frame>effect09_bomb_2.png</frame>
+		<frame>effect09_bomb_3.png</frame>
+		<frame>effect09_bomb_4.png</frame>
+		<frame>effect09_bomb_5.png</frame>
+		<frame>effect09_bomb_6.png</frame>
+	</animation>
+	<animation name="make_coin_ani" fps="10" loop="false">
+		<frame>effect06_coin_0.png</frame>
+		<frame>effect06_coin_1.png</frame>
+		<frame>effect06_coin_2.png</frame>
+		<frame>effect06_coin_3.png</frame>
+		<frame>effect06_coin_4.png</frame>
+		<frame>effect06_coin_5.png</frame>
+		<frame>effect06_coin_6.png</frame>
+	</animation>
+	<animation name="jellybear_2_1_destroy" fps="10" loop="false">
+		<frame>jelly_big_effect_0.png</frame>
+		<frame>jelly_big_effect_1.png</frame>
+		<frame>jelly_big_effect_2.png</frame>
+		<frame>jelly_big_effect_3.png</frame>
+		<frame>jelly_big_effect_4.png</frame>
+	</animation>
+	<animation name="jellybear_2_0_destroy" fps="10" loop="false">
+		<frame>jelly_big_fox_effect_0.png</frame>
+		<frame>jelly_big_fox_effect_1.png</frame>
+		<frame>jelly_big_fox_effect_2.png</frame>
+		<frame>jelly_big_fox_effect_3.png</frame>
+		<frame>jelly_big_fox_effect_4.png</frame>
+	</animation>
+	<animation name="transform_bear_ani" fps="12" loop="false">
+		<frame>effect07_sjelly_0.png</frame>
+		<frame>effect07_sjelly_1.png</frame>
+		<frame>effect07_sjelly_2.png</frame>
+		<frame>effect07_sjelly_3.png</frame>
+		<frame>effect07_sjelly_4.png</frame>
+		<frame>effect07_sjelly_5.png</frame>
+		<frame>effect07_sjelly_6.png</frame>
+		<frame>effect07_sjelly_7.png</frame>
+	</animation>
+	<animation name="jump_smoke_ani" fps="10" loop="false">
+		<frame>jump_smoke_0.png</frame>
+		<frame>jump_smoke_1.png</frame>
+		<frame>jump_smoke_2.png</frame>
+	</animation>
+	<animation name="trap_smoke_ani" fps="10" loop="false">
+		<frame>trap_smoke0.png</frame>
+		<frame>trap_smoke1.png</frame>
+		<frame>trap_smoke2.png</frame>
+		<frame>trap_smoke3.png</frame>
+		<frame>trap_smoke4.png</frame>
+		<frame>trap_smoke5.png</frame>
+	</animation>
+
+	<animation name="alphabet_blue_ani" fps="10" loop="false">
+		<frame>ov_game_eff_blue_0.png</frame>
+		<frame>ov_game_eff_blue_1.png</frame>
+	</animation>
+
+	<animation name="alphabet_green_ani" fps="10" loop="false">
+		<frame>ov_game_eff_green_0.png</frame>
+		<frame>ov_game_eff_green_1.png</frame>
+	</animation>
+	
+	<animation name="alphabet_purple_ani" fps="10" loop="false">
+		<frame>ov_game_eff_purple_0.png</frame>
+		<frame>ov_game_eff_purple_1.png</frame>
+	</animation>
+	
+	<animation name="alphabet_red_ani" fps="10" loop="false">
+		<frame>ov_game_eff_red_0.png</frame>
+		<frame>ov_game_eff_red_1.png</frame>
+	</animation>
+	
+	<animation name="alphabet_yellow_ani" fps="10" loop="false">
+		<frame>ov_game_eff_yellow_0.png</frame>
+		<frame>ov_game_eff_yellow_1.png</frame>
+	</animation>
+
+	<animation name="muscle_impact_ani" fps="30" loop="false">
+		<frame>muscleImpact_00.png</frame>
+		<frame>muscleImpact_01.png</frame>
+		<frame>muscleImpact_02.png</frame>
+		<frame>muscleImpact_03.png</frame>
+		<frame>muscleImpact_04.png</frame>
+	</animation>
+	
+	<animation name="revive_ani" fps="15" loop="true">
+		<frame>revive_00.png</frame>
+		<frame>revive_01.png</frame>
+		<frame>revive_02.png</frame>
+		<frame>revive_03.png</frame>
+		<frame>revive_04.png</frame>
+		<frame>revive_05.png</frame>
+	</animation>
+	
+	<animation name="hit_obstacles_ani" fps="24" loop="false">
+		<frame>effect_hit_obstacles_0.png</frame>
+		<frame>effect_hit_obstacles_1.png</frame>
+		<frame>effect_hit_obstacles_2.png</frame>
+		<frame>effect_hit_obstacles_3.png</frame>
+		<frame>effect_hit_obstacles_4.png</frame>
+	</animation>
+	
+</AnimationConfig>
