@@ -115,6 +115,10 @@
     "src/skills/SkillManager.js",
 
     "src/scenes/BonusTimeGui.js",
-    "src/scenes/GuiRegister.js"
+    "src/scenes/GuiRegister.js",
+
+    "src/scenes/LayerPlayBackground1.js",
+    "src/scenes/LayerPlayBackground2.js",
+    "src/managers/LevelsManager.js"
   ]
 }

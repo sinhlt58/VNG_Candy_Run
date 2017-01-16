@@ -4,12 +4,20 @@
 var ScenePlay = cc.Scene.extend({
     onEnter:function () {
         this._super();
-        this.addChild(new LayerPlayBackground());
+
+        for (var i=0; i<sprite_sheets_background.length-1; i+=2){
+            cc.spriteFrameCache.addSpriteFrames(sprite_sheets_background[i], sprite_sheets_background[i+1]);
+        }
+
         var animationLayer = new LayerPlayAnimation();
         this.addChild(animationLayer);
         var debugLayer = new LayerPlayDebug(animationLayer);
         this.addChild(debugLayer);
         this.addChild(new LayerPlayStatus(animationLayer));
+
+        this.addChild(new LayerPlayBackground2());
+        this.addChild(new LayerPlayBackground1());
+
 
         this.scheduleUpdate();
     },

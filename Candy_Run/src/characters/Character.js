@@ -58,9 +58,11 @@ var Character = cc.Class.extend({
 
     world:null,
 
+    currentLevelIn:null,
+
     ctor: function (jsonFile, atlasFile) {
 
-        this.hp = 100;
+        this.hp = 10000;
 
         this.currentHP = this.hp;
 
@@ -111,6 +113,7 @@ var Character = cc.Class.extend({
 
 
         this.skills = [];
+        this.currentLevelIn = 1;
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
@@ -121,7 +124,7 @@ var Character = cc.Class.extend({
 
 
         if (this.getPosition().y + this.getContentSize().height >= cc.view.getVisibleSize().height) {
-            cc.log("Higher Screen");
+            // cc.log("Higher Screen");
         }
 
         //if(this.getPosition().y>=cc.view.getVisibleSize());

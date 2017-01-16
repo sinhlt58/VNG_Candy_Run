@@ -8,6 +8,7 @@ var Player = cc.Class.extend({
     currentScore:0,
     characters: null,
     pets: null,
+    pCurrentCharacter:null,
     ctor: function () {
         //read files here.
         this.currentMoney = 100000;

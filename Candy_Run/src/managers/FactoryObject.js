@@ -114,6 +114,7 @@ var FactoryObject = cc.Class.extend({
             }
         }
         graphicsParent.addChild(character.spAnimation);
+        cr.game.getPlayer().pCurrentCharacter = character;
         return character;
     },
     getPetById:function (petId, graphicsParent, characterOwner) {

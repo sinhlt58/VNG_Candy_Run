@@ -12,7 +12,6 @@ var StateGiantActive = StateGiant.extend({
 
     update: function (dt, character) {
         this.currentCountTime += dt;
-        cc.log(this.currentCountTime);
         if (this.currentCountTime >= this.maxGiantTime){
             character.stateMachine.changeState("stateGiant", new StateGiantDisactive());
         }

@@ -69,7 +69,6 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.BUTTON_PLAY = new ccui.Button("play.png", "", "", ccui.Widget.PLIST_TEXTURE);
         this.BUTTON_PLAY.setPosition(cc.p(slotPlayPos.x, slotPlayPos.y - 10));
         this.addChild(this.BUTTON_PLAY);
-        this.addChild(this.BUTTON_PLAY);
         this.BUTTON_PLAY.addTouchEventListener(this.handleButtonEvents, this);
 
 

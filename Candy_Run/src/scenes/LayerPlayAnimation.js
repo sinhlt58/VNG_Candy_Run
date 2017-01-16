@@ -33,7 +33,7 @@ var LayerPlayAnimation = cc.Layer.extend({
 
                 if(key==cc.KEY.g){
 
-                    cc.log("G");
+                    // cc.log("G");
                     var character= e.getCurrentTarget().character;
 
                     if(character.stateMachine.stateGiant instanceof StateGiantActive){
@@ -131,6 +131,9 @@ var LayerPlayAnimation = cc.Layer.extend({
         this.character.world = this.world;
 
         Camera.init(this);
+
+        //init levels data
+        cr.level_manager.init(cc.loader.getRes(res.levels_json), this.world);
     },
     update: function (dt) {
         //handle inputs.

@@ -11,6 +11,9 @@ var World = cc.Class.extend({
     isNeedToInitVisibleChunks:false,
     debugDrawNode:null,
     pet:null,
+
+    isNeedToUpdateLevelIn: true,
+    currentLevelIn: 1,
     ctor:function (chunkData, factory, graphicsParent, character, pet) {
         this.chunks = chunkData;
         this.factory = factory;
@@ -42,12 +45,18 @@ var World = cc.Class.extend({
 
         //init collision detector.
         this.collisionDetector = new CollisionDetector(this);
+
     },
     update:function (dt) {
         //update collision.
         this.collisionDetector.update(dt);
 
         this.character.update(dt);
+
+        if (this.isNeedToUpdateLevelIn){
+            this.currentLevelIn = cr.level_manager.getLevelByPosition(this.character.getPosition());
+        }
+        cc.log("Level in: ", cr.level_manager.getLevelByPosition(this.character.getPosition()));
 
         this.pet.update(dt);
 

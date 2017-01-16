@@ -23,7 +23,9 @@ var res = {
     test_background1_png: "res/assets/gui/scene_play/background/tm02_bg1.jpg",
     test_button: "res/assets/gui/scene_lobby/gui_main/play.png",
     main_lobby_plist: "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.plist",
-    main_lobby_png: "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.png"
+    main_lobby_png: "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.png",
+
+    levels_json: "res/data/levels.json"
 };
 
 var sprite_sheets_play = [
@@ -43,8 +45,8 @@ var sprite_sheets_play = [
     "res/assets/gui/pets/gui_pets.png",
     "res/assets/gui/scene_play/end_game/gui_end_game.plist",
     "res/assets/gui/scene_play/end_game/gui_end_game.png",
-    "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.plist",
-    "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.png",
+    // "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.plist",
+    // "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.png",
 
     "res/assets/pets/pet_zombie.plist",
     "res/assets/pets/pet_zombie.png",

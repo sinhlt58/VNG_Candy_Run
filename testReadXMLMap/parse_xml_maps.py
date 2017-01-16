@@ -113,6 +113,7 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
     tree = ET.parse(mapFile)
     root = tree.getroot()
     maxXSoFarInMap = 0
+    firstItem = True
     for item in root.iter('Item'):
         textureName = item[7].text.replace("\\", "-")
         realTextureName = re.split('-', textureName)[-1]
@@ -122,6 +123,9 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
         if x > maxXSoFarInMap:
             maxXSoFarInMap = x
         x = x + preMapWidth
+        if firstItem == True:
+        	#print "levelX", x
+        	firstItem = False
         if x > maxXOnAllMap:
             maxXOnAllMap = x
 
@@ -131,10 +135,10 @@ for mapFile in ['MAP82.xml', 'MAP83.xml']:
         chunkDatasByObjectTypeIds[realObjectTypeId].append({"x": x, "y" : y})
 
     preMapWidth = preMapWidth + maxXSoFarInMap
-    print preMapWidth
+    #print 'preMapWidth', preMapWidth
 
 #save endX-1
-print maxXOnAllMap
+#print "maxXAllMap", maxXOnAllMap
 chunks['endX-1'] = maxXOnAllMap + 92
 chunks['loopX-1'] = 0
 
@@ -178,6 +182,7 @@ for i in range(1, 7):
         chunkDatasByObjectTypeIds[realObjectTypeId].append({"x": x, "y" : y})
 
     preMapWidth = preMapWidth + maxXSoFarInMap
+    print "level: ", i, " mapXMin: ", preMapWidth
 
 #save endX-0
 print maxXOnAllMap

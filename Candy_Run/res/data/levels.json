@@ -1,0 +1,59 @@
+[
+	{
+		"level" : 83,
+		"minX" : 0,
+		"maxX" : 5679,
+		"minY" : 781,
+		"maxY" : 1560
+	},
+	{
+		"level" : 84,
+		"minX" : 5680,
+		"maxX" : 9960,
+		"minY" : 781,
+		"maxY" : 1560
+	},
+
+	{
+		"level" : 1,
+		"minX" : 0,
+		"maxX" : 12286,
+		"minY" : 0,
+		"maxY" : 780
+ 	},
+	{
+		"level" : 2,
+		"minX" : 12287,
+		"maxX" : 26673,
+		"minY" : 0,
+		"maxY" : 780
+	},
+	{
+		"level" : 3,
+		"minX" : 26674,
+		"maxX" : 43637,
+		"minY" : 0,
+		"maxY" : 780
+	},
+	{
+		"level" : 4,
+		"minX" : 43638,
+		"maxX" : 68939,
+		"minY" : 0,
+		"maxY" : 780
+	},
+	{
+		"level" : 5,
+		"minX" : 68940,
+		"maxX" : 98378,
+		"minY" : 0,
+		"maxY" : 780
+	},
+	{
+		"level" : 6,
+		"minX" : 98379,
+		"maxX" : 136697,
+		"minY" : 0,
+		"maxY" : 780
+	}
+]
