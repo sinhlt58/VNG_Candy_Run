@@ -90,13 +90,25 @@ var LayerPlayBackground = cc.Layer.extend({
     fadeInMapLevel:function (level, duration) {
         var currentBackgrounds = this.levelMaps[level]["sprites"];
         for (var i=0; i < currentBackgrounds.length; i++){
-            currentBackgrounds[i].runAction(new cc.FadeIn(duration));
+            var fadeInAction = new cc.FadeIn(duration);
+            var sequence = new cc.Sequence(fadeInAction,
+                new cc.CallFunc(this.setVisibleBackground(currentBackgrounds[i], true), this));
+            currentBackgrounds[i].runAction(sequence);
+
         }
     },
     fadeOutMapLevel:function (level, duration) {
         var currentBackgrounds = this.levelMaps[level]["sprites"];
         for (var i=0; i < currentBackgrounds.length; i++){
-            currentBackgrounds[i].runAction(new cc.FadeOut(duration));
+            var fadeInAction = new cc.FadeOut(duration);
+            var sequence = new cc.Sequence(fadeInAction,
+                new cc.CallFunc(this.setVisibleBackground(currentBackgrounds[i], false), this));
+            currentBackgrounds[i].runAction(sequence);
+
         }
+    },
+
+    setVisibleBackground:function (background, val) {
+        background.setVisible(val);
     }
 });

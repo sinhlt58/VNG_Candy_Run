@@ -11,7 +11,9 @@ var ItemEffectTransform = ItemEffect.extend({
             var replaceCoin = world.factory.getAObjectByObjectTypeId(globals.OBJECT_TYPE_BIG_COIN);
             var jellyPos = jellies[i].sprite.getPosition();
             var jellyObjectData = jellies[i].sprite.getUserData();
+            jellies[i].sprite.removeFromParent();
             replaceCoin.sprite.setPosition(jellyPos);
+            world.graphicsParent.addChild(replaceCoin.sprite);
             jellyObjectData["pObject"] = replaceCoin;
             replaceCoin.sprite.setUserData(jellyObjectData);
             world.factory.releaseObject(jellies[i]);
