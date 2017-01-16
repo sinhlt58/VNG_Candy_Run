@@ -4,7 +4,7 @@
 var StateObstacleNormal=  {
     actionTag : 0,
     onEnter: function (obstacle) {
-        cc.log("obstacle :   ", obstacle);
+        //cc.log("obstacle :   ", obstacle);
         var currentCameraY = Camera.getCurrentCameraY();
         var defaultPos = obstacle.sprite.getPosition();
         var size = obstacle.sprite.getContentSize();

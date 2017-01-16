@@ -11,19 +11,23 @@ var StateReborn = StateMovement.extend({
 
 
     ctor: function () {
-        this.duration = 1;
+        this.duration = 0.1;
         this.timePass = 0;
 
     },
     onEnter: function (character) {
         character.animationController.setAnimation("reBorn", false);
-
+        character.setAccelerationY(0);
+        character.stateMachine.changeState("stateVisible", new StateActiveInvisible());
 
     },
     onExit: function (character) {
 
     },
     update: function (dt, character) {
+
+
+
         this.timePass+=dt;
         if(this.timePass>=this.duration){
             character.stateMachine.changeState("stateMovement", new StateRunning());

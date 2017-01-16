@@ -5,7 +5,7 @@ var StateMachineObstacle= cc.Class.extend({
 
 
     ctor: function (owner) {
-        cc.log(owner);
+        //cc.log(owner);
         this.owner=owner;
         this.stateObstacle = StateObstacleNormal;
 

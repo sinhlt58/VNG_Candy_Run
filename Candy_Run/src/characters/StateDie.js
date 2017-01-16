@@ -24,15 +24,29 @@ var StateDie = StateMovement.extend({
     },
     update: function (dt, character) {
         if (character.getPosition().y <= globals.GROUND_HEIGHT) {
+            cc.log("lower ground");
             this.grounded = true;
+            character.setAccelerationY(0);
         }
 
         if (this.timePass >= this.duration){
 
-            character.stateMachine.changeState("stateMovement", new StateReborn());
+            //if()
+
+            if(character.numOfLife>=0){
+                cc.log("change to reborn");
+                character.stateMachine.changeState("stateMovement", new StateReborn());
+            }else{
+
+            }
+
+
+
+
+
         }
 
-        if (this.grounded = true) {
+        if (this.grounded == true) {
             this.timePass += dt;
             character.setPositionY(90);
             character.setAccelerationY(0);
@@ -57,13 +71,19 @@ var StateDie = StateMovement.extend({
         //character.animationController.setAnimation('die', false);
 
         //stop the character
+
+        cc.log('Enter Die');
         character.setVelocityX(0);
         character.currentHP = character.hp;
 
 
         // make character fall
         if (character.getPosition().x > 90) {
-            character.setAccelerationY(-300);
+            character.setAccelerationY(-500);
+
+            cc.log("y>90");
+
+            character.animationController.setAnimation("die", false);
         }
 
 
