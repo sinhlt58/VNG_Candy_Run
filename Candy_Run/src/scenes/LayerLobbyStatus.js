@@ -160,6 +160,10 @@ var LayerLobbyStatus = cc.Layer.extend({
         //var
 
 
+
+
+
+
     },
 
     handleButtonEvents: function (sender, type) {
