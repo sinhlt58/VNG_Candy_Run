@@ -15,12 +15,15 @@ var LayerPlayStatus = cc.Layer.extend({
 
     bonusTimeGui: null,
 
-    hpProcessBar:null,
+    hpProcessBar: null,
 
-    layerPlayEnd:null,
+    layerPlayEnd: null,
 
 
     playerSliding: null,
+
+
+    dieSet: false,
 
     ctor: function (animationLayer) {
         this._super();
@@ -54,20 +57,20 @@ var LayerPlayStatus = cc.Layer.extend({
         this.labelScore = new cc.LabelTTF("", "Helvetica");
         size = this.labelScore.getContentSize();
         this.labelScore.setFontSize(35);
-        this.labelScore.setPosition(visibleSize.width / 2, visibleSize.height - size.height / 2 - 0.04*visibleSize.height);
+        this.labelScore.setPosition(visibleSize.width / 2, visibleSize.height - size.height / 2 - 0.04 * visibleSize.height);
         this.labelScore.setColor(cc.color(255, 255, 255));
         this.addChild(this.labelScore);
 
         var scoreIcon = new cc.Sprite("#G.png");
         size = scoreIcon.getContentSize();
-        scoreIcon.setPosition(this.labelScore.getPosition().x - 70 , this.labelScore.getPosition().y);
+        scoreIcon.setPosition(this.labelScore.getPosition().x - 70, this.labelScore.getPosition().y);
         this.addChild(scoreIcon);
 
         this.labelMoney = new cc.LabelTTF("", "Helvetica");
         size = this.labelMoney.getContentSize();
         this.labelMoney.setFontSize(35);
         this.labelMoney.setColor(cc.color(255, 255, 255));
-        this.labelMoney.setPosition(visibleSize.width / 2 + 200, visibleSize.height - size.height / 2 -  0.04*visibleSize.height);
+        this.labelMoney.setPosition(visibleSize.width / 2 + 200, visibleSize.height - size.height / 2 - 0.04 * visibleSize.height);
         this.addChild(this.labelMoney);
 
         var moneyScore = new cc.Sprite("#gold.png");
@@ -91,18 +94,18 @@ var LayerPlayStatus = cc.Layer.extend({
         //HP process bar
         var hpBackground = new cc.Sprite("#hpProgressBarBg.png");
         size = hpBackground.getContentSize();
-        hpBackground.setPosition(visibleSize.width*0.01, visibleSize.height - 82);
-        hpBackground.setAnchorPoint(cc.p(0,0));
+        hpBackground.setPosition(visibleSize.width * 0.01, visibleSize.height - 82);
+        hpBackground.setAnchorPoint(cc.p(0, 0));
         this.addChild(hpBackground);
 
         this.hpProcessBar = new cc.Sprite("#hpProgressBar.png");
         size = this.hpProcessBar.getContentSize();
-        this.hpProcessBar.setPosition(visibleSize.width*0.01 + 2, visibleSize.height - 82 + 2);
-        this.hpProcessBar.setAnchorPoint(cc.p(0,0));
+        this.hpProcessBar.setPosition(visibleSize.width * 0.01 + 2, visibleSize.height - 82 + 2);
+        this.hpProcessBar.setAnchorPoint(cc.p(0, 0));
         this.addChild(this.hpProcessBar);
 
         //BONUSTIME GUI
-        this.bonusTimeGui = new BonusTimeGui(0.02*visibleSize.height, this.hpProcessBar.getPosition().x, this);
+        this.bonusTimeGui = new BonusTimeGui(0.02 * visibleSize.height, this.hpProcessBar.getPosition().x, this);
 
 
         //crete layer end game
@@ -111,19 +114,21 @@ var LayerPlayStatus = cc.Layer.extend({
         this.layerPlayEnd.setVisible(false);
     },
 
-    update:function (dt) {
-        if(this.animationLayer.character.isDead()){
-            this.animationLayer.character.stateMachine.changeState("stateMovement", new StateDie());
-            // this.animationLayer.pause();
+    update: function (dt) {
 
-            // this.layerPlayEnd.setMoney(cr.game.getPlayer().currentMoney);
-            // this.layerPlayEnd.setScore(cr.game.getPlayer().currentScore);
-            // this.layerPlayEnd.setVisible(true);
+
+        if (this.animationLayer.character.stateMachine.stateMovement instanceof StateDie &&
+            this.animationLayer.character.numOfLife < 0 ) {
+            this.animationLayer.pause();
+            this.layerPlayEnd.setMoney(cr.game.getPlayer().currentMoney);
+            this.layerPlayEnd.setScore(cr.game.getPlayer().currentScore);
+            this.layerPlayEnd.setVisible(true);
         }
+
 
         this.bonusTimeGui.update();
         var itemEffectLetter = cr.item_effect_manager.getItemEffectByType(globals.ITEM_EFFECT_LETTER);
-        if (itemEffectLetter.isFullString()){
+        if (itemEffectLetter.isFullString()) {
             this.animationLayer.world.setTriggerHeaven(true);
             itemEffectLetter.resetLetters();
             this.animationLayer.world.character.stateMachine.changeState("stateMovement", new StateInHeaven());
@@ -132,16 +137,16 @@ var LayerPlayStatus = cc.Layer.extend({
         this.labelScore.setString(cr.game.getPlayer().currentScore);
         this.labelMoney.setString(cr.game.getPlayer().currentMoney);
         //update hp process bar.
-        var ratioHP = parseFloat(this.animationLayer.character.getHP()/ this.animationLayer.character.getMaxHP());
+        var ratioHP = parseFloat(this.animationLayer.character.getHP() / this.animationLayer.character.getMaxHP());
         if (ratioHP <= 0)
             ratioHP = 0;
         this.hpProcessBar.setScaleX(ratioHP);
 
 
-        if(this.animationLayer.character.stateMachine.stateMovement instanceof StateSliding){
+        if (this.animationLayer.character.stateMachine.stateMovement instanceof StateSliding) {
             // no change
         }
-        else if(this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning && this.playerSliding){
+        else if (this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning && this.playerSliding) {
             this.animationLayer.character.stateMachine.changeState('stateMovement', new StateSliding());
         }
     },
@@ -153,12 +158,11 @@ var LayerPlayStatus = cc.Layer.extend({
                 var character = this.animationLayer.character;
 
 
-
                 // flying
                 if (this.animationLayer.character.stateMachine.stateMovement instanceof StateFlying) {
                     var crState = this.animationLayer.character.stateMachine.stateMovement;
 
-                    if (crState.timePass >= crState.time == false&&( character.getPosition().y+ character.getContentSize().height<= cc.view.getVisibleSize().height)) {
+                    if (crState.timePass >= crState.time == false && ( character.getPosition().y + character.getContentSize().height <= cc.view.getVisibleSize().height)) {
                         character.setVelocityY(200);
                     } else {
                         // do nothing here
@@ -186,13 +190,13 @@ var LayerPlayStatus = cc.Layer.extend({
 
                 /*var character = this.animationLayer.character;
 
-                //only can slide when running
-                if (character.stateMachine.stateMovement instanceof StateRunning == true) {
-                    character.stateMachine.changeState('stateMovement', new StateSliding());
-                    cc.log("Enter sliding");
-                } else {
-                    cc.log('Sliding');
-                }*/
+                 //only can slide when running
+                 if (character.stateMachine.stateMovement instanceof StateRunning == true) {
+                 character.stateMachine.changeState('stateMovement', new StateSliding());
+                 cc.log("Enter sliding");
+                 } else {
+                 cc.log('Sliding');
+                 }*/
             }
         }
 
@@ -238,7 +242,7 @@ var LayerPlayStatus = cc.Layer.extend({
                 //character end slide
 
 
-                this.playerSliding=false;
+                this.playerSliding = false;
                 var character = this.animationLayer.character;
                 if (character.stateMachine.stateMovement instanceof StateSliding) {
                     character.stateMachine.changeState('stateMovement', new StateRunning(character));

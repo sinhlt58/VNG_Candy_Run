@@ -14,7 +14,8 @@ var SceneLobby = cc.Scene.extend({
         this.scheduleUpdate();
     },
     init:function () {
-        
+        var allImg= cc.spriteFrameCache;
+        allImg.addSpriteFrames(res.main_lobby_plist, res.main_lobby_png);
     },
     update:function (dt) {
         
