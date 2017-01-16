@@ -76,13 +76,8 @@ for (var i = 0; i < sprite_sheets_play.length; i++) {
     g_resources.push(sprite_sheets_play[i]);
 }
 
-<<<<<<< HEAD
-/*
-for(el in GUI_sheet){
-    g_resources.push(GUI_sheet[el]);
-}*/
-=======
+
 for (i=0; i<sprite_sheets_background.length; i++){
     g_resources.push(sprite_sheets_background[i]);
 }
->>>>>>> 87f71b45e91df6cdcf3567a38afcfb74e0b68fe2
+
