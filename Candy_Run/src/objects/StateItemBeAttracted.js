@@ -7,7 +7,8 @@ var StateItemBeAttracted = {
 
 
 
-    velocity: 1000,
+    velocity: 700,
+    //accleration: -50,
     onEnter: function (item) {
 
     },
@@ -37,6 +38,6 @@ var StateItemBeAttracted = {
 
     },
     onExit: function (item) {
-
+        this.velocity=700;
     }
 }

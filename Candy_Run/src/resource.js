@@ -25,6 +25,11 @@ var res = {
     main_lobby_plist: "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.plist",
     main_lobby_png: "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.png",
 
+
+    character_lobby_plist:"res/assets/gui/scene_lobby/gui_characters/lobby_character_layer.plist",
+    character_lobby_png:"res/assets/gui/scene_lobby/gui_characters/lobby_character_layer.png",
+
+
     levels_json: "res/data/levels.json"
 };
 
