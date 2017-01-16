@@ -11,10 +11,10 @@ var SkillPetRespawn = cc.Class.extend({
         character.numOfLife += 1;
     },
     update:function (character) {
-        if (character.isDead() && character.numOfLife > 0){
-            character.currentHP = this.respawnHP;
-            character.numOfLife -= 1;
-            character.respawnToPosition();
-        }
+        // if (character.isDead() && character.numOfLife > 0){
+        //     character.currentHP = this.respawnHP;
+        //     character.numOfLife -= 1;
+        //     character.respawnToPosition();
+        // }
     }
 });

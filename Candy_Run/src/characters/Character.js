@@ -61,7 +61,7 @@ var Character = cc.Class.extend({
     ctor: function (jsonFile, atlasFile) {
 
         cc.log(Math.sqrt(189));
-        this.hp = 1000;
+        this.hp = 100;
 
         this.currentHP = this.hp;
 
@@ -116,6 +116,9 @@ var Character = cc.Class.extend({
 
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
     update: function (dt) {
+
+
+        //cc.log(this.stateMachine.stateMovement);
 
 
         if (this.getPosition().y + this.getContentSize().height >= cc.view.getVisibleSize().height) {

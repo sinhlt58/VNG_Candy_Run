@@ -16,7 +16,7 @@ var StateReborn = StateMovement.extend({
 
     },
     onEnter: function (character) {
-        character.animationController.setAnimation("reborn", false);
+        character.animationController.setAnimation("reBorn", false);
 
 
     },

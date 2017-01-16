@@ -113,10 +113,12 @@ var LayerPlayStatus = cc.Layer.extend({
 
     update:function (dt) {
         if(this.animationLayer.character.isDead()){
-            this.animationLayer.pause();
-            this.layerPlayEnd.setMoney(cr.game.getPlayer().currentMoney);
-            this.layerPlayEnd.setScore(cr.game.getPlayer().currentScore);
-            this.layerPlayEnd.setVisible(true);
+            this.animationLayer.character.stateMachine.changeState("stateMovement", new StateDie());
+            // this.animationLayer.pause();
+
+            // this.layerPlayEnd.setMoney(cr.game.getPlayer().currentMoney);
+            // this.layerPlayEnd.setScore(cr.game.getPlayer().currentScore);
+            // this.layerPlayEnd.setVisible(true);
         }
 
         this.bonusTimeGui.update();

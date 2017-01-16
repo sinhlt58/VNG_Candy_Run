@@ -23,9 +23,15 @@ var StateDie = StateMovement.extend({
 
     },
     update: function (dt, character) {
-        if (character.getPosition().y <= 90) {
+        if (character.getPosition().y <= globals.GROUND_HEIGHT) {
             this.grounded = true;
         }
+
+        if (this.timePass >= this.duration){
+
+            character.stateMachine.changeState("stateMovement", new StateReborn());
+        }
+
         if (this.grounded = true) {
             this.timePass += dt;
             character.setPositionY(90);
@@ -37,7 +43,7 @@ var StateDie = StateMovement.extend({
             }
             // animation was set
             else{
-
+                cc.log(this.timePass);
             }
 
 
@@ -52,18 +58,18 @@ var StateDie = StateMovement.extend({
 
         //stop the character
         character.setVelocityX(0);
-
+        character.currentHP = character.hp;
 
 
         // make character fall
         if (character.getPosition().x > 90) {
-            this.character.setAccelerationY(-300);
+            character.setAccelerationY(-300);
         }
 
 
     },
     onExit: function (character) {
-
+        this.timePass = 0;
     }
 
 
