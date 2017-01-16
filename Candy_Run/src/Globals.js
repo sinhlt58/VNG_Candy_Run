@@ -30,4 +30,7 @@ globals.GROUND_HEIGHT = 90;
 globals.GROUND_WIDTH = 92;
 globals.NUM_OF_GROUND_PER_CHUNK = 2;
 
+globals.BACKGROUND_HEIGHT = 480;
+globals.BACKGROUND_WIDTH = 1200;
+
 var cr = {};

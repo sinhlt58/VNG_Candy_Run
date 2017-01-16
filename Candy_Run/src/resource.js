@@ -51,6 +51,19 @@ var sprite_sheets_play =  [
     "res/assets/pets/pet_cookie.png"
 ];
 
+
+var sprite_sheets_background = [
+    "res/assets/gui/backgrounds/background_map_1_2.plist",
+    "res/assets/gui/backgrounds/background_map_1_2.png",
+    "res/assets/gui/backgrounds/background_map_3_4.plist",
+    "res/assets/gui/backgrounds/background_map_3_4.png",
+    "res/assets/gui/backgrounds/background_map_5_6.plist",
+    "res/assets/gui/backgrounds/background_map_5_6.png",
+    "res/assets/gui/backgrounds/background_map_83_84.plist",
+    "res/assets/gui/backgrounds/background_map_83_84.png"
+];
+
+
 var g_resources = [];
 for (var i in res) {
     g_resources.push(res[i]);
@@ -58,4 +71,8 @@ for (var i in res) {
 
 for (i=0; i<sprite_sheets_play.length; i++){
     g_resources.push(sprite_sheets_play[i]);
+}
+
+for (i=0; i<sprite_sheets_background.length; i++){
+    g_resources.push(sprite_sheets_background[i]);
 }
