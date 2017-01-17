@@ -32,12 +32,19 @@ var res = {
 
 
     levels_json: "res/data/levels.json",
+
     music_lobby_bgm_ogg : "res/assets/music/ogg/lobby_bgm.ogg",
     music_main_bgm_ogg : "res/assets/music/ogg/main_bgm.ogg",
     music_fever_ogg : "res/assets/music/ogg/fever.ogg",
 
     sound_character_jump_mp3: "res/assets/using_sound/char04_jump.mp3",
-    sound_character_slide_mp3: "res/assets/using_sound/char04_slide.mp3"
+    sound_character_slide_mp3: "res/assets/using_sound/char04_slide.mp3",
+
+    gui_pet_cookie: "res/assets/gui/scene_lobby/gui_pets/pet_cookie.png",
+    gui_pet_zombie: "res/assets/gui/scene_lobby/gui_pets/pet_zombie.png",
+
+    gui_x_button: "res/assets/gui/scene_lobby/x_button.png"
+
 };
 
 var sprite_sheets_play = [

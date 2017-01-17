@@ -17,7 +17,6 @@ var LayerLobbyBackground = cc.Layer.extend({
         var visibleSize= cc.view.getVisibleSize();
         var size = this.backgroundImg.getContentSize();
         this.backgroundImg.setAnchorPoint(cc.p(0, 0));
-
         this.backgroundImg.setScale(visibleSize.width/size.width, visibleSize.height/size.height);
     }
 });

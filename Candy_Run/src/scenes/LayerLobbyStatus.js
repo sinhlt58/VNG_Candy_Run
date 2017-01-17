@@ -4,6 +4,17 @@
 var LayerLobbyStatus = cc.Layer.extend({
 
 
+
+
+    touchable: null,
+
+    layer_select_character: null,
+
+    layer_select_pets: null,
+
+
+
+
     SLOT_PLAY: null,
 
     BUTTON_PLAY: null,
@@ -35,12 +46,29 @@ var LayerLobbyStatus = cc.Layer.extend({
     HEART: null,
 
 
+
+    sp_ani_1: null,
+
+    sp_ani_2: null,
+
+
+
+    current_sp: null,
     /*btn_select_character: null,
      btn_select_pets*/
 
 
-    ctor: function () {
+    ctor: function (layer_s_ch, layer_s_pet) {
+
+
         this._super();
+
+
+        this.layer_select_character=layer_s_ch;
+        this.layer_select_pets= layer_s_pet;
+
+        this.touchable=true;
+
 
         this.HEART = [];
         this.init();
@@ -53,6 +81,7 @@ var LayerLobbyStatus = cc.Layer.extend({
 
 
         var visibleSize = this.getContentSize();
+
 
         // create slot play
         this.SLOT_PLAY = new cc.Sprite("#slotplay.png");
@@ -76,11 +105,13 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.BUTTON_CHARACTERS_SELECT = new ccui.Button("charShopBtn.png", "", "", ccui.Widget.PLIST_TEXTURE);
         this.BUTTON_CHARACTERS_SELECT.setPosition(cc.p(slotPlayPos.x, slotPlayPos.y + 75));
         this.addChild(this.BUTTON_CHARACTERS_SELECT);
+        this.BUTTON_CHARACTERS_SELECT.addTouchEventListener(this.handleButtonEvents, this);
 
 
         //create btn select pets
         this.BUTTON_PETS_SELECT = new ccui.Button("petShopBtn.png", "", "", ccui.Widget.PLIST_TEXTURE);
         this.BUTTON_PETS_SELECT.setPosition(cc.p(slotPlayPos.x + 100, slotPlayPos.y + 75));
+        this.BUTTON_PETS_SELECT.addTouchEventListener(this.handleButtonEvents, this);
         this.addChild(this.BUTTON_PETS_SELECT);
 
 
@@ -91,12 +122,26 @@ var LayerLobbyStatus = cc.Layer.extend({
 
 
         //create sp animation character
-        this.SP_ANIMATION = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
-        this.SP_ANIMATION.setAnimation(0, "run1", true);
-        this.SP_ANIMATION.setScale(0.7);
-        this.SP_ANIMATION.setTimeScale(0.7);
-        this.SP_ANIMATION.setPosition(cc.p(slotPlayPos.x, slotPlayPos.y + 120));
-        this.addChild(this.SP_ANIMATION);
+        this.sp_ani_1 = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
+        this.sp_ani_1.setAnimation(0, "run1", true);
+        this.sp_ani_1.setScale(0.7);
+        this.sp_ani_1.setTimeScale(0.7);
+        this.sp_ani_1.setPosition(cc.p(slotPlayPos.x, slotPlayPos.y + 120));
+        this.addChild(this.sp_ani_1);
+
+
+
+        this.sp_ani_2 = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas);
+        this.sp_ani_2.setAnimation(0, "run1", true);
+        this.sp_ani_2.setScale(0.7);
+        this.sp_ani_2.setTimeScale(0.7);
+        this.sp_ani_2.setPosition(cc.p(slotPlayPos.x, slotPlayPos.y + 120));
+        this.sp_ani_2.setVisible(false);
+        this.addChild(this.sp_ani_2);
+
+
+
+
 
 
         //create slot exp
@@ -158,26 +203,38 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.addChild(heart_1);
 
         //var
-
-
-
-
-
-
     },
 
     handleButtonEvents: function (sender, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
-            if (sender == this.BUTTON_PLAY) {
-                //cc.audioEngine.stopMusic();
-                cc.audioEngine.stopMusic(res.music_lobby_bgm_ogg);
-                cc.audioEngine.playMusic(res.music_main_bgm_ogg, true);
-                cc.director.pushScene(new ScenePlay());
-            } else if (sender == this.BUTTON_CHARACTERS_SELECT) {
 
-            } else if (sender == this.BUTTON_PETS_SELECT) {
+            //cc.log("click on layer");
+
+            // no layer cover this layer
+            if(this.touchable==true){
+                if (sender == this.BUTTON_PLAY) {
+
+                    cc.audioEngine.stopMusic(res.music_lobby_bgm_ogg);
+                    cc.audioEngine.playMusic(res.music_main_bgm_ogg, true);
+                    cc.director.pushScene(new ScenePlay());
+
+                } else if (sender == this.BUTTON_CHARACTERS_SELECT) {
+                    cc.log("Select character");
+                    this.layer_select_character.setVisible(true);
+                    this.touchable=false;
+
+                } else if (sender == this.BUTTON_PETS_SELECT) {
+                    cc.log("pet select");
+                    this.layer_select_pets.setVisible(true);
+                    this.touchable=false;
+                }
 
             }
+            //some layer is covering this layer
+            else{
+                // nothing here
+            }
+
         }
     }
 });
