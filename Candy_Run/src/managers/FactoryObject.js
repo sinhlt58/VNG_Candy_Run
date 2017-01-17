@@ -148,5 +148,36 @@ var FactoryObject = cc.Class.extend({
             graphicsParent.addChild(pet.sprite);
         }
         return pet;
+    },
+    runEffectAtPosition:function (effectTypeId, position, world) {
+        var effectObject = this.objectPool.getObjectByClassType(globals.CLASS_TYPE_EFFECT);
+        effectObject.setObjectTypeId(effectTypeId);
+        var effectObjectData = this.getObjectTypeData(effectTypeId);
+        var keyFrameName = effectObjectData["frameName"];
+        var startKeyFrame = effectObjectData["startKeyFrame"];
+        var endKeyFrame = effectObjectData["endKeyFrame"];
+        this.changeTextureOfSprite(effectObject.sprite, keyFrameName + startKeyFrame + ".png");
+        effectObject.sprite.setPosition(position);
+
+        //init animation
+        var frames = [];
+        for (var i=startKeyFrame; i<=endKeyFrame; i++){
+            frames.push(keyFrameName + i + ".png");
+        }
+        var animation = this.getAnimationByFrames(frames, effectObjectData["frameRate"]);
+        world.graphicsParent.addChild(effectObject.sprite);
+
+        effectObject.appearAtPosition(animation, position, world);
+
+        var a =1;
+    },
+    
+    getAnimationByFrames:function (frames, frameRate) {
+        var animFrames = [];
+        for (var i=0; i<frames.length; i++){
+            var frame = cc.spriteFrameCache.getSpriteFrame(frames[i]);
+            animFrames.push(frame);
+        }
+        return new cc.Animation(animFrames, frameRate);
     }
 });

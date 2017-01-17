@@ -110,6 +110,7 @@ var CollisionDetector = cc.Class.extend({
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_ITEM)) {
             var itemData = collisionObjects[globals.CLASS_TYPE_ITEM];
             for (i = 0; i < itemData.length; i++) {
+                this.world.factory.runEffectAtPosition(1002, character.getPosition(), this.world);//for testting
                 var itemDataObject = itemData[i];
                 var itemObject = itemDataObject["pObject"];
                 //do effects here
@@ -127,6 +128,7 @@ var CollisionDetector = cc.Class.extend({
             if (!(currentVisibleState instanceof StateActiveInvisible)){
                 character.stateMachine.changeState("stateVisible", new StateActiveInvisible());//actually singleton here.
                 character.stateMachine.changeState("stateHP", new StateTakingDamage());
+                this.world.factory.runEffectAtPosition(globals.EFFECT_HIT_OBSTCLE , character.getPosition(), this.world);
             }
             var currentGiantState = character.stateMachine.stateGiant;
             if (currentGiantState instanceof StateGiantActive){

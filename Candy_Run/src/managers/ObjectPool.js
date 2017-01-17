@@ -16,13 +16,15 @@ var ObjectPool = cc.Class.extend({
         var object;
         if (this.available[classType].length == 0){
             var sprite = new cc.Sprite();
-            if (classType == "Item"){
+            if (classType == globals.CLASS_TYPE_ITEM){
                 object = new Item(sprite);
-            }else if(classType == "Ground"){
+            }else if(classType == globals.CLASS_TYPE_GROUND){
                 object = new Ground(sprite);
-            }else if (classType == "Obstacle"){
+            }else if (classType == globals.CLASS_TYPE_OBSTACLE){
                 sprite.setLocalZOrder(-1);
                 object = new Obstacle(sprite);
+            }else if (classType == globals.CLASS_TYPE_EFFECT){
+                object = new Effect(sprite);
             }
             // object.sprite = new cc.Sprite();
             object.sprite.retain();

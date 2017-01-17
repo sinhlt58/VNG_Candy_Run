@@ -92,7 +92,7 @@ var LayerPlayBackground = cc.Layer.extend({
         for (var i=0; i < currentBackgrounds.length; i++){
             var fadeInAction = new cc.FadeIn(duration);
             var sequence = new cc.Sequence(fadeInAction,
-                new cc.CallFunc(this.setVisibleBackground(currentBackgrounds[i], true), this));
+                new cc.CallFunc(this.setVisibleBackground, currentBackgrounds[i], true));
             currentBackgrounds[i].runAction(sequence);
 
         }
@@ -102,13 +102,13 @@ var LayerPlayBackground = cc.Layer.extend({
         for (var i=0; i < currentBackgrounds.length; i++){
             var fadeInAction = new cc.FadeOut(duration);
             var sequence = new cc.Sequence(fadeInAction,
-                new cc.CallFunc(this.setVisibleBackground(currentBackgrounds[i], false), this));
+                new cc.CallFunc(this.setVisibleBackground, currentBackgrounds[i], false));
             currentBackgrounds[i].runAction(sequence);
 
         }
     },
 
-    setVisibleBackground:function (background, val) {
-        background.setVisible(val);
+    setVisibleBackground:function (backgroundSprite, val) {
+        this.setVisible(val);//this means backgrounds[i]
     }
 });

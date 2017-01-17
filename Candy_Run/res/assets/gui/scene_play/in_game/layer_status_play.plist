@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>B.png</key>
+            <key>b_B.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>E.png</key>
+            <key>b_E.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>I.png</key>
+            <key>b_I.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>M.png</key>
+            <key>b_M.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>N.png</key>
+            <key>b_N.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>O.png</key>
+            <key>b_O.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>S.png</key>
+            <key>b_S.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>T.png</key>
+            <key>b_T.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>U.png</key>
+            <key>b_U.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -333,7 +333,7 @@
             <key>size</key>
             <string>{1723,157}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9988b44f3713f42ed4e4333e9245d48c:e79e1b390e6460fb69f8cd83c4c7a688:607e3acec5b839e0fadb5a9577c1ecd1$</string>
+            <string>$TexturePacker:SmartUpdate:bec08d79feb020ca2367c1ea3ef7dabd:e79e1b390e6460fb69f8cd83c4c7a688:607e3acec5b839e0fadb5a9577c1ecd1$</string>
             <key>textureFileName</key>
             <string>layer_status_play.png</string>
         </dict>

@@ -76,6 +76,7 @@
     "src/objects/Ground.js",
     "src/objects/Item.js",
     "src/objects/Obstacle.js",
+    "src/objects/Effect.js",
     "src/objects/ItemEffect.js",
     "src/objects/ItemEffectFly.js",
     "src/objects/ItemEffectGiant.js",

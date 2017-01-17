@@ -589,5 +589,29 @@
 	    "classType": 2,
 	    "damage": 10,
 	    "texture": "m6_trap_0_2_1.png"
+	  },
+
+	  "1000" : {
+		"classType" : 3,
+		"frameName" : "effect16_bigbottle2_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 7,
+		"frameRate" : 0.2
+	  },
+
+	  "1001" : {
+		"classType" : 3,
+		"frameName" : "effect_hit_obstacles_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 4,
+		"frameRate" : 0.04
+	  },
+
+	  "1002" : {
+		"classType" : 3,
+		"frameName" : "effect08_magnet_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 7,
+		"frameRate" : 0.1
 	  }
 }

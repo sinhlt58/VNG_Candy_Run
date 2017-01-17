@@ -56,7 +56,10 @@ var sprite_sheets_play = [
     "res/assets/pets/pet_zombie.plist",
     "res/assets/pets/pet_zombie.png",
     "res/assets/pets/pet_cookie.plist",
-    "res/assets/pets/pet_cookie.png"
+    "res/assets/pets/pet_cookie.png",
+
+    "res/assets/effects/effect.plist",
+    "res/assets/effects/effect.png"
 ];
 
 

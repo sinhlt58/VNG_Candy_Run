@@ -50,6 +50,8 @@ var World = cc.Class.extend({
         cr.level_manager.init(cc.loader.getRes(res.levels_json), this);
         this.currentLevelIn = cr.level_manager.getLevelByPosition(this.character.getPosition());
 
+        //test effects
+        var testEffect = this.factory.runEffectAtPosition(1001, cc.p(500, 300), this);
     },
     update:function (dt) {
         //update collision.

@@ -17,7 +17,7 @@ var BonusTimeGui = cc.Class.extend({
         var trivialX = 1.5;
         for (var i=0; i<string.length; i++){
             var letter = string.charAt(i);
-            this.lettersStatus[letter] = new cc.Sprite("#" + letter + ".png");
+            this.lettersStatus[letter] = new cc.Sprite("#b_" + letter + ".png");
             this.lettersStatus[letter].setAnchorPoint(cc.p(0, 0));
             var letterSize = this.lettersStatus[letter].getContentSize();
             this.lettersStatus[letter].setPosition(initPositionX - trivialX*i, this.lettersBackground.getPosition().y + 4);

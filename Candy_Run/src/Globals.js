@@ -5,6 +5,7 @@ var globals = {};
 globals.CLASS_TYPE_ITEM = "Item";
 globals.CLASS_TYPE_GROUND = "Ground";
 globals.CLASS_TYPE_OBSTACLE = "Obstacle";
+globals.CLASS_TYPE_EFFECT = "Effect";
 
 globals.GUI_TYPE_STATIC = 0;
 globals.GUI_TYPE_BUTTON = 1;
@@ -34,5 +35,7 @@ globals.NUM_OF_GROUND_PER_CHUNK = 2;
 
 globals.BACKGROUND_HEIGHT = 480;
 globals.BACKGROUND_WIDTH = 1200;
+
+globals.EFFECT_HIT_OBSTCLE = 1001;
 
 var cr = {};
