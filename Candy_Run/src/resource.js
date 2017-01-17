@@ -64,6 +64,7 @@ var sprite_sheets_play = [
     "res/assets/gui/pets/gui_pets.png",
     "res/assets/gui/scene_play/end_game/gui_end_game.plist",
     "res/assets/gui/scene_play/end_game/gui_end_game.png",
+
     // "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.plist",
     // "res/assets/gui/scene_lobby/gui_main/gui_main_lobby.png",
 
