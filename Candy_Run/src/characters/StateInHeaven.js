@@ -56,7 +56,11 @@ var StateInHeaven = StateMovement.extend({
     },
 
     onEnter: function (character) {
+
+        cc.log("Enter heaven");
         character.animationController.setAnimation("enterFever", true);
+        character.setVelocity(cc.p(0, 400));
+
 
         //character.setAccelerationY()
 

@@ -13,6 +13,10 @@ var SceneLobby = cc.Scene.extend({
         var layerStatusLobby= new LayerLobbyStatus(layerSelectCharacter, layerSelectPets);
 
 
+        layerSelectCharacter.layerLobbyStatus= layerStatusLobby;
+        layerSelectPets.layerLobbyStatus= layerStatusLobby;
+
+
         this.addChild(layerBG);
         this.addChild(layerStatusLobby);
         this.addChild(layerSelectPets);

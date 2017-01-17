@@ -83,7 +83,7 @@ var CollisionDetector = cc.Class.extend({
                 var currentState= character.stateMachine.stateMovement;
                 currentState.fell= true;
                 character.setVelocityX(0);
-            }else if (character.stateMachine.stateMovement instanceof StateInHeaven ){
+            }else if (character.stateMachine.stateMovement instanceof StateInHeaven && character.getVelocity().y<=0 ){
                 character.stateMachine.changeState('stateMovement', new StateRunning());
 
 

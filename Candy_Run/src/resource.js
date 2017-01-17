@@ -33,7 +33,9 @@ var res = {
     levels_json: "res/data/levels.json",
 
     gui_pet_cookie: "res/assets/gui/scene_lobby/gui_pets/pet_cookie.png",
-    gui_pet_zombie: "res/assets/gui/scene_lobby/gui_pets/pet_zombie.png"
+    gui_pet_zombie: "res/assets/gui/scene_lobby/gui_pets/pet_zombie.png",
+
+    gui_x_button: "res/assets/gui/scene_lobby/x_button.png"
 };
 
 var sprite_sheets_play = [
