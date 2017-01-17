@@ -22,6 +22,11 @@ var StateJumping = StateMovement.extend({
         //todo: change later to shake the screen when giant and from jump to running.
         if(character.stateMachine.stateGiant instanceof StateGiantActive)
             Camera.shakeTheScreen(0.2);
+
+        var characterPos = character.getPosition();
+        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x, characterPos.y));
+        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x - 40, characterPos.y));
+        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x + 40, characterPos.y));
     },
     onExit: function (character) {
 

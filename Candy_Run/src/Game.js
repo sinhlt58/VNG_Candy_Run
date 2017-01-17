@@ -3,6 +3,7 @@
  */
 var Game = cc.Class.extend({
     player: null,
+    world:null,
     ctor: function () {
 
     },

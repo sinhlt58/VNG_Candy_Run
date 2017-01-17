@@ -110,7 +110,7 @@ var CollisionDetector = cc.Class.extend({
         if (collisionObjects.hasOwnProperty(globals.CLASS_TYPE_ITEM)) {
             var itemData = collisionObjects[globals.CLASS_TYPE_ITEM];
             for (i = 0; i < itemData.length; i++) {
-                this.world.factory.runEffectAtPosition(1002, character.getPosition(), this.world);//for testting
+                // this.world.spawnEffectAt(1004, character.getPosition());//for testting
                 var itemDataObject = itemData[i];
                 var itemObject = itemDataObject["pObject"];
                 //do effects here

@@ -37,5 +37,6 @@ globals.BACKGROUND_HEIGHT = 480;
 globals.BACKGROUND_WIDTH = 1200;
 
 globals.EFFECT_HIT_OBSTCLE = 1001;
+globals.EFFECT_JUMP = 1010;
 
 var cr = {};
