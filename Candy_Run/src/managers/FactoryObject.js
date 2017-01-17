@@ -116,6 +116,8 @@ var FactoryObject = cc.Class.extend({
                 character.pushSkill(skill);
             }
         }
+        character.sound_jump = characterData["sound_jump"];
+        character.sound_slide = characterData["sound_slide"];
         graphicsParent.addChild(character.spAnimation);
         cr.game.getPlayer().pCurrentCharacter = character;
         return character;

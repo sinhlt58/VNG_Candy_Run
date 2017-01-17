@@ -18,9 +18,11 @@ var StateDoubleJumping = StateMovement.extend({
         character.setVelocity(cc.p(currentVelo.x, 500));
 
         var characterPos = character.getPosition();
-        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x, characterPos.y));
-        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x - 40, characterPos.y - 5));
-        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x + 40, characterPos.y - 5));
+        cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x, characterPos.y));
+        cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x - 40, characterPos.y - 5));
+        cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x + 40, characterPos.y - 5));
+
+        cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(character.sound_jump));
     },
     onExit: function (character) {
         //cc.log("exit double jumping");

@@ -16,5 +16,6 @@
   "14": "res/assets/using_sound/char01_jump.mp3",
   "15": "res/assets/using_sound/char01_slide.mp3",
   "16": "res/assets/using_sound/char08_jump.mp3",
-  "17": "res/assets/using_sound/char08_slide.mp3"
+  "17": "res/assets/using_sound/char08_slide.mp3",
+  "18" : "res/assets/using_sound/ut_result_fail2.mp3"
 }

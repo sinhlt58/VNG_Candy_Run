@@ -41,5 +41,6 @@ globals.EFFECT_JUMP = 1010;
 
 globals.SOUND_TYPE_GIANT_LAND = 7;
 globals.SOUND_TYPE_MAGNETIC = 12;
+globals.SOUND_TYPE_FAIL = 18;
 
 var cr = {};

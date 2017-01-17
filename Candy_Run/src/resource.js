@@ -107,7 +107,8 @@ var sound = [
     "res/assets/using_sound/i_invinsible.mp3",
     "res/assets/using_sound/i_large_enegry.mp3",
     "res/assets/using_sound/i_magnet.mp3",
-    "res/assets/using_sound/i_small_enegry.mp3"
+    "res/assets/using_sound/i_small_enegry.mp3",
+    "res/assets/using_sound/ut_result_fail2.mp3"
 ];
 
 

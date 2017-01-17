@@ -6,7 +6,9 @@
         	"animation_json" : "res/assets/characters/zombie/zombie.json",
         	"animation_atlas" : "res/assets/characters/zombie/zombie.atlas"
         },
-        "gui_image":"zombie_gui.png"   
+        "gui_image":"zombie_gui.png",
+        "sound_jump": 14,
+        "sound_slide": 15
     },
     "1":{
     	"hp": 100,
@@ -15,6 +17,8 @@
         	"animation_json" : "res/assets/characters/princess/princess.json",
         	"animation_atlas" : "res/assets/characters/princess/princess.atlas"
         },
-        "gui_image":"princess_gui.png"
+        "gui_image":"princess_gui.png",
+        "sound_jump": 16,
+        "sound_slide": 17
     }
 }

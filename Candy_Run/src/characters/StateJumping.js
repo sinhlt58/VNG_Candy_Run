@@ -24,9 +24,15 @@ var StateJumping = StateMovement.extend({
             Camera.shakeTheScreen(0.2);
 
         var characterPos = character.getPosition();
-        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x, characterPos.y));
-        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x - 40, characterPos.y));
-        Game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x + 40, characterPos.y));
+        cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x, characterPos.y));
+        cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x - 40, characterPos.y));
+        cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x + 40, characterPos.y));
+
+        if (character.stateMachine.stateGiant instanceof StateGiantActive){
+            cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(globals.SOUND_TYPE_GIANT_LAND));
+        }else{
+            cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(character.sound_jump));
+        }
     },
     onExit: function (character) {
 

@@ -57,7 +57,7 @@ var World = cc.Class.extend({
         //     j++;
         // }
 
-        Game.world = this;
+        cr.game.world = this;
     },
     update:function (dt) {
         //update collision.

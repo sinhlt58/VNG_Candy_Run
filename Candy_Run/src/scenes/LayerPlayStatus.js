@@ -25,6 +25,8 @@ var LayerPlayStatus = cc.Layer.extend({
 
     dieSet: false,
 
+    isEndGame:false,
+
     ctor: function (animationLayer) {
         this._super();
         this.animationLayer = animationLayer;
@@ -119,10 +121,14 @@ var LayerPlayStatus = cc.Layer.extend({
 
         if (this.animationLayer.character.stateMachine.stateMovement instanceof StateDie &&
             this.animationLayer.character.numOfLife < 0 ) {
-            this.animationLayer.pause();
-            this.layerPlayEnd.setMoney(cr.game.getPlayer().currentMoney);
-            this.layerPlayEnd.setScore(cr.game.getPlayer().currentScore);
-            this.layerPlayEnd.setVisible(true);
+            if (!this.isEndGame){
+                this.animationLayer.pause();
+                this.layerPlayEnd.setMoney(cr.game.getPlayer().currentMoney);
+                this.layerPlayEnd.setScore(cr.game.getPlayer().currentScore);
+                this.layerPlayEnd.setVisible(true);
+                cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(globals.SOUND_TYPE_FAIL));
+                this.isEndGame = true;
+            }
         }
 
 
