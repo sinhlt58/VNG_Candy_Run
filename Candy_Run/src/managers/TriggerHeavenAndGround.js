@@ -48,6 +48,7 @@ var TriggerHeavenAndGround = Trigger.extend({
                 this.copyStateChunksFromOtherChunks(this.sourceChunkIdsFromTmp, this.desChunkIdsFromGroud,
                     this.deltaXFromTmpToGround, this.deltaYFromTmpToGround);
                 this.isInTmpChunks = false;
+                cc.log("teletport from tmp!!!!!");
             }
         }
 
@@ -206,12 +207,10 @@ var TriggerHeavenAndGround = Trigger.extend({
                         var pSourceObject = sourceObjectsData[t]["pObject"];
                         var pObjectSourcePos = pSourceObject.sprite.getPosition();
                         //teleport current sprite
-                        if(pSourceObject.sprite == null){
-                            var a = 1;
-                        }
                         pSourceObject.sprite.setPosition(pObjectSourcePos.x + deltaX, pObjectSourcePos.y + deltaY);
                         //swap that sprite for the desChunks
                         newObjectData["pObject"] = pSourceObject;
+                        newObjectData["pObject"].sprite.setUserData(newObjectData);
                         sourceObjectsData[t]["pObject"] = null;
                         //check if is obstacle then reset state
                         //not needed because the action moveTo of cc implement from moveBy

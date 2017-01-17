@@ -197,7 +197,7 @@ var World = cc.Class.extend({
         return 480 + 300;
     },
     getChunkIdsAroundCharacter:function (characterPos, bodySize) {
-        // return this.getVisibleChunkIds(characterPos, this.character.getInitPosition(), cc.view.getVisibleSize());
+        return this.getVisibleChunkIds(characterPos, this.character.getInitPosition(), cc.view.getVisibleSize());
     },
     getObjectsDataByChunkIds:function (chunkIds) {
         var objectsInChunks = [];
