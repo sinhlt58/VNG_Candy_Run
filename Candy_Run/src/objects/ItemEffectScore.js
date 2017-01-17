@@ -9,6 +9,6 @@ var ItemEffectScore = ItemEffect.extend({
 
         //cc.log("item score: ", item.score);
         game.getPlayer().increaseScore(item.score);
-
+        world.spawnEffectAt(1015, item.sprite.getPosition());
     }
 });

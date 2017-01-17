@@ -7,5 +7,6 @@ var ItemEffectHeal = ItemEffect.extend({
     },
     doEffect:function (game, world, item) {
         world.character.stateMachine.changeState("stateHP", new StateIncreasingHP());
+        world.spawnEffectAt(1006, item.sprite.getPosition());
     }
 });

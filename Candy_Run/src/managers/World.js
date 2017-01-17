@@ -51,7 +51,13 @@ var World = cc.Class.extend({
         this.currentLevelIn = cr.level_manager.getLevelByPosition(this.character.getPosition());
 
         //test effects
-        var testEffect = this.factory.runEffectAtPosition(1001, cc.p(500, 300), this);
+        // var j=0;
+        // for (i=1000; i<= 1015; i++){
+        //     this.factory.runEffectAtPosition(i, cc.p(j*100 + 50, 300), this);
+        //     j++;
+        // }
+
+        Game.world = this;
     },
     update:function (dt) {
         //update collision.
@@ -91,6 +97,8 @@ var World = cc.Class.extend({
         //update visible for chunks (just create objects inside the screen that are not rendered yet)
         //update objects inside the screen.
         this.updateObjectInsideTheScreen(dt);
+
+        // cc.log("effect length: ", this.factory.objectPool.available["Effect"].length);
     },
     updateVisibleObjectForChunk:function (chunkId) {
         var chunkData = this.getChunkDataById(chunkId);
@@ -339,5 +347,9 @@ var World = cc.Class.extend({
             }
         }
         return itemObjects;
+    },
+    
+    spawnEffectAt:function (effectType, position) {
+        this.factory.runEffectAtPosition(effectType, position, this);
     }
 });

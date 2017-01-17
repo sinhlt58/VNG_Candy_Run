@@ -613,5 +613,97 @@
 		"startKeyFrame" : 0,
 		"endKeyFrame" : 7,
 		"frameRate" : 0.1
+	  },
+	  "1003" : {
+		"classType" : 3,
+		"frameName" : "effect05_magnet_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 5,
+		"frameRate" : 0.1
+	  },
+	  "1004" : {
+		"classType" : 3,
+		"frameName" : "effect06_coin_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 6,
+		"frameRate" : 0.1
+	  },
+	  "1005" : {
+		"classType" : 3,
+		"frameName" : "effect07_sjelly_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 7,
+		"frameRate" : 0.1
+	  },
+	  "1006" : {
+		"classType" : 3,
+		"frameName" : "effect15_bigbottle1_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 6,
+		"frameRate" : 0.1
+	  },
+	  "1007" : {
+		"classType" : 3,
+		"frameName" : "effect16_bigbottle2_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 7,
+		"frameRate" : 0.1
+	  },
+	  "1008" : {
+		"classType" : 3,
+		"frameName" : "jelly_big_effect_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 4,
+		"frameRate" : 0.1
+	  },
+	  "1009" : {
+		"classType" : 3,
+		"frameName" : "jelly_big_fox_effect_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 4,
+		"frameRate" : 0.1
+	  },
+	  "1010" : {
+		"classType" : 3,
+		"frameName" : "jump_smoke_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 2,
+		"frameRate" : 0.2
+	  },
+
+	  "1011" : {
+		"classType" : 3,
+		"frameName" : "ov_game_eff_blue_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 1,
+		"frameRate" : 0.3
+	  },
+	  "1012" : {
+		"classType" : 3,
+		"frameName" : "ov_game_eff_green_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 1,
+		"frameRate" : 0.3
+	  },
+	  "1013" : {
+		"classType" : 3,
+		"frameName" : "ov_game_eff_purple_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 1,
+		"frameRate" : 0.3
+	  },
+	  "1014" : {
+		"classType" : 3,
+		"frameName" : "ov_game_eff_red_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 1,
+		"frameRate" : 0.3
+	  },
+	  "1015" : {
+		"classType" : 3,
+		"frameName" : "ov_game_eff_wh_",
+		"startKeyFrame" : 0,
+		"endKeyFrame" : 1,
+		"frameRate" : 0.3
 	  }
 }

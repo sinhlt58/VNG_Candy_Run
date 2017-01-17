@@ -58,7 +58,9 @@ var Character = cc.Class.extend({
 
     world:null,
 
-    currentLevelIn:null,
+    effectSpawnCountTime:0,
+    effectSpawnTime: 0.1,
+    randomEffectBehind: 0,
 
     ctor: function (jsonFile, atlasFile) {
 
@@ -111,9 +113,9 @@ var Character = cc.Class.extend({
 
 
 
-
+        var randomRange =  parseInt(Math.random()*1000 % 5);
+        this.randomEffectBehind = 1011 + randomRange;
         this.skills = [];
-        this.currentLevelIn = 1;
     },
 
     // all the update about velocity, acceleration and state will be performed in state_machine, this function will only update position
@@ -159,6 +161,14 @@ var Character = cc.Class.extend({
         //update skills
         for (var i=0; i<this.skills.length; i++){
             this.skills[i].update(this);
+        }
+
+        //update effect
+        this.effectSpawnCountTime += dt;
+        if (this.effectSpawnCountTime >= this.effectSpawnTime){
+            var characterPos = this.getPosition();
+            Game.world.spawnEffectAt(this.randomEffectBehind, cc.p(characterPos.x, characterPos.y + this.getContentSize().height/2));
+            this.effectSpawnCountTime = 0;
         }
     },
     getPosition: function () {

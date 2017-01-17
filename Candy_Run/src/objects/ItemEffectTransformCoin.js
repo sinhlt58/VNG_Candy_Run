@@ -17,6 +17,7 @@ var ItemEffectTransform = ItemEffect.extend({
             jellyObjectData["pObject"] = replaceCoin;
             replaceCoin.sprite.setUserData(jellyObjectData);
             world.factory.releaseObject(jellies[i]);
+            Game.world.spawnEffectAt(globals.EFFECT_JUMP, jellies[i].sprite.getPosition());
         }
     }
 });

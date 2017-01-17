@@ -16,8 +16,6 @@ var StateRunning = StateMovement.extend({
         var y = 90;
         character.position = cc.p(currentPosX, y);
         //cc.log(y);
-
-
     },
 
     //  fixme: set position and acceleration to running state

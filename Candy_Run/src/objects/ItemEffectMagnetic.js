@@ -7,5 +7,6 @@ var ItemEffectMagnetic = ItemEffect.extend({
     },
     doEffect:function (game, world, item) {
         world.character.stateMachine.changeState("stateMagnetic", new StateActiveMagnetic());
+        world.spawnEffectAt(1005, item.sprite.getPosition());
     }
 });
