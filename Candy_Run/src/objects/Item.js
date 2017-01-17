@@ -24,6 +24,11 @@ var Item = ObjectGame.extend({
         for (var i=0; i<this.effects.length; i++){
             this.effects[i].doEffect(game, world, this);
         }
+
+        //play sound if exit
+        if (this.sound != null){
+            cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(this.sound));
+        }
     },
     addAEffect:function (effect) {
         this.effects.push(effect);

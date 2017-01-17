@@ -42,6 +42,9 @@ var FactoryObject = cc.Class.extend({
         // }
 
         object.setObjectTypeId(objectTypeId);
+        if (objectTypeData.hasOwnProperty("sound")){
+            object.sound = objectTypeData["sound"];
+        }
 
         if (classType == globals.CLASS_TYPE_ITEM){
             object.stateMachineItem.changeState(StateItemNormal);

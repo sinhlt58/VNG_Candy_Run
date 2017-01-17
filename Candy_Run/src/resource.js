@@ -17,6 +17,7 @@ var res = {
     pets_json: "res/data/pets.json",
     gui_end_game_json: "res/assets/gui/scene_play/end_game/gui_end_game.json",
     gui_in_game_json: "res/assets/gui/scene_play/in_game/gui_in_game.json",
+    sound_json: "res/data/sound.json",
 
 
     test_background2_png: "res/assets/gui/scene_play/background/tm02_bg2.png",
@@ -30,7 +31,13 @@ var res = {
     character_lobby_png:"res/assets/gui/scene_lobby/gui_characters/lobby_character_layer.png",
 
 
-    levels_json: "res/data/levels.json"
+    levels_json: "res/data/levels.json",
+    music_lobby_bgm_ogg : "res/assets/music/ogg/lobby_bgm.ogg",
+    music_main_bgm_ogg : "res/assets/music/ogg/main_bgm.ogg",
+    music_fever_ogg : "res/assets/music/ogg/fever.ogg",
+
+    sound_character_jump_mp3: "res/assets/using_sound/char04_jump.mp3",
+    sound_character_slide_mp3: "res/assets/using_sound/char04_slide.mp3"
 };
 
 var sprite_sheets_play = [
@@ -75,6 +82,26 @@ var sprite_sheets_background = [
     "res/assets/gui/backgrounds/background_map_83_84.png"
 ];
 
+var sound = [
+    "res/assets/using_sound/char01_jump.mp3",
+    "res/assets/using_sound/char01_slide.mp3",
+    "res/assets/using_sound/char04_jump.mp3",
+    "res/assets/using_sound/char04_slide.mp3",
+    "res/assets/using_sound/char08_jump.mp3",
+    "res/assets/using_sound/char08_slide.mp3",
+    "res/assets/using_sound/g_alphabet.mp3",
+    "res/assets/using_sound/g_bigbearjelly.mp3",
+    "res/assets/using_sound/g_bigcoinjelly.mp3",
+    "res/assets/using_sound/g_coin.mp3",
+    "res/assets/using_sound/g_feverin.mp3",
+    "res/assets/using_sound/g_giantland.mp3",
+    "res/assets/using_sound/g_jelly.mp3",
+    "res/assets/using_sound/i_giant.mp3",
+    "res/assets/using_sound/i_invinsible.mp3",
+    "res/assets/using_sound/i_large_enegry.mp3",
+    "res/assets/using_sound/i_magnet.mp3",
+    "res/assets/using_sound/i_small_enegry.mp3"
+];
 
 
 var g_resources = [];
@@ -82,12 +109,16 @@ for (var i in res) {
     g_resources.push(res[i]);
 }
 
-for (var i = 0; i < sprite_sheets_play.length; i++) {
+for (i = 0; i < sprite_sheets_play.length; i++) {
     g_resources.push(sprite_sheets_play[i]);
 }
 
 
 for (i=0; i<sprite_sheets_background.length; i++){
     g_resources.push(sprite_sheets_background[i]);
+}
+
+for (i=0; i<sound.length; i++){
+    g_resources.push(sound[i]);
 }
 

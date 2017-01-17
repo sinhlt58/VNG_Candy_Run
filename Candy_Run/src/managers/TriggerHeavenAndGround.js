@@ -60,6 +60,7 @@ var TriggerHeavenAndGround = Trigger.extend({
             this.world.setIsNeedToInitVisibleChunks(true);
             //release ojects and teleport player here.
             if (this.isInHeaven){
+                cc.audioEngine.playMusic(res.music_main_bgm_ogg, true);
                 this.createTmpChunks(this.world.character.getInitPosition());
                 this.world.character.setPosition(cc.p(250 + this.tmpChunkIdX*this.world.getChunkWidth(), 90));
                 this.isInHeaven = !this.isInHeaven;
@@ -67,6 +68,7 @@ var TriggerHeavenAndGround = Trigger.extend({
             }else{
                 this.world.character.setPosition(this.initCharacterPosInHeaven);
                 this.isInHeaven = !this.isInHeaven;
+                cc.audioEngine.playMusic(res.music_fever_ogg, true);
             }
            // this.world.graphicsParent.updateCamera(this.world.character);
             Camera.update(this.world.character.getPosition(), this.world.character.getInitPosition(), cc.view.getVisibleSize());

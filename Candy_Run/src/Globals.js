@@ -39,4 +39,7 @@ globals.BACKGROUND_WIDTH = 1200;
 globals.EFFECT_HIT_OBSTCLE = 1001;
 globals.EFFECT_JUMP = 1010;
 
+globals.SOUND_TYPE_GIANT_LAND = 7;
+globals.SOUND_TYPE_MAGNETIC = 12;
+
 var cr = {};

@@ -169,6 +169,9 @@ var LayerLobbyStatus = cc.Layer.extend({
     handleButtonEvents: function (sender, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             if (sender == this.BUTTON_PLAY) {
+                //cc.audioEngine.stopMusic();
+                cc.audioEngine.stopMusic(res.music_lobby_bgm_ogg);
+                cc.audioEngine.playMusic(res.music_main_bgm_ogg, true);
                 cc.director.pushScene(new ScenePlay());
             } else if (sender == this.BUTTON_CHARACTERS_SELECT) {
 

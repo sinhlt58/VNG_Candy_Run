@@ -205,8 +205,10 @@ var LayerPlayStatus = cc.Layer.extend({
                 this.isGamePause = !this.isGamePause;
                 if (this.isGamePause) {
                     cc.director.pause();
+                    cc.audioEngine.pauseMusic();
                 } else {
                     cc.director.resume();
+                    cc.audioEngine.resumeMusic();
                 }
             }
             if (sender == this.TEST_BUTTON_DIE) {
@@ -236,7 +238,7 @@ var LayerPlayStatus = cc.Layer.extend({
                     //character.setVelocityY(-300);
                 }
 
-
+                // cc.audioEngine.playEffect(res.sound_character_jump_mp3);
             }
             if (sender == this.buttonSlide) {
                 //character end slide
@@ -249,6 +251,7 @@ var LayerPlayStatus = cc.Layer.extend({
                 }
                 //cc.log("Space is released");
                 //cc.log("Exit sliding");
+
             }
         }
 

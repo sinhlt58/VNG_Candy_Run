@@ -120,6 +120,7 @@
 
     "src/scenes/LayerPlayBackground1.js",
     "src/scenes/LayerPlayBackground2.js",
-    "src/managers/LevelsManager.js"
+    "src/managers/LevelsManager.js",
+    "src/managers/SoundManager.js"
   ]
 }

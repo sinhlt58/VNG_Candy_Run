@@ -4,6 +4,7 @@
 var ObjectGame = cc.Class.extend({
     objectTypeId:null,
     sprite:null,
+    sound:null,
     ctor:function (sprite) {
         this.sprite = sprite;
     },

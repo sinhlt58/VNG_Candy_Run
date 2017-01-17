@@ -10,7 +10,8 @@
             "jelly_coin_3.png",
             "jelly_coin_4.png"
         ],
-        "effects" : [0, 1]
+        "effects" : [0, 1],
+        "sound" : 5
     },
     "1":{
         "classType" : 0,
@@ -25,7 +26,8 @@
             "jelly_coin2_5.png",
             "jelly_coin2_6.png"
         ],
-        "effects" : [0, 1]
+        "effects" : [0, 1],
+        "sound" : 5
     },
     "2":{
         "classType" : 0,
@@ -38,7 +40,8 @@
             "coin_big_3.png",
             "coin_big_4.png"
         ],
-        "effects" : [0, 1]
+        "effects" : [0, 1],
+        "sound" : 4
     },
     "3":{
         "classType" : 0,
@@ -48,7 +51,8 @@
         "frames":[
             "jellybean_01.png"
         ],
-        "effects" : [0]
+        "effects" : [0],
+        "sound" : 8
     },
     "4":{
         "classType" : 0,
@@ -58,7 +62,8 @@
         "frames":[
             "jellybean_100.png"
         ],
-        "effects" : [0]
+        "effects" : [0],
+        "sound" : 3
     },
     "5":{
         "classType" : 0,
@@ -69,7 +74,8 @@
             "jellybean_101_1.png",
             "jellybean_101_2.png"
         ],
-        "effects" : [0]
+        "effects" : [0],
+        "sound" : 3
     },
     "6":{
         "classType" : 0,
@@ -80,7 +86,8 @@
             "jellybean_102_1.png",
             "jellybean_102_2.png"
         ],
-        "effects" : [0]
+        "effects" : [0],
+        "sound" : 3
     },
     "7":{
         "classType" : 0,
@@ -93,7 +100,8 @@
             "item04_biggest_2.png",
             "item04_biggest_3.png"
         ],
-        "effects" : [0, 2, 3]
+        "effects" : [0, 2, 3],
+        "sound" : 9
     },
     "8":{
         "classType" : 0,
@@ -119,7 +127,8 @@
             "item03_invincible_2.png",
             "item03_invincible_3.png"
         ],
-        "effects" : [0, 3, 4, 5]
+        "effects" : [0, 3, 4, 5],
+        "sound" : 10
     },
     "10":{
         "classType" : 0,
@@ -132,7 +141,8 @@
             "item02_fever_2.png",
             "item02_fever_3.png"
         ],
-        "effects" : [0, 6]
+        "effects" : [0, 6],
+        "sound" : 6
     },
     "11":{
         "classType" : 0,
@@ -145,7 +155,8 @@
             "item06_coin_2.png",
             "item06_coin_3.png"
         ],
-        "effects" : [0, 7]
+        "effects" : [0, 7],
+        "sound" : 4
     },
     "12":{
         "classType" : 0,
@@ -159,7 +170,8 @@
             "item08_energy_3.png"
         ],
         "effects" : [0, 8],
-        "healingHP" : 10
+        "healingHP" : 10,
+        "sound" : 13
     },
     "13":{
         "classType" : 0,
@@ -173,7 +185,8 @@
             "item09_bigenergy_3.png"
         ],
         "effects" : [0, 8],
-        "healingHP" : 30
+        "healingHP" : 30,
+        "sound" : 11
     },
     "14":{
         "classType" : 0,
@@ -184,7 +197,8 @@
             "jelly_alphabet_b.png"
         ],
         "effects" : [0, 9],
-        "letter" : "B"
+        "letter" : "B",
+        "sound" : 2
     },
     "15":{
         "classType" : 0,
@@ -195,7 +209,8 @@
             "jelly_alphabet_o.png"
         ],
         "effects" : [0, 9],
-        "letter" : "O"
+        "letter" : "O",
+        "sound" : 2
     },
     "16":{
         "classType" : 0,
@@ -206,7 +221,8 @@
             "jelly_alphabet_n.png"
         ],
         "effects" : [0, 9],
-        "letter" : "N"
+        "letter" : "N",
+        "sound" : 2
     },
     "17":{
         "classType" : 0,
@@ -217,7 +233,8 @@
             "jelly_alphabet_u.png"
         ],
         "effects" : [0, 9],
-        "letter" : "U"
+        "letter" : "U",
+        "sound" : 2
     },
     "18":{
         "classType" : 0,
@@ -228,7 +245,8 @@
             "jelly_alphabet_s.png"
         ],
         "effects" : [0, 9],
-        "letter" : "S"
+        "letter" : "S",
+        "sound" : 2
     },
     "19":{
         "classType" : 0,
@@ -239,7 +257,8 @@
             "jelly_alphabet_t.png"
         ],
         "effects" : [0, 9],
-        "letter" : "T"
+        "letter" : "T",
+        "sound" : 2
     },
     "20":{
         "classType" : 0,
@@ -250,7 +269,8 @@
             "jelly_alphabet_i.png"
         ],
         "effects" : [0, 9],
-        "letter" : "I"
+        "letter" : "I",
+        "sound" : 2
     },
     "21":{
         "classType" : 0,
@@ -261,7 +281,8 @@
             "jelly_alphabet_m.png"
         ],
         "effects" : [0, 9],
-        "letter" : "M"
+        "letter" : "M",
+        "sound" : 2
     },
     "22":{
         "classType" : 0,
@@ -272,7 +293,8 @@
             "jelly_alphabet_e.png"
         ],
         "effects" : [0, 9],
-        "letter" : "E"
+        "letter" : "E",
+        "sound" : 2
     },
 
 	  "23": {

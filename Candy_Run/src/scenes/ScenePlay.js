@@ -9,6 +9,8 @@ var ScenePlay = cc.Scene.extend({
             cc.spriteFrameCache.addSpriteFrames(sprite_sheets_background[i], sprite_sheets_background[i+1]);
         }
 
+        cr.sound_manager.init(cc.loader.getRes(res.sound_json));
+
         var animationLayer = new LayerPlayAnimation();
         this.addChild(animationLayer);
         var debugLayer = new LayerPlayDebug(animationLayer);

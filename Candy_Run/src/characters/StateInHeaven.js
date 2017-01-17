@@ -38,7 +38,6 @@ var StateInHeaven = StateMovement.extend({
             // base on position y ??
             //todo: set velocity to fly horizontally, update passedTime
 
-
             character.animationController.setAnimation('fly', true);
             this.passedTime += dt;
             character.setVelocityX(500);

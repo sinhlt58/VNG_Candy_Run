@@ -11,6 +11,8 @@ var SceneLobby = cc.Scene.extend({
         this.addChild(new LayerLobbyCharacters());
         this.addChild(new LayerLobbyPets());
 
+        cc.audioEngine.playMusic(res.music_lobby_bgm_ogg, true);
+
         this.scheduleUpdate();
     },
     init:function () {
