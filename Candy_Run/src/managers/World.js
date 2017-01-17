@@ -155,7 +155,7 @@ var World = cc.Class.extend({
             return this.chunks[chunkId]['data'];
     },
     getVisibleChunkIds:function (characterPos, characterInitPos, visibleSize) {
-        var minPos = cc.p(characterPos.x - characterInitPos.x, characterPos.y);
+        var minPos = cc.p(characterPos.x - characterInitPos.x - this.getChunkWidth(), characterPos.y);
         var maxPos = cc.p(characterPos.x + (visibleSize.width - characterInitPos.x - 1), characterPos.y);
         return this.getChunkIdsByRange(minPos, maxPos);
     },
