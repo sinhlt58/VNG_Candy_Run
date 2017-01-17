@@ -30,7 +30,10 @@ var res = {
     character_lobby_png:"res/assets/gui/scene_lobby/gui_characters/lobby_character_layer.png",
 
 
-    levels_json: "res/data/levels.json"
+    levels_json: "res/data/levels.json",
+
+    gui_pet_cookie: "res/assets/gui/scene_lobby/gui_pets/pet_cookie.png",
+    gui_pet_zombie: "res/assets/gui/scene_lobby/gui_pets/pet_zombie.png"
 };
 
 var sprite_sheets_play = [

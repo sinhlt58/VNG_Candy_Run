@@ -4,6 +4,15 @@
 var LayerLobbyStatus = cc.Layer.extend({
 
 
+
+
+    layer_select_character: null,
+
+    layer_select_pets: null,
+
+
+
+
     SLOT_PLAY: null,
 
     BUTTON_PLAY: null,
@@ -39,9 +48,14 @@ var LayerLobbyStatus = cc.Layer.extend({
      btn_select_pets*/
 
 
-    ctor: function () {
+    ctor: function (layer_s_ch, layer_s_pet) {
+
+
         this._super();
 
+
+        this.layer_select_character=layer_s_ch;
+        this.layer_select_pets= layer_s_pet;
         this.HEART = [];
         this.init();
         //cc.log(this['TEST_BUTTON_PAUSE']);
