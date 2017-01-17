@@ -213,9 +213,6 @@ var LayerLobbyStatus = cc.Layer.extend({
             // no layer cover this layer
             if(this.touchable==true){
                 if (sender == this.BUTTON_PLAY) {
-
-                    cc.audioEngine.stopMusic(res.music_lobby_bgm_ogg);
-                    cc.audioEngine.playMusic(res.music_main_bgm_ogg, true);
                     cc.director.pushScene(new ScenePlay());
 
                 } else if (sender == this.BUTTON_CHARACTERS_SELECT) {

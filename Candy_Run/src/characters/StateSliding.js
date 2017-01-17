@@ -17,8 +17,7 @@ var StateSliding = StateMovement.extend({
         var velocityX=character.velocity.x;
         character.setVelocity(cc.p(velocityX, 0));
 
-        // cc.audioEngine.playEffect(res.sound_character_slide_mp3);
-        //this.owner.offsetCollY=-40;
+        cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(character.sound_slide));
     },
 
     onExit: function (character) {

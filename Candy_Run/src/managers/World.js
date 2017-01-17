@@ -57,7 +57,7 @@ var World = cc.Class.extend({
         //     j++;
         // }
 
-        Game.world = this;
+        cr.game.world = this;
     },
     update:function (dt) {
         //update collision.
@@ -155,7 +155,7 @@ var World = cc.Class.extend({
             return this.chunks[chunkId]['data'];
     },
     getVisibleChunkIds:function (characterPos, characterInitPos, visibleSize) {
-        var minPos = cc.p(characterPos.x - characterInitPos.x, characterPos.y);
+        var minPos = cc.p(characterPos.x - characterInitPos.x - this.getChunkWidth(), characterPos.y);
         var maxPos = cc.p(characterPos.x + (visibleSize.width - characterInitPos.x - 1), characterPos.y);
         return this.getChunkIdsByRange(minPos, maxPos);
     },
@@ -221,7 +221,17 @@ var World = cc.Class.extend({
         return objectsInChunks;
     },
     getObjectsAroundCharacter:function (characterPos, bodySize) {
-        return this.getObjectsDataByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
+        // return this.getObjectsDataByChunkIds(this.getChunkIdsAroundCharacter(characterPos, bodySize));
+        var renderedObjectsData = this.getAllCurrentRenderedObjectsData(this.character.getPosition(),
+            this.character.getInitPosition(), cc.view.getVisibleSize());
+        var objectsAround = [];
+        for (var i=0; i<renderedObjectsData.length; i++){
+            var objectData = renderedObjectsData[i];
+            if (objectData["pObject"] != null && objectData["pObject"].sprite.isVisible()){
+                objectsAround.push(objectData);
+            }
+        }
+        return objectsAround;
     },
     getAllCurrentRenderedObjectsData:function (characterPos, characterInitPos, visibleSize) {
         // var visibleChunkIds = this.getVisibleChunkIds(characterPos, characterInitPos, visibleSize);

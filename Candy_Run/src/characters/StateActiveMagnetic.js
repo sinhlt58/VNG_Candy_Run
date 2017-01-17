@@ -5,6 +5,7 @@ var StateActiveMagnetic= StateMagnetic.extend({
     maxTimeCount:4,
     currentTimeCount:0,
     radius: 380,
+    soundId:null,
 
     update: function (dt, character) {
 
@@ -13,7 +14,7 @@ var StateActiveMagnetic= StateMagnetic.extend({
         */
         this.currentTimeCount += dt;
         if (this.currentTimeCount >= this.maxTimeCount){
-            character.stateMachine.changeState("stateMagnetic", new StateDeactiveMagnetic(character));
+            character.stateMachine.changeState("stateMagnetic", new StateDeactiveMagnetic());
         }
 
         var inRadiusItems = character.world.getObjectItemsInRadius(character.getPosition(), this.radius);
@@ -25,9 +26,10 @@ var StateActiveMagnetic= StateMagnetic.extend({
 
     }, 
     onEnter: function (character) {
-
+        // this.soundId = cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(globals.SOUND_TYPE_MAGNETIC), true);
     },
     onExit: function (character) {
+        // cc.audioEngine.stopEffect(character.soundId);
         this.currentTimeCount = 0;
     }
 });

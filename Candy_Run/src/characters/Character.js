@@ -61,6 +61,8 @@ var Character = cc.Class.extend({
     effectSpawnCountTime:0,
     effectSpawnTime: 0.1,
     randomEffectBehind: 0,
+    sound_jump: null,
+    sound_slide: null,
 
     ctor: function (jsonFile, atlasFile) {
 
@@ -167,7 +169,7 @@ var Character = cc.Class.extend({
         this.effectSpawnCountTime += dt;
         if (this.effectSpawnCountTime >= this.effectSpawnTime){
             var characterPos = this.getPosition();
-            Game.world.spawnEffectAt(this.randomEffectBehind, cc.p(characterPos.x, characterPos.y + this.getContentSize().height/2));
+            cr.game.world.spawnEffectAt(this.randomEffectBehind, cc.p(characterPos.x, characterPos.y + this.getContentSize().height/2));
             this.effectSpawnCountTime = 0;
         }
     },

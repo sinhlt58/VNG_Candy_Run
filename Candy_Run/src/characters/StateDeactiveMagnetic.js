@@ -5,8 +5,8 @@ var StateDeactiveMagnetic= StateMagnetic.extend({
    update: function (dt) {
        
    },
-    onEnter: function () {
-        
+    onEnter: function (character) {
+
     },
     onExit: function () {
         

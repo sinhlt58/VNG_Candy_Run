@@ -20,7 +20,7 @@ var ScenePlay = cc.Scene.extend({
         this.addChild(new LayerPlayBackground2());
         this.addChild(new LayerPlayBackground1());
 
-
+        cc.audioEngine.playMusic(res.music_main_bgm_ogg, true);
         this.scheduleUpdate();
     },
     init:function () {

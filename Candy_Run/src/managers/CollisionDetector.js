@@ -91,7 +91,6 @@ var CollisionDetector = cc.Class.extend({
 
 
 
-
         } else {
 
             //no ground collide
@@ -139,6 +138,7 @@ var CollisionDetector = cc.Class.extend({
                     obstacleObject.stateMachineObstacle.changeState(StateObstacleBeKicked);
                 }
             }
+
         } else {
 
             // nothing here
