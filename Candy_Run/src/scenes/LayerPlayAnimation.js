@@ -6,7 +6,13 @@ var LayerPlayAnimation = cc.Layer.extend({
     factoryObject: null,
     character: null,
     pet:null,
+
+
+    touching: null,
+
     ctor: function () {
+
+        this.touching= false;
         this._super();
         this.init();
 
@@ -136,6 +142,10 @@ var LayerPlayAnimation = cc.Layer.extend({
         //handle inputs.
         //update world accordingly to the character's pos.
         this.world.update(dt);
+
+        cc.log(this.touching);
+
+
     },
     updateCamera: function (character) {//todo: change code later for pretty
         var visibleSize = cc.view.getVisibleSize();
@@ -158,6 +168,11 @@ var LayerPlayAnimation = cc.Layer.extend({
 
     onTouchBegan: function (touch, event) {
         //console.log('mouse down');
+
+        var thisLayer= event.getCurrentTarget();
+
+        thisLayer.touching=true;
+
         return true;
     },
     onTouchEnded: function (t, e) {
@@ -174,6 +189,8 @@ var LayerPlayAnimation = cc.Layer.extend({
         } else {
         }
 
+
+        thisLayer.touching= false;
         return true;
     },
     onExit: function () {
