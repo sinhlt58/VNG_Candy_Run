@@ -49,6 +49,15 @@ var FactoryObject = cc.Class.extend({
         if (classType == globals.CLASS_TYPE_ITEM){
             object.stateMachineItem.changeState(StateItemNormal);
             var frames = objectTypeData["frames"];
+
+            if (objectTypeId == globals.OBJECT_TYPE_JELLY){
+                var randomJellyTexture = parseInt(Math.random()*39) + 1;
+                if (randomJellyTexture < 10)
+                    randomJellyTexture = "0" + randomJellyTexture;
+                randomJellyTexture = (randomJellyTexture);
+                frames[0] = "jellybean_" + randomJellyTexture + ".png";
+            }
+
             this.changeTextureOfSprite(object.sprite, frames[0]);
             object.score = objectTypeData["score"];
             object.money = objectTypeData["money"];
