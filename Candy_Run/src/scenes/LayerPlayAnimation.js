@@ -146,6 +146,25 @@ var LayerPlayAnimation = cc.Layer.extend({
         cc.log(this.touching);
 
 
+        if(this.touching==true){
+
+            if(this.character.stateMachine.stateMovement instanceof StateRunning){
+                this.character.stateMachine.changeState("stateMovement", new StateSliding());
+            }else if(this.character.stateMachine.stateMovement instanceof StateSliding){
+
+            }
+
+
+        }else {
+
+            if(this.character.stateMachine.stateMovement instanceof StateSliding){
+                this.character.stateMachine.changeState("stateMovement", new StateRunning());
+            }else if (this.character.stateMachine.stateMovement instanceof StateRunning){
+
+            }
+        }
+
+
     },
     updateCamera: function (character) {//todo: change code later for pretty
         var visibleSize = cc.view.getVisibleSize();
