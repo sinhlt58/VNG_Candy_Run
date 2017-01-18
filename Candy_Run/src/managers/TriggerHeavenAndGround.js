@@ -67,7 +67,9 @@ var TriggerHeavenAndGround = Trigger.extend({
                 this.isInHeaven = !this.isInHeaven;
                 // this.world.character.setPosition(this.rememberedPosInGround);
             }else{
-                this.world.character.setPosition(this.initCharacterPosInHeaven);
+                var randomRangeX = Math.random()*5000;
+                var randomInHeaven = cc.p(this.initCharacterPosInHeaven.x + randomRangeX, this.initCharacterPosInHeaven.y);
+                this.world.character.setPosition(randomInHeaven);
                 this.isInHeaven = !this.isInHeaven;
                 cc.audioEngine.playMusic(res.music_fever_ogg, true);
             }
