@@ -48,8 +48,13 @@ var LayerLobbyStatus = cc.Layer.extend({
 
 
     sp_ani_1: null,
-
     sp_ani_2: null,
+
+
+
+
+    ani_pet_1: null,
+    ani_pet_2: null,
 
 
 
@@ -121,16 +126,19 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.addChild(this.BUTTON_TREASURE);
 
 
-        //create sp animation character
+        //create sp animation character, zombie
         this.sp_ani_1 = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
         this.sp_ani_1.setAnimation(0, "run1", true);
         this.sp_ani_1.setScale(0.7);
         this.sp_ani_1.setTimeScale(0.7);
         this.sp_ani_1.setPosition(cc.p(slotPlayPos.x, slotPlayPos.y + 120));
+        this.sp_ani_1.setVisible(false);
         this.addChild(this.sp_ani_1);
 
 
 
+
+        // princess
         this.sp_ani_2 = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas);
         this.sp_ani_2.setAnimation(0, "run1", true);
         this.sp_ani_2.setScale(0.7);
@@ -139,6 +147,17 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.sp_ani_2.setVisible(false);
         this.addChild(this.sp_ani_2);
 
+
+
+        //cc.log(cr.game.getPlayer().currentCharacterId);
+
+        if(cr.game.getPlayer().currentCharacterId==0){
+            //zombie
+            cc.log("zombie");
+            this.sp_ani_1.setVisible(true);
+        }else{
+            this.sp_ani_2.setVisible(true);
+        }
 
 
 
@@ -202,6 +221,12 @@ var LayerLobbyStatus = cc.Layer.extend({
         heart_1.setScale(0.8);
         this.addChild(heart_1);
 
+
+
+
+
+
+
         //var
     },
 
@@ -217,12 +242,19 @@ var LayerLobbyStatus = cc.Layer.extend({
 
                 } else if (sender == this.BUTTON_CHARACTERS_SELECT) {
                     cc.log("Select character");
-                    this.layer_select_character.setVisible(true);
+                    //this.layer_select_character.setVisible(true);
+
+                    this.layer_select_character.isGoingUp=true;
+                    this.layer_select_character.wentDown=false;
+
                     this.touchable=false;
 
                 } else if (sender == this.BUTTON_PETS_SELECT) {
-                    cc.log("pet select");
-                    this.layer_select_pets.setVisible(true);
+
+                    cc.log("pet select")
+                    this.layer_select_pets.isGoingUp=true;
+                    this.layer_select_pets.wentDown=false;
+
                     this.touchable=false;
                 }
 

@@ -1,7 +1,22 @@
 /**
  * Created by Fresher on 12/29/2016.
  */
+
+//fixme: make this layer go up and down
 var LayerLobbyCharacters = cc.Layer.extend({
+
+
+
+    wentUp: null,
+    velocity: null,
+    initPos: null,
+    currentPosY: null,
+    wentDown: null,
+    isGoingUp: null,
+    isGoingDown: null,
+
+
+
 
 
     layerLobbyStatus: null,
@@ -44,10 +59,29 @@ var LayerLobbyCharacters = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-        this.setVisible(false);
+        this.setVisible(true);
         this.scheduleUpdate();
     },
     init: function () {
+
+        this.wentUp=false;
+        this.wentDown=true;
+        this.isGoingDown=false;
+        this.isGoingUp= false;
+        this.velocity=1000;
+        this.initPosY= - this.getContentSize().height;
+        this.currentPosY= this.initPosY;
+
+
+
+
+        this.setPosition(cc.p(0, this.initPosY));
+
+
+
+
+
+
         this.centerPos = cc.p(this.getContentSize().width / 2, this.getContentSize().height / 2);
 
 
@@ -92,7 +126,7 @@ var LayerLobbyCharacters = cc.Layer.extend({
 
 
         //create spAni character 1
-        this.sp_cha_1 = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas);
+        this.sp_cha_1 = new sp.SkeletonAnimation(res.princess_json, res.princess_atlas); // princess
         this.sp_cha_1.setPosition(slot_1_position);
         this.sp_cha_1.setAnimation(0, 'run1', true);
         this.sp_cha_1.setTimeScale(0.6);
@@ -153,7 +187,7 @@ var LayerLobbyCharacters = cc.Layer.extend({
 
 
         //create sp ani cha 2
-        this.sp_cha_2 = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas);
+        this.sp_cha_2 = new sp.SkeletonAnimation(res.zombie_json, res.zombie_atlas); // zombie
         this.sp_cha_2.setPosition(slot_2_position);
         this.sp_cha_2.setAnimation(0, 'run1', true);
         this.sp_cha_2.setTimeScale(0.6);
@@ -191,12 +225,72 @@ var LayerLobbyCharacters = cc.Layer.extend({
         this.btn_selected_char_2.setVisible(true);
 
 
+
+
+        //
+
+        if(cr.game.getPlayer().currentCharacterId==0){ // zombie
+            this.btn_selected_char_2.setVisible(true);
+            this.btn_select_char_2.setVisible(false);
+            this.btn_select_char_1.setVisible(true);
+            this.btn_selected_char_1.setVisible(false);
+        }else{// princess
+            this.btn_selected_char_2.setVisible(false);
+            this.btn_select_char_2.setVisible(true);
+            this.btn_select_char_1.setVisible(false);
+            this.btn_selected_char_1.setVisible(true);
+        }
+
+
+
         this.addChild(this.x_button);
         this.x_button.addTouchEventListener(this.handleButtonEvents, this);
 
     },
 
     update: function (dt) {
+
+
+
+        // handle going up
+        if(this.isGoingUp==true){
+            this.currentPosY+=this.velocity*dt;
+            // went up
+            if(this.currentPosY>=0){
+                this.currentPosY=0;
+                this.isGoingUp=false;
+                this.wentUp=true;
+            }
+
+            this.setPosition(cc.p(0, this.currentPosY));
+        }
+
+
+        // handle going down
+
+
+
+        if(this.isGoingDown==true){
+            this.currentPosY-=this.velocity*dt;
+
+            //went down
+            if(this.currentPosY<=this.initPosY){
+                this.currentPosY= this.initPosY;
+                this.isGoingDown= false;
+                this.wentDown=true;
+            }
+            this.setPosition(cc.p(0, this.currentPosY));
+        }
+
+
+
+
+
+
+        // reset touchable
+        if(this.wentDown==true){
+            this.layerLobbyStatus.touchable=true;
+        }
 
     },
     handleButtonEvents: function (sender, type) {
@@ -228,8 +322,16 @@ var LayerLobbyCharacters = cc.Layer.extend({
 
             } else if (sender == this.x_button) {
                 cc.log("X clicked");
-                this.setVisible(false);
-                this.layerLobbyStatus.touchable=true;
+
+
+                if(this.wentUp==true){
+                    this.isGoingDown=true;
+                    this.isGoingUp=false;
+                    this.wentDown=false;
+                    //this.layerLobbyStatus.touchable=true;
+                }
+
+
             }
 
         }

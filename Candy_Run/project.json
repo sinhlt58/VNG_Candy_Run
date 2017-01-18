@@ -53,6 +53,7 @@
     "src/characters/StateSliding.js",
     "src/characters/StateDie.js",
     "src/characters/StateReborn.js",
+    "src/characters/StateRunningNotFalling.js",
     "src/characters/StateMachineCharacter.js",
 
 

@@ -4,6 +4,20 @@
 var LayerLobbyPets= cc.Layer.extend({
 
 
+
+
+    wentUp: null,
+    velocity: null,
+    initPos: null,
+    currentPosY: null,
+    wentDown: null,
+    isGoingUp: null,
+    isGoingDown: null,
+
+
+
+
+
     layerLobbyStatus: null,
 
 
@@ -36,10 +50,28 @@ var LayerLobbyPets= cc.Layer.extend({
     ctor:function () {
         this._super();
         this.init();
-        this.setVisible(false);
+        this.setVisible(true);
         this.scheduleUpdate();
     },
     init: function () {
+
+
+
+
+        this.wentUp=false;
+        this.wentDown=true;
+        this.isGoingDown=false;
+        this.isGoingUp= false;
+        this.velocity=1000;
+        this.initPosY= - this.getContentSize().height;
+        this.currentPosY= this.initPosY;
+
+        this.setPosition(cc.p(0, this.initPosY));
+
+
+
+
+
         this.centerPos=cc.p(this.getContentSize().width/2, this.getContentSize().height/2);
 
 
@@ -82,7 +114,7 @@ var LayerLobbyPets= cc.Layer.extend({
         this.slot_1.setPosition(slot_1_position);
         this.addChild(this.slot_1);
 
-        // pet 1
+        // pet star
         this.pet_1= new cc.Sprite(res.gui_pet_cookie);
         this.pet_1.setPosition(cc.p(slot_1_position.x, slot_1_position.y+70));
         this.addChild(this.pet_1);
@@ -127,7 +159,7 @@ var LayerLobbyPets= cc.Layer.extend({
         this.addChild(this.slot_2);
 
 
-        //pet 2
+        //pet 2 , eye pet
         this.pet_2= new cc.Sprite(res.gui_pet_zombie);
         this.pet_2.setPosition(cc.p(slot_2_position.x, slot_2_position.y+70));
         this.addChild(this.pet_2);
@@ -161,10 +193,62 @@ var LayerLobbyPets= cc.Layer.extend({
         this.button_selected_2.setPosition(cc.p(slot_2_position.x, slot_2_position.y-120));
         this.addChild(this.button_selected_2);
 
+
+        if(cr.game.getPlayer().currentPetId==0){ // eye pet, selected pet 2
+            this.button_selected_2.setVisible(true);
+            this.button_select_2.setVisible(false);
+            this.button_select_1.setVisible(true);
+            this.button_selected_1.setVisible(false);
+        }else{
+            this.button_selected_2.setVisible(false);
+            this.button_select_2.setVisible(true);
+            this.button_select_1.setVisible(false);
+            this.button_selected_1.setVisible(true);
+        }
+
+
     },
     
     update: function (dt) {
+        // handle going up
+        if(this.isGoingUp==true){
+            this.currentPosY+=this.velocity*dt;
+            // went up
+            if(this.currentPosY>=0){
+                this.currentPosY=0;
+                this.isGoingUp=false;
+                this.wentUp=true;
+            }
 
+            this.setPosition(cc.p(0, this.currentPosY));
+        }
+
+
+        // handle going down
+
+
+
+        if(this.isGoingDown==true){
+            this.currentPosY-=this.velocity*dt;
+
+            //went down
+            if(this.currentPosY<=this.initPosY){
+                this.currentPosY= this.initPosY;
+                this.isGoingDown= false;
+                this.wentDown=true;
+            }
+            this.setPosition(cc.p(0, this.currentPosY));
+        }
+
+
+
+
+
+
+        // reset touchable
+        if(this.wentDown==true){
+            this.layerLobbyStatus.touchable=true;
+        }
     },
 
 
@@ -176,10 +260,7 @@ var LayerLobbyPets= cc.Layer.extend({
                 this.button_select_1.setVisible(false);
                 this.button_select_2.setVisible(true);
                 this.button_selected_2.setVisible(false);
-
-
                 cc.log("select pet 1");
-
                 cr.game.getPlayer().currentPetId=1;
 
             }else if(sender== this.button_select_2){
@@ -190,8 +271,15 @@ var LayerLobbyPets= cc.Layer.extend({
                 this.button_selected_2.setVisible(true);
                 cr.game.getPlayer().currentPetId=0;
             }else if(sender== this.x_button){
-                this.setVisible(false);
-                this.layerLobbyStatus.touchable= true;
+                cc.log("X clicked");
+
+
+                if(this.wentUp==true){
+                    this.isGoingDown=true;
+                    this.isGoingUp=false;
+                    this.wentDown=false;
+                    //this.layerLobbyStatus.touchable=true;
+                }
             }
 
 

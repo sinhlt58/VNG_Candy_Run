@@ -30,7 +30,7 @@ var StateReborn = StateMovement.extend({
 
         this.timePass+=dt;
         if(this.timePass>=this.duration){
-            character.stateMachine.changeState("stateMovement", new StateRunning());
+            character.stateMachine.changeState("stateMovement", new StateRunningNotFalling());
         }
 
 
