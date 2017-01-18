@@ -61,7 +61,7 @@ var StateInHeaven = StateMovement.extend({
 
 
         //character.setAccelerationY()
-
+        cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(globals.SOUND_TYPE_FEVER));
     },
     onExit: function (character) {
 
