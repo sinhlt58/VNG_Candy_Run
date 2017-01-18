@@ -152,7 +152,8 @@ var LayerPlayStatus = cc.Layer.extend({
         if (this.animationLayer.character.stateMachine.stateMovement instanceof StateSliding) {
             // no change
         }
-        else if (this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning && this.playerSliding) {
+        else if ((this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning||
+            this.animationLayer.character.stateMachine.stateMovement instanceof StateRunningNotFalling )&& this.playerSliding  ) {
             this.animationLayer.character.stateMachine.changeState('stateMovement', new StateSliding());
         }
     },
@@ -227,7 +228,7 @@ var LayerPlayStatus = cc.Layer.extend({
                 var character = this.animationLayer.character;
 
 
-                if (character.stateMachine.stateMovement instanceof StateRunning) {
+                if (character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateRunningNotFalling) {
                     character.stateMachine.changeState("stateMovement", new StateJumping(character));
 
                 }
@@ -252,7 +253,7 @@ var LayerPlayStatus = cc.Layer.extend({
 
                 this.playerSliding = false;
                 var character = this.animationLayer.character;
-                if (character.stateMachine.stateMovement instanceof StateSliding) {
+                if (character.stateMachine.stateMovement instanceof StateSliding ) {
                     character.stateMachine.changeState('stateMovement', new StateRunning(character));
                 }
                 //cc.log("Space is released");
