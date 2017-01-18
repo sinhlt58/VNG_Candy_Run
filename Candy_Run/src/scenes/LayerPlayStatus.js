@@ -2,6 +2,11 @@
  * Created by Fresher on 12/29/2016.
  */
 var LayerPlayStatus = cc.Layer.extend({
+
+
+    isTouching: null,
+
+
     buttonPause: null,
     TEST_BUTTON_DIE: null,
     isGamePause: false,
@@ -162,6 +167,10 @@ var LayerPlayStatus = cc.Layer.extend({
         if (type == ccui.Widget.TOUCH_BEGAN) {
             if (sender == this.buttonJump) {
 
+
+                this.touching=true;
+
+
                 var character = this.animationLayer.character;
 
 
@@ -196,6 +205,8 @@ var LayerPlayStatus = cc.Layer.extend({
             if (sender == this.buttonSlide) {
                 //character slide
 
+                this.touching=true;
+
                 this.playerSliding = true;
 
 
@@ -229,6 +240,8 @@ var LayerPlayStatus = cc.Layer.extend({
             if (sender == this.buttonJump) {
 
 
+                this.touching=false;
+
                 var character = this.animationLayer.character;
 
 
@@ -254,6 +267,8 @@ var LayerPlayStatus = cc.Layer.extend({
             if (sender == this.buttonSlide) {
                 //character end slide
 
+
+                this.touching=false;
 
                 this.playerSliding = false;
                 var character = this.animationLayer.character;

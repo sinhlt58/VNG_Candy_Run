@@ -2,6 +2,9 @@
  * Created by Fresher on 12/29/2016.
  */
 var LayerPlayAnimation = cc.Layer.extend({
+
+
+
     world: null,
     factoryObject: null,
     character: null,
@@ -147,10 +150,10 @@ var LayerPlayAnimation = cc.Layer.extend({
         //update world accordingly to the character's pos.
         this.world.update(dt);
 
-        cc.log(this.touching);
+        //cc.log(this.touching);
 
 
-        if (this.touching == true) {
+        /*if (this.touching == true) {
 
 
             this.touchingTime+=dt;
@@ -164,11 +167,11 @@ var LayerPlayAnimation = cc.Layer.extend({
                 }
             }
 
-            /*if (this.character.stateMachine.stateMovement instanceof StateRunning) {
+            /!*if (this.character.stateMachine.stateMovement instanceof StateRunning) {
                 this.character.stateMachine.changeState("stateMovement", new StateSliding());
             } else if (this.character.stateMachine.stateMovement instanceof StateSliding) {
 
-            }*/
+            }*!/
 
 
         } else {
@@ -180,7 +183,7 @@ var LayerPlayAnimation = cc.Layer.extend({
             } else if (this.character.stateMachine.stateMovement instanceof StateRunning) {
 
             }
-        }
+        }*/
 
 
     },
