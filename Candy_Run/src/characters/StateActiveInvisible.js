@@ -28,5 +28,6 @@ var StateActiveInvisible= StateVisible.extend({
             character.stateMachine.changeState("stateHP", new StateDecreasingHP());
         }
         this.maxVisibleTime = this.defaultVisibleTime;
+        character.spAnimation.setVisible(true);
     }
 });
