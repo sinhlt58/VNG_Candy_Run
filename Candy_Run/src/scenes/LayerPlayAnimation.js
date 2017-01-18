@@ -5,15 +5,21 @@ var LayerPlayAnimation = cc.Layer.extend({
     world: null,
     factoryObject: null,
     character: null,
-    pet:null,
+    pet: null,
 
 
     touching: null,
 
+
+    touchingTime: null,
+
+
     ctor: function () {
 
-        this.touching= false;
+
         this._super();
+        this.touching = false;
+        this.touchingTime = 0;
         this.init();
 
         cc.eventManager.addListener({
@@ -29,42 +35,40 @@ var LayerPlayAnimation = cc.Layer.extend({
             onKeyPressed: function (key, e) {
 
 
-                if(key==cc.KEY.h){
+                if (key == cc.KEY.h) {
 
-                    var character= e.getCurrentTarget().character;
+                    var character = e.getCurrentTarget().character;
 
                     character.stateMachine.changeState('stateMovement', new StateInHeaven());
 
                 }
 
-                if(key==cc.KEY.g){
+                if (key == cc.KEY.g) {
 
                     // cc.log("G");
-                    var character= e.getCurrentTarget().character;
+                    var character = e.getCurrentTarget().character;
 
-                    if(character.stateMachine.stateGiant instanceof StateGiantActive){
+                    if (character.stateMachine.stateGiant instanceof StateGiantActive) {
                         character.stateMachine.changeState('stateGiant', new StateGiantDisactive());
-                    }else{
+                    } else {
                         character.stateMachine.changeState('stateGiant', new StateGiantActive());
                     }
 
 
-
                 }
 
-                if(key==cc.KEY.f){
+                if (key == cc.KEY.f) {
 
                     //cc.log("F");
 
                     //fixme fix logic here, it is debug mode, remove later
-                    var character= e.getCurrentTarget().character;
+                    var character = e.getCurrentTarget().character;
 
-                    if(character.stateMachine.stateMovement instanceof StateRunning){
+                    if (character.stateMachine.stateMovement instanceof StateRunning) {
                         character.stateMachine.changeState('stateMovement', new StateFlying());
-                    }else if(character.stateMachine.stateMovement instanceof StateFlying){
-                        character.stateMachine.changeState("stateMovement",new StateRunning());
+                    } else if (character.stateMachine.stateMovement instanceof StateFlying) {
+                        character.stateMachine.changeState("stateMovement", new StateRunning());
                     }
-
 
 
                 }
@@ -76,7 +80,7 @@ var LayerPlayAnimation = cc.Layer.extend({
 
                     //only can slide when running
                     if (character.stateMachine.stateMovement instanceof StateRunning == true) {
-                        character.stateMachine.changeState("stateMovement",new StateSliding());
+                        character.stateMachine.changeState("stateMovement", new StateSliding());
                         //cc.log("Enter sliding");
                     } else {
                         //cc.log('Sliding');
@@ -92,8 +96,8 @@ var LayerPlayAnimation = cc.Layer.extend({
 
                 if (key == cc.KEY.space) {
                     var character = e.getCurrentTarget().character;
-                    if(character.stateMachine.stateMovement instanceof StateSliding){
-                        character.stateMachine.changeState("stateMovement",new StateRunning());
+                    if (character.stateMachine.stateMovement instanceof StateSliding) {
+                        character.stateMachine.changeState("stateMovement", new StateRunning());
                     }
                     cc.log("Space is released");
                     //cc.log("Exit sliding");
@@ -110,8 +114,8 @@ var LayerPlayAnimation = cc.Layer.extend({
         // cc.spriteFrameCache.addSpriteFrames(res.ground_plist, res.ground_png);
         // cc.spriteFrameCache.addSpriteFrames(res.obstacles_plist, res.obstacles_png);
         // cc.spriteFrameCache.addSpriteFrames(res.jelly_and_items_plist, res.jelly_and_items_png);
-        for (var i=0; i<sprite_sheets_play.length-1; i+=2){
-            cc.spriteFrameCache.addSpriteFrames(sprite_sheets_play[i], sprite_sheets_play[i+1]);
+        for (var i = 0; i < sprite_sheets_play.length - 1; i += 2) {
+            cc.spriteFrameCache.addSpriteFrames(sprite_sheets_play[i], sprite_sheets_play[i + 1]);
         }
 
         //create object factory with data.
@@ -146,20 +150,34 @@ var LayerPlayAnimation = cc.Layer.extend({
         cc.log(this.touching);
 
 
-        if(this.touching==true){
+        if (this.touching == true) {
 
-            if(this.character.stateMachine.stateMovement instanceof StateRunning){
-                this.character.stateMachine.changeState("stateMovement", new StateSliding());
-            }else if(this.character.stateMachine.stateMovement instanceof StateSliding){
 
+            this.touchingTime+=dt;
+
+
+            if(this.touchingTime>0.3){
+                if (this.character.stateMachine.stateMovement instanceof StateRunning) {
+                    this.character.stateMachine.changeState("stateMovement", new StateSliding());
+                } else if (this.character.stateMachine.stateMovement instanceof StateSliding) {
+
+                }
             }
 
+            /*if (this.character.stateMachine.stateMovement instanceof StateRunning) {
+                this.character.stateMachine.changeState("stateMovement", new StateSliding());
+            } else if (this.character.stateMachine.stateMovement instanceof StateSliding) {
 
-        }else {
+            }*/
 
-            if(this.character.stateMachine.stateMovement instanceof StateSliding){
+
+        } else {
+
+
+            this.touchingTime=0;
+            if (this.character.stateMachine.stateMovement instanceof StateSliding) {
                 this.character.stateMachine.changeState("stateMovement", new StateRunning());
-            }else if (this.character.stateMachine.stateMovement instanceof StateRunning){
+            } else if (this.character.stateMachine.stateMovement instanceof StateRunning) {
 
             }
         }
@@ -188,9 +206,9 @@ var LayerPlayAnimation = cc.Layer.extend({
     onTouchBegan: function (touch, event) {
         //console.log('mouse down');
 
-        var thisLayer= event.getCurrentTarget();
+        var thisLayer = event.getCurrentTarget();
 
-        thisLayer.touching=true;
+        thisLayer.touching = true;
 
         return true;
     },
@@ -199,17 +217,17 @@ var LayerPlayAnimation = cc.Layer.extend({
         var thisLayer = e.getCurrentTarget();
 
         if (thisLayer.character.stateMachine.stateMovement instanceof StateRunning) {
-            thisLayer.character.stateMachine.changeState("stateMovement",new StateJumping());
+            thisLayer.character.stateMachine.changeState("stateMovement", new StateJumping());
 
         }
         // is jumping v1
         else if (thisLayer.character.stateMachine.stateMovement instanceof StateJumping) {
-            thisLayer.character.stateMachine.changeState('stateMovement',new StateDoubleJumping());
+            thisLayer.character.stateMachine.changeState('stateMovement', new StateDoubleJumping());
         } else {
         }
 
 
-        thisLayer.touching= false;
+        thisLayer.touching = false;
         return true;
     },
     onExit: function () {
