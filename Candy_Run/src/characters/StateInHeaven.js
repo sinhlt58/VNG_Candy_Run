@@ -81,6 +81,8 @@ var StateInHeaven = StateMovement.extend({
         character.animationController.setAnimation("enterFever", true);
         character.setVelocity(cc.p(0, 400));
 
+        character.setAccelerationY(0);
+
 
         //character.setAccelerationY()
         cc.audioEngine.playEffect(cr.sound_manager.getSoundUrlById(globals.SOUND_TYPE_FEVER));
