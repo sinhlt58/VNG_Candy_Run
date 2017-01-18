@@ -181,6 +181,10 @@ var LayerPlayStatus = cc.Layer.extend({
                 else if (this.animationLayer.character.stateMachine.stateMovement instanceof StateInHeaven) {
                     // handle in heaven
                     var stateInHeaven = this.animationLayer.character.stateMachine.stateMovement;
+                    if(stateInHeaven.passedTime<stateInHeaven.freeFlyTime){
+                        character.setVelocityY(300);
+                        character.setAccelerationY(-500);
+                    }
                     if (stateInHeaven.passedTime <= stateInHeaven.time) {
                         character.setVelocityY(300);
                     }

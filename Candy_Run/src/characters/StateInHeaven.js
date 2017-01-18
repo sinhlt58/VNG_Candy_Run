@@ -11,10 +11,18 @@ var StateInHeaven = StateMovement.extend({
     time: null,
     passedTime: null,
 
+    freeFlyTime: null,
+    passedFreeFlyTime: null,
+
+
     ctor: function () {
         this.flewToHeaven = false;
         this.time = 15;
         this.passedTime = 0;
+        this.freeFlyTime=3;
+        this.passedFreeFlyTime=0;
+
+
     },
 
     update: function (dt, character) {
@@ -27,10 +35,12 @@ var StateInHeaven = StateMovement.extend({
 
             character.setVelocity(cc.p(0, 400));
             // 500 or some number
-            if (character.getPosition().y > 1150) {
+            if (character.getPosition().y > 1200) {
                 this.flewToHeaven = true;
                 character.setVelocityY(0);
-                character.setAccelerationY(-500);
+
+
+                //character.setAccelerationY(-500);
             }
         } else {
             // flew to heaven
@@ -42,11 +52,23 @@ var StateInHeaven = StateMovement.extend({
             this.passedTime += dt;
             character.setVelocityX(500);
 
-            if (this.passedTime >= this.time) {
+
+            if(this.passedTime>= this.freeFlyTime){
+
+                character.setAccelerationY(-500);
+
+                if (this.passedTime >= this.time) {
+                    // use acceleration y here
+                    character.setAccelerationY(-500);
+
+                }
+            }
+
+            /*if (this.passedTime >= this.time) {
                 // use acceleration y here
                 character.setAccelerationY(-500);
 
-            }
+            }*/
 
 
         }
