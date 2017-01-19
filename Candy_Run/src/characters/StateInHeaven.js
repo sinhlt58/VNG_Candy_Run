@@ -28,10 +28,10 @@ var StateInHeaven = StateMovement.extend({
     update: function (dt, character) {
 
 
-        if(character.getPosition().y>=1450){
-            character.setVelocityY(0);
-            character.setPositionY(1449);
-        }
+        // if(character.getPosition().y>=1450){
+        //     character.setVelocityY(0);
+        //     character.setPositionY(1449);
+        // }
 
 
         // if(this.passedTime<this.time){
@@ -84,11 +84,11 @@ var StateInHeaven = StateMovement.extend({
                 }
             }
 
-            /*if (this.passedTime >= this.time) {
-                // use acceleration y here
-                character.setAccelerationY(-500);
-
-            }*/
+            // if (this.passedTime >= this.time) {
+            //     // use acceleration y here
+            //     character.setAccelerationY(-500);
+            //
+            // }
 
 
         }

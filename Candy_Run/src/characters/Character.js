@@ -66,7 +66,7 @@ var Character = cc.Class.extend({
 
     ctor: function (jsonFile, atlasFile) {
 
-        this.hp = 1000;
+        this.hp = 5000;
 
         this.currentHP = this.hp;
 
