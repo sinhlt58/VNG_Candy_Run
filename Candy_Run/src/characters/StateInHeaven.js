@@ -19,7 +19,7 @@ var StateInHeaven = StateMovement.extend({
         this.flewToHeaven = false;
         this.time = 15;
         this.passedTime = 0;
-        this.freeFlyTime=3;
+        this.freeFlyTime=5;
         this.passedFreeFlyTime=0;
 
 
@@ -34,15 +34,15 @@ var StateInHeaven = StateMovement.extend({
         }
 
 
-        if(this.passedTime<this.time){
-            if(character.getPosition().y<1100){
-                character.setPositionY(1100);
-                character.setVelocityY(0);
-            }
-
-
-
-        }
+        // if(this.passedTime<this.time){
+        //     if(character.getPosition().y<1100){
+        //         character.setPositionY(1100);
+        //         character.setVelocityY(0);
+        //     }
+        //
+        //
+        //
+        // }
 
 
         cc.log(character.getPosition().y);
@@ -99,7 +99,7 @@ var StateInHeaven = StateMovement.extend({
     onEnter: function (character) {
         cc.log("Enter heaven");
         character.animationController.setAnimation("enterFever", true);
-        character.setVelocity(cc.p(0, 300));
+        character.setVelocity(cc.p(0, 700));
 
         character.setAccelerationY(0);
 
