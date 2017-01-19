@@ -105,7 +105,9 @@ var LayerPlayStatus = cc.Layer.extend({
         hpBackground.setAnchorPoint(cc.p(0, 0));
         this.addChild(hpBackground);
 
-        this.hpProcessBar = new cc.Sprite("#hpProgressBar.png");
+        this.hpProcessBar = new ccui.LoadingBar();
+        this.hpProcessBar.loadTexture("hpProgressBar.png", ccui.Widget.PLIST_TEXTURE);
+        this.hpProcessBar.setPercent(100);
         size = this.hpProcessBar.getContentSize();
         this.hpProcessBar.setPosition(visibleSize.width * 0.01 + 2, visibleSize.height - 82 + 2);
         this.hpProcessBar.setAnchorPoint(cc.p(0, 0));
@@ -151,7 +153,7 @@ var LayerPlayStatus = cc.Layer.extend({
         var ratioHP = parseFloat(this.animationLayer.character.getHP() / this.animationLayer.character.getMaxHP());
         if (ratioHP <= 0)
             ratioHP = 0;
-        this.hpProcessBar.setScaleX(ratioHP);
+        this.hpProcessBar.setPercent(ratioHP*100);
 
 
         if (this.animationLayer.character.stateMachine.stateMovement instanceof StateSliding) {
