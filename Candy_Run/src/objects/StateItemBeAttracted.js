@@ -4,10 +4,7 @@
 
 //this state make item follow character
 var StateItemBeAttracted = {
-
-
-
-    velocity: 700,
+    velocity: 900,
     //accleration: -50,
     onEnter: function (item) {
 
@@ -38,6 +35,6 @@ var StateItemBeAttracted = {
 
     },
     onExit: function (item) {
-        this.velocity=700;
+        this.velocity=900;
     }
 }
