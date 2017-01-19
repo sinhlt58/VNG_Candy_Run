@@ -40,6 +40,7 @@ var LayerPlayStatus = cc.Layer.extend({
         this.scheduleUpdate();
 
         this.playerSliding = false;
+        this.isTouching=false;
     },
     init: function () {
 
@@ -121,6 +122,14 @@ var LayerPlayStatus = cc.Layer.extend({
         this.layerPlayEnd = new LayerPlayEnd(cc.loader.getRes(res.gui_end_game_json));
         this.addChild(this.layerPlayEnd);
         this.layerPlayEnd.setVisible(false);
+
+
+
+
+
+
+
+        //debug label
     },
 
     update: function (dt) {
@@ -160,7 +169,9 @@ var LayerPlayStatus = cc.Layer.extend({
             // no change
         }
         else if ((this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning||
-            this.animationLayer.character.stateMachine.stateMovement instanceof StateRunningNotFalling )&& this.playerSliding  ) {
+            this.animationLayer.character.stateMachine.stateMovement instanceof StateRunningNotFalling)&& this.playerSliding == true ) {
+
+            cc.log("SET slide");
             this.animationLayer.character.stateMachine.changeState('stateMovement', new StateSliding());
         }
     },
@@ -170,7 +181,7 @@ var LayerPlayStatus = cc.Layer.extend({
             if (sender == this.buttonJump) {
 
 
-                this.touching=true;
+                this.isTouching=true;
 
 
                 var character = this.animationLayer.character;
@@ -207,7 +218,7 @@ var LayerPlayStatus = cc.Layer.extend({
             if (sender == this.buttonSlide) {
                 //character slide
 
-                this.touching=true;
+                this.isTouching=true;
 
                 this.playerSliding = true;
 
@@ -242,7 +253,7 @@ var LayerPlayStatus = cc.Layer.extend({
             if (sender == this.buttonJump) {
 
 
-                this.touching=false;
+                this.isTouching=false;
 
                 var character = this.animationLayer.character;
 
@@ -270,7 +281,7 @@ var LayerPlayStatus = cc.Layer.extend({
                 //character end slide
 
 
-                this.touching=false;
+                this.isTouching=false;
 
                 this.playerSliding = false;
                 var character = this.animationLayer.character;

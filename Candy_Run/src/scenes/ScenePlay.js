@@ -12,10 +12,20 @@ var ScenePlay = cc.Scene.extend({
         cr.sound_manager.init(cc.loader.getRes(res.sound_json));
 
         var animationLayer = new LayerPlayAnimation();
+
+        var statusLayer= new LayerPlayStatus(animationLayer);
+
+        animationLayer.layerStatus= statusLayer;
+
+
         this.addChild(animationLayer);
         var debugLayer = new LayerPlayDebug(animationLayer);
+
+
+
+
         this.addChild(debugLayer);
-        this.addChild(new LayerPlayStatus(animationLayer));
+        this.addChild(statusLayer);
 
         this.addChild(new LayerPlayBackground2());
         this.addChild(new LayerPlayBackground1());
