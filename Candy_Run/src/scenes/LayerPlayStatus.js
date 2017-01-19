@@ -57,8 +57,8 @@ var LayerPlayStatus = cc.Layer.extend({
         size = this.TEST_BUTTON_DIE.getContentSize();
         this.TEST_BUTTON_DIE.setPosition(cc.p(visibleSize.width - size.width * 1.5 - 20,
             visibleSize.height - size.height / 2 - this.globalPadding));
-        this.addChild(this.TEST_BUTTON_DIE);
-        this.TEST_BUTTON_DIE.addTouchEventListener(this.handleButtonEvents, this);
+        //this.addChild(this.TEST_BUTTON_DIE);
+        // this.TEST_BUTTON_DIE.addTouchEventListener(this.handleButtonEvents, this);
 
         //init score label
         this.labelScore = new cc.LabelTTF("", "Helvetica");
