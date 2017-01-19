@@ -88,13 +88,13 @@ var LayerPlayStatus = cc.Layer.extend({
         //init play buttons
         this.buttonJump = new ccui.Button("jumpBtn_Normal.png", "jumpBtn_Selected.png", "", ccui.Widget.PLIST_TEXTURE);
         size = this.buttonJump.getContentSize();
-        this.buttonJump.setPosition(size.width / 2 + 10, size.height / 2 + this.globalPadding);
+        this.buttonJump.setPosition(visibleSize.width - size.width / 2 - this.globalPadding, size.height / 2 + this.globalPadding);
         this.buttonJump.addTouchEventListener(this.handleButtonEvents, this);
         this.addChild(this.buttonJump);
 
         this.buttonSlide = new ccui.Button("slideBtn_Normal.png", "slideBtn_Selected.png", "", ccui.Widget.PLIST_TEXTURE);
         size = this.buttonSlide.getContentSize();
-        this.buttonSlide.setPosition(visibleSize.width - size.width / 2 - this.globalPadding, size.height / 2 + this.globalPadding);
+        this.buttonSlide.setPosition(size.width / 2 + 10, size.height / 2 + this.globalPadding);
         this.buttonSlide.addTouchEventListener(this.handleButtonEvents, this);
         this.addChild(this.buttonSlide);
 
