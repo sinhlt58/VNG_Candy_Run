@@ -68,6 +68,7 @@ var TriggerBackToLoop = Trigger.extend({
                         || teleportToObjectData["pObject"] == null){
                         var pObject = objectData["pObject"];
                         pObject.sprite.setPosition(cc.p(xTeleportTo, objectData.y)); //todo: may change to pObject.setPosition() only
+                        pObject.sprite.setUserData(teleportToObjectData);
                         teleportToObjectData["pObject"] = pObject;
                         objectData["pObject"] = null;
                         return ;
