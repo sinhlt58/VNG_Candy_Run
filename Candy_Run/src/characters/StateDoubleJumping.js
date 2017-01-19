@@ -15,8 +15,9 @@ var StateDoubleJumping = StateMovement.extend({
 
         character.animationController.setAnimation('doubleJump', false);
         var currentVelo= character.velocity;
-        character.setVelocity(cc.p(currentVelo.x, 500));
+        character.setVelocity(cc.p(currentVelo.x, 700));
 
+        character.setAcceleration(cc.p(0, -1600));
         var characterPos = character.getPosition();
         cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x, characterPos.y));
         cr.game.world.spawnEffectAt(globals.EFFECT_JUMP, cc.p(characterPos.x - 40, characterPos.y - 5));

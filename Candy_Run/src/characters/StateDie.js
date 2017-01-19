@@ -23,17 +23,28 @@ var StateDie = StateMovement.extend({
 
     },
     update: function (dt, character) {
+
+
         if (character.getPosition().y <= globals.GROUND_HEIGHT) {
             // cc.log("lower ground");
             this.grounded = true;
+
+            cc.log("make not falling anymore");
             character.setAccelerationY(0);
+
+            character.setVelocityY(0);
+            character.setPositionY(90);
         }
 
         if (this.timePass >= this.duration){
 
             //if()
 
+
+
+
             if(character.numOfLife>=0){
+                cc.log(character.numOfLife);
                 // cc.log("change to reborn");
                 character.stateMachine.changeState("stateMovement", new StateReborn());
             }else{
@@ -72,18 +83,29 @@ var StateDie = StateMovement.extend({
 
         //stop the character
 
-        // cc.log('Enter Die');
+
+        character.numOfLife-=1;
+        cc.log('Enter Die');
+
+        cc.log(character.getPosition().y);
+
         character.setVelocityX(0);
         character.currentHP = 500;
 
 
         // make character fall
-        if (character.getPosition().x > 90) {
+        if (character.getPosition().y > 90) {
+
+            cc.log(character.getPosition().y);
+
+            cc.log("make fall");
             character.setAccelerationY(-500);
 
             // cc.log("y>90");
 
             character.animationController.setAnimation("die", false);
+        }else{
+            character.setPositionY(90);
         }
 
 

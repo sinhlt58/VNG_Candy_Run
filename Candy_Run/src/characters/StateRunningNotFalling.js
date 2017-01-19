@@ -36,7 +36,7 @@ var StateRunningNotFalling= StateMovement.extend({
         character.offsetCollX = - character.getContentSize().width / 2;
         character.offsetCollY = 0;
         character.animationController.setAnimation('run1', true);
-        //console.log("On Enter Running");
+        console.log("On Enter Running not falling");
 
 
         character.body = {width: 90, height: 170};
@@ -49,7 +49,7 @@ var StateRunningNotFalling= StateMovement.extend({
         character.setPosition(cc.p(currentPosX, y));
 
         character.setAcceleration(cc.p(0, 0));
-        character.setVelocity((cc.p(500, 0)));
+        character.setVelocity((cc.p(700, 0)));
 
     },
     onExit: function (character) {

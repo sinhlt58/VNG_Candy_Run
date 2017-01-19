@@ -152,7 +152,7 @@ var LayerPlayAnimation = cc.Layer.extend({
         //update world accordingly to the character's pos.
         this.world.update(dt);
 
-        cc.log(this.touching);
+        //cc.log(this.touching);
 
 
 
@@ -174,7 +174,7 @@ var LayerPlayAnimation = cc.Layer.extend({
 
         } else {
 
-            cc.log(this.layerStatus.isTouching);
+            //cc.log(this.layerStatus.isTouching);
 
             this.touchingTime=0;
             if (this.character.stateMachine.stateMovement instanceof StateSliding && this.layerStatus.isTouching==false ) {

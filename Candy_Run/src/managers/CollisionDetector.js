@@ -95,10 +95,9 @@ var CollisionDetector = cc.Class.extend({
 
             //no ground collide
             //run here when jump or go to hole
-            if (character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding) {
-
+            if (character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateSliding ||
+                ((character.stateMachine.stateMovement instanceof StateJumping ||character.stateMachine.stateMovement instanceof StateDoubleJumping )&& character.getPosition().y<90)) {
                 cc.log("Die");
-
                 character.stateMachine.changeState("stateMovement", new StateFalling());
             }
 

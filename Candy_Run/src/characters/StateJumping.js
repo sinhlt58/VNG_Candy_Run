@@ -17,7 +17,7 @@ var StateJumping = StateMovement.extend({
         character.animationController.setAnimation('jump', false);
         var currentVelo= character.velocity;
         character.setVelocity(cc.p(currentVelo.x, 500));
-        character.setAcceleration(cc.p(0, -1000));
+        character.setAcceleration(cc.p(0, -1600));
 
         //todo: change later to shake the screen when giant and from jump to running.
         if(character.stateMachine.stateGiant instanceof StateGiantActive)

@@ -64,7 +64,7 @@ var StateMachineCharacter = cc.Class.extend({
 
 
         if(this.owner.isDead()){
-            this.owner.numOfLife-=1;
+
             this.owner.stateMachine.changeState("stateMovement", new StateDie());
         }
 
