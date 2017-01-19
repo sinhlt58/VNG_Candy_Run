@@ -231,9 +231,9 @@ var LayerPlayStatus = cc.Layer.extend({
                     // handle in heaven
                     var stateInHeaven = this.animationLayer.character.stateMachine.stateMovement;
                     if(stateInHeaven.passedTime<stateInHeaven.freeFlyTime){
-                        if(character.getPosition().y<=1100){
-                            character.setPositionY(1105);
-                        }
+                        // if(character.getPosition().y<=1100){
+                        //     character.setPositionY(1105);
+                        // }
                         character.setVelocityY(300);
                         character.setAccelerationY(-500);
                     }

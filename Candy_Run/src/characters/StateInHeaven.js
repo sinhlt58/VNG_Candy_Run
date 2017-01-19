@@ -19,7 +19,7 @@ var StateInHeaven = StateMovement.extend({
         this.flewToHeaven = false;
         this.time = 15;
         this.passedTime = 0;
-        this.freeFlyTime=5;
+        this.freeFlyTime=15;
         this.passedFreeFlyTime=0;
 
 
