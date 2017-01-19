@@ -32,6 +32,9 @@ var LayerPlayStatus = cc.Layer.extend({
 
     isEndGame:false,
 
+
+    labelCountTimeReborn: null,
+
     ctor: function (animationLayer) {
         this._super();
         this.animationLayer = animationLayer;
@@ -40,6 +43,7 @@ var LayerPlayStatus = cc.Layer.extend({
         this.scheduleUpdate();
 
         this.playerSliding = false;
+        this.isTouching=false;
     },
     init: function () {
 
@@ -121,9 +125,44 @@ var LayerPlayStatus = cc.Layer.extend({
         this.layerPlayEnd = new LayerPlayEnd(cc.loader.getRes(res.gui_end_game_json));
         this.addChild(this.layerPlayEnd);
         this.layerPlayEnd.setVisible(false);
+
+
+
+
+
+
+        this.labelCountTimeReborn= new cc.LabelTTF("CountTime reborn", "Helvetica");
+        this.labelCountTimeReborn.setFontSize(20);
+        this.labelCountTimeReborn.setColor(cc.color(255, 255, 255));
+        this.labelCountTimeReborn.setPosition(this.getContentSize().width/2, this.getContentSize().height/2);
+        this.addChild(this.labelCountTimeReborn);
+
+        this.labelCountTimeReborn.setVisible(false);
+
+        //debug label
     },
 
     update: function (dt) {
+
+
+
+
+        if( this.animationLayer.character.stateMachine.stateMovement instanceof StateReborn ){
+            var stateReborn= this.animationLayer.character.stateMachine.stateMovement;
+            if(stateReborn.passedTime>2){
+                this.labelCountTimeReborn.setString("1");
+            }else if(stateReborn.passedTime>1){
+                this.labelCountTimeReborn.setString("2");
+            }else if(stateReborn.passedTime>0){
+                this.labelCountTimeReborn.setString("3");
+            }
+            this.labelCountTimeReborn.setVisible(true);
+
+        }else{
+
+            this.labelCountTimeReborn.setVisible(false);
+
+        }
 
 
         if (this.animationLayer.character.stateMachine.stateMovement instanceof StateDie &&
@@ -160,7 +199,9 @@ var LayerPlayStatus = cc.Layer.extend({
             // no change
         }
         else if ((this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning||
-            this.animationLayer.character.stateMachine.stateMovement instanceof StateRunningNotFalling )&& this.playerSliding  ) {
+            this.animationLayer.character.stateMachine.stateMovement instanceof StateRunningNotFalling)&& this.playerSliding == true ) {
+
+            cc.log("SET slide");
             this.animationLayer.character.stateMachine.changeState('stateMovement', new StateSliding());
         }
     },
@@ -168,10 +209,7 @@ var LayerPlayStatus = cc.Layer.extend({
 
         if (type == ccui.Widget.TOUCH_BEGAN) {
             if (sender == this.buttonJump) {
-
-
-                this.touching=true;
-
+                this.isTouching=true;
 
                 var character = this.animationLayer.character;
 
@@ -193,6 +231,9 @@ var LayerPlayStatus = cc.Layer.extend({
                     // handle in heaven
                     var stateInHeaven = this.animationLayer.character.stateMachine.stateMovement;
                     if(stateInHeaven.passedTime<stateInHeaven.freeFlyTime){
+                        if(character.getPosition().y<=1100){
+                            character.setPositionY(1105);
+                        }
                         character.setVelocityY(300);
                         character.setAccelerationY(-500);
                     }
@@ -201,13 +242,23 @@ var LayerPlayStatus = cc.Layer.extend({
                     }
 
                 }
+                // running
+                else if(this.animationLayer.character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateRunningNotFalling){
+
+                    character.stateMachine.changeState("stateMovement", new StateJumping(character));
+
+                }
+                // jumping v1
+                else if (character.stateMachine.stateMovement instanceof StateJumping) {
+                    character.stateMachine.changeState('stateMovement', new StateDoubleJumping(character));
+                }
 
 
             }
             if (sender == this.buttonSlide) {
                 //character slide
 
-                this.touching=true;
+                this.isTouching=true;
 
                 this.playerSliding = true;
 
@@ -242,9 +293,9 @@ var LayerPlayStatus = cc.Layer.extend({
             if (sender == this.buttonJump) {
 
 
-                this.touching=false;
+                this.isTouching=false;
 
-                var character = this.animationLayer.character;
+                /*var character = this.animationLayer.character;
 
 
                 if (character.stateMachine.stateMovement instanceof StateRunning || character.stateMachine.stateMovement instanceof StateRunningNotFalling) {
@@ -262,15 +313,15 @@ var LayerPlayStatus = cc.Layer.extend({
                 // is inHeaven
                 else if (character.stateMachine.stateMovement instanceof StateInHeaven) {
                     //character.setVelocityY(-300);
-                }
+                }*/
 
-                // cc.audioEngine.playEffect(res.sound_character_jump_mp3);
+
             }
             if (sender == this.buttonSlide) {
                 //character end slide
 
 
-                this.touching=false;
+                this.isTouching=false;
 
                 this.playerSliding = false;
                 var character = this.animationLayer.character;

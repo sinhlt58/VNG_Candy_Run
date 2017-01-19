@@ -17,15 +17,13 @@ var StateFlying = StateMovement.extend({
     isResetVy: null,
 
 
-
-
     ctor: function (owner) {
 
         this.isGoingUp = true;
 
         this.time = 5;
         this.timePass = 0;
-        this.isResetVy=false;
+        this.isResetVy = false;
     },
 
 
@@ -38,8 +36,9 @@ var StateFlying = StateMovement.extend({
 
 
         // went up
-        if (character.getPosition().y >= 250) {
+        if (character.getPosition().y >= 350) {
             this.isGoingUp = false;
+            //character.setVelocityY(0);
             character.setAccelerationY(-500);
 
 
@@ -48,14 +47,15 @@ var StateFlying = StateMovement.extend({
         if (this.isGoingUp == false) {
 
 
-            this.timePass+=dt;
+            this.timePass += dt;
             // not reset vy
+            //this.isResetVy = true;
+            if (this.isResetVy == false) {
+                character.setVelocityY(0);
                 this.isResetVy=true;
-                if(this.isResetVy==false){
-                    character.setVelocityY(0);
             }
             // vy reset
-            else{
+            else {
 
             }
 
@@ -76,10 +76,8 @@ var StateFlying = StateMovement.extend({
         cc.log('on enter flying');
 
 
-        character.setVelocityY(0);
-        character.setAccelerationY(500);
-
-
+        character.setVelocityY(200);
+        character.setAccelerationY(800);
 
 
         //this.owner.setVelocity(cc.p(300, 400))

@@ -124,6 +124,9 @@ var Character = cc.Class.extend({
     update: function (dt) {
 
 
+
+        //cc.log(this.getPosition().y);
+
         //cc.log(this.stateMachine.stateMovement);
 
 
@@ -251,7 +254,7 @@ var Character = cc.Class.extend({
         return this.hp;
     },
     isDead: function () {
-        return (this.position.y <= -this.body.height || this.currentHP <= 0);
+        return  this.currentHP <= 0;
     },
 
     runSkillsInit:function () {

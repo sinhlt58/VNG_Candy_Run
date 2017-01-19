@@ -36,6 +36,8 @@ var SceneLobby = cc.Scene.extend({
         var allImg= cc.spriteFrameCache;
         allImg.addSpriteFrames(res.main_lobby_plist, res.main_lobby_png);
         cc.spriteFrameCache.addSpriteFrames(res.character_lobby_plist, res.character_lobby_png);
+        cc.spriteFrameCache.addSpriteFrames(res.pet_cookie_plist, res.pet_cookie_png);
+        cc.spriteFrameCache.addSpriteFrames(res.pet_zombie_plist, res.pet_zombie_png);
     },
     update:function (dt) {
         

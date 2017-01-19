@@ -24,7 +24,12 @@ cc.game.onStart = function(){
         cr.game = new Game();
         cr.game.init();
 
+
+
+
         cc.director.runScene(new SceneLobby());
+
+
     }, this);
 };
 

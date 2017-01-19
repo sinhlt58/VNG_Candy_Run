@@ -43,7 +43,15 @@ var res = {
     gui_pet_cookie: "res/assets/gui/scene_lobby/gui_pets/pet_cookie.png",
     gui_pet_zombie: "res/assets/gui/scene_lobby/gui_pets/pet_zombie.png",
 
-    gui_x_button: "res/assets/gui/scene_lobby/x_button.png"
+    gui_x_button: "res/assets/gui/scene_lobby/x_button.png",
+
+
+
+    pet_zombie_plist: "res/assets/pets/pet_zombie.plist",
+    pet_zombie_png:"res/assets/pets/pet_zombie.png",
+
+    pet_cookie_plist: "res/assets/pets/pet_cookie.plist",
+    pet_cookie_png: "res/assets/pets/pet_cookie.png"
 
 };
 

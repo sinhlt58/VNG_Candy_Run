@@ -5,6 +5,8 @@ var LayerPlayAnimation = cc.Layer.extend({
 
 
 
+    layerStatus: null,
+
     world: null,
     factoryObject: null,
     character: null,
@@ -153,13 +155,15 @@ var LayerPlayAnimation = cc.Layer.extend({
         //cc.log(this.touching);
 
 
-        /*if (this.touching == true) {
 
+
+
+        if (this.touching == true) {
 
             this.touchingTime+=dt;
 
 
-            if(this.touchingTime>0.3){
+            if(this.touchingTime > 0.3){
                 if (this.character.stateMachine.stateMovement instanceof StateRunning) {
                     this.character.stateMachine.changeState("stateMovement", new StateSliding());
                 } else if (this.character.stateMachine.stateMovement instanceof StateSliding) {
@@ -167,23 +171,18 @@ var LayerPlayAnimation = cc.Layer.extend({
                 }
             }
 
-            /!*if (this.character.stateMachine.stateMovement instanceof StateRunning) {
-                this.character.stateMachine.changeState("stateMovement", new StateSliding());
-            } else if (this.character.stateMachine.stateMovement instanceof StateSliding) {
-
-            }*!/
-
 
         } else {
 
+            //cc.log(this.layerStatus.isTouching);
 
             this.touchingTime=0;
-            if (this.character.stateMachine.stateMovement instanceof StateSliding) {
+            if (this.character.stateMachine.stateMovement instanceof StateSliding && this.layerStatus.isTouching==false ) {
                 this.character.stateMachine.changeState("stateMovement", new StateRunning());
             } else if (this.character.stateMachine.stateMovement instanceof StateRunning) {
 
             }
-        }*/
+        }
 
 
     },
@@ -231,7 +230,7 @@ var LayerPlayAnimation = cc.Layer.extend({
 
 
         thisLayer.touching = false;
-        return true;
+        //return true;
     },
     onExit: function () {
         this._super();

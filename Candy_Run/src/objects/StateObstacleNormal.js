@@ -18,7 +18,7 @@ var StateObstacleNormal=  {
         var newPos = cc.p(defaultPos.x, newY);
         obstacle.sprite.setPosition(newPos);
 
-        var appearAction = new cc.MoveTo(2, defaultPos);
+        var appearAction = new cc.MoveTo(0.5, defaultPos);
         appearAction.setTag(this.actionTag);
         obstacle.sprite.runAction(appearAction);
     },

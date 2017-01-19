@@ -4,15 +4,13 @@
 var LayerLobbyStatus = cc.Layer.extend({
 
 
-
+    centerPos: null,
 
     touchable: null,
 
     layer_select_character: null,
 
     layer_select_pets: null,
-
-
 
 
     SLOT_PLAY: null,
@@ -46,16 +44,16 @@ var LayerLobbyStatus = cc.Layer.extend({
     HEART: null,
 
 
-
     sp_ani_1: null,
     sp_ani_2: null,
-
-
 
 
     ani_pet_1: null,
     ani_pet_2: null,
 
+
+    spr_pet_cookie: null,
+    spr_pet_zombie: null,
 
 
     current_sp: null,
@@ -69,24 +67,43 @@ var LayerLobbyStatus = cc.Layer.extend({
         this._super();
 
 
-        this.layer_select_character=layer_s_ch;
-        this.layer_select_pets= layer_s_pet;
+        this.layer_select_character = layer_s_ch;
+        this.layer_select_pets = layer_s_pet;
 
-        this.touchable=true;
+        this.touchable = true;
 
 
         this.HEART = [];
         this.init();
+
+        this.scheduleUpdate();
         //cc.log(this['TEST_BUTTON_PAUSE']);
+    },
+
+
+    update: function (dt) {
+        if(cr.game.getPlayer().currentPetId==0){
+            this.spr_pet_zombie.setVisible(true);
+            this.spr_pet_cookie.setVisible(false);
+        }else if(cr.game.getPlayer().currentPetId==1){
+            this.spr_pet_zombie.setVisible(false);
+            this.spr_pet_cookie.setVisible(true);
+        }
+
+
     },
     init: function () {
 
         /*var allImg= cc.spriteFrameCache;
          allImg.addSpriteFrames(res.main_lobby_plist, res.main_lobby_png);*/
 
+        //var petsData = cc.loader.getRes(res.pets_json);
+
 
         var visibleSize = this.getContentSize();
 
+
+        this.centerPos = cc.p(visibleSize.width / 2, visibleSize.height / 2);
 
         // create slot play
         this.SLOT_PLAY = new cc.Sprite("#slotplay.png");
@@ -136,6 +153,47 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.addChild(this.sp_ani_1);
 
 
+        // create pet cookie animation
+        this.spr_pet_cookie = new cc.Sprite("#Symbol 40.png");
+        var all_frames_pet_cookie = [];
+
+        for (var i = 40; i <= 64; ++i) {
+            var string_name = "Symbol " + i + ".png";
+            var tmpfr = cc.spriteFrameCache.getSpriteFrame(string_name);
+            all_frames_pet_cookie.push(tmpfr);
+        }
+
+        var animation_pet_cookie = new cc.Animation(all_frames_pet_cookie, 0.1);
+        var action_cookie = new cc.RepeatForever(new cc.Animate(animation_pet_cookie));
+
+        this.spr_pet_cookie.runAction(action_cookie);
+
+        this.spr_pet_cookie.setScale(0.7);
+
+
+        this.spr_pet_cookie.setPosition(cc.p(slotPlayPos.x - 100, slotPlayPos.y + 220));
+        this.addChild(this.spr_pet_cookie);
+        this.spr_pet_cookie.setVisible(false);
+
+
+        //create pet zombie
+        this.spr_pet_zombie = new cc.Sprite("#skeleton-docnhan_fever0.png");
+        var all_fr_pet_zombie= [];
+        for(var i=0; i<=5; ++i){
+            var names_spr= "skeleton-docnhan_fever"+i+".png";
+            all_fr_pet_zombie.push(cc.spriteFrameCache.getSpriteFrame(names_spr));
+        }
+        var animation_pet_zombie= new cc.Animation(all_fr_pet_zombie, 0.1);
+        var action_pet_zombie= new cc.RepeatForever(new cc.Animate(animation_pet_zombie));
+        this.spr_pet_zombie.runAction(action_pet_zombie);
+        this.spr_pet_zombie.setScale(0.7);
+
+        this.spr_pet_zombie.setPosition(cc.p(slotPlayPos.x - 100, slotPlayPos.y + 220));
+        this.addChild(this.spr_pet_zombie);
+        this.spr_pet_zombie.setVisible(false);
+
+
+
 
 
         // princess
@@ -148,19 +206,15 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.addChild(this.sp_ani_2);
 
 
-
         //cc.log(cr.game.getPlayer().currentCharacterId);
 
-        if(cr.game.getPlayer().currentCharacterId==0){
+        if (cr.game.getPlayer().currentCharacterId == 0) {
             //zombie
             cc.log("zombie");
             this.sp_ani_1.setVisible(true);
-        }else{
+        } else {
             this.sp_ani_2.setVisible(true);
         }
-
-
-
 
 
         //create slot exp
@@ -186,7 +240,7 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.NUM_LEVEL.attr({
             textAlign: cc.TEXT_ALIGNMENT_CENTER,
             font: "Helvetica",
-            string: "10",
+            string: "10"
 
         });
         this.NUM_LEVEL.setScale(1.5);
@@ -222,11 +276,6 @@ var LayerLobbyStatus = cc.Layer.extend({
         this.addChild(heart_1);
 
 
-
-
-
-
-
         //var
     },
 
@@ -236,7 +285,7 @@ var LayerLobbyStatus = cc.Layer.extend({
             //cc.log("click on layer");
 
             // no layer cover this layer
-            if(this.touchable==true){
+            if (this.touchable == true) {
                 if (sender == this.BUTTON_PLAY) {
                     cc.director.pushScene(new ScenePlay());
 
@@ -244,23 +293,23 @@ var LayerLobbyStatus = cc.Layer.extend({
                     cc.log("Select character");
                     //this.layer_select_character.setVisible(true);
 
-                    this.layer_select_character.isGoingUp=true;
-                    this.layer_select_character.wentDown=false;
+                    this.layer_select_character.isGoingUp = true;
+                    this.layer_select_character.wentDown = false;
 
-                    this.touchable=false;
+                    this.touchable = false;
 
                 } else if (sender == this.BUTTON_PETS_SELECT) {
 
-                    cc.log("pet select")
-                    this.layer_select_pets.isGoingUp=true;
-                    this.layer_select_pets.wentDown=false;
+                    cc.log("pet select");
+                    this.layer_select_pets.isGoingUp = true;
+                    this.layer_select_pets.wentDown = false;
 
-                    this.touchable=false;
+                    this.touchable = false;
                 }
 
             }
             //some layer is covering this layer
-            else{
+            else {
                 // nothing here
             }
 
