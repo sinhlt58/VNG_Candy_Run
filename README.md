@@ -1,8 +1,13 @@
 # VNG_Run_Run
+
 Needed tools:
+
 Cocos2dx 3.13.1: http://www.cocos2d-x.org/download/version (dowloand version 3.13.1 - very important)
+
 Android sdk: https://developer.android.com/studio/index.html
+
 Android ndk 12b: https://developer.android.com/ndk/downloads/index.html
+
 Ant: http://ant.apache.org/
 
 Setup:
